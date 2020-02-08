@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>组合数学 on ouuan的博客</title>
+    <link>https://ouuan.github.io/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</link>
+    <description>Recent content in 组合数学 on ouuan的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 05 Sep 2019 10:45:59 +0800</lastBuildDate>
+    
+	<atom:link href="https://ouuan.github.io/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>LOJ6519 魔力环（Burnside引理，容斥原理）</title>
+      <link>https://ouuan.github.io/post/loj6519-%E9%AD%94%E5%8A%9B%E7%8E%AFburnside%E5%BC%95%E7%90%86%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/</link>
+      <pubDate>Thu, 05 Sep 2019 10:45:59 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/loj6519-%E9%AD%94%E5%8A%9B%E7%8E%AFburnside%E5%BC%95%E7%90%86%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/</guid>
+      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://loj.ac/problem/6519&#34; target=&#34;_blank&#34;&gt;LOJ&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problem/P4916&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
+&lt;p&gt;你需要给 $n$ 颗珠子的项链染 $m$ 颗黑色，$n-m$ 颗白色，不能有连续的一串黑色珠子长度超过 $k$，求旋转同构下本质不同的染色方案数。&lt;/p&gt;
+&lt;p&gt;$1\le m,k\le n\le10^5$&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>LOJ6077 逆序对（生成函数，计数dp）</title>
+      <link>https://ouuan.github.io/post/loj6077-%E9%80%86%E5%BA%8F%E5%AF%B9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E8%AE%A1%E6%95%B0dp/</link>
+      <pubDate>Wed, 04 Sep 2019 09:22:32 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/loj6077-%E9%80%86%E5%BA%8F%E5%AF%B9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E8%AE%A1%E6%95%B0dp/</guid>
+      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://loj.ac/problem/6089&#34; target=&#34;_blank&#34;&gt;LOJ&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
+&lt;p&gt;求长度为 $n$ 逆序对数为 $k$ 的排列个数。&lt;/p&gt;
+&lt;p&gt;$1\le n, k\le 10^5$，$k\le \binom n 2$&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>BZOJ3622 已经没有什么好害怕的了（二项式反演，组合数学）</title>
+      <link>https://ouuan.github.io/post/bzoj3622-%E5%B7%B2%E7%BB%8F%E6%B2%A1%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%AE%B3%E6%80%95%E7%9A%84%E4%BA%86%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%8F%8D%E6%BC%94%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</link>
+      <pubDate>Fri, 15 Mar 2019 12:48:17 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/bzoj3622-%E5%B7%B2%E7%BB%8F%E6%B2%A1%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%AE%B3%E6%80%95%E7%9A%84%E4%BA%86%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%8F%8D%E6%BC%94%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</guid>
+      <description>&lt;h1 id=&#34;题目链接&#34;&gt;题目链接&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P4859&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://darkbzoj.tk/problem/3622&#34; target=&#34;_blank&#34;&gt;darkbzoj&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;题意简述&#34;&gt;题意简述&lt;/h1&gt;
+&lt;p&gt;给你两个长为 $n$ 、无重复元素的数列 $a,b$，求将 $b$ 重排后 $\left(\sum\limits_{i=1}^n[a_i&amp;gt;b_i]\right)-\left(\sum\limits_{i=1}^n[a_i&amp;lt;b_i]\right)=k$（$k$ 给定）的方案数。&lt;/p&gt;
+&lt;p&gt;$n\le2000$。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>BZOJ4665 小w的喜糖（容斥原理，组合数学）</title>
+      <link>https://ouuan.github.io/post/bzoj4665-%E5%B0%8Fw%E7%9A%84%E5%96%9C%E7%B3%96%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</link>
+      <pubDate>Wed, 13 Mar 2019 21:10:56 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/bzoj4665-%E5%B0%8Fw%E7%9A%84%E5%96%9C%E7%B3%96%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</guid>
+      <description>&lt;h1 id=&#34;题目链接&#34;&gt;题目链接&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://darkbzoj.tk/problem/4665&#34; target=&#34;_blank&#34;&gt;darkbzoj&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;题意简述&#34;&gt;题意简述&lt;/h1&gt;
+&lt;p&gt;给你一个数列，求重排后每个位置都变了的方案数。&lt;/p&gt;
+&lt;p&gt;数列长度和值域都是 $2000$。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>BZOJ1856 [SCOI2010]生成字符串（组合数学）</title>
+      <link>https://ouuan.github.io/post/bzoj1856-scoi2010-%E7%94%9F%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</link>
+      <pubDate>Tue, 12 Feb 2019 14:56:42 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/bzoj1856-scoi2010-%E7%94%9F%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</guid>
+      <description>&lt;h1 id=&#34;题目链接&#34;&gt;题目链接&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P1641&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://darkbzoj.tk/problem/1856&#34; target=&#34;_blank&#34;&gt;darkbzoj&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;题意简述&#34;&gt;题意简述&lt;/h1&gt;
+&lt;p&gt;$n$ 个入栈操作，$m$ 个出栈操作，问合法操作序列数。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>WC2019 全国模拟赛第二场 T1 题解</title>
+      <link>https://ouuan.github.io/post/wc2019-%E5%85%A8%E5%9B%BD%E6%A8%A1%E6%8B%9F%E8%B5%9B%E7%AC%AC%E4%BA%8C%E5%9C%BA-t1-%E9%A2%98%E8%A7%A3/</link>
+      <pubDate>Sat, 08 Dec 2018 12:04:29 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/wc2019-%E5%85%A8%E5%9B%BD%E6%A8%A1%E6%8B%9F%E8%B5%9B%E7%AC%AC%E4%BA%8C%E5%9C%BA-t1-%E9%A2%98%E8%A7%A3/</guid>
+      <description>又只会写T1&amp;hellip; 题目链接 题意简述 给你一个排列 $p_{1..n}$，$a_{1..n}$ 为任意的一个排列，定义 $b[a_i]=a[</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>十二省联考2019 游记 &amp; 题解 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="口中喊着「僕勝つから。ぜったい、勝て来るから。」的你，真的付出了桐山般的努力吗？
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.64.0 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/%E5%8D%81%E4%BA%8C%E7%9C%81%E8%81%94%E8%80%832019-%E6%B8%B8%E8%AE%B0-%E9%A2%98%E8%A7%A3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.6e1b3b90.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="十二省联考2019 游记 &amp; 题解" />
+<meta property="og:description" content="口中喊着「僕勝つから。ぜったい、勝て来るから。」的你，真的付出了桐山般的努力吗？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/%E5%8D%81%E4%BA%8C%E7%9C%81%E8%81%94%E8%80%832019-%E6%B8%B8%E8%AE%B0-%E9%A2%98%E8%A7%A3/" />
+<meta property="article:published_time" content="2019-04-08T15:39:51+08:00" />
+<meta property="article:modified_time" content="2020-02-08T18:37:53+08:00" />
+<meta itemprop="name" content="十二省联考2019 游记 &amp; 题解">
+<meta itemprop="description" content="口中喊着「僕勝つから。ぜったい、勝て来るから。」的你，真的付出了桐山般的努力吗？">
+<meta itemprop="datePublished" content="2019-04-08T15:39:51&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-08T18:37:53&#43;08:00" />
+<meta itemprop="wordCount" content="4532">
+
+
+
+<meta itemprop="keywords" content="CCF系列赛事,省选," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="十二省联考2019 游记 &amp; 题解"/>
+<meta name="twitter:description" content="口中喊着「僕勝つから。ぜったい、勝て来るから。」的你，真的付出了桐山般的努力吗？"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/links/">
+        <li class="mobile-menu-item">链接</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/links/">链接</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">十二省联考2019 游记 &amp; 题解</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2019-04-08 15:39:51 &#43;0800 &#43;0800"> 2019-04-08 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%B8%B8%E8%AE%B0/"> 游记 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#d1t1">D1T1</a>
+      <ul>
+        <li><a href="#考场做法">考场做法</a></li>
+        <li><a href="#题解做法">题解做法</a></li>
+        <li><a href="#正常人做法">正常人做法</a></li>
+      </ul>
+    </li>
+    <li><a href="#d1t2">D1T2</a></li>
+    <li><a href="#d1t3">D1T3</a>
+      <ul>
+        <li><a href="#快速幂">快速幂</a></li>
+        <li><a href="#区间筛质数莫比乌斯函数">区间筛质数/莫比乌斯函数</a></li>
+        <li><a href="#区间筛原根">区间筛原根</a></li>
+        <li><a href="#参考代码">参考代码</a></li>
+      </ul>
+    </li>
+    <li><a href="#d2t1">D2T1</a></li>
+    <li><a href="#d2t2">D2T2</a></li>
+    <li><a href="#d2t3">D2T3</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>口中喊着「僕勝つから。ぜったい、勝て来るから。」的你，真的付出了桐山般的努力吗？</p>
+<h1 id="day--1">Day -1</h1>
+<p>晚上看 WF 直播，为了看滚榜睡得很晚，结果最后滚的时候 b 站那几个直播的去海底捞吃火锅，然后断断续续的&hellip;.最后也没有看完滚榜，还是第二天才看的排名&hellip;</p>
+<h1 id="day-0">Day 0</h1>
+<p>由于前一天睡得比较晚，所以下午睡了两个小时。晚上 vp 了一场 cf。</p>
+<p>然后..本来想早点睡，结果由于下午睡了两个小时，睡不着了..最后很晚才睡。在床上看了四集半《三月的狮子》..（半是因为看困了，于是赶紧抓住机会睡了。）</p>
+<h1 id="day-1">Day 1</h1>
+<p>早上起来的时候感觉特别清醒，后来才想起来，初三有段时间也不怎么睡，也是刚起来的时候并不会很困..走起路来有种 ふわふわ 的感觉..一直持续到快到华科的时候，才稍微觉得有点困..</p>
+<p>拿到题之后看了眼 T1，异或 $\rightarrow$ 可持久化 01 Trie，求前 $k$ 大之和 $\rightarrow$ 分成 $n$ 类每类的最大值塞堆里。大致的思路真的是一眼就想出来了..然而并没有想到三元组的做法，虽然 18 年暑假去安师大附中集训的时候做过一道那样的题..</p>
+<p>我想的做法是记录在 Trie 上 dfs 到的位置，然后根据位置求下一个。一开始我写的是每个点记录父亲，然后写+调 $2h$ 才想起来：这是可持久化啊，怎么记录父亲&hellip;然后尝试加了个 map 来记录不同版本的父亲，变成 $\log^2$，然后大样例跑了 $13s$，还 WA&hellip;</p>
+<p>于是就先把 T1 放了一下，去看 T2。这 T2 什么鬼题面？（赛后结合讲题 PPT 里的简述一下就明白题意了，可能是简述的原因，也可能是没睡好考场上 sb 了..只不过一个没有题目背景的题为什么不写简述题意呢..）看了半天稍微看懂题意了，然后一看第一档暴力，好像第一档就得写个 $20min$ ~ $0.5h$ 的..我的习惯是先写 PJ 难度暴力，然后写正解，最后写不好写的部分分，所以就先放着了。</p>
+<p>然后去看 T3..没想到竟然能在考场上碰到 ydc 的题面..先把 998244353 切了，然后写了个从最大值起枚举模数，然后..1145141？唐 突 恶 臭，<code>//echouctr</code> 警告。赛后得知有人直接（<del>抱着恶臭的想法</del>）试出来了..还有只枚举质数的..想不明白为什么要给个质数..搞的我还写了扩展欧拉定理和求 $\varphi$（虽然也没有太麻烦..）。<code>1_?+</code> 直接弃了。<code>wa</code> 尝试把快速幂里的 <code>long long</code> 去掉，然后没过，就也弃了。后面的..猜到了 <code>p</code> 是质数，根据 <code>0/+/-</code> 猜到了 <code>u</code> 是 $\mu$，猜到了 <code>g</code> 是原根..nmdwsm是区间筛啊..</p>
+<p>回来看 T1，重构的决定还算比较果断，换了种找后继的方式：记录 dfs 路径以及每个点被搜到的次数，满了就换个儿子，否则按原路径往下。写的还算比较顺利，不到 $1h$ 就过了大样例，然后开始对拍，也过拍了。然后，把 <code>rand()</code> 的范围开到 <code>unsigned</code>..不过拍了？？检查了一下，所有该开 <code>unsigned</code> 的地方都开了，于是把所有参与位运算的 <code>1</code> 都改成了 <code>1u</code>，还是过不了..然后我就开始 sb 了：先把 <code>unsigned int</code> 改成 <code>unsigned long long</code>，发现过不了，<strong>然后改回 unsigned int</strong>，再把循环的范围从 <code>31</code> 改成 <code>32</code>.. 然后我就各种检查，直到考试结束也没过拍..考后发现，是一种边界情况的一行代码放错位置了，除了同时开 <code>unsigned long long</code> 和循环范围 <code>32</code>，也可以把那行代码换个位置来解决。</p>
+<p>下午得知正式选手好像必须参加讲题？看分，发现第一题竟然过了..脸挺好的。T2 <code>puts(&quot;-1&quot;)</code> 果然没分。T3 写多少是多少（废话，这种题..）。$100+0+19$，$rk6$，被吊锤了..在其他省就垫底了..</p>
+<p>晚上打了场 Global，神仙 <code>Div.2 A~C &amp; Div.1 E/F</code> 场..写完 A ~ E 之后发现所有人包括 tourist 都是五题，而且 tourist 在我之前半个小时就写完五题了..于是就不想打了。又过了快一个小时，发现有好多人在 hack A，于是就去看了下，hack 了一个写法奇怪的 A。最后涨了不少分..</p>
+<p>还好晚上顺利睡着了..</p>
+<h1 id="day-2">Day 2</h1>
+<p>由于昨天调 T1 调的心态爆炸才去看后面的题导致整场爆炸，于是这次先看了每道题..</p>
+<p>看了看 T1，除了 dp 没啥想法，先写了个 $20$ 分暴力，准备把 dp 留到后面写。真的是 sb 了，没想到可以压两维，只压了一维..</p>
+<p>然后去看 T2，第一眼并没有什么想法..暴力连第二档都不太会写，于是先写了个 $\mathcal O(n^n)$。</p>
+<p>然后去看 T3，emm..暴力怎么写啊.webp。</p>
+<p>然后去上了个厕所。在厕所里想到了 T2 的做法..写的比较顺利，大概不到 $1h$ 吧..就第一次测挂了，改了个小地方就过了所有样例。然后对拍，也过拍了。然后测了下链..RE了？？冷静了一下，猜测是爆栈了，直接去问了监考，答复是栈空间和内存限制一样，然后就愉快地本地开栈过了。</p>
+<p>然后去写 T1 的 dp..一开始尝试单数组滚动，然后挂了。于是改成 01 滚动，又调了好久才过..</p>
+<p>最后去写 T3，决定只写 $k=1$。先写了下 $k=1$ &amp; $l=n$ 的 dp，很快就写完了。然后去写剩下的 $k=1$，算了下复杂度，$\mathcal O(nl^2)$，感觉好悬..然后发现可以用 NTT 优化到 $\mathcal O(nl\log l)$，然后开始写 NTT，然后..NTT 没调出来..考前应该写一写的..因为比较头铁，NTT 一直调到了离考试结束 $15min$，然后开始 rush $\mathcal O(nl^2)$，失败了..</p>
+<p>出考场不久，想起来自己 T1 好像忘清空了..<del>辣鸡温馨提示</del>。然后我在影响正确性/不影响正确性之间反复切换了几次结论..最后在看成绩之前得出的结论是，我没有限制（$k=0$）的点稳挂，剩下的点大概率挂。</p>
+<p>去看成绩，$20+100+8$。T1 竟然有 $20$？难道是 $k\ne0$ 的点都过了？听完讲题之后去看评测结果，发现是 $k=0$ 的两个点过了&hellip;至今没想明白，只不过如果清空了数组就是 $40$ 了。</p>
+<p>最后是两天总分第四（<del>和去年一样，白学了</del>），加上 NOIP 还是被胡队爆踩了..</p>
+<p>晚上两天挂分 $100+$ 的<del>裸</del>罗队在裙里问为什么 D2T2 $75​$ 分，我把他的代码复制到 LOJ 发现过了..</p>
+<p>冷静了一下，感觉不可能是 OJ 的问题，所以不开 C++11 测了一下，果然没过..因为前几天写 OI Wiki 的时候查过，所以很快就猜到了，是 <code>swap</code> 的问题.. <code>priority_queue</code> 的 <code>swap</code> 在不开 C++11 时是 $\mathcal O(n)$ 的。</p>
+<h1 id="题解">题解</h1>
+<h2 id="d1t1">D1T1</h2>
+<h3 id="考场做法">考场做法</h3>
+<p>建可持久化 01 Trie，把区间异或和转化成两个前缀异或和的异或，然后对每个右端点就可以找到最大的异或和，扔进堆里。找最大值的时候记录一下在 Trie 上的路径，以及每一层经过的次数。堆里弹出一个值后插入下一个值时根据记录的路径来找：如果经过次数大于子树当前节点的 <code>siz</code> 就换个儿子并清空比他更深的节点的记录的经过次数，否则按记录的路径走。如果 Trie 的根都满了就不 <code>push</code> 了。</p>
+<details class="admonition note"><summary class="admonition-title">参考代码</summary>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;queue&gt;
+#include &lt;map&gt;
+#include &lt;cctype&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+int n,k;
+
+typedef unsigned int ui;
+typedef pair&lt;ui,int&gt; pui;
+
+ui read()
+{
+    ui out=0;
+    char c;
+    while (!isdigit(c=getchar()));
+    for (;isdigit(c);c=getchar()) out=out*10+c-'0';
+    return out;
+}
+
+const int N=500010;
+
+struct Node
+{
+    int val,ch[2];
+} t[N*35];
+
+int rt[N],tot,d[N][35],cnt[N][35];
+ui pre[N];
+unsigned long long ans;
+priority_queue&lt;pui&gt; q;
+
+int ins(int x,ui y)
+{
+    int i,u,v,root;
+    u=root=++tot;
+    t[u].val=t[x].val+1;
+    for (i=31;i&gt;=0;--i)
+    {
+        v=((y&gt;&gt;i)&amp;1u);
+        t[u].ch[v^1]=t[x].ch[v^1];
+        u=t[u].ch[v]=++tot;
+        x=t[x].ch[v];
+        t[u].val=t[x].val+1;
+    }
+    return root;
+}
+
+signed main()
+{
+    scanf(&quot;%d %d&quot;,&amp;n,&amp;k);
+
+    int i,j,u,v,r;
+    ui x;
+
+    for (i=1;i&lt;=n;++i)
+    {
+        pre[i]=pre[i-1]^read();
+        u=rt[i]=ins(rt[i-1],pre[i-1]);
+        for (x=0,j=31;j&gt;=0;--j)
+        {
+            v=(((pre[i]&gt;&gt;j)&amp;1u)^1u);
+            if (t[u].ch[v])
+            {
+                x|=(1u&lt;&lt;j);
+                d[i][j]=u=t[u].ch[v];
+            }
+            else d[i][j]=u=t[u].ch[v^1];
+            ++cnt[i][j];
+        }
+        q.push(pui(x,i));
+    }
+
+    while (k--)
+    {
+        ans+=q.top().first;
+        r=q.top().second;
+        q.pop();
+        x=0;
+        for (u=rt[r],i=31;i&gt;=0;--i)
+        {
+            v=(((pre[r]&gt;&gt;i)&amp;1u)^1u);
+            if (cnt[r][i]==0)
+            {
+                ++cnt[r][i];
+                if (t[u].ch[v])
+                {
+                    x|=(1u&lt;&lt;i);
+                    u=d[r][i]=t[u].ch[v];
+                }
+                else u=d[r][i]=t[u].ch[v^1];
+            }
+            else if (cnt[r][i]&lt;t[d[r][i]].val)
+            {
+                if (d[r][i]==t[u].ch[v]) x|=(1u&lt;&lt;i);
+                ++cnt[r][i];
+                u=d[r][i];
+            }
+            else
+            {
+                for (j=i;j&gt;=0;--j) cnt[r][j]=0;
+                ++cnt[r][i];
+                u=d[r][i]=t[u].ch[v^1];
+            }
+        }
+        if (cnt[r][31]==t[rt[r]].val) continue;
+        q.push(pui(x,r));
+    }
+
+    printf(&quot;%lld\n&quot;,ans);
+
+    return 0;
+}
+</code></pre>
+</details>
+<h3 id="题解做法">题解做法</h3>
+<p>除了找后继都是差不多的，找后继的方法是找完 $[0,r)$ 之后把 $[0,ans)$ 和 $(ans,r)$ 塞进堆里。</p>
+<h3 id="正常人做法"><del>正常人做法</del></h3>
+<p>翻了下 LOJ 最短解，然后被自己蠢哭了..</p>
+<p>直接记录每个右端点已经找到第 $k$  大了，然后找第 $k$ 大的方式类似值域线段树/平衡树找第 $k​$ 大&hellip;</p>
+<h2 id="d1t2">D1T2</h2>
+<p>讲一下 SAM 做法.. sb 选手不适合打 SA。</p>
+<p>把所有串翻转，B 是 A 的前缀就变成了 B 是 A 的后缀。</p>
+<p>是后缀就是 parent 树上的祖先，或者同一个节点且 len 更小。</p>
+<p>把所有 A/B 串对应的节点按在 A/B 中的 len 拆点，每个 parent 树上的节点从较小的 len 向较大的 len 连边，A 串对应的点 &amp; len 向 A 串连边，B 串向对应的点 &amp; len 连边。</p>
+<p>然后拓扑排序/记忆化搜索即可。</p>
+<p><del>当然如果你像我一样 sb，可以按 dfs 序用线段树优化连边，就可以（假装）不用拆点了..</del></p>
+<details class="admonition note"><summary class="admonition-title">参考代码</summary>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;set&gt;
+#include &lt;map&gt;
+#include &lt;cctype&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+int read()
+{
+    int out=0;
+    char c;
+    while (!isdigit(c=getchar()));
+    for (;isdigit(c);c=getchar()) out=out*10+c-'0';
+    return out;
+}
+
+const int N=200010;
+
+struct Node
+{
+    int len,par,ch[26];
+} sam[N&lt;&lt;1];
+
+void insert(int x);
+
+int p,tot,fa[N&lt;&lt;1][20],sta[N];
+
+void add(int u,int v);
+long long dp(int u);
+
+int head[N*5],nxt[N*6],to[N*6],cnt;
+int n,na,nb,m,a[N],alen[N],b[N],blen[N],w[N*5],tot2;
+set&lt;int&gt; aln[N&lt;&lt;1],bln[N&lt;&lt;1];
+map&lt;int,int&gt; aid[N&lt;&lt;1],bid[N&lt;&lt;1];
+long long ans,f[N*5];
+bool vis1[N*5],vis2[N*5],loop;
+char s[N];
+
+int main()
+{
+    int i,j,l,r,u,pre,T;
+
+    T=read();
+
+    while (T--)
+    {
+        scanf(&quot;%s&quot;,s+1);
+        n=strlen(s+1);
+        reverse(s+1,s+n+1);
+
+        for (i=1;i&lt;=2*n;++i)
+        {
+            memset(sam[i].ch,0,sizeof(sam[i].ch));
+            aln[i].clear();
+            aid[i].clear();
+            bln[i].clear();
+            bid[i].clear();
+        }
+        memset(w,0,sizeof(w));
+        memset(head,0,sizeof(head));
+        memset(vis1,false,sizeof(vis1));
+        memset(vis2,false,sizeof(vis2));
+        cnt=ans=0;
+        p=tot=1;
+        loop=false;
+
+        for (i=1;i&lt;=n;++i)
+        {
+            sta[i]=tot+1;
+            insert(s[i]-'a');
+        }
+
+        for (i=2;i&lt;=tot;++i) fa[i][0]=sam[i].par;
+        for (j=1;j&lt;=18;++j)
+        {
+            for (i=2;i&lt;=tot;++i)
+            {
+                fa[i][j]=fa[fa[i][j-1]][j-1];
+            }
+        }
+
+        na=read();
+
+        for (i=1;i&lt;=na;++i)
+        {
+            r=n+1-read();
+            l=n+1-read();
+            u=sta[r];
+            for (j=18;j&gt;=0;--j)
+            {
+                if (sam[fa[u][j]].len&gt;r-l)
+                {
+                    u=fa[u][j];
+                }
+            }
+            a[i]=u;
+            alen[i]=r-l+1;
+            aln[u].insert(alen[i]);
+            bln[u].insert(alen[i]);
+        }
+
+        nb=read();
+
+        for (i=1;i&lt;=nb;++i)
+        {
+            r=n+1-read();
+            l=n+1-read();
+            u=sta[r];
+            for (j=18;j&gt;=0;--j)
+            {
+                if (sam[fa[u][j]].len&gt;r-l)
+                {
+                    u=fa[u][j];
+                }
+            }
+            b[i]=u;
+            blen[i]=r-l+1;
+            bln[u].insert(blen[i]);
+        }
+
+        tot2=tot;
+
+        for (i=2;i&lt;=tot;++i)
+        {
+            if (bln[i].empty()) add(sam[i].par,i);
+            else
+            {
+                for (auto k : aln[i]) w[aid[i][k]=++tot2]=k;
+                pre=sam[i].par;
+                for (auto k : bln[i])
+                {
+                    add(pre,bid[i][k]=++tot2);
+                    if (aln[i].find(k)!=aln[i].end()) add(tot2,aid[i][k]);
+                    pre=tot2;
+                }
+                add(tot2,i);
+            }
+        }
+
+        m=read();
+
+        for (i=1;i&lt;=m;++i)
+        {
+            l=read();
+            r=read();
+            add(aid[a[l]][alen[l]],bid[b[r]][blen[r]]);
+        }
+
+        for (i=1;i&lt;=na;++i) ans=max(ans,dp(aid[a[i]][alen[i]]));
+
+        if (loop) puts(&quot;-1&quot;);
+        else printf(&quot;%lld\n&quot;,ans);
+    }
+
+    return 0;
+}
+
+long long dp(int u)
+{
+    if (vis2[u]) return f[u];
+    if (vis1[u]) loop=true;
+    if (loop) return 0;
+    vis1[u]=true;
+    int i,v;
+    f[u]=w[u];
+    for (i=head[u];i;i=nxt[i])
+    {
+        v=to[i];
+        f[u]=max(f[u],dp(v)+w[u]);
+    }
+    vis2[u]=true;
+    return f[u];
+}
+
+void insert(int x)
+{
+    int np=++tot;
+    sam[np].len=sam[p].len+1;
+    while (p&amp;&amp;!sam[p].ch[x])
+    {
+        sam[p].ch[x]=np;
+        p=sam[p].par;
+    }
+    if (!p) sam[np].par=1;
+    else
+    {
+        int q=sam[p].ch[x];
+        if (sam[q].len==sam[p].len+1) sam[np].par=q;
+        else
+        {
+            int nq=++tot;
+            sam[nq].len=sam[p].len+1;
+            memcpy(sam[nq].ch,sam[q].ch,sizeof(sam[q].ch));
+            sam[nq].par=sam[q].par;
+            sam[q].par=sam[np].par=nq;
+            while (p&amp;&amp;sam[p].ch[x]==q)
+            {
+                sam[p].ch[x]=nq;
+                p=sam[p].par;
+            } 
+        }
+    }
+    p=np;
+}
+
+void add(int u,int v)
+{
+    nxt[++cnt]=head[u];
+    head[u]=cnt;
+    to[cnt]=v;
+}
+</code></pre>
+</details>
+<h2 id="d1t3">D1T3</h2>
+<h3 id="快速幂">快速幂</h3>
+<h4 id="-3"># 3</h4>
+<p>欧拉定理，边读入边取模。</p>
+<h4 id="-4"># 4</h4>
+<p>找到最大值往上枚举 / <del>抱着恶臭的想法直接猜出来</del>。</p>
+<h4 id="-5"># 5</h4>
+<p>按 $x$ 排序后发现有两组相邻的 $x$ 差小于等于 $10$，由于 $p|(y_119^{x_2-x_1}-y_2)$，求出这两组的 $gcd$ 即可。</p>
+<h4 id="-6--7"># 6 / 7</h4>
+<p>先自然溢出再取模。</p>
+<p># 7 暴力找循环节即可。需要注意循环节中不含 $1$ .. 所以不能直接通过 $1$ 来判断循环节，可以用 <code>set</code>。</p>
+<h3 id="区间筛质数莫比乌斯函数">区间筛质数/莫比乌斯函数</h3>
+<h4 id="-9--12"># 9 / 12</h4>
+<p>用 $\sqrt n$ 以内的质数筛后面的。</p>
+<h4 id="-10--13"># 10 / 13</h4>
+<p>用 $5\times10^7$ 以内的数筛后面的，然后把错误的项打表。</p>
+<p>好像可以用 Miller-Rabin 不打表做，不太会..</p>
+<p>几个优化码长的小技巧：</p>
+<ol>
+<li>数组里面存差分。</li>
+<li>把 $5\times10^7$ 略微调大，但要注意不要 TLE。</li>
+<li>把数组压成字符串。</li>
+</ol>
+<h3 id="区间筛原根">区间筛原根</h3>
+<h4 id="-14"># 14</h4>
+<p>直接判断 $p-1$ 除掉每个质因数后是否是 $a^x\equiv1\pmod p$ 的解。</p>
+<h4 id="-15"># 15</h4>
+<p>先找到任意一个原根 $g$。</p>
+<p>预处理出 $x​$ 是 $g​$ 的 $k​$ 次幂，那么 $x​$ 是原根当且仅当 $k​$ 和 $p-1​$ 互质。</p>
+<h4 id="-16"># 16</h4>
+<p>枚举质数判断即可快速找到 $p$。（说是快速还是要跑几十秒..）</p>
+<h3 id="参考代码">参考代码</h3>
+<p><a href="https://loj.ac/submission/412233" target="_blank">LOJ 最慢解</a></p>
+<h2 id="d2t1">D2T1</h2>
+<p>搞三个背包：</p>
+<ol>
+<li>整个城市都没有限制的城市选择阵营。</li>
+<li>没有限制的学校选择派系。</li>
+<li>有限制的学校选择阵营&amp;派系，注意每个有限制的城市要选一个有限制的学校作为“代表”，在背包时对阵营的贡献为整个城市的总和。</li>
+</ol>
+<p>最后再枚举第三个背包的每一项，对答案的贡献就是这一项乘上前两个背包中可以和这一项一起选的方案数，实际上是一段连续的区间，所以前两个背包预处理一下前缀和就可以算了。</p>
+<p>用值域优化一下背包的枚举范围，总复杂度是 $\mathcal O(nm+k^2wm)$。</p>
+<p>整体思路不难，知识点只有背包..然而还是写了整整一晚上。</p>
+<p>在寝室调到快十二点，虽然觉得自己挺 sb 的，但本地在 lemon 上 ac 的时候..真的好爽啊。</p>
+<p>不得不说寝室写题效率就是高，又爽。<del><font color="white">写完还能看一集三狮</font></del></p>
+<details class="admonition note"><summary class="admonition-title">参考代码</summary>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+typedef long long ll;
+
+const int N=1005;
+const int M=2505;
+const int K=35;
+const int V=10;
+const int mod=998244353;
+
+struct Node
+{
+    int b,s,p;
+    bool operator&lt;(const Node&amp; y) const
+    {
+        if ((~p&amp;&amp;~y.p)||(p==-1&amp;&amp;y.p==-1)) return b&lt;y.b;
+        if (p==-1) return false;
+        return true;
+    }
+} a[N];
+
+int n,c,m,f[M],g[M],h[M][K*V][2],zy[2],px[2],sum[N],tot[4],ans;
+bool ban[N];
+
+int main()
+{
+    int T,i,j,k,x,y,tmp[2];
+
+    scanf(&quot;%d&quot;,&amp;T);
+
+    while (T--)
+    {
+        memset(f,0,sizeof(f));
+        memset(g,0,sizeof(g));
+        memset(h,0,sizeof(h));
+        memset(tot,0,sizeof(tot));
+        memset(sum,0,sizeof(sum));
+        memset(ban,false,sizeof(ban));
+
+        scanf(&quot;%d%d%d%d%d%d&quot;,&amp;n,&amp;c,zy+0,zy+1,px+0,px+1);
+
+        for (i=1;i&lt;=n;++i)
+        {
+            scanf(&quot;%d%d&quot;,&amp;a[i].b,&amp;a[i].s);
+            sum[a[i].b]+=a[i].s;
+            a[i].p=-1;
+            tot[0]+=a[i].s;
+            tot[1]+=a[i].s;
+        }
+
+        scanf(&quot;%d&quot;,&amp;m);
+
+        for (i=1;i&lt;=m;++i)
+        {
+            scanf(&quot;%d%d&quot;,&amp;x,&amp;y);
+            a[x].p=y;
+            ban[a[x].b]=true;
+            tot[0]-=a[x].s;
+            tot[2]+=a[x].s;
+        }
+
+        sort(a+1,a+n+1);
+
+        f[0]=1;
+        for (i=1;i&lt;=c;++i)
+        {
+            if (ban[i]||!sum[i])
+            {
+                tot[1]-=sum[i];
+                tot[3]+=sum[i];
+                continue;
+            }
+            for (j=min(zy[0],tot[1]);j&gt;=sum[i];--j)
+            {
+                if (j&gt;=sum[i]) f[j]=(f[j]+f[j-sum[i]])%mod;
+            }
+        }
+        for (j=1;j&lt;=zy[0];++j) f[j]=(f[j-1]+f[j])%mod;
+
+        g[0]=1;
+        for (i=m+1;i&lt;=n;++i)
+        {
+            for (j=min(px[0],tot[0]);j&gt;=a[i].s;--j)
+            {
+                if (j&gt;=a[i].s) g[j]=(g[j]+g[j-a[i].s])%mod;
+            }
+        }
+        for (j=1;j&lt;=px[0];++j) g[j]=(g[j-1]+g[j])%mod;
+
+        h[0][0][0]=1;
+        for (i=m;i&gt;=1;--i)
+        {
+            for (j=min(tot[3],zy[0]);j&gt;=0;--j)
+            {
+                for (k=tot[2];k&gt;=0;--k)
+                {
+                    for (x=0;x&lt;=1;++x)
+                    {
+                        tmp[x]=0;
+                        for (y=0;y&lt;=1;++y)
+                        {
+                            if ((x^1)*2+(y^1)==a[i].p||j&lt;x*sum[a[i].b]||k&lt;y*a[i].s) continue;
+                            if (a[i].b!=a[i+1].b||i==m) tmp[x]=(0ll+tmp[x]+h[j-x*sum[a[i].b]][k-y*a[i].s][x^1]+h[j-x*sum[a[i].b]][k-y*a[i].s][x])%mod;
+                            else tmp[x]=(tmp[x]+h[j][k-y*a[i].s][x])%mod;
+                        }
+                    }
+                    h[j][k][0]=tmp[0];
+                    h[j][k][1]=tmp[1];
+                }
+            }
+        }
+
+        ans=0;
+        for (j=0;j&lt;=tot[3]&amp;&amp;j&lt;=zy[0];++j)
+        {
+            if (zy[0]-j&lt;tot[3]-j+tot[1]-zy[1]) continue;
+            for (k=0;k&lt;=tot[2];++k)
+            {
+                if (px[0]-k&lt;tot[2]-k+tot[0]-px[1]) continue;
+                ans=(ans+(ll)(h[j][k][0]+h[j][k][1])*(f[zy[0]-j]-(tot[3]-j+tot[1]-zy[1]&gt;0?f[tot[3]-j+tot[1]-zy[1]-1]:0))%mod*(g[px[0]-k]-(tot[2]-k+tot[0]-px[1]&gt;0?g[tot[2]-k+tot[0]-px[1]-1]:0)))%mod;
+            }
+        }
+
+        cout&lt;&lt;(ans+mod)%mod&lt;&lt;endl;
+    }
+
+    return 0;
+}
+</code></pre>
+</details>
+<h2 id="d2t2">D2T2</h2>
+<p>用堆维护每个子树的答案（堆里每个元素为每一组的最大值），合并的时候弹出两个堆顶取 max 记录下来，直到其中一个堆为空，再把记录的值加到非空的那个堆里，就是新的答案。可以两两合并，也可以把儿子合并了再加上自己。合并时每弹出两个元素、加入一个元素，元素的总数就会减少一，所以总复杂度是 $\mathcal O(n\log n)$。注意，不能用 <code>=</code> 来复制堆，而要用 <code>swap</code>，而且要开 C++11。如果不开 C++11 可以记录 id 然后 swap id。</p>
+<p>贪心合并就不严格证了，感觉稍有点类似<a href="https://codeforces.com/contest/1119/problem/B" target="_blank">最近那场 CF 的 B</a>？</p>
+<details class="admonition note"><summary class="admonition-title">参考代码</summary>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cctype&gt;
+#include &lt;queue&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+int read()
+{
+    int out=0;
+    char c;
+    while (!isdigit(c=getchar()));
+    for (;isdigit(c);c=getchar()) out=out*10+c-'0';
+    return out;
+}
+
+const int N=200010;
+
+void dfs1(int u);
+void dfs2(int u);
+
+vector&lt;int&gt; son[N];
+int n,a[N],mxdep[N];
+priority_queue&lt;int&gt; q[N];
+
+int main()
+{
+    int i;
+    long long ans=0;
+
+    n=read();
+
+    for (i=1;i&lt;=n;++i) a[i]=read();
+
+    for (i=2;i&lt;=n;++i) son[read()].push_back(i);
+
+    dfs1(1);
+
+    for (i=1;i&lt;=n;++i) sort(son[i].begin(),son[i].end(),[](int x,int y){return mxdep[x]&gt;mxdep[y];});
+
+    dfs2(1);
+
+    while (!q[1].empty())
+    {
+        ans+=q[1].top();
+        q[1].pop();
+    }
+
+    cout&lt;&lt;ans;
+
+    return 0;
+}
+
+void dfs2(int u)
+{
+    int i,v,mx;
+    vector&lt;int&gt; tmp;
+    for (i=0;i&lt;son[u].size();++i)
+    {
+        v=son[u][i];
+        dfs2(v);
+    }
+    if (son[u].size())
+    {
+        if (son[u].size()&gt;1)
+        {
+            while (!q[son[u][1]].empty())
+            {
+                mx=0;
+                for (i=0;i&lt;son[u].size();++i)
+                {
+                    v=son[u][i];
+                    if (q[v].empty()) break;
+                    mx=max(mx,q[v].top());
+                    q[v].pop();
+                }
+                tmp.push_back(mx);
+            }
+        }
+        q[u].swap(q[son[u][0]]);
+        for (i=0;i&lt;tmp.size();++i) q[u].push(tmp[i]);
+    }
+    q[u].push(a[u]);
+}
+
+void dfs1(int u)
+{
+    int i,v;
+    for (i=0;i&lt;son[u].size();++i)
+    {
+        v=son[u][i];
+        dfs1(v);
+        mxdep[u]=max(mxdep[u],mxdep[v]+1);
+    }
+}
+</code></pre>
+</details>
+<h2 id="d2t3">D2T3</h2>
+<p>待填。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content" title="2020-02-08 18:37:53 &#43;0800 &#43;0800">
+        2020-02-08
+        <a href="https://github.com/ouuan/hugo-blog/commit/da8aa41962b5f5a65348e9b2f49d8519daa2fc8d" title="Add aliases" target="_blank">(da8aa41)</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/ccf%E7%B3%BB%E5%88%97%E8%B5%9B%E4%BA%8B/">CCF系列赛事</a>
+          <a href="/tags/%E7%9C%81%E9%80%89/">省选</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/noi2010-%E8%88%AA%E7%A9%BA%E7%AE%A1%E5%88%B6%E5%BB%BA%E5%8F%8D%E5%9B%BE%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">[NOI2010]航空管制（建反图，拓扑排序，优先队列）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/%E6%A0%91%E5%88%86%E5%9D%97%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+            <span class="next-text nav-default">树分块学习笔记</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/hexo-blog-utterances"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span>
+    <span class="author">ouuan</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/tomorrow.min.css" rel="stylesheet">
+  <script>hljs.configure({tabReplace: '    '});</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.63725abf.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157787819-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

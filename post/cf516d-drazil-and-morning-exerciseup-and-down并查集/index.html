@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>CF516D Drazil and Morning Exercise（up and down，并查集） - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="题目链接 CF
+洛谷
+题意简述 给定一棵 $n$ 个点带边权的树，定义 $d(u)$ 为树上离它最远的点到它的距离，$q$ 次询问，每次询问给定 $l$，求一个最大的树上连通块 $V&#39;$ 的大小，满足 $\forall u, v\in V&#39;$，$|d(u)-d(v)|\le l$。
+$1\le n\le 10^5$, $1\le q\le 50$。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.64.0 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/cf516d-drazil-and-morning-exerciseup-and-down%E5%B9%B6%E6%9F%A5%E9%9B%86/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.6e1b3b90.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="CF516D Drazil and Morning Exercise（up and down，并查集）" />
+<meta property="og:description" content="题目链接
+CF
+洛谷
+题意简述
+给定一棵 $n$ 个点带边权的树，定义 $d(u)$ 为树上离它最远的点到它的距离，$q$ 次询问，每次询问给定 $l$，求一个最大的树上连通块 $V&#39;$ 的大小，满足 $\forall u, v\in V&#39;$，$|d(u)-d(v)|\le l$。
+$1\le n\le 10^5$, $1\le q\le 50$。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/cf516d-drazil-and-morning-exerciseup-and-down%E5%B9%B6%E6%9F%A5%E9%9B%86/" />
+<meta property="article:published_time" content="2019-09-10T13:37:12+08:00" />
+<meta property="article:modified_time" content="2020-02-08T18:37:53+08:00" />
+<meta itemprop="name" content="CF516D Drazil and Morning Exercise（up and down，并查集）">
+<meta itemprop="description" content="题目链接
+CF
+洛谷
+题意简述
+给定一棵 $n$ 个点带边权的树，定义 $d(u)$ 为树上离它最远的点到它的距离，$q$ 次询问，每次询问给定 $l$，求一个最大的树上连通块 $V&#39;$ 的大小，满足 $\forall u, v\in V&#39;$，$|d(u)-d(v)|\le l$。
+$1\le n\le 10^5$, $1\le q\le 50$。">
+<meta itemprop="datePublished" content="2019-09-10T13:37:12&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-08T18:37:53&#43;08:00" />
+<meta itemprop="wordCount" content="1207">
+
+
+
+<meta itemprop="keywords" content="up and down,并查集," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CF516D Drazil and Morning Exercise（up and down，并查集）"/>
+<meta name="twitter:description" content="题目链接
+CF
+洛谷
+题意简述
+给定一棵 $n$ 个点带边权的树，定义 $d(u)$ 为树上离它最远的点到它的距离，$q$ 次询问，每次询问给定 $l$，求一个最大的树上连通块 $V&#39;$ 的大小，满足 $\forall u, v\in V&#39;$，$|d(u)-d(v)|\le l$。
+$1\le n\le 10^5$, $1\le q\le 50$。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/links/">
+        <li class="mobile-menu-item">链接</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/links/">链接</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">CF516D Drazil and Morning Exercise（up and down，并查集）</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2019-09-10 13:37:12 &#43;0800 &#43;0800"> 2019-09-10 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#题目链接">题目链接</a></li>
+    <li><a href="#题意简述">题意简述</a></li>
+    <li><a href="#简要做法">简要做法</a></li>
+    <li><a href="#参考代码">参考代码</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="题目链接">题目链接</h2>
+<p><a href="http://codeforces.com/contest/516/problem/D" target="_blank">CF</a></p>
+<p><a href="https://www.luogu.org/problem/CF516D" target="_blank">洛谷</a></p>
+<h2 id="题意简述">题意简述</h2>
+<p>给定一棵 $n$ 个点带边权的树，定义 $d(u)$ 为树上离它最远的点到它的距离，$q$ 次询问，每次询问给定 $l$，求一个最大的树上连通块 $V'$ 的大小，满足 $\forall u, v\in V'$，$|d(u)-d(v)|\le l$。</p>
+<p>$1\le n\le 10^5$, $1\le q\le 50$。</p>
+<h2 id="简要做法">简要做法</h2>
+<p>首先使用 up and down（两遍 dfs，第一遍求往下走的最远距离，第二遍求往上走的最远距离）求出 $d(u)$。</p>
+<p>有一个性质：如果以 $d(u)$ 最小的 $u$ 为根，$\forall v, d(v)\ge d(parent(v))$。（下文中的“子树”都是以 $d$ 最小的点为根的。）</p>
+<details class="admonition note"><summary class="admonition-title">简单证明</summary>
+<p>不难发现，我们只要证明 $u$ 的每个儿子 $v$ 都是子树 $v$ 中 $d$ 最小的，即可归纳地证明原命题。</p>
+<p>假设子树 $v$ 中存在一个点 $w$，$d(w)&lt;d(v)$，那么从 $v$ 出发的最长路的第一步一定是 $v$ 到 $w$ 的路径上的第一条边（否则的话，从 $w$ 出发可以走到 $v$ 再走从 $v$ 出发的最长路，就会导致 $d(w)&gt;d(v)$），这样的话，从 $u$ 出发也可以先走到 $v$ 再走 $v$ 出发的最长路，这样的话 $d(u)&gt;d(v)$，与题设矛盾。</p>
+</details>
+<p>题目所求的连通块一定是 $d$ 的大小连续的一段，令所求连通块中 $d$ 最小且离根最近的点为 $u$，由上面的性质不难发现，所求连通块一定在子树 $u$ 中。</p>
+<p>如果按 $d$ 从大到小枚举每个点，用并查集维护符合条件的点的连通性以及每块的大小，可以发现，删去一个点（一个 $d&gt;d(u)+l$ 的点）并不影响连通性，只需要将其所在块的大小减一即可。（加入一个点就是合并子树，删去一个点是删去叶子。）</p>
+<p>这样的话答案就是过程中最大的一块的大小。</p>
+<p>总时间复杂度就是 $O(qn\alpha(n)+n\log n)$ <del>或 O(qn+nlogn)</del> 或 $O(qn\log n)$。</p>
+<h2 id="参考代码">参考代码</h2>
+<p>（非常抱歉，使用了 CF 模板 qaq）</p>
+<pre><code class="language-cpp">#ifndef OUUAN
+#pragma GCC optimize(&quot;Ofast,no-stack-protector,unroll-loops,fast-math&quot;)
+#endif
+#include&lt;bits/stdc++.h&gt;
+
+#define int LoveLive
+//#define FAST_IOSTREAM 1
+
+#define For(i,l,r)for(int i=(l),i##end=(r);i&lt;=i##end;++i)
+#define FOR(i,r,l)for(int i=(r),i##end=(l);i&gt;=i##end;--i)
+#define SON(i,u)for(int i=head[u];i;i=nxt[i])
+#define ms(a,x)memset(a,x,sizeof(a))
+#define fi first
+#define se second
+#define pb emplace_back
+#define pq priority_queue
+#define isinf(x)(x&gt;=INF?-1:x)
+#define y1 why_is_there_a_function_called_y1
+#define DEBUG(x)cerr&lt;&lt;(#x)&lt;&lt;&quot;:&quot;&lt;&lt;x&lt;&lt;endl
+using namespace std;
+typedef long long LoveLive;typedef pair&lt;int,int&gt;pii;typedef vector&lt;int&gt;vi;
+#ifdef int
+const int INF=0x3f3f3f3f3f3f3f3fll;
+#else
+const int INF=0x3f3f3f3f;
+#endif
+const double eps=1e-9;mt19937 rng(chrono::steady_clock::now().time_since_epoch().
+count());int randint(int l,int r){int out=rng()%(r-l+1)+l;return out&gt;=l?out:out+
+r-l+1;}
+#ifdef FAST_IOSTREAM
+#define br cout&lt;&lt;'\n'
+#define sp cout&lt;&lt;' '
+long long read(){long long x;cin&gt;&gt;x;return x;}template&lt;typename T&gt;void read(T&amp;x){
+cin&gt;&gt;x;}template&lt;typename T&gt;void write(const T&amp;x){cout&lt;&lt;x;}
+#else
+#define br putchar('\n')
+#define sp putchar(' ')
+template&lt;typename T&gt;typename enable_if&lt;!is_integral&lt;T&gt;::value,void&gt;::type read(T
+&amp;x){cin&gt;&gt;x;}long long read(){char c;long long out=0,f=1;for(c=getchar();!isdigit
+(c)&amp;&amp;c!='-';c=getchar());if(c=='-'){f=-1;c=getchar();}for(;isdigit(c);c=getchar())
+out=(out&lt;&lt;3)+(out&lt;&lt;1)+c-'0';return out*f;}template&lt;typename T&gt;typename enable_if
+&lt;is_integral&lt;T&gt;::value,T&gt;::type read(T&amp;x){char c;T f=1;x=0;for(c=getchar();!isdigit
+(c)&amp;&amp;c!='-';c=getchar());if(c=='-'){f=-1;c=getchar();}for(;isdigit(c);c=getchar())
+x=(x&lt;&lt;3)+(x&lt;&lt;1)+c-'0';return x*=f;}char read(char&amp;x){for(x=getchar();isspace(x);
+x=getchar());return x;}double read(double&amp;x){scanf(&quot;%lf&quot;,&amp;x);return x;}template&lt;
+typename T&gt;typename enable_if&lt;!is_integral&lt;T&gt;::value,void&gt;::type write(const T&amp;x
+){cout&lt;&lt;x;}template&lt;typename T&gt;typename enable_if&lt;is_integral&lt;T&gt;::value,void&gt;::type
+write(const T&amp;x){if(x&lt;0){putchar('-');write(-x);return;}if(x&gt;9)write(x/10);putchar
+(x%10+'0');}void write(const char&amp;x){putchar(x);}void write(const double&amp;x){printf
+(&quot;%.10lf&quot;,x);}
+#endif
+template&lt;typename T,typename...Args&gt;void read(T&amp;x,Args&amp;...args){read(x);read(args
+...);}template&lt;typename OutputIt,typename=typename enable_if&lt;is_same&lt;output_iterator_tag
+,typename iterator_traits&lt;OutputIt&gt;::iterator_category&gt;::value||(
+is_base_of&lt;forward_iterator_tag,typename iterator_traits&lt;OutputIt&gt;::iterator_category&gt;::value
+&amp;&amp;!is_const&lt;OutputIt&gt;::value)&gt;::type&gt;void read(OutputIt __first,OutputIt __last){for(;__first
+!=__last;++__first)read(*__first);}template&lt;typename InputIt,typename=typename enable_if
+&lt;is_base_of&lt;input_iterator_tag,typename iterator_traits&lt;InputIt&gt;::iterator_category
+&gt;::value&gt;::type&gt;void wts(InputIt __first,InputIt __last){bool isFirst=true;for(;
+__first!=__last;++__first){if(isFirst)isFirst=false;else sp;write(*__first);}br;}
+template&lt;typename InputIt,typename=typename enable_if&lt;is_base_of&lt;input_iterator_tag
+,typename iterator_traits&lt;InputIt&gt;::iterator_category&gt;::value&gt;::type&gt;void wtb(InputIt
+__first,InputIt __last){for(;__first!=__last;++__first){write(*__first);br;}}template
+&lt;typename T&gt;void wts(const T&amp;x){write(x);sp;}template&lt;typename T&gt;void wtb(const
+T&amp;x){write(x);br;}template&lt;typename T&gt;void wte(const T&amp;x){write(x);exit(0);}template
+&lt;typename T,typename...Args&gt;void wts(const T&amp;x,Args...args){wts(x);wts(args...);}
+template&lt;typename T,typename...Args&gt;void wtb(const T&amp;x,Args...args){wts(x);wtb(args
+...);}template&lt;typename T,typename...Args&gt;void wte(const T&amp;x,Args...args){wts(x);
+wte(args...);}template&lt;typename T&gt;inline bool up(T&amp;x,const T&amp;y){return x&lt;y?x=y,1
+:0;}template&lt;typename T&gt;inline bool dn(T&amp;x,const T&amp;y){return y&lt;x?x=y,1:0;}
+
+const int N = 100010;
+const int mod = 1000000007;
+
+int head[N], nxt[N &lt;&lt; 1], to[N &lt;&lt; 1], edge[N &lt;&lt; 1], cnt;
+int n, f[N], siz[N], id[N], rid[N];
+
+struct Element
+{
+    int fi, se;
+    Element() { fi = 0; se = -INF; }
+    void insert(int x)
+    {
+        if (x &gt; fi)
+        {
+            se = fi;
+            fi = x;
+        }
+        else if (x &gt; se) se = x;
+    }
+    int get(int x)
+    {
+        if (x == fi) return se;
+        return fi;
+    }
+} dis[N];
+
+void dfsdn(int u, int fa)
+{
+    SON (i, u)
+    {
+        int v = to[i];
+        int w = edge[i];
+        if (v == fa) continue;
+        dfsdn(v, u);
+        dis[u].insert(dis[v].fi + w);
+    }
+}
+
+void dfsup(int u, int fa)
+{
+    SON (i, u)
+    {
+        int v = to[i];
+        int w = edge[i];
+        if (v == fa) continue;
+        dis[v].insert(dis[u].get(dis[v].fi + w) + w);
+        dfsup(v, u);
+    }
+}
+
+void add(int u, int v, int w)
+{
+    nxt[++cnt] = head[u];
+    head[u] = cnt;
+    to[cnt] = v;
+    edge[cnt] = w;
+}
+
+int find(int x)
+{
+    return x == f[x] ? x : f[x] = find(f[x]);
+}
+
+void merge(int x, int y)
+{
+    if (find(x) == find(y)) return;
+    if (siz[find(x)] &lt; siz[find(y)]) swap(x, y);
+    siz[find(x)] += siz[find(y)];
+    f[find(y)] = find(x);
+}
+
+signed main()
+{
+    #ifdef FAST_IOSTREAM
+    cin.sync_with_stdio(false);
+    cin.tie(0);
+    #endif
+
+    read(n);
+
+    For (i, 1, n - 1)
+    {
+        int u, v, w;
+        read(u, v, w);
+        add(u, v, w);
+        add(v, u, w);
+    }
+
+    dfsdn(1, 0);
+    dfsup(1, 0);
+
+    For (i, 1, n) id[i] = i;
+    sort(id + 1, id + n + 1, [](int x, int y){return dis[x].fi &gt; dis[y].fi;});
+    For (i, 1, n) rid[id[i]] = i;
+
+    int q = read();
+
+    while (q--)
+    {
+        int len = read();
+        int l = 1;
+        int ans = 0;
+        For (i, 1, n)
+        {
+            f[i] = i;
+            siz[i] = 1;
+        }
+        For (u, 1, n)
+        {
+            while (dis[id[l]].fi &gt; dis[id[u]].fi + len) --siz[find(id[l++])];
+            SON (i, id[u])
+            {
+                int v = to[i];
+                if (rid[v] &lt; u) merge(id[u], v);
+            }
+            up(ans, siz[find(id[u])]);
+        }
+        wtb(ans);
+    }
+
+    return 0;
+}
+</code></pre>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content" title="2020-02-08 18:37:53 &#43;0800 &#43;0800">
+        2020-02-08
+        <a href="https://github.com/ouuan/hugo-blog/commit/da8aa41962b5f5a65348e9b2f49d8519daa2fc8d" title="Add aliases" target="_blank">(da8aa41)</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/up-and-down/">up and down</a>
+          <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cf1209f-koala-and-notebookbfs%E6%9C%80%E7%9F%AD%E8%B7%AF/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">CF1209F Koala and Notebook（BFS，最短路）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/loj6519-%E9%AD%94%E5%8A%9B%E7%8E%AFburnside%E5%BC%95%E7%90%86%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/">
+            <span class="next-text nav-default">LOJ6519 魔力环（Burnside引理，容斥原理）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/hexo-blog-utterances"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span>
+    <span class="author">ouuan</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/tomorrow.min.css" rel="stylesheet">
+  <script>hljs.configure({tabReplace: '    '});</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.63725abf.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157787819-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

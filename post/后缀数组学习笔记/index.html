@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>后缀数组学习笔记 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="后缀数组是一种处理字符串问题的有力工具（废话），本文的主要特点是一步步地由最朴素的后缀数组构建方法逐步优化，而非直接给出最终优化后的代码。
+希望这篇文章能让更多的人看懂后缀数组的代码，学会后缀数组。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.64.0 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.6e1b3b90.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="后缀数组学习笔记" />
+<meta property="og:description" content="后缀数组是一种处理字符串问题的有力工具（废话），本文的主要特点是一步步地由最朴素的后缀数组构建方法逐步优化，而非直接给出最终优化后的代码。
+希望这篇文章能让更多的人看懂后缀数组的代码，学会后缀数组。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
+<meta property="article:published_time" content="2019-02-17T13:53:54+08:00" />
+<meta property="article:modified_time" content="2020-02-08T18:37:53+08:00" />
+<meta itemprop="name" content="后缀数组学习笔记">
+<meta itemprop="description" content="后缀数组是一种处理字符串问题的有力工具（废话），本文的主要特点是一步步地由最朴素的后缀数组构建方法逐步优化，而非直接给出最终优化后的代码。
+希望这篇文章能让更多的人看懂后缀数组的代码，学会后缀数组。">
+<meta itemprop="datePublished" content="2019-02-17T13:53:54&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-08T18:37:53&#43;08:00" />
+<meta itemprop="wordCount" content="3467">
+
+
+
+<meta itemprop="keywords" content="字符串,后缀数组," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="后缀数组学习笔记"/>
+<meta name="twitter:description" content="后缀数组是一种处理字符串问题的有力工具（废话），本文的主要特点是一步步地由最朴素的后缀数组构建方法逐步优化，而非直接给出最终优化后的代码。
+希望这篇文章能让更多的人看懂后缀数组的代码，学会后缀数组。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/links/">
+        <li class="mobile-menu-item">链接</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/links/">链接</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">后缀数组学习笔记</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2019-02-17 13:53:54 &#43;0800 &#43;0800"> 2019-02-17 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#字符集1">字符集$^{[1]}$</a></li>
+    <li><a href="#字符串1">字符串$^{[1]}$</a></li>
+    <li><a href="#子串1">子串$^{[1]}$</a></li>
+    <li><a href="#后缀">后缀</a></li>
+    <li><a href="#字典序">字典序</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#on2log-n-做法">$O(n^2\log n)$ 做法</a></li>
+    <li><a href="#onlog2n-做法">$O(n\log^2n)$ 做法</a></li>
+    <li><a href="#onlog-n-做法">$O(n\log n)$ 做法</a>
+      <ul>
+        <li><a href="#计数排序">计数排序</a></li>
+        <li><a href="#基数排序">基数排序</a></li>
+        <li><a href="#将基数排序运用于求后缀数组">将基数排序运用于求后缀数组</a></li>
+        <li><a href="#一些常数优化">一些常数优化</a></li>
+      </ul>
+    </li>
+    <li><a href="#on-做法">$O(n)$ 做法</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#jsoi2007字符加密">[JSOI2007]字符加密</a></li>
+    <li><a href="#usaco07decbest-cow-line-gold">[USACO07DEC]Best Cow Line, Gold</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#lcp最长公共前缀">lcp（最长公共前缀）</a></li>
+    <li><a href="#height-数组的定义">$height$ 数组的定义</a></li>
+    <li><a href="#on-求-height-数组需要的一个引理">$O(n)$ 求 $height$ 数组需要的一个引理</a></li>
+    <li><a href="#on-求-height-数组的代码实现">$O(n)$ 求 $height$ 数组的代码实现</a></li>
+    <li><a href="#应用-height-数组需要的一个性质">应用 $height$ 数组需要的一个性质</a></li>
+    <li><a href="#height-数组的应用">$height$ 数组的应用</a>
+      <ul>
+        <li><a href="#usaco06decmilk-patterns">[USACO06DEC]Milk Patterns</a></li>
+        <li><a href="#ahoi2013差异">[AHOI2013]差异</a></li>
+        <li><a href="#haoi2016找相同字符">[HAOI2016]找相同字符</a></li>
+        <li><a href="#noi2015品酒大会">[NOI2015]品酒大会</a></li>
+        <li><a href="#sp8222-nsubstr---substrings">SP8222 NSUBSTR - Substrings</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>后缀数组是一种处理字符串问题的有力工具（废话），本文的主要特点是一步步地由最朴素的后缀数组构建方法逐步优化，而非直接给出最终优化后的代码。</p>
+<p>希望这篇文章能让更多的人看懂后缀数组的代码，学会后缀数组。</p>
+<p>本文已于 <a href="https://github.com/OI-wiki/OI-wiki/pull/1730" target="_blank">pr #1730</a> 优化并合并至 <a href="https://oi-wiki.org/string/sa/" target="_blank">OI Wiki</a>，推荐在 <a href="https://oi-wiki.org/string/sa/" target="_blank">OI Wiki</a> 上阅读。</p>
+<h1 id="模板题链接">模板题链接</h1>
+<p><a href="https://www.luogu.org/problemnew/show/P3809" target="_blank">洛谷</a>（只用求 $sa$）</p>
+<p><a href="https://loj.ac/problem/111" target="_blank">LOJ</a>（只用求 $sa$）</p>
+<p><a href="http://uoj.ac/problem/35" target="_blank">UOJ</a>（求 $sa$ 和 $height$）</p>
+<p><a href="https://duck.ac/problem/1006" target="_blank">评测鸭</a>（求 $sa$ 和 $height$）</p>
+<h1 id="两can篇kao论zi文liao">两（can）篇（kao）论（zi）文（liao）</h1>
+<p>[1]：<a href="https://wenku.baidu.com/view/0dc03d2b1611cc7931b765ce0508763230127479.html" target="_blank">[2004]后缀数组 by.徐智磊</a></p>
+<p>[2]：<a href="https://wenku.baidu.com/view/5b886b1ea76e58fafab00374.html" target="_blank">[2009]后缀数组——处理字符串的有力工具 by.罗穗骞</a></p>
+<p>这两篇论文还是写的很好的，大家可以看看。</p>
+<p>下文中如果有引用这两篇论文中的内容，将以上标形式标出（$^{[1]}$ $^{[2]}$）。</p>
+<h1 id="关于字符串">关于字符串..</h1>
+<p>说到字符串算法，就得先提一些定（fei）义（hua），知道的就可以不看了..</p>
+<h2 id="字符集1">字符集$^{[1]}$</h2>
+<p>一个字符集 $Σ$ 是一个建立了全序关系的集合，也就是说，$Σ$ 中的任意两个不同的元素 $α$ 和 $β$ 都可以比较大小，要么 $α&lt;β$，要么 $β&lt;α$（也就是$α&gt;β$）。字符集 $Σ$ 中的元素称为字符。</p>
+<h2 id="字符串1">字符串$^{[1]}$</h2>
+<p>一个字符串 $S$ 是将 $n$ 个字符顺次排列形成的数组，$n$ 称为 $S$ 的长度，表示为 $len(S)$。$S$ 的第 $i$ 个字符表示为 $S[i]$。</p>
+<h2 id="子串1">子串$^{[1]}$</h2>
+<p>字符串 $S$ 的子串 $S[i..j]，i≤j$，表示 $S$ 串中从 $i$ 到 $j$ 这一段，也就是顺次排列 $S[i],S[i+1],\ldots,S[j]$ 形成的字符串。</p>
+<h2 id="后缀">后缀</h2>
+<p>后缀是指从某个位置 $i$ 开始到整个串末尾结束的一个特殊子串。字符串 $S$ 的从 $i$ 开头的后缀表示为 $Suffix(S,i)$，也就是 $Suffix(S,i)=S[i..len(S)]$。$^{[1]}$</p>
+<p>下文中以 &ldquo;后缀 $i$&rdquo; 代指字符串从 $i$ 开头的后缀。$i$ 称作这个后缀的编号。</p>
+<h2 id="字典序">字典序</h2>
+<p>以第 $i$ 个字符作为第 $i$ 关键字进行大小比较，空字符小于字符集内任何字符（即：$a&lt;aa$）。</p>
+<h1 id="后缀数组是什么">后缀数组是什么？</h1>
+<p>后缀数组主要是两个数组：$sa$ 和 $rk$。</p>
+<p>其中，$sa[i]$ 表示将所有后缀排序后第 $i$ 小的后缀的编号。$rk[i]$ 表示后缀 $i$ 的排名。</p>
+<p>这两个数组满足性质：$sa[rk[i]]=rk[sa[i]]=i$。</p>
+<p>后缀数组示例：$^{[2]}$</p>
+<p><img src="/post_img/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/sark.png" alt="sark"></p>
+<h1 id="后缀数组怎么求">后缀数组怎么求？</h1>
+<h2 id="on2log-n-做法">$O(n^2\log n)$ 做法</h2>
+<p>我相信这个做法大家还是能自己想到的..用string+sort就可以了。由于比较两个字符串是 $O(n)$ 的，所以排序是 $O(n^2\log n)$ 的。</p>
+<h2 id="onlog2n-做法">$O(n\log^2n)$ 做法</h2>
+<p>这个做法要用到倍增的思想。</p>
+<p>先对每个长度为 $1$ 的子串（即每个字符）进行排序。</p>
+<p>假设我们已经知道了长度为 $w$ 的子串的排名 $rk_w[1..n]$（即，$rk_w[i]$ 表示 $s[i..\min(i+w-1,n)]$ 在 $\{s[x..\min(x+w-1,n)]\ |\ x\in\mathbb{N}\bigcap[1,n]\}$ 中的排名），那么，以 $rk_w[i]$ 为第一关键字， $rk_w[i+w]$ 为第二关键字（若 $i+w&gt;n$ 则令 $rk_w[i+w]$ 为 $-INF$）进行排序，就可以求出 $rk_{2w}[1..n]$。</p>
+<p>倍增排序示意图：$^{[2]}$</p>
+<p><img src="/post_img/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/bz.png" alt="bz"></p>
+<p>如果用 <code>sort</code> 进行排序，复杂度就是 $O(n\log^2n)$ 的。</p>
+<details class="admonition note"><summary class="admonition-title">参考代码</summary>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N=1000010;
+
+char s[N];
+int n,w,sa[N],rk[N&lt;&lt;1],oldrk[N]; //为了防止访问rk[i+w]导致数组越界，开两倍数组。当然也可以在访问前判断是否越界，但直接开两倍数组方便一些。
+
+int main()
+{
+    int i,p;
+
+    scanf(&quot;%s&quot;,s+1);
+    n=strlen(s+1);
+    for (i=1;i&lt;=n;++i) rk[i]=s[i];
+
+    for (w=1;w&lt;n;++w)
+    {
+        for (i=1;i&lt;=n;++i) sa[i]=i;
+        sort(sa+1,sa+n+1,[](int x,int y){return rk[x]==rk[y]?rk[x+w]&lt;rk[y+w]:rk[x]&lt;rk[y];}); //这里用到了lambda表达式
+        memcpy(oldrk,rk,sizeof(oldrk)); //由于计算rk的时候原来的rk会被覆盖，要先复制一份
+        for (p=0,i=1;i&lt;=n;++i) rk[sa[i]]=oldrk[sa[i]]==oldrk[sa[i-1]]&amp;&amp;oldrk[sa[i]+w]==oldrk[sa[i-1]+w]?p:++p; //若两个子串相同，它们对应的rk也需要相同，所以要去重
+    }
+
+    for (i=1;i&lt;=n;++i) printf(&quot;%d &quot;,sa[i]);
+
+    return 0;
+}
+</code></pre>
+</details>
+<h2 id="onlog-n-做法">$O(n\log n)$ 做法</h2>
+<p>在刚刚的 $O(n\log^2n)$ 做法中，一次排序是 $O(n\log n)$ 的，如果能 $O(n)$ 排序，就能 $O(n\log n)$ 计算后缀数组了。</p>
+<h3 id="计数排序">计数排序</h3>
+<p>计数排序的核心思想还是比较好理解的，可以先看代码：</p>
+<pre><code class="language-cpp">//对a这个数组进行排序，结果存到数组b中（b[i]表示第i名的编号），cnt是一个辅助数组，m是a的值域
+for (i=1;i&lt;=n;++i) ++cnt[a[i]];
+for (i=1;i&lt;=m;++i) cnt[i]+=cnt[i-1];
+for (i=n;i&gt;=1;--i) b[cnt[a[i]]--]=i;
+</code></pre>
+<p>其实就是先数一数小于等于 $a[i]$ 的数有多少个，然后从后往前看每个数的名次。感性理解/手玩一下就能明白这个排序算法了。</p>
+<p>这个算法有两个特点：</p>
+<ol>
+<li>它是 $O(n+m)$ 的（$m$ 为待排序数据的值域范围）。</li>
+<li>它是一个稳定排序，即，相等的数会按原位置（下标）进行排序。</li>
+</ol>
+<h3 id="基数排序">基数排序</h3>
+<p>值得一提的是很多人经常把计数排序和基数排序搞混..</p>
+<p>基数排序是一个基于稳定排序的多关键字排序算法，复杂度为关键字个数乘上稳定排序的复杂度。而这个稳定排序通常用计数排序实现。</p>
+<p>它的思想是，如果有 $k$ 个关键字，先以第 $k$ 关键字进行一次稳定排序，然后再以第 $k-1$ 关键字进行一次稳定排序，……，最后以第一关键字进行一次稳定排序。可以看出，这样做就完成了以这 $k$ 个关键字的排序。</p>
+<p>具体实现大约是这样的：</p>
+<pre><code class="language-cpp">//key[i][j]表示第j个数的第i关键字，b[i]依然表示第i名的编号，m是key的值域，cnt和id都是辅助数组
+for (i=1;i&lt;=n;++i) id[i]=i;
+for (i=k;i&gt;=1;--i)
+{
+    memset(cnt,0,sizeof(cnt));
+    for (j=1;j&lt;=n;++j) id[j]=b[j];
+    for (j=1;j&lt;=n;++j) ++cnt[key[i][id[j]]];
+    for (j=1;j&lt;=m;++j) cnt[j]+=cnt[j-1];
+    for (j=n;j&gt;=1;--j) b[cnt[key[i][id[j]]]--]=id[j];
+}
+</code></pre>
+<h3 id="将基数排序运用于求后缀数组">将基数排序运用于求后缀数组</h3>
+<p>如果你学会了基数排序，也会 $O(n\log^2n)$ 求后缀数组，那你应该可以自己写出一个 $O(n\log n)$ 求后缀数组的程序了。</p>
+<details class="admonition note"><summary class="admonition-title">参考代码</summary>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N=1000010;
+
+char s[N];
+int n,sa[N],rk[N&lt;&lt;1],oldrk[N&lt;&lt;1],id[N],cnt[N];
+
+int main()
+{
+    int i,m,p,w;
+
+    scanf(&quot;%s&quot;,s+1);
+    n=strlen(s+1);
+    m=max(n,300);
+    for (i=1;i&lt;=n;++i) ++cnt[rk[i]=s[i]];
+    for (i=1;i&lt;=m;++i) cnt[i]+=cnt[i-1];
+    for (i=n;i&gt;=1;--i) sa[cnt[rk[i]]--]=i;
+
+    for (w=1;w&lt;n;w&lt;&lt;=1)
+    {
+        memset(cnt,0,sizeof(cnt));
+        for (i=1;i&lt;=n;++i) id[i]=sa[i];
+        for (i=1;i&lt;=n;++i) ++cnt[rk[id[i]+w]];
+        for (i=1;i&lt;=m;++i) cnt[i]+=cnt[i-1];
+        for (i=n;i&gt;=1;--i) sa[cnt[rk[id[i]+w]]--]=id[i];
+        memset(cnt,0,sizeof(cnt));
+        for (i=1;i&lt;=n;++i) id[i]=sa[i];
+        for (i=1;i&lt;=n;++i) ++cnt[rk[id[i]]];
+        for (i=1;i&lt;=m;++i) cnt[i]+=cnt[i-1];
+        for (i=n;i&gt;=1;--i) sa[cnt[rk[id[i]]]--]=id[i];
+        memcpy(oldrk,rk,sizeof(oldrk));
+        for (p=0,i=1;i&lt;=n;++i) rk[sa[i]]=oldrk[sa[i]]==oldrk[sa[i-1]]&amp;&amp;oldrk[sa[i]+w]==oldrk[sa[i-1]+w]?p:++p;
+    }
+
+    for (i=1;i&lt;=n;++i) printf(&quot;%d &quot;,sa[i]);
+
+    return 0;
+}
+</code></pre>
+</details>
+<h3 id="一些常数优化">一些常数优化</h3>
+<p>如果你把上面那份代码交到洛谷上..</p>
+<p><img src="/post_img/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/TLE.png" alt="TLE"></p>
+<p>怎么会这样呢？是这题卡常吗？</p>
+<p>一翻其他人的代码，最慢点也不过 $1s$..</p>
+<p>这是因为，上面那份代码的常数的确很大..</p>
+<h4 id="第二关键字无需计数排序">第二关键字无需计数排序</h4>
+<p>实际上，像这样就可以了：</p>
+<pre><code class="language-cpp">for (p=0,i=n;i&gt;n-w;--i) id[++p]=i;
+for (i=1;i&lt;=n;++i) if (sa[i]&gt;w) id[++p]=sa[i]-w;
+</code></pre>
+<p>意会一下，先把 $s[i+w..i+2w-1]$ 为空串的位置放前面，再把剩下的按排好的顺序放进去。</p>
+<h4 id="优化计数排序的值域">优化计数排序的值域</h4>
+<p>每次对 $rk$ 进行去重之后，我们都计算了一个 $p$，这个 $p$ 即是 $k$ 的值域，将值域改成它即可。</p>
+<h4 id="将-rkidi-存下来减少不连续内存访问">将 $rk[id[i]]$ 存下来，减少不连续内存访问</h4>
+<p>这个优化在数据范围较大时效果非常明显。</p>
+<h4 id="用函数cmp来计算是否重复">用函数cmp来计算是否重复</h4>
+<p>同样是减少不连续内存访问，在数据范围较大时效果比较明显。</p>
+<p>把 <code>oldrk[sa[i]]==oldrk[sa[i-1]]&amp;&amp;oldrk[sa[i]+w]==oldrk[sa[i-1]+w]</code> 替换成 <code>cmp(sa[i],sa[i-1],w)</code>，<code>bool cmp(int x,int y,int w){ return id[x]==id[y]&amp;&amp;id[x+w]==id[y+w]; }</code>。</p>
+<details class="admonition note"><summary class="admonition-title">参考代码</summary>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N=1000010;
+
+char s[N];
+int n,sa[N],rk[N],oldrk[N&lt;&lt;1],id[N],px[N],cnt[N]; //px[i]=rk[id[i]]（用于排序的数组所以叫px）
+
+bool cmp(int x,int y,int w){ return oldrk[x]==oldrk[y]&amp;&amp;oldrk[x+w]==oldrk[y+w]; }
+
+int main()
+{
+    int i,m=300,p,w;
+
+    scanf(&quot;%s&quot;,s+1);
+    n=strlen(s+1);
+    for (i=1;i&lt;=n;++i) ++cnt[rk[i]=s[i]];
+    for (i=1;i&lt;=m;++i) cnt[i]+=cnt[i-1];
+    for (i=n;i&gt;=1;--i) sa[cnt[rk[i]]--]=i;
+
+    for (w=1;w&lt;n;w&lt;&lt;=1,m=p) //m=p就是优化计数排序值域
+    {
+        for (p=0,i=n;i&gt;n-w;--i) id[++p]=i;
+        for (i=1;i&lt;=n;++i) if (sa[i]&gt;w) id[++p]=sa[i]-w;
+        memset(cnt,0,sizeof(cnt));
+        for (i=1;i&lt;=n;++i) ++cnt[px[i]=rk[id[i]]];
+        for (i=1;i&lt;=m;++i) cnt[i]+=cnt[i-1];
+        for (i=n;i&gt;=1;--i) sa[cnt[px[i]]--]=id[i];
+        memcpy(oldrk,rk,sizeof(rk));
+        for (p=0,i=1;i&lt;=n;++i) rk[sa[i]]=cmp(sa[i],sa[i-1],w)?p:++p;
+    }
+
+    for (i=1;i&lt;=n;++i) printf(&quot;%d &quot;,sa[i]);
+
+    return 0;
+}
+</code></pre>
+<p>这样优化之后应该不开O2都能过。</p>
+</details>
+<h2 id="on-做法">$O(n)$ 做法</h2>
+<p><del>名字叫DC3，我不会</del></p>
+<p>可以参考<a href="https://wenku.baidu.com/view/5b886b1ea76e58fafab00374.html" target="_blank">[2009]后缀数组——处理字符串的有力工具 by.罗穗骞</a>，里面有介绍这个算法。</p>
+<p>一般情况下用倍增法做足常数优化是不会被卡的..</p>
+<p>还有个叫“诱导排序”的东西，也是 $O(n)$ 的，听说又好写（相对于 DC3）又快。</p>
+<h1 id="后缀数组无需-height-数组的应用">后缀数组无需 $height$ 数组的应用</h1>
+<p>如果用不到 $height$ 数组，一般就是利用 $rk$ 数组对字符串进行排序，有时需要对原串进行一定的加工使需要排序的字符串变成后缀，或者是只需对后缀进行排序便能对需要排序的字符串进行排序。</p>
+<h2 id="jsoi2007字符加密">[JSOI2007]字符加密</h2>
+<p><a href="https://www.luogu.org/problemnew/show/P4051" target="_blank">洛谷</a></p>
+<p><a href="https://darkbzoj.tk/problem/1031" target="_blank">dark bzoj</a></p>
+<h2 id="usaco07decbest-cow-line-gold">[USACO07DEC]Best Cow Line, Gold</h2>
+<p><a href="https://www.luogu.org/problemnew/show/P2870" target="_blank">洛谷</a></p>
+<p><a href="https://ouuan.github.io/P2870-USACO07DEC-Best-Cow-Line-Gold%EF%BC%88%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%EF%BC%89/" target="_blank">我的题解</a></p>
+<h1 id="height-数组">$height$ 数组</h1>
+<p>后缀数组的题目往往是要用到 $height$ 数组的。</p>
+<h2 id="lcp最长公共前缀">lcp（最长公共前缀）</h2>
+<p>两个字符串 $S$ 和 $T$ 的 $lcp$ 就是最大的 $x$ 使得 $S_i=T_i\ (\forall\ 1\le i\le x)$ 。</p>
+<p>下文中以 $lcp(i,j)$ 表示后缀 $i$ 和后缀 $j$ 的最长公共前缀（的长度）。</p>
+<h2 id="height-数组的定义">$height$ 数组的定义</h2>
+<p>$height[i]=lcp(sa[i],sa[i-1])$，即第 $i$ 名的后缀与它前一名的后缀的最长公共前缀。</p>
+<h2 id="on-求-height-数组需要的一个引理">$O(n)$ 求 $height$ 数组需要的一个引理</h2>
+<p>$height[rk[i]]\ge height[rk[i-1]]-1$</p>
+<p>证明的话..<del>感性理解</del></p>
+<p>当 $height[rk[i-1]]\le1$ 时，上式显然成立（右边小于等于 $0$ ）。</p>
+<p>当 $height[rk[i-1]]&gt;1$ 时：</p>
+<p>设后缀 $i-1$ 为 $aAD$（$A$ 是一个长度为 $height[rk[i-1]]-1$ 的字符串），那么后缀 $i$ 就是 $AD$。设后缀 $sa[rk[i-1]-1]$ 为 $aAB$ ，那么 $lcp(i-1,sa[rk[i-1]-1])=aA$。由于后缀 $sa[rk[i-1]-1]+1$ 是 $AB$，一定排在后缀 $i$ 的前面，所以后缀 $sa[rk[i]-1]$ 一定含有前缀 $A$，所以 $lcp(i,sa[rk[i]-1])$ 至少是 $height[rk[i-1]]-1$。</p>
+<p>简单来说：</p>
+<p>$i-1$：$aAD$</p>
+<p>$i$：$AD$</p>
+<p>$sa[rk[i-1]-1]$：$aAB$</p>
+<p>$sa[rk[i-1]-1]+1$：$AB$</p>
+<p>$sa[rk[i]-1]$：$A[B/C]$</p>
+<p>$lcp(i,sa[rk[i]-1])$：$AX$（$X$ 可能为空）</p>
+<h2 id="on-求-height-数组的代码实现">$O(n)$ 求 $height$ 数组的代码实现</h2>
+<p>利用上面这个引理暴力求即可：</p>
+<pre><code class="language-cpp">for (i=1,k=0;i&lt;=n;++i)
+{
+    if (k) --k;
+    while (s[i+k]==s[sa[rk[i]-1]+k]) ++k;
+    ht[rk[i]]=k; //height太长了缩写为ht
+}
+</code></pre>
+<p><del>利用摊还分析/势能分析可以发现是O(n)的</del>，$k$ 不会超过 $n$，最多减 $n$ 次，所以最多加 $2n$ 次。</p>
+<h2 id="应用-height-数组需要的一个性质">应用 $height$ 数组需要的一个性质</h2>
+<p>$lcp(sa[i],sa[j])=\min\{height[i+1..j]\}$</p>
+<p>感性理解：如果 $height$ 一直大于某个数，前这么多位就一直没变过；反之，由于后缀已经排好序了，不可能变了之后变回来。</p>
+<p>严格证明可以参考<a href="https://wenku.baidu.com/view/0dc03d2b1611cc7931b765ce0508763230127479.html" target="_blank">[2004]后缀数组 by.徐智磊</a>。</p>
+<h2 id="height-数组的应用">$height$ 数组的应用</h2>
+<p>$height$ 数组往往用来解决关于字符串公共部分的题目，通常需要和RMQ/单调栈等算法相结合。</p>
+<h3 id="usaco06decmilk-patterns">[USACO06DEC]Milk Patterns</h3>
+<p><a href="https://www.luogu.org/problemnew/show/P2852" target="_blank">洛谷</a></p>
+<p><a href="https://ouuan.github.io/P2852-USACO06DEC-Milk-Patterns%EF%BC%88%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%EF%BC%89/" target="_blank">我的题解</a></p>
+<h3 id="ahoi2013差异">[AHOI2013]差异</h3>
+<p><a href="https://www.luogu.org/problemnew/show/P3181" target="_blank">洛谷</a></p>
+<p><a href="https://darkbzoj.tk/problem/3238" target="_blank">dark bzoj</a></p>
+<h3 id="haoi2016找相同字符">[HAOI2016]找相同字符</h3>
+<p><a href="https://www.luogu.org/problemnew/show/P3181" target="_blank">洛谷</a></p>
+<p><a href="https://darkbzoj.tk/problem/4566" target="_blank">dark bzoj</a></p>
+<p><a href="https://ouuan.github.io/BZOJ4566-HAOI2016-%E6%89%BE%E7%9B%B8%E5%90%8C%E5%AD%97%E7%AC%A6%EF%BC%88%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%EF%BC%89/" target="_blank">我的题解</a></p>
+<h3 id="noi2015品酒大会">[NOI2015]品酒大会</h3>
+<p><a href="https://www.luogu.org/problemnew/show/P2178" target="_blank">洛谷</a></p>
+<p><a href="https://darkbzoj.tk/problem/3238" target="_blank">dark bzoj</a></p>
+<h3 id="sp8222-nsubstr---substrings">SP8222 NSUBSTR - Substrings</h3>
+<p><a href="https://www.luogu.org/problemnew/show/SP8222" target="_blank">洛谷</a></p>
+<p><a href="https://www.spoj.com/problems/NSUBSTR/" target="_blank">SPOJ</a></p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content" title="2020-02-08 18:37:53 &#43;0800 &#43;0800">
+        2020-02-08
+        <a href="https://github.com/ouuan/hugo-blog/commit/da8aa41962b5f5a65348e9b2f49d8519daa2fc8d" title="Add aliases" target="_blank">(da8aa41)</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+          <a href="/tags/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/">后缀数组</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/bzoj4516-sdoi2016-%E7%94%9F%E6%88%90%E9%AD%94%E5%92%92sam/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">BZOJ4516 [SDOI2016]生成魔咒（SAM）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/bzoj4566-haoi2016-%E6%89%BE%E7%9B%B8%E5%90%8C%E5%AD%97%E7%AC%A6%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/">
+            <span class="next-text nav-default">BZOJ4566 [HAOI2016]找相同字符（后缀数组）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/hexo-blog-utterances"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span>
+    <span class="author">ouuan</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/tomorrow.min.css" rel="stylesheet">
+  <script>hljs.configure({tabReplace: '    '});</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.63725abf.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157787819-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

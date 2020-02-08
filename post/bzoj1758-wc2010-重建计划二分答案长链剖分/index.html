@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>BZOJ1758 [WC2010]重建计划（二分答案，长链剖分） - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="题目链接 洛谷
+题意简述 给你一棵带边权的树，求所有长度在 $[L,U]$ 这个范围内的路径里平均权值（总权值除以边数）的最大值。
+$2\le n\le 10^5$，保证至少有一条满足要求的路径。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.64.0 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/bzoj1758-wc2010-%E9%87%8D%E5%BB%BA%E8%AE%A1%E5%88%92%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88%E9%95%BF%E9%93%BE%E5%89%96%E5%88%86/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.6e1b3b90.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="BZOJ1758 [WC2010]重建计划（二分答案，长链剖分）" />
+<meta property="og:description" content="题目链接
+洛谷
+题意简述
+给你一棵带边权的树，求所有长度在 $[L,U]$ 这个范围内的路径里平均权值（总权值除以边数）的最大值。
+$2\le n\le 10^5$，保证至少有一条满足要求的路径。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/bzoj1758-wc2010-%E9%87%8D%E5%BB%BA%E8%AE%A1%E5%88%92%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88%E9%95%BF%E9%93%BE%E5%89%96%E5%88%86/" />
+<meta property="article:published_time" content="2019-07-23T20:24:05+08:00" />
+<meta property="article:modified_time" content="2020-02-08T18:37:53+08:00" />
+<meta itemprop="name" content="BZOJ1758 [WC2010]重建计划（二分答案，长链剖分）">
+<meta itemprop="description" content="题目链接
+洛谷
+题意简述
+给你一棵带边权的树，求所有长度在 $[L,U]$ 这个范围内的路径里平均权值（总权值除以边数）的最大值。
+$2\le n\le 10^5$，保证至少有一条满足要求的路径。">
+<meta itemprop="datePublished" content="2019-07-23T20:24:05&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-08T18:37:53&#43;08:00" />
+<meta itemprop="wordCount" content="1339">
+
+
+
+<meta itemprop="keywords" content="二分答案,长链剖分," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="BZOJ1758 [WC2010]重建计划（二分答案，长链剖分）"/>
+<meta name="twitter:description" content="题目链接
+洛谷
+题意简述
+给你一棵带边权的树，求所有长度在 $[L,U]$ 这个范围内的路径里平均权值（总权值除以边数）的最大值。
+$2\le n\le 10^5$，保证至少有一条满足要求的路径。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/links/">
+        <li class="mobile-menu-item">链接</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/links/">链接</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">BZOJ1758 [WC2010]重建计划（二分答案，长链剖分）</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2019-07-23 20:24:05 &#43;0800 &#43;0800"> 2019-07-23 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#题目链接">题目链接</a></li>
+    <li><a href="#题意简述">题意简述</a></li>
+    <li><a href="#简要做法">简要做法</a></li>
+    <li><a href="#参考代码">参考代码</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="题目链接">题目链接</h2>
+<p><a href="https://www.luogu.org/problemnew/show/P4292" target="_blank">洛谷</a></p>
+<h2 id="题意简述">题意简述</h2>
+<p>给你一棵带边权的树，求所有长度在 $[L,U]$ 这个范围内的路径里平均权值（总权值除以边数）的最大值。</p>
+<p>$2\le n\le 10^5$，保证至少有一条满足要求的路径。</p>
+<h2 id="简要做法">简要做法</h2>
+<p><code>#define 父亲 单亲</code>（<del>如果有谴责“父亲节点”人士的话</del>）</p>
+<p>首先可以二分答案，就可以把每条边的边权都减去二分的答案，然后转化为判断有没有权值和为正的符合长度要求的路径。</p>
+<p>然后有点分治和长链剖分两种做法，本题解介绍长链剖分的做法。</p>
+<p>由于合并时要区间查询最大值，可以用线段树来维护。</p>
+<p>具体来说，我们可以像重链剖分一样计算 dfs 序时优先 dfs 重（长）儿子，这样的话长链的 dfs 序就是连续的一段。当我们处理到子树 $u$ 时，$dfn_u+k$ 这个位置上的值表示自 $u$ 起向下长度为 $k$ 的路径的最大权值。可以发现不同长链之间不会互相影响，而重儿子的信息只要一个区间加就可以继承给父亲。所以，每次先 dfs 重儿子把信息继承上来，并检查有没有权值和为正的符合长度要求的路径，然后 dfs 轻儿子并枚举深度，在线段树中查询对应的一段长度合法的区间的最大值来检查有没有权值和为正的符合长度要求的路径，并将轻儿子信息也合并上来。</p>
+<h2 id="参考代码">参考代码</h2>
+<p>代码用了 CF 模板，还请谅解..（只不过这种题就算按正常码风写估计也很难看懂吧..不如自己思考细节如何实现）</p>
+<pre><code class="language-cpp">#ifndef OUUAN
+#pragma GCC optimize(&quot;Ofast,no-stack-protector,unroll-loops,fast-math&quot;)
+#endif
+#include&lt;bits/stdc++.h&gt;
+
+#define int LoveLive
+//#define FAST_IOSTREAM 1
+
+#define For(i,l,r)for(int i=(l),i##end=(r);i&lt;=i##end;++i)
+#define FOR(i,r,l)for(int i=(r),i##end=(l);i&gt;=i##end;--i)
+#define SON(i,u)for(int i=head[u];i;i=nxt[i])
+#define ms(a,x)memset(a,x,sizeof(a))
+#define fi first
+#define se second
+#define pq priority_queue
+#define pb emplace_back
+#define isinf(x)(x&gt;=INF?-1:x)
+#define DEBUG(x)cerr&lt;&lt;(#x)&lt;&lt;&quot;:&quot;&lt;&lt;x&lt;&lt;endl
+using namespace std;typedef long long LoveLive;typedef pair&lt;int,int&gt;pii;typedef vector&lt;int&gt;vi;
+#ifdef int
+const int INF=0x3f3f3f3f3f3f3f3fll;
+#else
+const int INF=0x3f3f3f3f;
+#endif
+const double eps=1e-9;mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());int randint
+(int l,int r){return(int)rng()%(r-l+1)+l;}
+#ifdef FAST_IOSTREAM
+#define br cout&lt;&lt;'\n'
+#define sp cout&lt;&lt;' '
+long long read(){long long x;cin&gt;&gt;x;return x;}template&lt;typename T&gt;void read(T&amp;x){cin&gt;&gt;x;}template&lt;typename
+T&gt;void write(const T&amp;x){cout&lt;&lt;x;}
+#else
+#define br putchar('\n')
+#define sp putchar(' ')
+template&lt;typename T&gt;typename enable_if&lt;!is_integral&lt;T&gt;::value,void&gt;::type read(T&amp;x){cin&gt;&gt;x;}long long
+read(){char c;long long out=0,f=1;for(c=getchar();!isdigit(c)&amp;&amp;c!='-';c=getchar());if(c=='-'){f=-1;c
+=getchar();}for(;isdigit(c);c=getchar())out=(out&lt;&lt;3)+(out&lt;&lt;1)+c-'0';return out*f;}template&lt;typename T
+&gt;typename enable_if&lt;is_integral&lt;T&gt;::value,T&gt;::type read(T&amp;x){char c;T f=1;x=0;for(c=getchar();!isdigit
+(c)&amp;&amp;c!='-';c=getchar());if(c=='-'){f=-1;c=getchar();}for(;isdigit(c);c=getchar())x=(x&lt;&lt;3)+(x&lt;&lt;1)+c-'0';
+return x*=f;}char read(char&amp;x){for(x=getchar();isspace(x);x=getchar());return x;}double read(double
+&amp;x){scanf(&quot;%lf&quot;,&amp;x);return x;}void read(char*x){scanf(&quot;%s&quot;,x);}template&lt;typename T&gt;typename enable_if
+&lt;!is_integral&lt;T&gt;::value,void&gt;::type write(const T&amp;x){cout&lt;&lt;x;}template&lt;typename T&gt;typename enable_if&lt;
+is_integral&lt;T&gt;::value,void&gt;::type write(const T&amp;x){if(x&lt;0){putchar('-');write(-x);return;}if(x&gt;9)write
+(x/10);putchar(x%10+'0');}void write(const char&amp;x){putchar(x);}void write(const double&amp;x){printf(&quot;%.10lf&quot;
+,x);}void write(const char*x){printf(&quot;%s&quot;,x);}
+#endif
+template&lt;typename T,typename...Args&gt;void read(T&amp;x,Args&amp;...args){read(x);read(args...);}template&lt;typename
+...Args&gt;void read(char*x,Args&amp;...args){read(x);read(args...);}template&lt;typename OutputIt,typename=typename
+enable_if&lt;is_same&lt;output_iterator_tag,typename iterator_traits&lt;OutputIt&gt;::iterator_category&gt;::value ||(
+is_base_of&lt;forward_iterator_tag,typename iterator_traits&lt;OutputIt&gt;::iterator_category&gt;::value&amp;&amp;!is_const
+&lt;OutputIt&gt;::value)&gt;::type&gt;void read(OutputIt __first,OutputIt __last){for(;__first!=__last;++__first)
+read(*__first);}template&lt;typename InputIt,typename=typename enable_if&lt;is_base_of&lt;input_iterator_tag,typename
+iterator_traits&lt;InputIt&gt;::iterator_category&gt;::value&gt;::type&gt;void wts(InputIt __first,InputIt __last){
+for(;__first!=__last;++__first){write(*__first);sp;}}template&lt;typename InputIt,typename=typename enable_if
+&lt;is_base_of&lt;input_iterator_tag,typename iterator_traits&lt;InputIt&gt;::iterator_category&gt;::value&gt;::type&gt;void
+wtb(InputIt __first,InputIt __last){for(;__first!=__last;++__first){write(*__first);br;}}void wts(const
+char*x){write(x);sp;}void wtb(const char*x){write(x);br;}void wte(const char*x){write(x);exit(0);}template
+&lt;typename T&gt;void wts(const T&amp;x){write(x);sp;}template&lt;typename T&gt;void wtb(const T&amp;x){write(x);br;}template
+&lt;typename T&gt;void wte(const T&amp;x){write(x);exit(0);}template&lt;typename...Args&gt;void wts(const char*x,Args
+...args){wts(x);wts(args...);}template&lt;typename...Args&gt;void wtb(const char*x,Args...args){wts(x);wtb(
+args...);}template&lt;typename...Args&gt;void wte(const char*x,Args...args){wts(x);wte(args...);}template&lt;typename
+T,typename...Args&gt;void wts(const T&amp;x,Args...args){wts(x);wts(args...);}template&lt;typename T,typename...
+Args&gt;void wtb(const T&amp;x,Args...args){wts(x);wtb(args...);}template&lt;typename T,typename...Args&gt;void wte
+(const T&amp;x,Args...args){wts(x);wte(args...);}template&lt;typename T&gt;inline bool up(T&amp;x,const T&amp;y){return
+x&lt;y?x=y,1:0;}template&lt;typename T&gt;inline bool dn(T&amp;x,const T&amp;y){return y&lt;x?x=y,1:0;}
+
+const int N = 100010;
+
+struct SegmentTree
+{
+#define ls (cur &lt;&lt; 1)
+#define rs (cur &lt;&lt; 1 | 1)
+#define mid ((l + r) &gt;&gt; 1)
+
+    double mx[N &lt;&lt; 2], tag[N &lt;&lt; 2];
+
+    void reset()
+    {
+        ms(mx, 0);
+        ms(tag, 0);
+    }
+
+    void add(int x, double y)
+    {
+        mx[x] += y;
+        tag[x] += y;
+    }
+
+    void pushdown(int cur)
+    {
+        if (fabs(tag[cur]) &lt; eps) return;
+        add(ls, tag[cur]);
+        add(rs, tag[cur]);
+        tag[cur] = 0;
+    }
+
+    void modify(int cur, int l, int r, int p, double x)
+    {
+        up(mx[cur], x);
+        if (l == r - 1) return;
+        pushdown(cur);
+        if (p &lt; mid) modify(ls, l, mid, p, x);
+        else modify(rs, mid, r, p, x);
+    }
+
+    void madd(int cur, int l, int r, int L, int R, double x)
+    {
+        if (l &gt;= R || r &lt;= L) return;
+        if (L &lt;= l &amp;&amp; r &lt;= R) add(cur, x);
+        else
+        {
+            pushdown(cur);
+            madd(ls, l, mid, L, R, x);
+            madd(rs, mid, r, L, R, x);
+            mx[cur] = max(mx[ls], mx[rs]);
+        }
+    }
+
+    double query(int cur, int l, int r, int L, int R)
+    {
+        if (l &gt;= R || r &lt;= L) return -INF;
+        if (L &lt;= l &amp;&amp; r &lt;= R) return mx[cur];
+        pushdown(cur);
+        return max(query(ls, l, mid, L, R), query(rs, mid, r, L, R));
+    }
+
+    double query(int cur, int l, int r, int p)
+    {
+        if (l == r - 1) return mx[cur];
+        pushdown(cur);
+        if (p &lt; mid) return query(ls, l, mid, p);
+        return query(rs, mid, r, p);
+    }
+
+#undef ls
+#undef rs
+#undef mid
+} t;
+
+int head[N], nxt[N &lt;&lt; 1], to[N &lt;&lt; 1], edge[N &lt;&lt; 1], cnt;
+
+void add(int u, int v, int w)
+{
+    nxt[++cnt] = head[u];
+    head[u] = cnt;
+    to[cnt] = v;
+    edge[cnt] = w;
+}
+
+int n, mnlen, mxlen, dep[N], son[N], f[N], dfn[N], dfntot;
+
+void dfs1(int u, int fa)
+{
+    dep[u] = 1;
+    SON(i, u)
+    {
+        int v = to[i];
+        if (v == fa) continue;
+        f[v] = edge[i];
+        dfs1(v, u);
+        if(up(dep[u], dep[v] + 1)) son[u] = v;
+    }
+}
+
+void dfs2(int u, int fa)
+{
+    dfn[u] = ++dfntot;
+    if (son[u]) dfs2(son[u], u);
+    SON(i, u)
+    {
+        int v = to[i];
+        if (v != fa &amp;&amp; v != son[u]) dfs2(v, u);
+    }
+}
+
+bool flag;
+
+void dfs(int u, int fa, double x)
+{
+    if (flag || !son[u]) return;
+    dfs(son[u], u, x);
+    t.madd(1, 1, n + 1, dfn[son[u]], dfn[son[u]] + dep[son[u]], f[son[u]] - x);
+    if (dep[u] - 1 &gt;= mnlen &amp;&amp; t.query(1, 1, n + 1, dfn[u] + mnlen, min(dfn[u] + mxlen + 1, dfn[u] + dep[u])) &gt; 0)
+    {
+        flag = true;
+        return;
+    }
+    SON(i, u)
+    {
+        int v = to[i];
+        if (v != fa &amp;&amp; v != son[u])
+        {
+            dfs(v, u, x);
+            t.madd(1, 1, n + 1, dfn[v], dfn[v] + dep[v], f[v] - x);
+            For (j, max(0ll, mnlen - dep[u]), min(mxlen - 1, dep[v] - 1))
+            {
+                if (t.query(1, 1, n + 1, dfn[v] + j) +
+                    t.query(1, 1, n + 1, max(0ll, mnlen - j - 1) + dfn[u], min(dep[u], mxlen - j) + dfn[u]) &gt; 0)
+                {
+                    flag = true;
+                    return;
+                }
+            }
+            For (j, 0, dep[v] - 1) t.modify(1, 1, n + 1, dfn[u] + j + 1, t.query(1, 1, n + 1, dfn[v] + j));
+        }
+    }
+}
+
+bool check(double x)
+{
+    flag = false;
+
+    t.reset();
+
+    dfs(1, 0, x);
+
+    return flag;
+}
+
+signed main()
+{
+#ifdef FAST_IOSTREAM
+    cin.sync_with_stdio(false);
+    cin.tie(0);
+#endif
+
+    read(n, mnlen, mxlen);
+
+    For (i, 2, n)
+    {
+        int u, v, w;
+        read(u, v, w);
+        add(u, v, w);
+        add(v, u, w);
+    }
+
+    dfs1(1, 0);
+    dfs2(1, 0);
+
+    double l = 0, r = 1e6;
+
+    For (i, 1, 40)
+    {
+        double mid = (l + r) / 2;
+        if (check(mid)) l = mid;
+        else r = mid;
+    }
+
+    printf(&quot;%.3lf&quot;, r);
+
+    return 0;
+}
+</code></pre>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content" title="2020-02-08 18:37:53 &#43;0800 &#43;0800">
+        2020-02-08
+        <a href="https://github.com/ouuan/hugo-blog/commit/da8aa41962b5f5a65348e9b2f49d8519daa2fc8d" title="Add aliases" target="_blank">(da8aa41)</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/">二分答案</a>
+          <a href="/tags/%E9%95%BF%E9%93%BE%E5%89%96%E5%88%86/">长链剖分</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/agc007f-shik-and-copying-string%E8%B4%AA%E5%BF%83%E5%AE%9E%E7%8E%B0/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">AGC007F Shik and Copying String（贪心，实现）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/nio9102-%E8%90%BD%E9%9B%A8%E5%A4%A7/">
+            <span class="next-text nav-default">NIO9102 落雨大</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/hexo-blog-utterances"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span>
+    <span class="author">ouuan</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/tomorrow.min.css" rel="stylesheet">
+  <script>hljs.configure({tabReplace: '    '});</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.63725abf.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157787819-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

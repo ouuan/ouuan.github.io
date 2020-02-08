@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>300iq奔北坡 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="由于实在想不到这次是什么记了，所以就叫 300iq 奔北坡好了。
+实际上是一篇 CTS &amp;amp; APIO &amp;amp; THUSC 2019 游记。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.64.0 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/300iq%E5%A5%94%E5%8C%97%E5%9D%A1/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.6e1b3b90.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="300iq奔北坡" />
+<meta property="og:description" content="由于实在想不到这次是什么记了，所以就叫 300iq 奔北坡好了。
+实际上是一篇 CTS &amp; APIO &amp; THUSC 2019 游记。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/300iq%E5%A5%94%E5%8C%97%E5%9D%A1/" />
+<meta property="article:published_time" content="2019-05-12T21:45:13+08:00" />
+<meta property="article:modified_time" content="2020-02-08T18:37:53+08:00" />
+<meta itemprop="name" content="300iq奔北坡">
+<meta itemprop="description" content="由于实在想不到这次是什么记了，所以就叫 300iq 奔北坡好了。
+实际上是一篇 CTS &amp; APIO &amp; THUSC 2019 游记。">
+<meta itemprop="datePublished" content="2019-05-12T21:45:13&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-08T18:37:53&#43;08:00" />
+<meta itemprop="wordCount" content="4631">
+
+
+
+<meta itemprop="keywords" content="CCF系列赛事,清华营," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="300iq奔北坡"/>
+<meta name="twitter:description" content="由于实在想不到这次是什么记了，所以就叫 300iq 奔北坡好了。
+实际上是一篇 CTS &amp; APIO &amp; THUSC 2019 游记。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/links/">
+        <li class="mobile-menu-item">链接</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/links/">链接</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">300iq奔北坡</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2019-05-12 21:45:13 &#43;0800 &#43;0800"> 2019-05-12 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%B8%B8%E8%AE%B0/"> 游记 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#arrival">Arrival</a></li>
+    <li><a href="#cts-day-1">CTS Day 1</a></li>
+    <li><a href="#cts-day-2">CTS Day 2</a></li>
+    <li><a href="#cts-其它">CTS 其它</a></li>
+    <li><a href="#apio-讲课-day-1">APIO 讲课 Day 1</a></li>
+    <li><a href="#apio-考试">APIO 考试</a></li>
+    <li><a href="#apio-讲题">APIO 讲题</a></li>
+    <li><a href="#apio-讲课-day-2">APIO 讲课 Day 2</a></li>
+    <li><a href="#apio-颁奖">APIO 颁奖</a></li>
+    <li><a href="#thusc-day--1">THUSC Day -1</a></li>
+    <li><a href="#thusc-day-0">THUSC Day 0</a></li>
+    <li><a href="#thusc-day-1-1">THUSC Day 1-1</a></li>
+    <li><a href="#thusc-day-1-2">THUSC Day 1-2</a></li>
+    <li><a href="#thusc-day-2">THUSC Day 2</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>由于实在想不到这次是什么记了，所以就叫 300iq 奔北坡好了。</p>
+<p>实际上是一篇 CTS &amp; APIO &amp; THUSC 2019 游记。</p>
+<h2 id="arrival">Arrival</h2>
+<p>因为是去北京所以要二次安检，然后剪刀被收了..一开始还说我有两把剪刀，然后又过了一次安检就没有了..最后的结果是吃方便面的时候撕不开酱料包，用圆规戳开的。</p>
+<p>车上先是在熟悉的文章、字符串和 Reverses 三道题上分别自闭，然后开始看题解，看 border 相关论文，然后就开始看 THUPC 的榜，然后不小心被 300iq 看到了 300iq_ben_bei_po。</p>
+<p>到了之后，发现 Sooke 就比我们早到一点点——实际上比我们早一趟地铁左右。到酒店的时候办入住排队，Sooke 刚好就在我们几个人前面，然后就愉快地面基了。</p>
+<p>下午去试机，现场写了一道我们那场 cf 的题，（<del>证明了如果会做还是可以在场上写出来的</del>）。</p>
+<p>然后，从 Sooke 来试机起，简单教了一下 Sooke 用 noilinux，一起吃了晚饭，一起走回酒店，然后发现 Sooke 房间就在我隔壁，然后 Sooke 就待在我房间里了，准备看我打他验的那场 cf。</p>
+<p>之前 THUWC 的时候试机坐 pr 右边的右边，这次又是来的时间差不多 + 住隔壁..比较神奇。</p>
+<p>晚上智商比较掉线（可能和前一天没睡好略有关系），掉了波分。</p>
+<h2 id="cts-day-1">CTS Day 1</h2>
+<p>咕了 5min（<del>为什么 cf 每次都是 35 开始</del>）</p>
+<p>开考前就注意到 T1 12s，原来是 10 组数据&hellip;（ctr：我本机 1.Xs，评测姬 6.Xs，怎么办啊）</p>
+<p>第一眼就觉得 T1 的暴力好像不太会做，阶乘会挂。</p>
+<p>然后去看 T2，3min 想到三方做法，然后又花了 3min 去掉一维，然后 10min 左右写 + 调完了 48 分。</p>
+<p>T3 是个提答，（可能是雅礼集训那道五子棋的原因），我就直接搞了个估价函数，每次枚举所有可能的位置，选估价函数最大的那个。前三个点都是立刻出结果，第二个点只有 9 分，然后就把后面的点挂着跑。发现第四个点非常特殊，所以就数了一下每种块各有几个，然后直接在草稿纸上算出方案，然后若干个 for 循环输出。</p>
+<p>然后，本来以为 T2 $m=0, 1, 2$ 的几个点要大力数据分治，然后发现如果 $n\ge d+2m-1$ 直接输出 $d^n$ 就好了..</p>
+<p>然后，发现 T3 后面的一个点跑了 1h 还没跑出来，于是就开始乱搞。先是调循环步长，发现还是跑的特别慢。然后就加了个剪枝，每一行找到第一个可以放的位置就放，快了很多。最后把两个点分别跑出来了 3 分和 4 分。</p>
+<p>回去看 T1，发现一个剪枝搜索的方法（实际上和那个七方 dp 思路差不多&hellip;），然后写到一半想起来可以打表..最后写了个可以在 1s 内跑完一组的搜索，还是打了个表交上去。</p>
+<p>最后是 $10+60+46$，被所有人踩了。</p>
+<p>为什么我没想到 T1 的七方 dp 呢..当时脑子里大概是 $12\rightarrow2^n$，然而有三维，要 $2^{nml}$，做不了，不做了&hellip;（题解：一看就是<del>指数级</del>多项式算法）</p>
+<h2 id="cts-day-2">CTS Day 2</h2>
+<p>又咕了 5min。</p>
+<p>第一眼，T1 计几，考场不能开计几。</p>
+<p>第二眼，T2 字符串！woc，还是个计数。</p>
+<p>第三眼，T3 这是棵树！这边怎么还有反的..</p>
+<p>看了一圈还是感觉 T1 最可做&hellip;然而我先去推了一会儿 T2，没有任何成果。T3 的暴力也不会写..</p>
+<p>冷静了一下想到了 T1 $30​$ 分做法，就写了一个。考场上还算错复杂度了..只不过问题不大。</p>
+<p>然后在三题之间轮流自闭，T1 猜到了凸包合并后更优肯定要合并，也写了个两两尝试合并，然而过不去样例三，就没管了。（95 分做法：随机合并，记录过程中最优解，直到快超时。）</p>
+<p>快结束的时候写了个 T2 10 分爆搜，发现要跑 4s，然后就写了个字符离散化..实际上可以被类似 <code>bdfhjlnprt</code> 之类的串卡掉，只不过还是过了。</p>
+<p>最后是 $10+30+0$，好像还挺大众（</p>
+<h2 id="cts-其它">CTS 其它</h2>
+<p>讲题比较自闭..就记得 _rqy 自己上台吐槽两天四道计数，组题人（同时是 D1T3 出题人）说“我要从五道题里面选六道题，我也很无奈啊”。</p>
+<p>另外首师大附中里的有张摄影的标题戳到我了&hellip;（<del>不要说我中二</del>）（<del>也不要在意右边，那是手指挡住了</del>）</p>
+<p><img src="/post_img/300iq%E5%A5%94%E5%8C%97%E5%9D%A1/yakusoku.jpg" alt="yakusoku"></p>
+<p>录了个<a href="https://www.bilibili.com/video/av52574050" target="_blank">论文答辩</a>。</p>
+<p>最后闭幕式的时候 wh 和 dzd 的讲话还是非常精彩。譬如：知识点涵盖了容斥原理，动态规划，概率论……<font style="opacity: 0">为什么要去掉这个 C 呢？没有钱是干不了这个活的，收的钱也不一定够</font></p>
+<p>dzd 还抱着好像是某位博士的女儿上了台..</p>
+<p><img src="/post_img/300iq%E5%A5%94%E5%8C%97%E5%9D%A1/girl1.jpg" alt="girl1"></p>
+<p><img src="/post_img/300iq%E5%A5%94%E5%8C%97%E5%9D%A1/girl2.jpg" alt="girl2"></p>
+<p>在 cf 上<a href="https://codeforc.es/blog/entry/66927#comment-511486" target="_blank">抢了个评论</a>。上午答辩完就差不多猜到了名单，然而不敢提前发，就提前写好了评论，一公布立马发出去了。感觉的确可以从答辩判断名单，某个 twr 硬是觉得有黑幕还被 up 了我就很没有办法。</p>
+<p><del>cf 出题组全员 Ag。</del></p>
+<h2 id="apio-讲课-day-1">APIO 讲课 Day 1</h2>
+<p>上午缓存管理，下午 PJ dp ？？</p>
+<h2 id="apio-考试">APIO 考试</h2>
+<p>开场 5min 就交了一发 WA..把 A 的暴力交错题了，一看发现纸质题面和实际顺序不一样（好像是翻译的时候还没给题目顺序&hellip;）</p>
+<p>评测系统果然是不需要数据分治的，每个子任务分别提交就可以了，会分别在所有提交中取 max。只不过如果出现特殊情况，要由 CCF 来收题，这样写可能会比较惨..</p>
+<p>先把 T1 的暴力和无修改写了，然后把 T2 的 10 分写了，然后把 T3 暴力、询问长度一、零变一写了，然后把 T1 链写了。这些分好像都比较水..过程中想了会儿各种正解，写完的时候大约是 3h。</p>
+<p>然后，感觉 T1 的树应该可做，然而不会做。T3 的修改在询问前好像也不太会。然后去看只有 10 分的 T2，怎么这么多 subtask，我一个都不会啊..然后，我发现好像有循环节，然后就是本场比赛最蠢的一个地方，我把循环节暴力跑出来，然后用 map 判下标..然后想了个特别麻烦的 5 分做法，一直调到考试结束&hellip;</p>
+<p>最后分数就是前 3h 写的 $43+10+60$，一出考场发现所有人都是 243 / 203 &hellip; 说好的 100+ <font color = "gold">Au</font> 呢？以后再也不能按往年分数线打比赛了&hellip;</p>
+<h2 id="apio-讲题">APIO 讲题</h2>
+<ul>
+<li>考虑让大象写题解</li>
+<li>大象写了一篇题解</li>
+<li>讲完了</li>
+</ul>
+<h2 id="apio-讲课-day-2">APIO 讲课 Day 2</h2>
+<p>上午是 THUWC 时来过的 lzj，又是图像渲染。</p>
+<p>下午是四场讲题里最正常的一场（树上线性问题），前半部分是 <del>希望的超详细题解</del> 自顶向下 dp + 长链剖分，后半部分，后半部分是什么啊..好像是各种神仙题，比如树上线性（不带反阿克曼）并查集……</p>
+<h2 id="apio-颁奖">APIO 颁奖</h2>
+<p>五页 113 艹，成功压线 Cu。</p>
+<p>四页 203 <font color = "gold">Au</font> 比 <font color = "silver">Ag</font> 多艹。</p>
+<p><font color = "silver">Ag</font> 前几都是神仙艹。</p>
+<h2 id="thusc-day--1">THUSC Day -1</h2>
+<p>THUSC 电脑的用户名是 THUSC Day 0-Test、THUSC Day0、THUSC Day1-1 和 THUSC Day1-2。（为什么 Day -1 要提 THUSC 电脑用户名？因为今天是 Day -1。）</p>
+<p>收到选手须知，划重点：WireShark，O3，python，Ubuntu 16.04，没写考试安排。</p>
+<p>学一波 WireShark 好了。</p>
+<p><del>结果颓了一整天</del></p>
+<p>晚上 11 点睡了，好像很久没睡这么早了..</p>
+<h2 id="thusc-day-0">THUSC Day 0</h2>
+<p>为什么 tdoj waiting 显示满分啊..一开始我还以为 pt 是假的（</p>
+<p>试机自闭了，sb 字符串二分想了无限假做法，开始怀疑自己的智商。</p>
+<p><del>开营式全是硬广</del>，感觉还是 THUWC 的有意思些，哦不对，那好像是闭幕式&hellip;</p>
+<p>一进考场就发生了一件很神奇的事，94 和 96 中间没有 95..于是我换了一台机子。</p>
+<p>比赛咕了 $40min$（<del>传统艺能</del>）。</p>
+<p>开场看 T1，很快发现了（<del>在没有操作 3 时</del>）取空的情况只会发生不超过 $n$ 次，20min 的时候已经完全构思好了正解，然而不知道为什么以为操作 3 会破坏复杂度，就写了个 60 分..第一次尝试在草稿纸上完整地写下要维护哪些量，每个操作各要具体怎么修改怎么询问，写了半张草稿纸，然后写代码极其顺畅，1h 的时候就把 60 分部分分 1A 了。然后发现 $l=r$ 也很水，就写了个 $80$ 分的数据分治，然后各种挂，又过了 $40min$ 才写完，共 $6.2KB$。</p>
+<p>然后看了眼 T2，$k=20\rightarrow2^k$，$\min\rightarrow minmax$ 容斥 $\rightarrow$ 不会做（<del>鬼知道我怎么想的</del>），然后去看 T3，侧信道攻击是什么啊..OI 题名全是骗人的.jpg。往后一看，好像还真是题目背景里说的那回事..好像不太可做，回去看 T2。woc 这不是个 sb 题吗&hellip;在最短路上就是 $dis[u][k]+dis[k][v]=dis[u][v]$，然后随手写了个 $3^k$——对每个救援队记录哪些点可以。然后发现改成对每个点记录哪些救援队可以，就可以轻松 $n2^k$ 了..pt 1A，然后就没管了。</p>
+<p>犹豫了一下，决定还是先别侧信道攻击了，回来看 T1。woc 我又 sb 了，操作三不破坏复杂度啊，每次单点加最多把一个空的变成不空，所以还是只会有不超过 $n+m$ 次取空..于是在 $60​$ 分代码的基础上只加一个函数，其它全都不用改，就 pp 了。</p>
+<p>然后去看 T3，这个 $10$ 分，可以枚举 $w$，枚举 $y$，枚举 $q$……诶，询问数超了，那就 <code>get_w()</code>.. woc，直接 <code>for (i = 0; i &lt; 500; ++i) Qs[i] = i;</code> 不就可以了吗，我又 sb 了..把枚举删掉，写上 for 循环，一交，怎么爆零了？woc，没设置 $u$ 和 ​$v$&hellip;那后面的分怎么做啊..先 <code>get_w()</code> <code>get_y()</code> 吧..二分一下 $q$..怎么过不了啊..哦，是快速幂，所以 $time$ 并不关于 $q$ 单调..那就以二分结果为中心往两边爆搜吧..$subtask2$ 拿了 $16$，继续各种乱搞，拿不到分了，考试结束了。</p>
+<p>感觉好像比较大众分啊..可能会被 T3（&amp; 可能比较弱的 pt &amp; 把 THUSC 当成 IOI 赛制打的选手）区分出来了。</p>
+<p>大约在宾馆见识到了真正的“抽水马桶”&hellip;不是按，不是转，是抽..</p>
+<p>晚上睡得比前一天还早（</p>
+<h2 id="thusc-day-1-1">THUSC Day 1-1</h2>
+<p>94 和 96 中间还是没有 95&hellip;</p>
+<p>比赛又咕了 $30min$。</p>
+<p>开场，T1 不是 sb 题吗 $\rightarrow$ 没过 pt $\rightarrow $ 读错题了？$\rightarrow​$ 草，只有灯塔可以点亮..（鬼知道我为什么在点亮数轴（大约是以为每个点都有灯塔，只是一部分有游客吧..</p>
+<p>于是 20min 才把 T1 过掉（</p>
+<p>然后去看 T2，前两个 subtask 好像挺好写的..继续看 T3，考场上好像不能开计算几何来着（</p>
+<p>然而我还是开了..emm..这玩意不用取模诶..哦，好像每种本质不同的划分都可以用一条两圆公切线表示。但是，怎么求公切线啊..用各种方法算了一个小时，算出来的结果都很麻烦，感觉会算错，于是就没管了（然而降智的效果已经达到了</p>
+<p>先写了前两个 subtask，然后发现好像可以处理出每个右端点向左种类数增加的地方，然后写了个假做法写自闭了，最后大致上想到了单调栈做法，然后好像是以为假掉了，也可能没太想清楚，最后写了个 $\mathcal O(nm^2)​$ 交上去&hellip;</p>
+<p>成功被计几 &amp; 自己的假做法降智，被区分了，白给 $48$ 分。</p>
+<h2 id="thusc-day-1-2">THUSC Day 1-2</h2>
+<p>果然是网络题..</p>
+<p>有了 WC 的经验，没仔细阅读学习手册直接开始做，还是写了 $1h$ T1..</p>
+<p>T2 的 $8$ 分是 CRC32，WC 写过，然后..写了 $1h$，WA 了 $1h$。学习手册里的 CRC32 样例过了，输出中间结果 data 转 01 看起来也没什么问题..不知道怎么回事。</p>
+<p>大众分好像是 $48$，㕛被区分了。</p>
+<h2 id="thusc-day-2">THUSC Day 2</h2>
+<p><del>听说线 428 ？emm..成功被白给区分了。</del></p>
+<p><del>只不过也没什么白给不白给的，就是不熟练才会白给，会做也没用啊.</del></p>
+<p>网传线假掉了&hellip;</p>
+<p>我妈在八点半接到我爸的电话，说我爸接到了 THU 电话&hellip;</p>
+<p>然后，赶去西郊宾馆，等了 2.5h，好像是分块后按字典序排？<del>中途还见到了在其它 SC 游记里听说过的搭矿泉水瓶</del>。</p>
+<p>面试大约是自我介绍 + 提问 + 嘤语阅读。毕竟我也是受了其他人游记一定的帮助，简单说一下需要注意的问题..</p>
+<ol>
+<li>自我介绍不需要提 OI 成绩。我一开始说我的 OI 成绩被打断了，好像是考官有成绩..（其实是看别人游记说教官提问“你的 OI 最好成绩”我才说的 qaq</li>
+<li>提问会和自我介绍相关。反正我是这样的..比如，我自我介绍的时候提了一下对人工智能略有了解，就被问了有哪些了解、有什么看法之类的。所以建议自我介绍可以提一提自己熟悉的计算机科学领域，然后在相关方面准备一下可能的问题回答。</li>
+<li>嘤语阅读要尝试看懂。大约是计算机科学专业文章，一开始会给你 $30s$ 左右看一遍，然后我当时只是想了想应该怎么读，没有仔细看。读了一遍之后他问我看懂了什么，然后就 GG 了..个人感觉这个部分是我面试挂的最惨的地方（</li>
+</ol>
+<p>下午讲题 + 科研 / 科协 / <del>蒜</del>算协 介绍，感觉不如 WC 有意思..可能是时间比较短，而且也听过一遍类似的内容了..（<del>有个人工智能简笔画妹子挺有意思的</del>）</p>
+<p>然后，荣获 3=，就去赶火车了..</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content" title="2020-02-08 18:37:53 &#43;0800 &#43;0800">
+        2020-02-08
+        <a href="https://github.com/ouuan/hugo-blog/commit/da8aa41962b5f5a65348e9b2f49d8519daa2fc8d" title="Add aliases" target="_blank">(da8aa41)</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/ccf%E7%B3%BB%E5%88%97%E8%B5%9B%E4%BA%8B/">CCF系列赛事</a>
+          <a href="/tags/%E6%B8%85%E5%8D%8E%E8%90%A5/">清华营</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E4%BD%BF%E7%94%A8-testlib-h-%E5%86%99-lemon-spj/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">使用 testlib.h 写 lemon SPJ</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/%E5%9B%9E%E6%96%87%E8%87%AA%E5%8A%A8%E6%9C%BApam%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+            <span class="next-text nav-default">回文自动机（PAM）学习笔记</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/hexo-blog-utterances"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span>
+    <span class="author">ouuan</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/tomorrow.min.css" rel="stylesheet">
+  <script>hljs.configure({tabReplace: '    '});</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.63725abf.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157787819-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>莫队、带修莫队、树上莫队详解 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="这几天学习了莫队算法，试着写一篇比较详细的莫队教程吧&amp;hellip; 普通莫队 简介 莫队是一种基于分块思想的离线算法，用于解决区间问题，适用范围" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.64.0 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/%E8%8E%AB%E9%98%9F%E5%B8%A6%E4%BF%AE%E8%8E%AB%E9%98%9F%E6%A0%91%E4%B8%8A%E8%8E%AB%E9%98%9F%E8%AF%A6%E8%A7%A3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.6e1b3b90.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="莫队、带修莫队、树上莫队详解" />
+<meta property="og:description" content="这几天学习了莫队算法，试着写一篇比较详细的莫队教程吧&hellip; 普通莫队 简介 莫队是一种基于分块思想的离线算法，用于解决区间问题，适用范围" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/%E8%8E%AB%E9%98%9F%E5%B8%A6%E4%BF%AE%E8%8E%AB%E9%98%9F%E6%A0%91%E4%B8%8A%E8%8E%AB%E9%98%9F%E8%AF%A6%E8%A7%A3/" />
+<meta property="article:published_time" content="2018-09-30T17:19:58+08:00" />
+<meta property="article:modified_time" content="2020-02-08T18:37:53+08:00" />
+<meta itemprop="name" content="莫队、带修莫队、树上莫队详解">
+<meta itemprop="description" content="这几天学习了莫队算法，试着写一篇比较详细的莫队教程吧&hellip; 普通莫队 简介 莫队是一种基于分块思想的离线算法，用于解决区间问题，适用范围">
+<meta itemprop="datePublished" content="2018-09-30T17:19:58&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-08T18:37:53&#43;08:00" />
+<meta itemprop="wordCount" content="5666">
+
+
+
+<meta itemprop="keywords" content="离线算法,莫队," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="莫队、带修莫队、树上莫队详解"/>
+<meta name="twitter:description" content="这几天学习了莫队算法，试着写一篇比较详细的莫队教程吧&hellip; 普通莫队 简介 莫队是一种基于分块思想的离线算法，用于解决区间问题，适用范围"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/links/">
+        <li class="mobile-menu-item">链接</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/links/">链接</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">莫队、带修莫队、树上莫队详解</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2018-09-30 17:19:58 &#43;0800 &#43;0800"> 2018-09-30 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#算法思想">算法思想</a></li>
+    <li><a href="#例题解析">例题解析</a></li>
+    <li><a href="#优化复杂度">优化复杂度</a></li>
+    <li><a href="#例题代码">例题代码</a></li>
+    <li><a href="#其它例题">其它例题</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#算法简介">算法简介</a></li>
+    <li><a href="#分块大小的选择以及复杂度证明">分块大小的选择以及复杂度证明</a></li>
+    <li><a href="#例题代码-1">例题代码</a></li>
+    <li><a href="#其它例题-1">其它例题</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#分块方式">分块方式</a></li>
+    <li><a href="#修改方式">修改方式</a></li>
+    <li><a href="#关于单点修改">关于单点修改</a></li>
+    <li><a href="#复杂度分析">复杂度分析</a></li>
+    <li><a href="#例题代码-2">例题代码</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#适用范围">适用范围</a></li>
+    <li><a href="#算法流程">算法流程</a></li>
+    <li><a href="#例题--代码">例题 & 代码</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>这几天学习了莫队算法，试着写一篇比较详细的莫队教程吧&hellip;</p>
+<h1 id="普通莫队">普通莫队</h1>
+<h2 id="简介">简介</h2>
+<p>莫队是一种基于分块思想的离线算法，用于解决区间问题，适用范围如下：</p>
+<ol>
+<li>
+<p>只有询问没有修改。</p>
+</li>
+<li>
+<p>允许离线。</p>
+</li>
+<li>
+<p>在已知询问 $[l,r]$ 答案的情况下可以 $O(1)$  得到 $[l,r-1],[l,r+1],[l-1,r],[l+1,r]$ 的答案。</p>
+</li>
+</ol>
+<p>满足以上三个条件就可以在 $O(n\sqrt{m}+m\log m)​$ 的时间复杂度下得到每个询问的解。</p>
+<!-- more -->
+<h2 id="算法思想">算法思想</h2>
+<p>莫队的精髓就在于通过对询问进行排序，并把询问的结果作为下一个询问求解的基础，使得暴力求解的复杂度得到保证。</p>
+<p>上文中“适用范围”的第三点“<strong>在已知询问 $[l,r]$ 答案的情况下可以 $O(1)$  得到 $[l,r-1],[l,r+1],[l-1,r],[l+1,r]$ 的答案</strong>”即是“<strong>把询问的结果作为下一个询问求解的基础</strong>”的方法。</p>
+<h2 id="例题解析">例题解析</h2>
+<p>例：<a href="https://www.luogu.org/problemnew/show/P1494" target="_blank">[国家集训队]小Z的袜子</a></p>
+<p>在这题中，用 $cnt_i$ 表示当前处理的区间内颜色为i的袜子出现的次数，用 $\mathrm{len}$ 表示当前处理的区间的长度，用 $x$ 表示新增的那只袜子的颜色。</p>
+<p>以已知区间 $[l,r]$ 的答案求解区间 $[l,r+1]$ 为例。分别处理分子和分母：</p>
+<ul>
+<li>分母为任选两只袜子的组合总数，原先是 $\frac{\mathrm{len}(\mathrm{len}-1)}{2}$，现在是 $\frac{\mathrm{len}(\mathrm{len}+1)}{2}$，增加了 $\mathrm{len}$ 。</li>
+<li>分子为两只袜子颜色相同的组合总数，比原来增加了 $cnt_x$，即新增的这只袜子和原本就在当前区间内的相同颜色的袜子的组合。</li>
+</ul>
+<p>因此，将一只颜色为x的袜子计入答案的函数就可以写出来了：</p>
+<pre><code class="language-cpp">//fz代表分子，fm代表分母
+void add(int x)
+{
+    fz+=cnt[x];
+    ++cnt[x];
+    fm+=len;
+    ++len;
+}
+</code></pre>
+<p>同理可以写出将一只颜色为x的袜子移出答案的函数：</p>
+<pre><code class="language-cpp">void del(int x)
+{
+    --cnt[x];
+    fz-=cnt[x];
+    --len;
+    fm-=len;
+}
+</code></pre>
+<p>于是，我们就可以得到一个暴力的算法：用 $l$ 和 $r$ 分别记录当前区间的两个端点，然后用下面这段代码来更新答案（q[i].l,q[i].r代表正在处理的询问的两个端点，col[p]代表第 $p$ 只袜子的颜色）：</p>
+<pre><code class="language-cpp">while (l&gt;q[i].l)
+{
+    add(col[--l]);
+}
+while (r&lt;q[i].r)
+{
+    add(col[++r]);
+}
+while (l&lt;q[i].l) 
+{
+    del(col[l++]);
+}
+while (r&gt;q[i].r)
+{
+    del(col[r--]);
+}
+</code></pre>
+<p>然而，这个算法的时间复杂度是 $O(nm)$ 的（因为最坏情况下每次 $l$ 和 $r$ 两个指针都要走 $O(n)$ 的距离，而一共有 $m$ 次询问），和暴力完全一样甚至跑的更慢。</p>
+<h2 id="优化复杂度">优化复杂度</h2>
+<p>别忘了，之前我说过，莫队的精髓就在于通过对询问进行排序，使得暴力求解的复杂度得到保证。</p>
+<p>我们的目的是使 $l$ 和 $r$ 两个指针走过的总距离尽量的小，这时候就要用到分块的思想了。</p>
+<p>把整个区间 $[1,n]$ 分成若干块，以询问的左端点所在块为第一关键字，以询问的右端点大小为第二关键字，对询问进行排序，那么：</p>
+<ul>
+<li>对于同一块的询问，$l$ 指针每次最多移动块的大小，$r$ 指针的移动则是单调的，总共移动最多 $n$ 。</li>
+<li>对于不同块的询问，$l$ 每次换块时最多移动两倍块的大小， $r$ 每次换块时最多移动 $n$  。</li>
+</ul>
+<p>总结：（用 $B$ 表示块的大小）$l$ 指针每次移动 $O(B)$，$r$ 指针每块移动 $O(n)​$ 。</p>
+<p>所以：</p>
+<ul>
+<li>$l$ 的移动次数最多为询问数 $\times$ 块的大小，即 $O(mB)$ 。</li>
+<li>$r$ 的移动次数最多为块的个数 $\times$ 总区间大小，即 $O(n^2/B)$ 。</li>
+</ul>
+<p>因此，总移动次数为 $O(mB+n^2/B)$ 。</p>
+<blockquote>
+<p>实际上，“换块”这一事件发生的次数并不多，因此即便换块复杂度达到 $\mathcal O(n)$ 也是不会影响复杂度的。只不过一般情况下块是相邻的，换块复杂度就比较小。</p>
+<p>—— update on 2019.7.27</p>
+</blockquote>
+<p>没错，这就是个双勾函数，所以当 $B=\sqrt{\frac{n^2}{m}}$ 即 $\frac{n}{\sqrt{m}}$ 时复杂度最小，为 $O(n\sqrt{m})$ 。</p>
+<p>剩下的最后一个问题：初始的当前区间是什么？</p>
+<p>只要任意指定一个空区间就好了，如 $l=1,r=0$ 。</p>
+<p>所以，整个莫队算法就可以概括为：</p>
+<ol>
+<li>
+<p>将询问记录下来。</p>
+</li>
+<li>
+<p>以 $\frac{n}{\sqrt{m}}$ 为块的大小，以询问的左端点所在块为第一关键字，以询问的右端点大小为第二关键字，对询问进行排序。</p>
+</li>
+<li>
+<p>暴力处理每个询问。</p>
+</li>
+<li>
+<p>输出答案。</p>
+</li>
+</ol>
+<p>总的复杂度为 $O(n\sqrt{m}+m\log m)$ 。</p>
+<p>P.S. 网上很多教程说分块大小取 $\sqrt{n}$ 最优，复杂度为 $O(n\sqrt{n})$，这是不严谨的，当n、m差别较大时使用 $\sqrt{n}$ 作为分块大小效率会明显偏低。</p>
+<h2 id="例题代码">例题代码</h2>
+<p><a href="https://www.luogu.org/problemnew/show/P1494" target="_blank">[国家集训队]小Z的袜子</a> AC代码：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+const int N=50010;
+
+void add(int x);
+void del(int x);
+int gcd(int a,int b);
+
+int n,m,B,fz,fm,len,col[N],cnt[N],ans[N][2];
+
+struct Query
+{
+    int l,r,id;
+    bool operator&lt;(Query&amp; b)
+    {
+        return l/B==b.l/B?r&lt;b.r:l&lt;b.l;
+    }
+} q[N];
+
+int main()
+{
+    int i,l=1,r=0,g;
+
+    cin&gt;&gt;n&gt;&gt;m;
+
+    B=n/sqrt(m);
+
+    for (i=1;i&lt;=n;++i)
+    {
+        cin&gt;&gt;col[i];
+    }
+
+    for (i=0;i&lt;m;++i)
+    {
+        cin&gt;&gt;q[i].l&gt;&gt;q[i].r;
+        q[i].id=i;
+    }
+
+    sort(q,q+m);
+
+    for (i=0;i&lt;m;++i)
+    {
+        if (q[i].l==q[i].r)
+        {
+            ans[q[i].id][0]=0;
+            ans[q[i].id][1]=1;
+            continue;
+        }
+        while (l&gt;q[i].l)
+        {
+            add(col[--l]);
+        }
+        while (r&lt;q[i].r)
+        {
+            add(col[++r]);
+        }
+        while (l&lt;q[i].l) 
+        {
+            del(col[l++]);
+        }
+        while (r&gt;q[i].r)
+        {
+            del(col[r--]);
+        }
+        g=gcd(fz,fm);
+        ans[q[i].id][0]=fz/g;
+        ans[q[i].id][1]=fm/g;
+    }
+
+    for (i=0;i&lt;m;++i)
+    {
+        printf(&quot;%d/%d\n&quot;,ans[i][0],ans[i][1]);
+    }
+
+    return 0;
+}
+
+void add(int x)
+{
+    fz+=cnt[x];
+    ++cnt[x];
+    fm+=len;
+    ++len;
+}
+
+void del(int x)
+{
+    --cnt[x];
+    fz-=cnt[x];
+    --len;
+    fm-=len;
+}
+
+int gcd(int a,int b)
+{
+    return b==0?a:gcd(b,a%b);
+}
+</code></pre>
+<h2 id="其它例题">其它例题</h2>
+<p><a href="https://www.luogu.org/problemnew/show/P2709" target="_blank">小B的询问</a></p>
+<h1 id="带修莫队">带修莫队</h1>
+<p>前面说过，普通的莫队只能解决没有修改的问题，那么<a href="https://www.luogu.org/problemnew/show/P1903" target="_blank">带修改的问题</a>怎么解决呢？带修莫队就是一种支持单点修改的莫队算法。</p>
+<h2 id="算法简介">算法简介</h2>
+<p>还是对询问进行排序，每个询问除了左端点和右端点还要记录这次询问是在第几次修改之后（时间），以左端点所在块为第一关键字，以右端点所在块为第二关键字，以时间为第三关键字进行排序。</p>
+<p>暴力查询时，如果当前修改数比询问的修改数少就把没修改的进行修改，反之回退。</p>
+<p>需要注意的是，修改分为两部分：</p>
+<ol>
+<li>
+<p>若修改的位置在当前区间内，需要更新答案（del原颜色，add修改后的颜色）。</p>
+</li>
+<li>
+<p>无论修改的位置是否在当前区间内，都要进行修改（以供add和del函数在以后更新答案）。</p>
+</li>
+</ol>
+<h2 id="分块大小的选择以及复杂度证明">分块大小的选择以及复杂度证明</h2>
+<p>（用 $B$ 表示分块大小，$c$ 表示修改个数，$q$ 表示询问个数，l块表示以 $l/B$ 分的块，r块表示以 $r/B$ 分的块，每个l块包含 $n/B$ 个r块）</p>
+<ol>
+<li>
+<p>对于时间指针 $now$：对于每个r块，最坏情况下会移动 $c$，共有 $\left(\frac{n}{B}\right)^2$ 个r块，所以总移动次数为 $\frac{cn^2}{B^2}$ 。</p>
+</li>
+<li>
+<p>对于左端点指针 $l$ ：l块内移动每次最多 $B$，换l块每次最多 $2B$，所以总移动次数为 $O(qB)$ 。</p>
+</li>
+<li>
+<p>对于右端点指针 $r​$：r块内移动每次最多 $B​$，换r块每次最多 $2B​$，所有l块内移动次数之和为 $O(qB)​$；换l块时最多移动 $n​$，总的换l块时移动次数为 $O\left(\frac{n^2}{B}\right)​$；所以总的移动次数为 $O\left(qB+\frac{n^2}{B}\right)​$ 。</p>
+</li>
+</ol>
+<p>所以：总移动次数为 $O\left(\frac{cn^2}{B^2}+qB+\frac{n^2}{B}\right)$ 。</p>
+<blockquote>
+<p>实际上，“换块”这一事件发生的次数并不多，因此即便换块复杂度达到 $\mathcal O(n)​$ 也是不会影响复杂度的。只不过一般情况下块是相邻的，换块复杂度就比较小。</p>
+<p>—— update on 2019.7.27</p>
+</blockquote>
+<p>由于一般的题目都不会告诉你修改和询问分别的个数，所以统一用 $m​$ 表示，即 $O\left(\frac{mn^2}{B^2}+mB+\frac{n^2}{B}\right)​$ 。</p>
+<p>那么 $B$ 取多少呢&hellip;Mathematica告诉我大约是这个： <img src="dxmdfkdx.jpg" alt=""></p>
+<p>所以还是不要纠结带修莫队的最佳分块大小好了&hellip;视作 $n=m​$ 的话，就可以得到总移动次数为 $O\left(\frac{n^3}{B^2}+nB+\frac{n^2}{B}\right)​$，那么 $B=n^{\frac{2}{3}}​$ 时取最小值 $O\left(n^{\frac{5}{3}}\right)​$ 。</p>
+<p>所以：带修莫队的渐进时间复杂度为 $O\left(n\log n+n^{\frac{5}{3}}\right)$ （视作 $n=m$）。</p>
+<h2 id="例题代码-1">例题代码</h2>
+<p>这次就不详细分析例题了，直接上代码。</p>
+<p><a href="https://www.luogu.org/problemnew/show/P1903" target="_blank">[国家集训队]数颜色</a> AC代码：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+void add(int x);
+void del(int x);
+void modify(int x,int ti);  //这个函数会执行或回退修改ti（执行还是回退取决于是否执行过，具体通过swap实现），x表明当前的询问是x，即若修改了区间[q[x].l,q[x].r]便要更新答案
+
+int n,m,B,cnt[1000010],a[50010],ans,ccnt,qcnt,now,out[50010];
+
+struct Change
+{
+    int p,col;
+} c[50010];
+
+struct Query
+{
+    int l,r,t,id;
+    bool operator&lt;(Query&amp; b)
+    {
+        return l/B==b.l/B?(r/B==b.r/B?t&lt;b.t:r&lt;b.r):l&lt;b.l;
+    }
+} q[50010];
+
+int main()
+{
+    int i,l=2,r=1;
+    char type[10];
+
+    cin&gt;&gt;n&gt;&gt;m;
+    B=pow(n,0.66666);
+
+    for (i=1;i&lt;=n;++i)
+    {
+        cin&gt;&gt;a[i];
+    }
+
+    for (i=1;i&lt;=m;++i)
+    {
+        scanf(&quot;%s&quot;,type);
+        if (type[0]=='Q')
+        {
+            ++qcnt;
+            cin&gt;&gt;q[qcnt].l&gt;&gt;q[qcnt].r;
+            q[qcnt].t=ccnt;
+            q[qcnt].id=qcnt;
+        }
+        else
+        {
+            ++ccnt;
+            cin&gt;&gt;c[ccnt].p&gt;&gt;c[ccnt].col;
+        }
+    }
+
+    sort(q+1,q+qcnt+1);
+
+    for (i=1;i&lt;=qcnt;++i)
+    {
+        while (l&gt;q[i].l)
+        {
+            add(a[--l]);
+        }
+        while (r&lt;q[i].r)
+        {
+            add(a[++r]);
+        }
+        while (l&lt;q[i].l)
+        {
+            del(a[l++]);
+        }
+        while (r&gt;q[i].r)
+        {
+            del(a[r--]);
+        }
+        while (now&lt;q[i].t)
+        {
+            modify(i,++now);
+        }
+        while (now&gt;q[i].t)
+        {
+            modify(i,now--);
+        }
+        out[q[i].id]=ans;
+    }
+
+    for (i=1;i&lt;=qcnt;++i)
+    {
+        cout&lt;&lt;out[i]&lt;&lt;endl;
+    }
+
+    return 0;
+}
+
+void add(int x)
+{
+    if (cnt[x]++==0)
+    {
+        ++ans;
+    }
+}
+
+void del(int x)
+{
+    if (--cnt[x]==0)
+    {
+        --ans;
+    }
+}
+
+void modify(int x,int ti)
+{
+    if (c[ti].p&gt;=q[x].l&amp;&amp;c[ti].p&lt;=q[x].r)
+    {
+        del(a[c[ti].p]);
+        add(c[ti].col);
+    }
+    swap(a[c[ti].p],c[ti].col); //下次执行时必定是回退这次操作，直接互换就可以了 
+}
+</code></pre>
+<h2 id="其它例题-1">其它例题</h2>
+<p><a href="https://www.luogu.org/problemnew/show/CF940F" target="_blank">CF940F Machine Learning</a></p>
+<h1 id="树上莫队">树上莫队</h1>
+<p>其实，莫队算法除了序列还可以用于树。复杂度同序列上的莫队（不带修 $O(n\sqrt{m}+m\log m)​$，带修 $O\left(n\log n+n^{\frac{5}{3}}\right)$）。</p>
+<p>例题：<a href="http://uoj.ac/problem/58" target="_blank">[WC2013]糖果公园</a></p>
+<h2 id="分块方式">分块方式</h2>
+<p>这里需要看一道专门为树上莫队设计的题目 <a href="https://www.luogu.org/problemnew/show/P2325" target="_blank">[SCOI2005]王室联邦</a>。</p>
+<p>用这道题所要求的方式进行分块，并用后文的方式更新答案，就能保证复杂度（复杂度分析见后文）。</p>
+<p>那么如何满足<strong>每块大小在 $[B,3B]$，块内每个点到核心点路径上的所有点都在块内</strong>呢？</p>
+<p>这里先提供一种构造方式，再予以证明：</p>
+<p><strong>dfs，并创建一个栈，dfs一个点时先记录初始栈顶高度，每dfs完当前节点的一棵子树就判断栈内（相对于刚开始dfs时）新增节点的数量是否≥B，是则将栈内所有新增点分为同一块，核心点为当前dfs的点，当前节点结束dfs时将当前节点入栈，整个dfs结束后将栈内所有剩余节点归入已经分好的最后一个块。</strong></p>
+<p>参考代码：</p>
+<pre><code class="language-cpp">void dfs(int u,int fa)
+{
+    int t=top;
+    for (int i=head[u];i;i=nxt[i])
+    {
+        int v=to[i];
+        if (v!=fa)
+        {
+            dfs(v,u);
+            if (top-t&gt;=B)
+            {
+                key[++tot]=u;
+                while (top&gt;t) bl[stk[top--]]=tot;
+            }
+        }
+    }
+    stk[++top]=u;
+}
+
+int main()
+{
+    //.......
+
+    dfs(1,0);
+
+    if (!tot) ++tot;
+    key[tot]=1;
+    while (top) bl[stk[top--]]=tot;
+}
+</code></pre>
+<p>如果你看懂了这个方法的话，每块大小≥B是显然的，下面证明为何每块大小≤3B：</p>
+<p>对于当前节点的每一棵子树：</p>
+<ul>
+<li>
+<p>若未被分块的节点数&gt;B，那么在dfs这棵子树的根节点时就一定会把这棵子树的一部分分为一块直至这棵子树的剩余节点数≤B，所以这种情况不存在。</p>
+</li>
+<li>
+<p>若未被分块的节点数=B，这些节点一定会和栈中所有节点分为一块，栈中之前还剩 $[0,B-1]$ 个节点，那么这一块的大小为 $[B,2B-1]$ 。</p>
+</li>
+<li>
+<p>若未被分块的节点数&lt;B，当未被分块的节点数+栈中剩余节点数≥B时，这一块的大小为 $[B,2B-1)$，否则继续进行下一棵子树。</p>
+</li>
+</ul>
+<p>对于dfs结束后栈内剩余节点，数量一定在 $[1,B]​$ 内，而已经分好的每一块的大小为 $[B,2B-1]​$，所以每块的大小都在 $[B,3B)​$ 内。</p>
+<h2 id="修改方式">修改方式</h2>
+<p>所谓“修改”，就是由询问 $(cu,cv)$ 更新至询问 $(tu,tv)$ 。</p>
+<p>如果把两条路径上的点全部修改复杂度是和暴力一样的，所以需要做一些处理。</p>
+<p>（下文中 $T(u,v)​$ 表示 $u​$ 到 $v​$ 的路径上除 $lca(u,v)​$ 外的所有点构成的集合，$S(u,v)​$ 代表u到v的路径，$xor​$ 表示集合对称差（就跟异或差不多））</p>
+<ul>
+<li>两个指针 $cu,cv​$ （相当于序列莫队的 $l,r​$ 两个指针）， $ans​$记录$T(cu,cv)​$ 的答案，$vis​$ 数组记录每个节点是否在 $T(cu,cv)​$ 内；</li>
+<li>由 $T(cu,cv)​$ 更新至 $T(tu,tv)​$ 时，将 $T(cu,tu)​$ 和 $T(cv,tv)​$ 的 $vis​$ 分别取反，并相应地更新答案；</li>
+<li>将答案记录到 $out​$ 数组（离线后用于输出那个）时对 $lca(cu,cv)​$ （此时的 $cu,cv​$ 已更新为上一步中的 $tu,tv​$） 的 $vis​$ 取反并更新答案，记录完再改回来（因为 $lca​$ 处理比较麻烦，这样搞比较方便）。</li>
+</ul>
+<p>第二步证明如下：</p>
+<p>$\quad,T(cu,cv)\ xor\ T(tu,tv)$</p>
+<p>$=[S(cu,root)\ xor\ S(cv,root)]\ xor\ [S(tu,root)\ xor\ S(tv,root)]$ （lca及以上相消）</p>
+<p>$=[S(cu,root)\ xor\ S(tu,root)]\ xor\ [S(cv,root)\ xor\ S(tv,root)]$ （交换律、结合律）</p>
+<p>$=T(cu,tu)\ xor\ T(cv,tv)$</p>
+<p>之所以要把 $T(cu,cv)\ xor\ T(tu,tv)$ 转化成 $T(cu,tu)\ xor\ T(cv,tv)$，是因为这样的话就能通过对询问排序来保证复杂度。排序方式就是以 $u$ 所在块编号为第一关键字，$v​$ 的编号为第二关键字排序。如果是带修莫队，就还要以时间为第三关键字。</p>
+<h2 id="关于单点修改">关于单点修改</h2>
+<p>树上莫队的单点修改和序列莫队类似，唯一不同就是，修改后是否更新答案通过 $vis$ 数组判断。</p>
+<h2 id="复杂度分析">复杂度分析</h2>
+<p>每块大小在 $[B,3B)​$，所以两点间路径长度也在 $[B,3B)​$，块内移动就是 $\mathcal O(B)​$ 的，然后就和序列莫队的复杂度分析类似了&hellip;</p>
+<h2 id="例题代码-2">例题代码</h2>
+<p><a href="http://uoj.ac/problem/58" target="_blank">[WC2013]糖果公园</a></p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+const int N=100010;
+
+void pathmodify(int u,int v); //将T(u,v)取反并更新答案
+void opp(int x); //将节点x取反并更新答案
+void modify(int ti); //进行或回退修改ti
+int lca(int u,int v);
+void dfs(int u); //进行分块并记录dep数组、f数组（用于求lca、两点间路径）
+void add(int u,int v);
+
+int head[N],nxt[N&lt;&lt;1],to[N&lt;&lt;1],cnt;
+int n,m,Q,B,bl[N],tot,V[N],W[N],a[N],stk[N],top,qcnt,ccnt,dep[N],f[20][N],num[N],now;
+long long ans,out[N];
+bool vis[N];
+
+struct Query
+{
+    int u,v,t,id;
+    bool operator&lt;(Query&amp; y)
+    {
+        return bl[u]==bl[y.u]?(bl[v]==bl[y.v]?t&lt;y.t:bl[v]&lt;bl[y.v]):bl[u]&lt;bl[y.u];
+    }
+} q[N];
+
+struct Change
+{
+    int p,x;
+} c[N];
+
+int main()
+{
+    int i,j,u,v,lc,type;
+
+    cin&gt;&gt;n&gt;&gt;m&gt;&gt;Q;
+    B=pow(n,0.666);
+
+    for (i=1;i&lt;=m;++i) cin&gt;&gt;V[i];
+    for (i=1;i&lt;=n;++i) cin&gt;&gt;W[i];
+
+    for (i=1;i&lt;n;++i)
+    {
+        cin&gt;&gt;u&gt;&gt;v;
+        add(u,v);
+        add(v,u);
+    }
+
+    dfs(1);
+
+    for (i=1;i&lt;=16;++i)
+    {
+        for (j=1;j&lt;=n;++j)
+        {
+            f[i][j]=f[i-1][f[i-1][j]];
+        }
+    }
+
+    while (top) bl[stk[top--]]=tot;
+
+    for (i=1;i&lt;=n;++i) cin&gt;&gt;a[i];
+
+    for (i=0;i&lt;Q;++i)
+    {
+        cin&gt;&gt;type;
+        if (type==0)
+        {
+            ++ccnt;
+            cin&gt;&gt;c[ccnt].p&gt;&gt;c[ccnt].x;
+        }
+        else
+        {
+            cin&gt;&gt;q[qcnt].u&gt;&gt;q[qcnt].v;
+            q[qcnt].t=ccnt;
+            q[qcnt].id=qcnt;
+            ++qcnt;
+        }
+    }
+
+    sort(q,q+qcnt);
+
+    u=v=1;
+
+    for (i=0;i&lt;qcnt;++i)
+    {
+        pathmodify(u,q[i].u);
+        pathmodify(v,q[i].v);
+        u=q[i].u;
+        v=q[i].v;
+        while (now&lt;q[i].t) modify(++now);
+        while (now&gt;q[i].t) modify(now--);
+        lc=lca(u,v);
+        opp(lc);
+        out[q[i].id]=ans;
+        opp(lc);
+    }
+
+    for (i=0;i&lt;qcnt;++i) cout&lt;&lt;out[i]&lt;&lt;endl;
+
+    return 0;
+}
+
+void pathmodify(int u,int v)
+{
+    if (dep[u]&lt;dep[v]) swap(u,v);
+    while (dep[u]&gt;dep[v])
+    {
+        opp(u);
+        u=f[0][u];
+    }
+    while (u!=v)
+    {
+        opp(u);
+        opp(v);
+        u=f[0][u];
+        v=f[0][v];
+    }
+}
+
+void opp(int x)
+{
+    if (vis[x]) ans-=1ll*V[a[x]]*W[num[a[x]]--];
+    else ans+=1ll*V[a[x]]*W[++num[a[x]]];
+    vis[x]^=1;
+}
+
+void modify(int ti)
+{
+    if (vis[c[ti].p])
+    {
+        opp(c[ti].p);
+        swap(a[c[ti].p],c[ti].x);
+        opp(c[ti].p);
+    }
+    else swap(a[c[ti].p],c[ti].x);
+}
+
+int lca(int u,int v)
+{
+    if (dep[u]&lt;dep[v])
+    {
+        swap(u,v);
+    }
+    int i;
+    for (i=0;i&lt;=16;++i)
+    {
+        if ((dep[u]-dep[v])&amp;(1&lt;&lt;i))
+        {
+            u=f[i][u];
+        }
+    }
+    if (u==v) return u;
+    for (i=16;i&gt;=0;--i)
+    {
+        if (f[i][u]!=f[i][v])
+        {
+            u=f[i][u];
+            v=f[i][v];
+        }
+    }
+    return f[0][u];
+}
+
+void dfs(int u)
+{
+    int t=top;
+    for (int i=head[u];i;i=nxt[i])
+    {
+        int v=to[i];
+        if (v!=f[0][u])
+        {
+            f[0][v]=u;
+            dep[v]=dep[u]+1;
+            dfs(v);
+            if (top-t&gt;=B)
+            {
+                ++tot;
+                while (top&gt;t) bl[stk[top--]]=tot;
+            }
+        }
+    }
+    stk[++top]=u;
+}
+
+void add(int u,int v)
+{
+    nxt[++cnt]=head[u];
+    head[u]=cnt;
+    to[cnt]=v;
+}
+</code></pre>
+<h1 id="回滚莫队只增莫队">回滚莫队（只增莫队）</h1>
+<h2 id="适用范围">适用范围</h2>
+<ol>
+<li>删除时不方便统计答案。</li>
+<li>可以方便地回滚单次操作，即修改造成的影响要么能够在 $\mathcal O(\sqrt n)$ 内保存下来，要么可以 $\mathcal O(1)​$ 地回滚单次增加。</li>
+</ol>
+<h2 id="算法流程">算法流程</h2>
+<ol>
+<li>对于左右端点在同一块的暴力计算。</li>
+<li>跟普通莫队一样排序，左端点换块时清空答案，把左指针设为左端点所在块的下一块的开头，把右指针设为左端点所在块的最后一位。这样右指针是单调递增的，每处理一个询问时，先记录一些信息（比如答案），再左移左指针并更新答案，然后把左指针移回左端点所在块的下一块的开头，过程中回滚除记录下的信息以外的其它影响，最后把记录下的信息恢复。如：先右移右指针，再记录 <code>ans</code>，然后左移左指针时增加 <code>cnt</code> 并更新 <code>ans</code>，回滚时把增加的 <code>cnt</code> 减掉，最后把 <code>ans</code> 回滚为记录的值。</li>
+</ol>
+<h2 id="例题--代码">例题 &amp; 代码</h2>
+<p><a href="http://darkbzoj.tk/problem/4241" target="_blank">BZOJ4241 历史研究</a></p>
+<details class="admonition note"><summary class="admonition-title">参考代码</summary>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cctype&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+typedef long long ll;
+
+const int N = 100010;
+const int B = 333;
+
+int read()
+{
+    int out = 0;
+    char c;
+    while (!isdigit(c = getchar()));
+    for (; isdigit(c); c = getchar()) out = out * 10 + c - '0';
+    return out;
+}
+
+struct Query
+{
+    int l, r, id;
+    bool operator&lt;(const Query &amp; y) const
+    {
+        return l / B == y.l / B ? r &lt; y.r : l &lt; y.l;
+    }
+} q[N];
+
+void add(int x);
+
+int n, m, a[N], lsh[N], tot, cnt[N];
+ll ans, bk, out[N];
+
+int main()
+{
+    int i, j, l, r, bl = -1;
+
+    n = read();
+    m = read();
+
+    for (i = 1; i &lt;= n; ++i) a[i] = lsh[++tot] = read();
+
+    sort(lsh + 1, lsh + tot + 1);
+    tot = unique(lsh + 1, lsh + tot + 1) - lsh;
+
+    for (i = 1; i &lt;= n; ++i) a[i] = lower_bound(lsh + 1, lsh + tot, a[i]) - lsh;
+
+    for (i = 1; i &lt;= m; ++i)
+    {
+        q[i].l = read();
+        q[i].r = read();
+        q[i].id = i;
+        if (q[i].l / B == q[i].r / B) // 暴力处理左右端点在同一块的询问
+        {
+            for (j = q[i].l; j &lt;= q[i].r; ++j)
+            {
+                ++cnt[a[j]];
+                out[i] = max(out[i], (ll) cnt[a[j]] * lsh[a[j]]);
+            }
+            for (j = q[i].l; j &lt;= q[i].r; ++j) --cnt[a[j]];
+        }
+    }
+
+    sort(q + 1, q + m + 1);
+
+    for (i = 1; i &lt;= m; ++i)
+    {
+        if (q[i].l / B == q[i].r / B) continue;
+        if (i == 1 || q[i].l / B != bl) // 左端点换块
+        {
+            ans = 0;
+            bl = q[i].l / B;
+            memset(cnt, 0, sizeof(cnt));
+            l = (bl + 1) * B;
+            r = (bl + 1) * B - 1;
+        }
+        while (r &lt; q[i].r) add(a[++r]); // 右移右指针
+        bk = ans; // 记录 ans
+        while (l &gt; q[i].l) add(a[--l]); // 左移左指针并更新答案
+        out[q[i].id] = ans;
+        while (l &lt; (bl + 1) * B) --cnt[a[l++]]; // 回滚
+        ans = bk; // 把 ans 修改回来
+    }
+
+    for (i = 1; i &lt;= m; ++i) printf(&quot;%lld\n&quot;, out[i]);
+
+    return 0;
+}
+
+void add(int x)
+{
+    ++cnt[x];
+    ans = max(ans, (ll) cnt[x] * lsh[x]);
+}
+</code></pre>
+</details>
+<h1 id="莫队的扩展">莫队的扩展</h1>
+<p>其实莫队可以扩展到高维，参见<a href="https://ouuan.github.io/%e4%ba%8c%e7%bb%b4%e8%8e%ab%e9%98%9f%e8%a7%a3%e9%a2%98%e6%8a%a5%e5%91%8a" target="_blank">二维莫队解题报告</a>。</p>
+<p>更一般地，若 $Q(x_1,x_2,\cdots,x_k)​$ 为一个询问，$\forall i\in[1,k]​$，$x_i​$ 的规模都为 $n​$，可以在时间 $\mathrm{T}​$ 内求解 $Q(x_1,x_2,\cdots,x_i\pm 1,\cdots,x_n)​$，共有 $m​$ 个询问，那么就可以在 $O\left(km\log m+nTm^\frac{k-1}{k}\right)​$ 的时间复杂度下离线求解。</p>
+<p>（蒟蒻的大胆猜想而已..并没有严格证明）</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content" title="2020-02-08 18:37:53 &#43;0800 &#43;0800">
+        2020-02-08
+        <a href="https://github.com/ouuan/hugo-blog/commit/da8aa41962b5f5a65348e9b2f49d8519daa2fc8d" title="Add aliases" target="_blank">(da8aa41)</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E7%A6%BB%E7%BA%BF%E7%AE%97%E6%B3%95/">离线算法</a>
+          <a href="/tags/%E8%8E%AB%E9%98%9F/">莫队</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2018%E5%9B%BD%E5%BA%86yali%E9%9B%86%E8%AE%AD%E6%B8%B8%E8%AE%B0/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">2018国庆YALI集训游记</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/hexo-blog-utterances"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span>
+    <span class="author">ouuan</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/tomorrow.min.css" rel="stylesheet">
+  <script>hljs.configure({tabReplace: '    '});</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.63725abf.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157787819-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

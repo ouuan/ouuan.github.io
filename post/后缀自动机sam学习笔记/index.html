@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>后缀自动机（SAM）学习笔记 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="后缀自动机是一种处理字符串问题的有力工具（废话），它的码量不比后缀数组大（实际代码难度不比后缀数组小，但也不难），处理问题时的思维难度往往比后缀数组小，复杂度更优秀。若字符集大小为 $|\Sigma|$，则：构建时间复杂度 $O(n|\Sigma|)$，转移时间复杂度 $O(1)$，空间复杂度 $O(n|\Sigma|)$ 或 构建时间复杂度 $O(n\log|\Sigma|)$，转移时间复杂度 $O(\log|\Sigma|)$，空间复杂度 $O(n)$。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.64.0 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BAsam%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.6e1b3b90.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="后缀自动机（SAM）学习笔记" />
+<meta property="og:description" content="后缀自动机是一种处理字符串问题的有力工具（废话），它的码量不比后缀数组大（实际代码难度不比后缀数组小，但也不难），处理问题时的思维难度往往比后缀数组小，复杂度更优秀。若字符集大小为 $|\Sigma|$，则：构建时间复杂度 $O(n|\Sigma|)$，转移时间复杂度 $O(1)$，空间复杂度 $O(n|\Sigma|)$ 或 构建时间复杂度 $O(n\log|\Sigma|)$，转移时间复杂度 $O(\log|\Sigma|)$，空间复杂度 $O(n)$。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BAsam%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
+<meta property="article:published_time" content="2019-02-22T12:31:37+08:00" />
+<meta property="article:modified_time" content="2020-02-08T21:24:40+08:00" />
+<meta itemprop="name" content="后缀自动机（SAM）学习笔记">
+<meta itemprop="description" content="后缀自动机是一种处理字符串问题的有力工具（废话），它的码量不比后缀数组大（实际代码难度不比后缀数组小，但也不难），处理问题时的思维难度往往比后缀数组小，复杂度更优秀。若字符集大小为 $|\Sigma|$，则：构建时间复杂度 $O(n|\Sigma|)$，转移时间复杂度 $O(1)$，空间复杂度 $O(n|\Sigma|)$ 或 构建时间复杂度 $O(n\log|\Sigma|)$，转移时间复杂度 $O(\log|\Sigma|)$，空间复杂度 $O(n)$。">
+<meta itemprop="datePublished" content="2019-02-22T12:31:37&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-08T21:24:40&#43;08:00" />
+<meta itemprop="wordCount" content="6297">
+
+
+
+<meta itemprop="keywords" content="字符串,SAM," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="后缀自动机（SAM）学习笔记"/>
+<meta name="twitter:description" content="后缀自动机是一种处理字符串问题的有力工具（废话），它的码量不比后缀数组大（实际代码难度不比后缀数组小，但也不难），处理问题时的思维难度往往比后缀数组小，复杂度更优秀。若字符集大小为 $|\Sigma|$，则：构建时间复杂度 $O(n|\Sigma|)$，转移时间复杂度 $O(1)$，空间复杂度 $O(n|\Sigma|)$ 或 构建时间复杂度 $O(n\log|\Sigma|)$，转移时间复杂度 $O(\log|\Sigma|)$，空间复杂度 $O(n)$。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/links/">
+        <li class="mobile-menu-item">链接</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/links/">链接</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">后缀自动机（SAM）学习笔记</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2019-02-22 12:31:37 &#43;0800 &#43;0800"> 2019-02-22 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#定义">定义</a></li>
+    <li><a href="#性质">性质</a></li>
+    <li><a href="#一个朴素的sam">一个朴素的SAM</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#right-集合">$right$ 集合</a></li>
+    <li><a href="#right-集合等价类">$right$ 集合等价类</a>
+      <ul>
+        <li><a href="#right-集合等价类的定义">$right$ 集合等价类的定义</a></li>
+        <li><a href="#right-集合等价类与最简sam">$right$ 集合等价类与最简SAM</a></li>
+        <li><a href="#right-集合等价类的性质">$right$ 集合等价类的性质</a></li>
+      </ul>
+    </li>
+    <li><a href="#parent">$parent$</a>
+      <ul>
+        <li><a href="#parent-的定义">$parent$ 的定义</a></li>
+        <li><a href="#parent-的性质">$parent$ 的性质</a></li>
+        <li><a href="#parent-树">$parent$ 树</a></li>
+      </ul>
+    </li>
+    <li><a href="#最简sam状态数为线性的证明">最简SAM状态数为线性的证明</a></li>
+    <li><a href="#最简sam转移数为线性的证明">最简SAM转移数为线性的证明</a></li>
+    <li><a href="#最简sam的线性构造">最简SAM的线性构造</a></li>
+    <li><a href="#参考代码">参考代码</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#判断子串后缀">判断子串/后缀</a></li>
+    <li><a href="#读入字符串时删除首字符">读入字符串时删除首字符</a></li>
+    <li><a href="#子串出现次数">子串出现次数</a></li>
+    <li><a href="#子串第一次出现位置">子串第一次出现位置</a></li>
+    <li><a href="#本质不同子串数">本质不同子串数</a></li>
+    <li><a href="#第-k-大子串">第 $k$ 大子串</a></li>
+    <li><a href="#两串的最长公共子串">两串的最长公共子串</a></li>
+    <li><a href="#多串的最长公共子串">多串的最长公共子串</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>后缀自动机是一种处理字符串问题的有力工具（废话），它的码量不比后缀数组大（实际代码难度不比后缀数组小，但也不难），处理问题时的思维难度往往比后缀数组小，复杂度更优秀。若字符集大小为 $|\Sigma|$，则：构建时间复杂度 $O(n|\Sigma|)$，转移时间复杂度 $O(1)$，空间复杂度 $O(n|\Sigma|)$ 或 构建时间复杂度 $O(n\log|\Sigma|)$，转移时间复杂度 $O(\log|\Sigma|)$，空间复杂度 $O(n)$。</p>
+<h1 id="确定有限状态自动机dfa">确定有限状态自动机（DFA）</h1>
+<p>一个 <strong>确定有限状态自动机（DFA）</strong> 由以下五部分构成：</p>
+<ol>
+<li><strong>字符集</strong>（$\Sigma$），该自动机只能输入这些字符。</li>
+<li><strong>状态集合</strong>（$Q$）。如果把一个DFA看成一张有向图，那么 DFA 中的状态就相当于图上的顶点。</li>
+<li><strong>起始状态</strong>（$start$），$start\in Q$，是一个特殊的状态。起始状态一般用 $s$ 表示，为了避免混淆，本文中使用 $start$。</li>
+<li><strong>接受状态集合</strong>（$F$），$F\subseteq Q$，是一堆特殊的状态。</li>
+<li><strong>转移函数</strong>（$\delta$），$\delta$ 是一个接受两个参数返回一个值的函数，其中第一个参数和返回值都是一个状态，第二个参数是字符集中的一个字符。如果把一个DFA看成一张有向图，那么 DFA 中的转移函数就相当于顶点间的边，而每条边上都有一个字符。</li>
+</ol>
+<p>DFA 的作用就是识别字符串，一个自动机 $A$，若它能识别（接受）字符串 $S$，那么 $A(S)=True$，否则 $A(S)=False$。</p>
+<p>当一个DFA读入一个字符串时，从初始状态起按照转移函数一个一个字符地转移。如果读入完一个字符串的所有字符后位于一个接受状态，那么我们称这个 DFA <strong>接受</strong> 这个字符串，反之我们称这个 DFA <strong>不接受</strong> 这个字符串。</p>
+<p>如果一个状态 $v$ 没有字符 $c$ 的转移，那么我们令 $\delta(v,c)=null$，而 $null$ 只能转移到 $null$，且 $null$ 不属于接受状态集合。无法转移到任何一个接受状态的状态都可以视作 $null$，或者说，$null$ 代指所有无法转移到任何一个接受状态的状态。</p>
+<p>我们扩展定义转移函数 $\delta$，令其第二个参数可以接收一个字符串：$\delta(v,s)=\delta(\delta(v,s[1]),s[2..|s|])$，这个扩展后的转移函数就可以表示从一个状态起接收一个字符串后转移到的状态。那么，$A(s)=[\delta(start,s)\in F]$。</p>
+<p>如，一个接受且仅接受字符串 &ldquo;a&rdquo;, &ldquo;ab&rdquo;, &ldquo;aac&rdquo; 的 DFA：</p>
+<p><img src="/post_img/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%88SAM%EF%BC%89%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/dfa.png" alt="dfa"></p>
+<h1 id="后缀自动机sam">后缀自动机（SAM）</h1>
+<h2 id="定义">定义</h2>
+<p>一个字符串的 <strong>后缀自动机（SAM）</strong> 就是一个 <strong>接受且仅接受</strong> 这个字符串的 <strong>所有后缀</strong> 的 DFA。</p>
+<p>下文中以 $SAM_s$ 代指字符串 $s$ 的后缀自动机，$\delta_s$ 代指 $SAM_s$ 的转移函数。若不带下标则表示字符串为母串 $s$（需要构建 SAM 的那个字符串）。</p>
+<p>根据定义，一个字符串 $t$ 是一个字符串 $s$ 的后缀，当且仅当 $SAM_s(t)=True$。</p>
+<h2 id="性质">性质</h2>
+<p>一个字符串 $t$ 是一个字符串 $s$ 的子串，当且仅当 $\delta_s(start_s,t)\neq null$。</p>
+<p>因为，若 $t$ 是 $s$ 的子串，则在 $t$ 之后添加字符可能成为 $s$ 的一个后缀，反之不可能。</p>
+<h2 id="一个朴素的sam">一个朴素的SAM</h2>
+<p>若我们将一个字符串的所有后缀插入到一个字典树（Trie 树）中，并将每次插入的终止节点标记为接受状态，就可以得到一个状态数为 $O(n^2)$ 的SAM。</p>
+<p>如，串 &ldquo;abaaabaa&rdquo; 的一个 <strong>朴素SAM</strong>：</p>
+<p><img src="/post_img/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%88SAM%EF%BC%89%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/triesam.png" alt="triesam"></p>
+<h1 id="最简sam">最简SAM</h1>
+<p>上文中的“朴素SAM”状态数是 $O(n^2)$ 的，而 <strong>最简SAM</strong> 的状态数和转移数（点数和边数）都是 $O(n)$ 的。</p>
+<h2 id="right-集合">$right$ 集合</h2>
+<p>对于一个字符串 $t$，若它在 $s$ 中出现的位置集合为：$\{[l_1,r_1),[l_2,r_2),\cdots,[l_n,r_n)\}$（下标从 $0$ 开始），那么定义 $right(t)$ 为 $\{r_1,r_2,\cdots,r_n\}$。</p>
+<p>如，又是串 &ldquo;abaaabaa&rdquo;，那么 $right(a)=\{1,3,4,5,7,8\}$，$right(aa)=\{4,5,8\}$，$right(aab)=\{6\}$。</p>
+<p>在有的教程中，也称其为 $endpos$ 集合。</p>
+<h2 id="right-集合等价类">$right$ 集合等价类</h2>
+<h3 id="right-集合等价类的定义">$right$ 集合等价类的定义</h3>
+<p>$right$ 集合相等的字符串组成一个 <strong>$right$ 集合等价类</strong>。</p>
+<p>如，双是串 &ldquo;abaaabaa&rdquo;，那么 $right$ 集合为 $\{4,8\}$ 的字符串有 $\{abaa,baa\}$，这两个字符串组成一个 $right$ 集合等价类。</p>
+<h3 id="right-集合等价类与最简sam">$right$ 集合等价类与最简SAM</h3>
+<p>我们定义 $reg(v)$ 表示 <strong>从状态 $v$ 开始能识别的字符串的集合</strong>。即：$t\in reg(v)$ 当且仅当 $\delta(v,t)\in F$（$F$ 为接受状态集合）。</p>
+<p>如果在 $t$ 的后面补上一个字符串 $s[r_i..n]$（$r_i\in right(t)$，$n$ 表示 $s$ 的长度），就得到了 $s$ 的一个后缀。所以，若 $right(t_1)=right(t_2)$，那么 $reg(SAM(t_1))=reg(SAM(t_2))=\{s[r_i..n]|r_i\in right(t_1)\}$。</p>
+<p>对于每个状态 $v$，我们只关心 $reg(v)$，所以可以用SAM上的每一个状态去表示一个 $right$ 集合等价类，转移函数也相应地更改为对应的等价类（令 $f(v)$ 表示原状态 $v$ 对应的字符串的 $right$ 集合等价类在最简SAM中对应的状态，那么原来的转移函数 $\delta(u,c)=v$ 更改为 $\delta&rsquo;(f(u),c)=f(v)$。可以证明，若 $right(u_1)=right(u_2)$，那么 $right(\delta(u_1,c))=right(\delta(u_2,c))$，因为 $right(\delta(u,c))=\{r_i|r_i\in right(u),s[r_i]=c\}$）。</p>
+<p>这样的SAM是状态数最少的，因为状态的 $reg$ 两两不同。这样的SAM若要和朴素SAM区分，可以叫做 <strong>最简SAM</strong>。但一般不加说明的SAM都指最简SAM。</p>
+<p>这样的SAM，从起始状态到某个状态可能有多条路径，每条路径都对应一个字符串，那么我们称这个状态 <strong>对应</strong> 着这些字符串。</p>
+<p>如，叒是串 &ldquo;abaaabaa​&rdquo; 的最简SAM：</p>
+<p><img src="/post_img/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%88SAM%EF%BC%89%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/minsam.png" alt="minsam"></p>
+<h3 id="right-集合等价类的性质">$right$ 集合等价类的性质</h3>
+<p>对于每个状态 $v$，定义 $max(v)$ 和 $min(v)$ 分别表示 <strong>这个状态对应的 最长 和 最短 的字符串</strong>。</p>
+<p>那么，<strong>$v$ 对应的任意一个字符串都是 $max(v)$ 的后缀，且不是 $min(v)$ 的真后缀。并且，$v$ 包含了所有这样的字符串。</strong></p>
+<p>第一点（$v$ 中的任意一个字符串都是 $max(v)$ 的后缀）可以由 $right$ 集合的定义得到。</p>
+<p>第二点（且不是 $min(v)$ 的真后缀）可以由 $min(v)$ 的定义得到。</p>
+<p>第三点（$v$ 包含了所有这样的字符串）可以由一个引理证明：**对于一个字符串 $t$ ，它的 $right$ 集合是它的任意一个后缀的 $right$ 集合的子集。**这个引理很好证明，进而可以证明这条性质。</p>
+<p>如，叕是串 &ldquo;abaaabaa&rdquo;，$right$ 集合为 $\{6\}$ 的串有 $\{aab,aaab,baaab,abaaab\}$，若这个 $right$ 集合等价类对应状态 $v$，那么 $max(v)=abaaab$，$min(v)=aab$。</p>
+<p>这条性质说明 &ldquo;aaab&rdquo; 和 &ldquo;baaab&rdquo; 都属于这个 $right$ 集合等价类，且 &ldquo;ab&rdquo; 和 &ldquo;b&rdquo; 不属于这个 $right$ 集合等价类。</p>
+<p>证明第三点所用的引理说明，$right(aaab)\subseteq right(aab)\subseteq right(ab)\subseteq right(b)$，也就是 $\{6\}\subseteq\{6\}\subseteq\{2,6\}\subseteq\{2,6\}$ 。</p>
+<h2 id="parent">$parent$</h2>
+<h3 id="parent-的定义">$parent$ 的定义</h3>
+<p>$parent$ 有两种等价的定义（你也可以把其一视作定义，另一个视作性质）：</p>
+<h4 id="定义一">定义一</h4>
+<p>对于每个状态 $v$（除了起始状态），找到最长的一个字符串 $t$ 所对应的状态，使得 $right(v)\subsetneq right(t)$（注意是真子集；如果不存在这样的字符串就找起始状态），这样的状态就是 $parent(v)$。</p>
+<h4 id="定义二">定义二</h4>
+<p>对于每个状态 $v$（除了起始状态），$min(v)[1..n-1]$ 对应的状态（$n$ 表示 $min(v)$ 的长度，假定空串对应起始状态）就是 $parent(v)$。</p>
+<p>有的教程中把 $parent$ 叫做后缀连接 $link$。</p>
+<h3 id="parent-的性质">$parent$ 的性质</h3>
+<p>$len(min(v))=len(max(parent(v)))+1$，这个可以由定义二说明。</p>
+<h3 id="parent-树">$parent$ 树</h3>
+<p>$parent$ 连接可以构成一棵树。</p>
+<p>由定义一，由 $right$ 集合要么包含要么不相交可以说明。$parent$ 树可以看成 $right$ 集合的包含关系所构成的树。</p>
+<p>由定义一或定义二，由除起始状态外的状态都有且仅有一条出边并且 $parent$ 连接无环（$right$ 集合大小递增/对应字符串长度递减）可以说明。</p>
+<p>如，醊是串 &ldquo;abaaabaa&rdquo;，它的 $parent$ 树：（用 $max(v)$ 代表每个状态）</p>
+<p><img src="/post_img/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%88SAM%EF%BC%89%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/parent.png" alt="parent"></p>
+<p>SAM上的接受状态就是包含 $r_i=n$（字符串长度）的一些 $right$ 集合等价类，也就是 $parent$ 树上 $\{n\}$ 对应的状态及其祖先。因此，可以通过 $parent$ 树确定SAM的接受状态集合。</p>
+<h2 id="最简sam状态数为线性的证明">最简SAM状态数为线性的证明</h2>
+<p>每次把 $right$ 集合分成 $k$ 部分需要 $k$ 条边，最坏情况下每次都只分成两部分，总共要分成至多 $n$ 部分，所以状态数不会超过 $2n-1$（分 $n-1$ 次最多 $2n-2$ 条边，也就是 $2n-1$ 个点）。</p>
+<h2 id="最简sam转移数为线性的证明">最简SAM转移数为线性的证明</h2>
+<p>考虑SAM的任意一个生成树，那么SAM上的边就会被分成树边和非树边。</p>
+<p>树边最多只有 $2n-2$ 条。</p>
+<p>对于字符串的每个后缀，将其输入到SAM中都会经过一条终点为接受状态的路径，若经过了一条非树边，则称该后缀对应它经过的 <strong>第一条</strong> 非树边。</p>
+<p>对于每条非树边 $(u,v)$，一定存在一条从起始状态到 $u$ 的不经过任何非树边的路径（因为树上两点间必定有路径），也一定存在一条从 $v$ 到任意一个接受状态的路径（否则 $v=null$），所以，至少有一个后缀对应着这条非树边。</p>
+<p>因此，非树边数量不会超过后缀数量。总的边数就是 $O(n)$ 的。</p>
+<h2 id="最简sam的线性构造">最简SAM的线性构造</h2>
+<p>SAM的线性构造可以在均摊 $O(1)$ 的时间复杂度内向SAM增加一个字符（从 $SAM_{s[0..i-1]}$ 变成 $SAM_{s[0..i]}$）。</p>
+<p>向SAM增加一个字符，就是在所有接受状态后增加一个字符。所以，我们需要考虑上一次插入时的最后一个状态（$last$）以及它在 $parent$ 树上的祖先（也就是所有接受状态）。</p>
+<p>加入一个字符 $x$ 时，我们先创建一个新状态 $np$，这个状态刚插入时代表 $right$ 集合 $\{i\}$（$i$ 表示这是插入的第 $i$ 个字符）。</p>
+<p>一个引理：<strong>若一个状态有字符 $c$ 的转移，则它在 $parent$ 树上的祖先都有。</strong></p>
+<p>引理的证明：$right(\delta(v,c))=\{r_i|r_i\in right(v),s[r_i]=c\}$，而 $right(v)\subsetneq right(parent(v))$。</p>
+<p>因此，找到 $last$ 最深的有出边 $x$ 的祖先 $p$ 后，在其之上的祖先都有出边 $x$。</p>
+<p>对于在其之下的状态，直接向 $np$ 连边即可。</p>
+<p>接下来要分三种情况讨论：</p>
+<p>若不存在 $p$（起始状态都没有出边 $x$），则将 $parent(np)$ 设为初始状态。</p>
+<p>否则，令 $len(v)$ 表示 $max(v)$ 的长度，$q$ 表示 $\delta(p,x)$。</p>
+<p>若 $len(q)=len(p)+1$，将 $parent(np)$ 设为 $q$ 即可。</p>
+<p>否则，新建状态 $nq$，$len(nq)$ 设为（实际上不是人为设定，它本来就是）$len(p)+1$，将 $q$ 的转移函数复制到 $nq$，然后将 $parent(nq)$ 设为 $parent(q)$，再将 $parent(q)$ 和 $parent(np)$ 都设为 $nq$，最后把 $p$ 及 $p$ 的祖先中所有出边 $x$ 连到 $q$ 的都改为连到 $nq$。实际上，枚举祖先时只要遇到出边 $x$ 不连到 $q$ 的就可以停止枚举了。</p>
+<p>至于为什么这样做..恕我表达能力有限，还请参考<a href="https://max.book118.com/html/2017/0523/108664184.shtm" target="_blank">陈立杰WC课件</a>第 $35$ 页。</p>
+<p>构建过程的复杂度证明可以参考 <a href="https://oi-wiki.org/string/sam/#_7" target="_blank">OI-Wiki</a>。</p>
+<h2 id="参考代码">参考代码</h2>
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+
+const int N=1000010;
+
+struct Node
+{
+    int len,par,ch[26];
+} sam[N&lt;&lt;1];
+
+void insert(int x);
+
+char s[N];
+int p,tot;
+
+int main()
+{
+    int i;
+
+    scanf(&quot;%s&quot;,s);
+
+    sam[0].par=-1;
+    for (i=0;s[i];++i) insert(s[i]-'0');
+
+    return 0;
+}
+
+void insert(int x)
+{
+    int np=++tot;
+    sam[np].len=sam[p].len+1;
+    while (~p&amp;&amp;!sam[p].ch[x])
+    {
+        sam[p].ch[x]=np;
+        p=sam[p].par;
+    }
+    if (p==-1) sam[np].par=0;
+    else
+    {
+        int q=sam[p].ch[x];
+        if (sam[q].len==sam[p].len+1) sam[np].par=q;
+        else
+        {
+            int nq=++tot;
+            sam[nq].len=sam[p].len+1;
+            memcpy(sam[nq].ch,sam[q].ch,sizeof(sam[q].ch));
+            sam[nq].par=sam[q].par;
+            sam[q].par=sam[np].par=nq;
+            while (~p&amp;&amp;sam[p].ch[x]==q)
+            {
+                sam[p].ch[x]=nq;
+                p=sam[p].par;
+            }
+        }
+    }
+    p=np;
+}
+</code></pre>
+<h1 id="sam的一些应用">SAM的一些应用</h1>
+<p>一些应用我还没有写过..写过之后可能会补（gu）上（gu）来（gu）。可以参考<a href="https://oi-wiki.org/string/sam/#_13" target="_blank">OI wiki</a>。</p>
+<h2 id="判断子串后缀">判断子串/后缀</h2>
+<p>根据SAM的定义和性质，建出文本串的SAM，将模式串分别输入SAM，若转移到 $null$ 则不是子串，否则是；若转移到接受状态则是后缀，否则不是。</p>
+<h2 id="读入字符串时删除首字符">读入字符串时删除首字符</h2>
+<p>记录一下已读入的字符串长度，若小于等于当前状态的 $parent.len$，就转移到 $parent$。</p>
+<p>例题：<a href="http://codeforces.com/problemset/problem/235/C" target="_blank">CF235C Cyclical Quest</a></p>
+<h2 id="子串出现次数">子串出现次数</h2>
+<p>一个子串出现次数就是其对应 $right$ 集合的元素个数。</p>
+<p>在创建 $np$ 时，将其 $cnt$ 赋为 $1$，建好SAM后，每个状态的出现次数就是 $parent$ 子树内的 $cnt$ 之和。</p>
+<p>例题：<a href="https://www.luogu.org/problemnew/show/P3804" target="_blank">【模板】后缀自动机</a></p>
+<h2 id="子串第一次出现位置">子串第一次出现位置</h2>
+<p>和子串出现次数差不多，创建 $np$ 时，将 $firstpos(np)$ 设为 $len(np)-1$，复制 $nq$ 时，将 $firstpos(nq)$ 设为 $firstpos(q)$，最后对子树内取 $min$。</p>
+<h2 id="本质不同子串数">本质不同子串数</h2>
+<p>每个状态表示 $maxlen-minlen+1$ 个字符串，而 $minlen=len(parent)+1$，所以一个状态表示的字符串数量就是 $len-parent.len$。求和即可。</p>
+<p>例题：<a href="https://www.luogu.org/problemnew/show/P4070" target="_blank">[SDOI2016]生成魔咒</a></p>
+<h2 id="第-k-大子串">第 $k$ 大子串</h2>
+<p>预处理每个状态可以转移到多少个不同的子串，然后就可以做了。</p>
+<p>例题：</p>
+<p><a href="https://www.luogu.org/problemnew/show/SP7258" target="_blank">SP7258 SUBLEX</a></p>
+<p><a href="https://www.luogu.org/problemnew/show/P3975" target="_blank">[TJOI2015]弦论</a></p>
+<h2 id="两串的最长公共子串">两串的最长公共子串</h2>
+<p>对其中一个串建SAM，从起始状态开始，读入另一个字符串，若有转移则转移，将已匹配长度 $+1$，否则跳到 $parent$（这里和 $kmp$ 有点像），并将已匹配长度修改为 $len(parent)$。过程中最大的已匹配长度就是答案。</p>
+<p>例题：<a href="https://www.luogu.org/problemnew/show/SP1811" target="_blank">SP1811 LCS</a></p>
+<h2 id="多串的最长公共子串">多串的最长公共子串</h2>
+<p>还是对其中一个串建SAM，以同样的方式依次读入每个字符串，只不过对每个状态要保存当前字符串的最大匹配长度，所有字符串在某个状态的最大匹配长度的最小值就是这一堆字符串在这个状态能匹配的最大长度。如果能在一个状态匹配，一定能在 $parent$ 处匹配，所以要对子树取 $max$，但也不要忘了对 $len$ 取 $min$。</p>
+<p>例题：</p>
+<p><a href="https://www.luogu.org/problemnew/show/SP1812" target="_blank">SP1812 LCS2</a></p>
+<p><a href="https://www.luogu.org/problemnew/show/P2463" target="_blank">[SDOI2008]Sandy的卡片</a></p>
+<h1 id="任意dfa的压缩">任意DFA的压缩</h1>
+<p>UPD: 这部分内容非常 naive，建议阅读 <a href="https://en.wikipedia.org/wiki/DFA_minimization" target="_blank">Wikipedia</a> 或自行搜索易于访问的中文资料，关键词：自动机最小化，Myhill-Nerode 定理。</p>
+<details class="admonition note"><summary class="admonition-title">我就是要看！</summary>
+<p>这部分估计没人感兴趣..OI里没用，也不是证明SAM最小性必需的（最小性的证明我在前文中已经简略说明了：状态的 $reg$ 两两不同）。只不过或许会对理解SAM本质以及发明它的人怎么想到的有些帮助&hellip;</p>
+<p>或许这种方式在很多年前就已经被人提出了..总之这部分内容完全是我自己yy的，我也懒得去查有没有人发明过。</p>
+<p>这部分内容不保证正确性，如果有误欢迎指正。如果有人愿意提供严谨证明（怎么可能有人啊..只不过我这里都懒得严谨证明了，随便口头地说了一下）一定非常感谢。</p>
+<p><strong>“DFA的压缩”的定义</strong></p>
+<p>一个可用于压缩DFA的映射 $f:Q_A\rightarrow Q_B$ 需要满足以下几个条件：</p>
+<ol>
+<li>$\forall v\ne start_A,f(v)\ne f(start_A)$</li>
+<li>$\forall u\in F,v\notin F,f(u)\ne f(v)$</li>
+<li>$\forall f(u)=f(v),c\in\Sigma,f(\delta_A(u,c))=f(\delta_A(v,c))$</li>
+</ol>
+<p>如：在SAM中，把所有 $right$ 集合相同的状态映射到同一状态就是一个符合条件的映射。</p>
+<p>定义DFA $A$ 在映射 $f$ 下的压缩为 $B$，其中：</p>
+<ol>
+<li>$\Sigma_B=\Sigma_A$</li>
+<li>$Q_B=f(Q_A)$</li>
+<li>$start_B=f(start_A)$</li>
+<li>$F_B=f(F_A)$</li>
+<li>$\delta_B(f(v),c)=f(\delta_A(v,c))$，这一定义依赖于 $f$ 的性质 $3$。</li>
+</ol>
+<p>如：用 $right$ 集合等价类这个映射可以将朴素SAM压缩成最简SAM。</p>
+<p><strong>压缩后的自动机与原自动机等价的证明</strong></p>
+<p>我们证明一个比 $A(s)=B(s)$ 更强的命题：$[\delta_A(v,s)\in F_A]=[\delta_B(f(v),s)\in F_B]$。</p>
+<p>当 $s$ 只有一个字符时，根据 $f$ 满足的性质 $2$ 以及 $B$ 的定义 $4,5$，命题显然成立。</p>
+<p>当 $s$ 不止一个字符时，可以归纳地说明命题成立。</p>
+<p><strong>DFA的最简压缩方法</strong></p>
+<p>这里给出一个将任意DFA压缩至最简的方法：</p>
+<p>由于DFA是一个DAG，它的任意生成子图都必定有出度为 $0$ 的点。每次找到这些点，然后从中选取尽量多的点，使其映射到同一个状态后满足 $f$ 需要满足的三条性质（也就是，同一字符转移到的状态映射到的状态相同，且没有一个是接受状态另一个不是的情况），然后将这些点从图中删去，重复直至所有点都有了映射后的状态（所有点都被删去）。这样得到的映射 $f$ 能够将原DFA压缩至最简。</p>
+<p><strong>压缩至最简的证明</strong></p>
+<p>我们先证明每个状态的 $reg$（定义参见上文，表示从一个状态起能识别的字符串集合）两两不等。我们按照拓扑序归纳地证明。</p>
+<p>没有出边的非接受状态可以视作 $null$，而没有出边的接受状态按上文所述方法必定会被映射至同一状态。所以命题对没有出边的状态成立。</p>
+<p>假设一个状态所有出边的对应状态都已被证明，那么转移函数不同就等价于 $reg$ 不同，所以命题成立。</p>
+<p>接着，我们由 $reg$ 两两不同证明压缩至最简：</p>
+<p>若状态数继续减少，那么必然存在原来 $reg$ 不同的两个状态 $B(s_1)$ 和 $B(s_2)$ 被压缩到了一起，任取一个只在 $reg(B(s_1))$ 或只在 $reg(B(s_2))$ 中的字符串 $t$，原来 $B(s_1+t)\ne B(s_2+t)$，压缩后却使得 $B&rsquo;(s_1+t)=B&rsquo;(s_2+t)$，不符合要求。</p>
+</details>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content" title="2020-02-08 21:24:40 &#43;0800 &#43;0800">
+        2020-02-08
+        <a href="https://github.com/ouuan/hugo-blog/commit/4af5a2cc562aaa763e968f35cf0652af7bc5fbd3" title="Add shortcode fold and fold fake DFA minimization" target="_blank">(4af5a2c)</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+          <a href="/tags/sam/">SAM</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cf235c-cyclical-questsam/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">CF235C Cyclical Quest（SAM）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/p3804-%E6%A8%A1%E6%9D%BF%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/">
+            <span class="next-text nav-default">P3804 【模板】后缀自动机（SAM/后缀数组）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/hexo-blog-utterances"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span>
+    <span class="author">ouuan</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/tomorrow.min.css" rel="stylesheet">
+  <script>hljs.configure({tabReplace: '    '});</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.63725abf.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157787819-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>建图 on ouuan的博客</title>
+    <link>https://ouuan.github.io/tags/%E5%BB%BA%E5%9B%BE/</link>
+    <description>Recent content in 建图 on ouuan的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 15 Oct 2019 15:01:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://ouuan.github.io/tags/%E5%BB%BA%E5%9B%BE/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>CF508D Tanya and Password（欧拉路径）</title>
+      <link>https://ouuan.github.io/post/cf508d-tanya-and-password%E6%AC%A7%E6%8B%89%E8%B7%AF%E5%BE%84/</link>
+      <pubDate>Tue, 15 Oct 2019 15:01:00 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/cf508d-tanya-and-password%E6%AC%A7%E6%8B%89%E8%B7%AF%E5%BE%84/</guid>
+      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/508/problem/D&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
+&lt;p&gt;有一个字符串 $S[1..n+2]$，告诉你 $\forall 1\le i\le n, S[i..i+2]$（所有长为 $3$ 的子串），求任意一个满足条件的 $S$。&lt;/p&gt;
+&lt;p&gt;$1\le n\le 2\cdot 10^5$，字符集为大小写字母 + 数字。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

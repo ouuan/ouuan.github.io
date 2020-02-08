@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Surreal Numbers 阅读笔记 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="今天模拟赛遇到了一道需要超现实数的题目，赛后在阅读 Matrix67 的博客 时听说了唐纳德所著的《Surreal Numbers》（中译：研究之美）这本书，于是就阅读了一下。
+大约会把书里的定理证一遍吧..
+学习超现实数的时候请假装自己不知道关于数字的一切知识，并且不要把定义的名字真的当回事（某些定义有着熟悉的名字，但可能与我们熟知的意义相同，也可能不同）。
+小说下载
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.64.0 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/surreal-numbers-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.6e1b3b90.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Surreal Numbers 阅读笔记" />
+<meta property="og:description" content="今天模拟赛遇到了一道需要超现实数的题目，赛后在阅读 Matrix67 的博客 时听说了唐纳德所著的《Surreal Numbers》（中译：研究之美）这本书，于是就阅读了一下。
+大约会把书里的定理证一遍吧..
+学习超现实数的时候请假装自己不知道关于数字的一切知识，并且不要把定义的名字真的当回事（某些定义有着熟悉的名字，但可能与我们熟知的意义相同，也可能不同）。
+小说下载" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/surreal-numbers-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" />
+<meta property="article:published_time" content="2019-06-26T15:05:09+08:00" />
+<meta property="article:modified_time" content="2020-02-08T18:37:53+08:00" />
+<meta itemprop="name" content="Surreal Numbers 阅读笔记">
+<meta itemprop="description" content="今天模拟赛遇到了一道需要超现实数的题目，赛后在阅读 Matrix67 的博客 时听说了唐纳德所著的《Surreal Numbers》（中译：研究之美）这本书，于是就阅读了一下。
+大约会把书里的定理证一遍吧..
+学习超现实数的时候请假装自己不知道关于数字的一切知识，并且不要把定义的名字真的当回事（某些定义有着熟悉的名字，但可能与我们熟知的意义相同，也可能不同）。
+小说下载">
+<meta itemprop="datePublished" content="2019-06-26T15:05:09&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-08T18:37:53&#43;08:00" />
+<meta itemprop="wordCount" content="920">
+
+
+
+<meta itemprop="keywords" content="博弈论,超现实数," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Surreal Numbers 阅读笔记"/>
+<meta name="twitter:description" content="今天模拟赛遇到了一道需要超现实数的题目，赛后在阅读 Matrix67 的博客 时听说了唐纳德所著的《Surreal Numbers》（中译：研究之美）这本书，于是就阅读了一下。
+大约会把书里的定理证一遍吧..
+学习超现实数的时候请假装自己不知道关于数字的一切知识，并且不要把定义的名字真的当回事（某些定义有着熟悉的名字，但可能与我们熟知的意义相同，也可能不同）。
+小说下载"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/links/">
+        <li class="mobile-menu-item">链接</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/links/">链接</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Surreal Numbers 阅读笔记</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2019-06-26 15:05:09 &#43;0800 &#43;0800"> 2019-06-26 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%85%B6%E5%AE%83%E7%9F%A5%E8%AF%86/"> 其它知识 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#conways-rules">Conway&rsquo;s rules</a></li>
+    <li><a href="#definitions">Definitions</a>
+      <ul>
+        <li><a href="#symbols">Symbols</a></li>
+        <li><a href="#number">Number</a></li>
+        <li><a href="#rule-1">Rule #1</a></li>
+        <li><a href="#rule-2">Rule #2</a></li>
+      </ul>
+    </li>
+    <li><a href="#theorems">Theorems</a>
+      <ul>
+        <li><a href="#t1">T1</a></li>
+        <li><a href="#t2">T2</a></li>
+        <li><a href="#t3">T3</a></li>
+        <li><a href="#t4">T4</a></li>
+        <li><a href="#t5">T5</a></li>
+        <li><a href="#t6">T6</a></li>
+        <li><a href="#t7">T7</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>今天模拟赛遇到了一道需要超现实数的题目，赛后在阅读 <a href="http://www.matrix67.com/blog/archives/6333" target="_blank">Matrix67 的博客</a> 时听说了唐纳德所著的《Surreal Numbers》（中译：研究之美）这本书，于是就阅读了一下。</p>
+<p>大约会把书里的定理证一遍吧..</p>
+<p>学习超现实数的时候请假装自己不知道关于数字的一切知识，并且不要把定义的名字真的当回事（某些定义有着熟悉的名字，但可能与我们熟知的意义相同，也可能不同）。</p>
+<p><a href="/post_doc/Surreal-Numbers-%e9%98%85%e8%af%bb%e7%ac%94%e8%ae%b0/[%e7%a0%94%e7%a9%b6%e4%b9%8b%e7%be%8e].%ef%bc%88%e7%be%8e%ef%bc%89%e9%ab%98%e5%be%b7%e7%ba%b3.%e6%89%ab%e6%8f%8f%e7%89%88.pdf">小说下载</a></p>
+<p>本文可能比较咕，不知道什么时候能填完坑&hellip;</p>
+<h2 id="conways-rules">Conway&rsquo;s rules</h2>
+<p>（<del>翻译挺神仙的</del>）</p>
+<blockquote>
+<p>创生二道，大小诸数盖由此出。</p>
+</blockquote>
+<ol>
+<li>
+<p>凡数，皆合于前创二数之集，其位左者，无一大于或似于其位右者。</p>
+</li>
+<li>
+<p>甲数小于或似于乙数，当且仅当甲数之左集中无一大于或似于乙数，且乙数之右集中无一小于或似于甲数。</p>
+</li>
+</ol>
+<blockquote>
+<p>Conway 检视二道，连呼妙哉！此二道真妙绝。</p>
+</blockquote>
+<h2 id="definitions">Definitions</h2>
+<h3 id="symbols">Symbols</h3>
+<p>比较运算符上画一道斜线表示不满足该运算符。</p>
+<p>$x\le y$ 表示 $x$ 小于或似于 $y$。</p>
+<p>$x\ge y$ 表示 $y\le x$。</p>
+<p>$x\equiv y$ 表示 $x$ 似于 $y$，即 $x\le y$ 且 $y\le x$。</p>
+<p>根据下文会介绍的定理 (T4)，“不小于或似于” 即 &ldquo;大于且不似于&rdquo;，所以可以定义 $x&lt;y$ 表示 $x\not\ge y$，$x&gt;y$ 表示 $x\not\le y$。</p>
+<p>$A\le x$（$A$ 是一个集合，$x$ 是一个数）表示 $A$ 中任意一个元素都 $\le x$。（其它运算符类似）</p>
+<p>$x\le A$（$A$ 是一个集合，$x$ 是一个数）表示 $A\ge x$。（其它运算符类似）</p>
+<p>$A\le B$（$A$ 和 $B$ 都是集合）表示 $A$ $\le$ $B$ 中任意一个元素。（其它运算符类似）</p>
+<h3 id="number">Number</h3>
+<p>一个数 $x$ 可以表示为 $(X_L,X_R)$ 的形式，其中 $X_L$ 表示 $x$ 的左集，$X_R$ 表示 $x$ 的右集。即 $x=(X_L,X_R)$。</p>
+<p>$x_L$ 表示 $X_L$ 中的一个元素，$x_R$ 表示 $X_R$ 中的一个元素。</p>
+<h3 id="rule-1">Rule #1</h3>
+<p>$$x_L\not\ge x_R$$</p>
+<h3 id="rule-2">Rule #2</h3>
+<p>$$x\le y\Leftrightarrow X_L\not\ge y\land Y_R\not\le x$$</p>
+<h2 id="theorems">Theorems</h2>
+<h3 id="t1">T1</h3>
+<p>$$x\le y\land y\le z\Rightarrow x\le z$$</p>
+<details class="admonition note"><summary class="admonition-title">证明</summary>
+<p>假设该命题不成立，即存在 $x\le y,y\le z,x\not\le z$。</p>
+<p>$\because x\not\le z$</p>
+<p>$\therefore \exists\ x_L\ge z\lor\exists\ z_R\le x$</p>
+<p>当 $x_L\ge z$ 时</p>
+<p>​	$\because x\le y$</p>
+<p>​	$\therefore x_L\not\ge y$</p>
+<p>​	$\therefore y\le z,z\le x_L,y\not\le x_L$</p>
+<p>当 $z_R\le x$ 时</p>
+<p>​	$\because y\le z$</p>
+<p>​	$\therefore z_R\not\le y$</p>
+<p>​	$\therefore z_R\le x,x\le y,z_R\not\le y$</p>
+<p>综上，无论是哪种情形，都会得到新的一组不满足原命题的数，而这组数的其中一个数会比原来的三个数中的一个创造的早，新的这组数的另外两个数就是原来的三个数中另外两个数。这样的话，若出现了一组不满足原命题的数，创造时间就会不断向前追溯，而追溯是有尽头的，因此这种情形不可能出现。</p>
+<p>证毕。</p>
+</details>
+<h3 id="t2">T2</h3>
+<p>$$X_L\le x\le X_R$$</p>
+<details class="admonition note"><summary class="admonition-title">证明</summary>
+</details>
+<h3 id="t3">T3</h3>
+<p>$x\le x$</p>
+<details class="admonition note"><summary class="admonition-title">证明</summary>
+</details>
+<h3 id="t4">T4</h3>
+<p>$$x\not\le y\Rightarrow y\le x$$</p>
+<details class="admonition note"><summary class="admonition-title">证明</summary>
+</details>
+<h3 id="t5">T5</h3>
+<p>$$x&lt;y\land y\le z\Rightarrow x&lt;z$$</p>
+<details class="admonition note"><summary class="admonition-title">证明</summary>
+</details>
+<h3 id="t6">T6</h3>
+<p>$$x\le y\land y&lt;z\Rightarrow x&lt;z$$</p>
+<details class="admonition note"><summary class="admonition-title">证明</summary>
+</details>
+<h3 id="t7">T7</h3>
+<p>$$Y_L&lt;x&lt;Y_R\Rightarrow x\equiv(x_L\bigcup Y_L,x_R\bigcup Y_R)$$</p>
+<details class="admonition note"><summary class="admonition-title">证明</summary>
+</details>
+<p>（本文咕咕中……）</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content" title="2020-02-08 18:37:53 &#43;0800 &#43;0800">
+        2020-02-08
+        <a href="https://github.com/ouuan/hugo-blog/commit/da8aa41962b5f5a65348e9b2f49d8519daa2fc8d" title="Add aliases" target="_blank">(da8aa41)</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/">博弈论</a>
+          <a href="/tags/%E8%B6%85%E7%8E%B0%E5%AE%9E%E6%95%B0/">超现实数</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/c-11-enable-if-%E7%9A%84%E4%BD%BF%E7%94%A8/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">C&#43;&#43;11 enable_if 的使用</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cf708c-centroids%E6%A0%91%E5%BD%A2dpup-and-down/">
+            <span class="next-text nav-default">CF708C Centroids（树形dp，up and down）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/hexo-blog-utterances"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span>
+    <span class="author">ouuan</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/tomorrow.min.css" rel="stylesheet">
+  <script>hljs.configure({tabReplace: '    '});</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.63725abf.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157787819-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

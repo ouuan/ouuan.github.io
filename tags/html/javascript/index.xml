@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HTML/JavaScript on ouuan的博客</title>
+    <link>https://ouuan.github.io/tags/html/javascript/</link>
+    <description>Recent content in HTML/JavaScript on ouuan的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 20 Dec 2018 23:12:18 +0800</lastBuildDate>
+    
+	<atom:link href="https://ouuan.github.io/tags/html/javascript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>随机生成图片展示</title>
+      <link>https://ouuan.github.io/post/%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%E5%B1%95%E7%A4%BA/</link>
+      <pubDate>Thu, 20 Dec 2018 23:12:18 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%E5%B1%95%E7%A4%BA/</guid>
+      <description>传送门 源码按F12即可查看（当然也可以在 repo 里面看） 看到一个帖子里提到了一个140字符画图比赛，看到了 Martin Büttner&amp;amp;rsquo;s</description>
+    </item>
+    
+    <item>
+      <title>html实现随机图片</title>
+      <link>https://ouuan.github.io/post/html%E5%AE%9E%E7%8E%B0%E9%9A%8F%E6%9C%BA%E5%9B%BE%E7%89%87/</link>
+      <pubDate>Wed, 12 Dec 2018 23:42:17 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/html%E5%AE%9E%E7%8E%B0%E9%9A%8F%E6%9C%BA%E5%9B%BE%E7%89%87/</guid>
+      <description>注：暂时还不知道如何制作能被引用的随机图片，只能查看图片，而不能通过类似于![](图片地址)的方式查看。 demo 欢迎投稿图片：投稿地址 核心代码 &amp;lt;script type=&amp;quot;text/javascript&amp;quot;</description>
+    </item>
+    
+  </channel>
+</rss>

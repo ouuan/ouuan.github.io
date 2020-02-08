@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>CF1260F Colored Tree（点分治，差分，基数排序） - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="题目链接 CF
+题意简述 给你一棵树，每个点的颜色为一个区间内的整数，一种染色方案的权值是所有同色无序点对的距离之和，求所有不同染色方案的权值之和。
+点数、颜色数均不超过 $10^5$ 。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.64.0 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/cf1260f-colored-tree%E7%82%B9%E5%88%86%E6%B2%BB%E5%B7%AE%E5%88%86%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.6e1b3b90.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="CF1260F Colored Tree（点分治，差分，基数排序）" />
+<meta property="og:description" content="题目链接
+CF
+题意简述
+给你一棵树，每个点的颜色为一个区间内的整数，一种染色方案的权值是所有同色无序点对的距离之和，求所有不同染色方案的权值之和。
+点数、颜色数均不超过 $10^5$ 。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/cf1260f-colored-tree%E7%82%B9%E5%88%86%E6%B2%BB%E5%B7%AE%E5%88%86%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/" />
+<meta property="article:published_time" content="2019-11-29T14:00:53+08:00" />
+<meta property="article:modified_time" content="2020-02-08T18:37:53+08:00" />
+<meta itemprop="name" content="CF1260F Colored Tree（点分治，差分，基数排序）">
+<meta itemprop="description" content="题目链接
+CF
+题意简述
+给你一棵树，每个点的颜色为一个区间内的整数，一种染色方案的权值是所有同色无序点对的距离之和，求所有不同染色方案的权值之和。
+点数、颜色数均不超过 $10^5$ 。">
+<meta itemprop="datePublished" content="2019-11-29T14:00:53&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-08T18:37:53&#43;08:00" />
+<meta itemprop="wordCount" content="2929">
+
+
+
+<meta itemprop="keywords" content="点分治,差分,基数排序,数据结构,概率期望," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CF1260F Colored Tree（点分治，差分，基数排序）"/>
+<meta name="twitter:description" content="题目链接
+CF
+题意简述
+给你一棵树，每个点的颜色为一个区间内的整数，一种染色方案的权值是所有同色无序点对的距离之和，求所有不同染色方案的权值之和。
+点数、颜色数均不超过 $10^5$ 。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/links/">
+        <li class="mobile-menu-item">链接</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/links/">链接</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">CF1260F Colored Tree（点分治，差分，基数排序）</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2019-11-29 14:00:53 &#43;0800 &#43;0800"> 2019-11-29 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#题目链接">题目链接</a></li>
+    <li><a href="#题意简述">题意简述</a></li>
+    <li><a href="#简要做法">简要做法</a></li>
+    <li><a href="#参考代码">参考代码</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="题目链接">题目链接</h2>
+<p><a href="https://codeforces.com/contest/1260/problem/F" target="_blank">CF</a></p>
+<h2 id="题意简述">题意简述</h2>
+<p>给你一棵树，每个点的颜色为一个区间内的整数，一种染色方案的权值是所有同色无序点对的距离之和，求所有不同染色方案的权值之和。</p>
+<p>点数、颜色数均不超过 $10^5$ 。</p>
+<h2 id="简要做法">简要做法</h2>
+<p>首先是 $O(n^2)$ 做法：把计算总和转化为计算期望，然后就可以枚举点对，计算同色概率，乘上距离，最后把期望乘上方案数就是答案。进行 $n$ 次 DFS 而不是每次求 LCA 就可以做到 $O(n^2)$ 。</p>
+<p>然后是 $O(n\log n\log c)$（$c$ 为颜色数）做法：点分治，令 $f(u, v)=\max(0, \min(r_u, r_v)-\max(l_u, l_v)+1)$, 点 $u$ 的贡献是 $\sum_{v}f(u, v)(dep_u+dep_v)(r_u-l_u+1)^{-1}(r_v-l_v+1)^{-1}$，即 $\left(dep_u\cdot(r_u-l_u+1)^{-1}\right)\cdot\left(\sum_{v}f(u, v)(r_v-l_v+1)^{-1}\right)+(r_u-l_u+1)^{-1}\cdot\left(\sum_{v}f(u, v)dep_v(r_v-l_v+1)^{-1}\right)$ ，用以颜色为下标、支持区间加/查询区间和的线段树维护 $\sum_{v}(r_v-l_v+1)^{-1}$ 以及 $\sum_{v}dep_v(r_v-l_v+1)^{-1}$ 即可。</p>
+<p>如果你写的是其它 $O(n\log n\log c)$ 做法，如链分治（dsu on tree），或者你的常数比较小（比如使用树状数组而不是线段树），你可能就过了。</p>
+<p>否则，你可能 <a href="https://codeforces.com/contest/1260/submission/65895673" target="_blank">TLE on 6</a> 或者 <a href="https://codeforces.com/contest/1260/submission/65896002" target="_blank">TLE on 14</a> 之类的。</p>
+<p>但是，大常数选手并不是没有活路的，因为这题有 $O(n\log n)$ 做法。</p>
+<p>其中一种，是使用差分代替上述做法中的线段树。但如果在点分治内进行比较排序，复杂度是 $O(n\log^2 n)$（尽管瓶颈部分的常数很小），解决方法是在点分治的外部进行一次排序，然后在内部就可以线性地将每棵子树的修改与询问划分开来。</p>
+<p>“划分”本质上是一个双关键字排序，第一关键字为所在子树的编号，第二关键字为修改/询问原本的排序方式，利用基数排序的思想，由于第二关键字已经有序，对第一关键字进行稳定排序即可。使用计数排序可以做到线性复杂度，总复杂度就是 $O(n\log n)$ 。</p>
+<h2 id="参考代码">参考代码</h2>
+<details class="admonition note"><summary class="admonition-title">nlognlogc</summary>
+<pre><code class="language-cpp">																																																	#ifndef OUUAN
+																																																	#pragma GCC optimize(&quot;Ofast,no-stack-protector,unroll-loops,fast-math&quot;)
+																																																	#endif
+																																																	#include&lt;bits/stdc++.h&gt;
+ 
+//#define int LoveLive
+//#define FAST_IOSTREAM 1
+ 
+																																																	#define For(i,l,r)for(int i=(l),i##end=(r);i&lt;=i##end;++i)
+																																																	#define FOR(i,r,l)for(int i=(r),i##end=(l);i&gt;=i##end;--i)
+																																																	#define SON(i,u)for(int i=head[u];i;i=nxt[i])
+																																																	#define ms(a,x)memset(a,x,sizeof(a))
+																																																	#define fi first
+																																																	#define se second
+																																																	#define pb emplace_back
+																																																	#define pq priority_queue
+																																																	#define isinf(x)(x&gt;=INF?-1:x)
+																																																	#define y1 why_is_there_a_function_called_y1
+																																																	#define DEBUG(x)cerr&lt;&lt;(#x)&lt;&lt;&quot;:&quot;&lt;&lt;x&lt;&lt;endl
+																																																	using namespace std;typedef long long LoveLive;typedef pair&lt;int,int&gt;pii;typedef vector&lt;int&gt;vi;typedef long double ld;const double inf=1e121;const double eps=1e-10;mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());int randint(int l,int r){int out=rng()%(r-l+1)+l;return out&gt;=l?out:out+r-l+1;}
+																																																	#ifdef int
+																																																	const int INF=0x3f3f3f3f3f3f3f3fll;
+																																																	#else
+																																																	const int INF=0x3f3f3f3f;typedef long long ll;
+																																																	#endif
+																																																	#ifdef FAST_IOSTREAM
+																																																	#define br cout&lt;&lt;'\n'
+																																																	#define sp cout&lt;&lt;' '
+																																																	long long read(){long long x;cin&gt;&gt;x;return x;}template&lt;typename T&gt;void read(T&amp;x){cin&gt;&gt;x;}template&lt;typename T&gt;void write(const T&amp;x){cout&lt;&lt;x;}
+																																																	#else
+																																																	#define br putchar('\n')
+																																																	#define sp putchar(' ')
+																																																	template&lt;typename T&gt;typename enable_if&lt;!is_integral&lt;T&gt;::value,void&gt;::type read(T&amp;x){cin&gt;&gt;x;}long long read(){char c;long long out=0,f=1;for(c=getchar();!isdigit(c)&amp;&amp;c!='-';c=getchar());if(c=='-'){f=-1;c=getchar();}for(;isdigit(c);c=getchar())out=(out&lt;&lt;3)+(out&lt;&lt;1)+c-'0';return out*f;}template&lt;typename T&gt;typename enable_if&lt;is_integral&lt;T&gt;::value,T&gt;::type read(T&amp;x){char c;T f=1;x=0;for(c=getchar();!isdigit(c)&amp;&amp;c!='-';c=getchar());if(c=='-'){f=-1;c=getchar();}for(;isdigit(c);c=getchar())x=(x&lt;&lt;3)+(x&lt;&lt;1)+c-'0';return x*=f;}char read(char&amp;x){for(x=getchar();isspace(x);x=getchar());return x;}double read(double&amp;x){scanf(&quot;%lf&quot;,&amp;x);return x;}ld read(ld&amp;x){scanf(&quot;%Lf&quot;,&amp;x);return x;}template&lt;typename T&gt;typename enable_if&lt;!is_integral&lt;T&gt;::value,void&gt;::type write(const T&amp;x){cout&lt;&lt;x;}template&lt;typename T&gt;typename enable_if&lt;is_integral&lt;T&gt;::value,void&gt;::type write(const T&amp;x){if(x&lt;0){putchar('-');write(-x);return;}if(x&gt;9)write(x/10);putchar(x%10+'0');}void write(const char&amp;x){putchar(x);}void write(const double&amp;x){printf(&quot;%.10lf&quot;,x);}void write(const ld&amp;x){printf(&quot;%.10Lf&quot;,x);}
+																																																	#endif
+																																																	template&lt;typename T,typename...Args&gt;void read(T&amp;x,Args&amp;...args){read(x);read(args...);}template&lt;typename OutputIt,typename=typename enable_if&lt;is_same&lt;output_iterator_tag,typename iterator_traits&lt;OutputIt&gt;::iterator_category&gt;::value||(is_base_of&lt;forward_iterator_tag,typename iterator_traits&lt;OutputIt&gt;::iterator_category&gt;::value&amp;&amp;!is_const&lt;OutputIt&gt;::value)&gt;::type&gt;void read(OutputIt __first,OutputIt __last){for(;__first!=__last;++__first)read(*__first);}template&lt;typename InputIt,typename=typename enable_if&lt;is_base_of&lt;input_iterator_tag,typename iterator_traits&lt;InputIt&gt;::iterator_category&gt;::value&gt;::type&gt;void wts(InputIt __first,InputIt __last){bool isFirst=true;for(;__first!=__last;++__first){if(isFirst)isFirst=false;else sp;write(*__first);}br;}template&lt;typename InputIt,typename=typename enable_if&lt;is_base_of&lt;input_iterator_tag,typename iterator_traits&lt;InputIt&gt;::iterator_category&gt;::value&gt;::type&gt;void wtb(InputIt __first,InputIt __last){for(;__first!=__last;++__first){write(*__first);br;}}template&lt;typename T&gt;void wts(const T&amp;x){write(x);sp;}template&lt;typename T&gt;void wtb(const T&amp;x){write(x);br;}template&lt;typename T&gt;void wte(const T&amp;x){write(x);exit(0);}template&lt;typename T,typename...Args&gt;void wts(const T&amp;x,Args...args){wts(x);wts(args...);}template&lt;typename T,typename...Args&gt;void wtb(const T&amp;x,Args...args){wts(x);wtb(args...);}template&lt;typename T,typename...Args&gt;void wte(const T&amp;x,Args...args){wts(x);wte(args...);}template&lt;typename T&gt;inline bool up(T&amp;x,const T&amp;y){return x&lt;y?x=y,1:0;}template&lt;typename T&gt;inline bool dn(T&amp;x,const T&amp;y){return y&lt;x?x=y,1:0;}template&lt;typename T&gt;inline bool inRange(const T&amp;x,const T&amp;l,const T&amp;r){return!(x&lt;l)&amp;&amp;!(r&lt;x);}template&lt;typename valueType,typename tagType&gt;class segmentTreeNode{public:int id,left,right;valueType val;tagType tag;};template&lt;typename valueType, typename tagType, valueType(*merge)(valueType,valueType), void(*update)(segmentTreeNode&lt;valueType,tagType&gt;&amp;,tagType)&gt;class segmentTree{private:std::vector&lt;segmentTreeNode&lt;valueType,tagType&gt;&gt;nodes;int leftRange,rightRange;valueType valueZero;tagType tagZero;void pushup(int cur){nodes[cur].val=merge(nodes[cur&lt;&lt;1].val,nodes[cur&lt;&lt;1|1].val);}void pushdown(int cur){update(nodes[cur&lt;&lt;1],nodes[cur].tag);update(nodes[cur&lt;&lt;1|1],nodes[cur].tag);nodes[cur].tag=tagZero;}void build(int cur,int l,int r,const std::vector&lt;valueType&gt;&amp;initValue){nodes[cur].id=cur;nodes[cur].left=l;nodes[cur].right=r;nodes[cur].tag=tagZero;if(l==r-1)nodes[cur].val=initValue[l-leftRange];else{build(cur&lt;&lt;1,l,(l+r)&gt;&gt;1,initValue);build(cur&lt;&lt;1|1,(l+r)&gt;&gt;1,r,initValue);pushup(cur);}}void init(const std::vector&lt;valueType&gt;&amp;_initValue,const valueType&amp;_valueZero,const tagType&amp;_tagZero){valueZero=_valueZero;tagZero=_tagZero;nodes.resize((rightRange-leftRange)&lt;&lt;2);build(1,leftRange,rightRange,_initValue);}void modify(int cur,int l,int r,int L,int R,const tagType&amp;tag){if(l&gt;=R||r&lt;=L)return;if(L&lt;=l&amp;&amp;r&lt;=R)update(nodes[cur],tag);else{pushdown(cur);modify(cur&lt;&lt;1,l,(l+r)&gt;&gt;1,L,R,tag);modify(cur&lt;&lt;1|1,(l+r)&gt;&gt;1,r,L,R,tag);pushup(cur);}}valueType query(int cur,int l,int r,int L,int R){if(l&gt;=R||r&lt;=L)return valueZero;if(L&lt;=l&amp;&amp;r&lt;=R)return nodes[cur].val;pushdown(cur);return merge(query(cur&lt;&lt;1,l,(l+r)&gt;&gt;1,L,R), query(cur&lt;&lt;1|1,(l+r)&gt;&gt;1,r,L,R));}public:segmentTree(){}segmentTree(int _leftRange,int _rightRange,const std::vector&lt;valueType&gt;&amp;_initValue,const valueType&amp;_valueZero,const tagType&amp;_tagZero){leftRange=_leftRange;rightRange=_rightRange;init(_initValue,_valueZero,_tagZero);}segmentTree(int size,const std::vector&lt;valueType&gt;&amp;_initValue,const valueType&amp;_valueZero,const tagType&amp;_tagZero){leftRange=1;rightRange=size+1;init(_initValue,_valueZero,_tagZero);}void modify(int l,int r,const tagType&amp;tag){modify(1,leftRange,rightRange,l,r,tag);}void modify(int p,const tagType&amp;tag){modify(p,p+1,tag);}valueType query(int l,int r){return query(1,leftRange,rightRange,l,r);}valueType query(int p){return query(p,p+1);}};class maxFlow{private:typedef long long ll;std::queue&lt;int&gt;q;std::vector&lt;int&gt;head,cur,nxt,to,dep;std::vector&lt;ll&gt;cap;public:maxFlow(int _n=0){init(_n);}void init(int _n){head.clear();head.resize(_n+1,0);nxt.resize(2);to.resize(2);cap.resize(2);}void init(){init(head.size()-1);}void add(int u,int v,ll w){nxt.push_back(head[u]);head[u]=to.size();to.push_back(v);cap.push_back(w);}void Add(int u,int v,ll w){add(u,v,w);add(v,u,0);}void del(int x){cap[x&lt;&lt;1]=cap[x&lt;&lt;1|1]=0;}bool bfs(int s,int t){dep.clear();dep.resize(head.size(),-1);dep[s]=0;q.push(s);while(!q.empty()){int u=q.front();q.pop();for(int i=head[u];i;i=nxt[i]){int v=to[i];ll w=cap[i];if(w&gt;0&amp;&amp;dep[v]==-1){dep[v]=dep[u]+1;q.push(v);}}}return ~dep[t];}ll dfs(int u,ll flow,int t){if(dep[u]==dep[t])return u==t?flow:0;ll out=0;for(int&amp;i=cur[u];i;i=nxt[i]){int v=to[i];ll w=cap[i];if(w&gt;0&amp;&amp;dep[v]==dep[u]+1){ll f=dfs(v,std::min(w,flow-out),t);cap[i]-=f;cap[i ^ 1]+=f;out+=f;if(out==flow)return out;}}return out;}ll maxflow(int s,int t){ll out=0;while(bfs(s,t)){cur=head;out+=dfs(s,0x7fffffffffffffffll,t);}return out;}ll getflow(int x)const{return cap[x&lt;&lt;1|1];}};struct customHash{static uint64_t splitmix64(uint64_t x){x+=0x9e3779b97f4a7c15;x=(x ^(x&gt;&gt;30))*0xbf58476d1ce4e5b9;x=(x ^(x&gt;&gt;27))*0x94d049bb133111eb;return x ^(x&gt;&gt;31);}size_t operator()(uint64_t x)const{static const uint64_t FIXED_RANDOM=rng();return splitmix64(x+FIXED_RANDOM);}};
+ 
+typedef pair&lt;bool, pii&gt; pbii;
+
+const int W = 100000;
+const int mod = (1e9 + 7//, 998244353
+);
+
+vector&lt;vi&gt; g;
+vector&lt;bool&gt; vis;
+int n, tsiz, rt, ans;
+vi l, r, siz, wt, inv;
+
+int qpow(int x, int y)
+{
+    int out = 1;
+    while (y)
+    {
+        if (y &amp; 1) out = (ll) out * x % mod;
+        x = (ll) x * x % mod;
+        y &gt;&gt;= 1;
+    }
+    return out;
+}
+
+int modadd(int x, int y)
+{
+    return (x += y) &gt;= mod ? x - mod : x;
+}
+
+pii merge(pii x, pii y)
+{
+    return pii(modadd(x.fi, y.fi), modadd(x.se, y.se));
+}
+
+void update(segmentTreeNode&lt;pii, pbii&gt;&amp; u, pbii x)
+{
+    if (x.first)
+    {
+        u.tag = pbii(true, pii(0, 0));
+        u.val = pii(0, 0);
+    }
+    else if (x.se == pii(0, 0)) return;
+    u.tag.se = merge(u.tag.se, x.se);
+    u.val.fi = (u.val.fi + (ll) x.se.fi * (u.right - u.left)) % mod;
+    u.val.se = (u.val.se + (ll) x.se.se * (u.right - u.left)) % mod;
+}
+
+segmentTree&lt;pii, pbii, merge, update&gt; t(W, vector&lt;pii&gt;(W, pii(0, 0)), pii(0, 0), pbii(false, pii(0, 0)));
+
+void getroot(int u, int pa)
+{
+    siz[u] = wt[u] = 1;
+    for (auto v : g[u])
+    {
+        if (v == pa || vis[v]) continue;
+        getroot(v, u);
+        siz[u] += siz[v];
+        up(wt[u], siz[v]);
+    }
+    up(wt[u], tsiz - siz[u]);
+    if (!rt || wt[u] &lt; wt[rt]) rt = u;
+}
+
+void calc(int u, int pa, int dep)
+{
+    auto res = t.query(l[u], r[u] + 1);
+    ans = (ans + (ll) inv[u] * dep % mod * res.fi + (ll) inv[u] * res.se) % mod;
+    for (auto v : g[u])
+    {
+        if (v == pa || vis[v]) continue;
+        calc(v, u, dep + 1);
+    }
+}
+
+void insert(int u, int pa, int dep)
+{
+    t.modify(l[u], r[u] + 1, pbii(false, pii(inv[u], (ll) inv[u] * dep % mod)));
+    for (auto v : g[u])
+    {
+        if (v == pa || vis[v]) continue;
+        insert(v, u, dep + 1);
+    }
+}
+
+void solve(int u)
+{
+    vis[u] = true;
+    t.modify(1, W + 1, pbii(true, pii(0, 0)));
+    t.modify(l[u], r[u] + 1, pbii(false, pii(inv[u], 0)));
+    for (auto v : g[u])
+    {
+        if (vis[v]) continue;
+        calc(v, u, 1);
+        insert(v, u, 1);
+    }
+    for (auto v : g[u])
+    {
+        if (vis[v]) continue;
+        rt = 0;
+        tsiz = siz[v];
+        getroot(v, u);
+        solve(rt);
+    }
+}
+
+signed main()
+{
+    #ifdef FAST_IOSTREAM
+    cin.sync_with_stdio(false);
+    cin.tie(0);
+    #endif
+
+    read(n);
+
+    l.resize(n + 1);
+    g.resize(n + 1);
+    vis.resize(n + 1, false);
+    r = wt = siz = inv = l;
+
+    For (i, 1, n)
+    {
+        read(l[i], r[i]);
+        inv[i] = qpow(r[i] - l[i] + 1, mod - 2);
+    }
+
+    For (i, 2, n)
+    {
+        int u, v;
+        read(u, v);
+        g[u].pb(v);
+        g[v].pb(u);
+    }
+
+    tsiz = n;
+    getroot(1, 0);
+    solve(rt);
+
+    for (int i = 1; i &lt;= n; ++i) ans = (ll) ans * (r[i] - l[i] + 1) % mod;
+
+    cout &lt;&lt; ans;
+
+    return 0;
+}
+</code></pre>
+</details>
+<details class="admonition note"><summary class="admonition-title">nlogn#1</summary>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+typedef long long ll;
+
+const int mod = 1e9 + 7;
+
+int qpow(int x, int y)
+{
+    int out = 1;
+    while (y)
+    {
+        if (y &amp; 1) out = (ll) out * x % mod;
+        x = (ll) x * x % mod;
+        y &gt;&gt;= 1;
+    }
+    return out;
+}
+
+vector&lt;bool&gt; vis;
+int n, tsiz, rt, ans;
+vector&lt;vector&lt;int&gt; &gt; g;
+vector&lt;int&gt; siz, wt, bel, dep, inv;
+
+struct Modification
+{
+    int id, p, inv, l;
+    Modification(int _id, int _p, int _inv, int _l): id(_id), p(_p), inv(_inv), l(_l) {}
+    bool operator&lt;(const Modification&amp; b) const { return p &lt; b.p; }
+    int k1() const { return inv; }
+    int b1() const { return p == l ? (ll) (1 - l + mod) * k1() % mod : (ll) (mod - p + 1) * k1() % mod; }
+    int k2() const { return (ll) inv * dep[id] % mod; }
+    int b2() const { return p == l ? (ll) (1 - l + mod) * k2() % mod : (ll) (mod - p + 1) * k2() % mod; }
+};
+
+struct Query
+{
+    int id, p, inv;
+    Query(int _id, int _p, int _inv): id(_id), p(_p), inv(_inv) {}
+    bool operator&lt;(const Query&amp; b) const { return p &lt; b.p; }
+    void calc(int x1, int x2, int type) const { ans = (ans + (ll) type * inv * ((ll) dep[id] * x1 % mod + x2) % mod + mod) % mod; }
+};
+
+void getroot(int u, int pa)
+{
+    siz[u] = wt[u] = 1;
+    for (auto v : g[u])
+    {
+        if (v == pa || vis[v]) continue;
+        getroot(v, u);
+        siz[u] += siz[v];
+        wt[u] = max(wt[u], siz[v]);
+    }
+    wt[u] = max(wt[u], tsiz - siz[u]);
+    if (!rt || wt[u] &lt; wt[rt]) rt = u;
+}
+
+void calc(const vector&lt;Modification&gt;&amp; ms, const vector&lt;Query&gt;&amp; qs, int type)
+{
+    int k1 = 0, b1 = 0, k2 = 0, b2 = 0, i = 0;
+    for (auto q : qs)
+    {
+        while (i &lt; ms.size() &amp;&amp; ms[i].p &lt;= q.p)
+        {
+            k1 = (k1 + ms[i].k1()) % mod;
+            b1 = (b1 + ms[i].b1()) % mod;
+            k2 = (k2 + ms[i].k2()) % mod;
+            b2 = (b2 + ms[i].b2()) % mod;
+            ++i;
+        }
+        q.calc(((ll) k1 * q.p + b1) % mod, ((ll) k2 * q.p + b2) % mod, type);
+    }
+}
+
+void dfs(int u, int pa)
+{
+    for (auto v : g[u])
+    {
+        if (v == pa || vis[v]) continue;
+        dep[v] = dep[u] + 1;
+        bel[v] = bel[u];
+        dfs(v, u); 
+    }
+}
+
+void solve(int u, vector&lt;Modification&gt;&amp; ms, vector&lt;Query&gt;&amp; qs)
+{
+    vis[u] = true;
+    vector&lt;vector&lt;Query&gt; &gt; qson(1, vector&lt;Query&gt;());
+    vector&lt;vector&lt;Modification&gt; &gt; mson(1, vector&lt;Modification&gt;());
+    for (auto v : g[u])
+    {
+        if (vis[v]) continue;
+        mson.push_back(vector&lt;Modification&gt;());
+        qson.push_back(vector&lt;Query&gt;());
+        bel[v] = mson.size() - 1;
+        dep[v] = 1;
+        dfs(v, u);
+    }
+    bel[u] = dep[u] = 0;
+    calc(ms, qs, 1);
+    for (auto m : ms) mson[bel[m.id]].push_back(m);
+    for (auto q : qs) qson[bel[q.id]].push_back(q);
+    vector&lt;Modification&gt;().swap(ms); // free memory, the memory complexity is O(n) instead of O(nlogn) because of these two lines
+    vector&lt;Query&gt;().swap(qs);
+    for (auto v : g[u])
+    {
+        if (vis[v]) continue;
+        calc(mson[bel[v]], qson[bel[v]], -1);
+        tsiz = siz[v];
+        rt = 0;
+        getroot(v, u);
+        solve(rt, mson[bel[v]], qson[bel[v]]);
+    }
+}
+
+int main()
+{
+    scanf(&quot;%d&quot;, &amp;n);
+
+    g.resize(n + 1);
+    siz.resize(n + 1, 0);
+    vis.resize(n + 1, false);
+    wt = bel = dep = inv = siz;
+
+    vector&lt;Modification&gt; ms;
+    vector&lt;Query&gt; qs;
+
+    int mul = (mod + 1) / 2;
+
+    for (int i = 1; i &lt;= n; ++i)
+    {
+        int l, r;
+        scanf(&quot;%d%d&quot;, &amp;l, &amp;r);
+        mul = (ll) mul * (r - l + 1) % mod;
+        inv[i] = qpow(r - l + 1, mod - 2);
+        ms.push_back(Modification(i, l, inv[i], l));
+        ms.push_back(Modification(i, r + 1, mod - inv[i], l));
+        qs.push_back(Query(i, l - 1, mod - inv[i]));
+        qs.push_back(Query(i, r, inv[i]));
+    }
+
+    for (int i = 1; i &lt; n; ++i)
+    {
+        int u, v;
+        scanf(&quot;%d%d&quot;, &amp;u, &amp;v);
+        g[u].push_back(v);
+        g[v].push_back(u);
+    }
+
+    sort(ms.begin(), ms.end());
+    sort(qs.begin(), qs.end());
+
+    tsiz = n;
+    getroot(1, 0);
+    solve(rt, ms, qs);
+
+    cout &lt;&lt; (ll) ans * mul % mod;
+
+    return 0;
+}
+</code></pre>
+</details>
+<details class="admonition note"><summary class="admonition-title">nlogn#2</summary>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+typedef long long ll;
+
+const int mod = 1e9 + 7;
+
+static unsigned fast_mod(uint64_t x)
+{
+#if !defined(_WIN32) || defined(_WIN64)
+    return x % mod;
+#endif
+    // Optimized mod for Codeforces 32-bit machines.
+    // x must be less than 2^32 * m for this to work, so that x / m fits in a 32-bit integer.
+    unsigned x_high = x &gt;&gt; 32, x_low = (unsigned) x;
+    unsigned quot, rem;
+    asm(&quot;divl %4\n&quot;
+        : &quot;=a&quot; (quot), &quot;=d&quot; (rem)
+        : &quot;d&quot; (x_high), &quot;a&quot; (x_low), &quot;r&quot; (mod));
+    return rem;
+}
+
+int modadd(int x, int y)
+{
+    return (x += y) &gt;= mod ? x - mod : x;
+}
+
+int qpow(int x, int y)
+{
+    int out = 1;
+    while (y)
+    {
+        if (y &amp; 1) out = fast_mod((ll) out * x);
+        x = fast_mod((ll) x * x);
+        y &gt;&gt;= 1;
+    }
+    return out;
+}
+
+vector&lt;bool&gt; vis;
+int n, tsiz, rt, ans;
+vector&lt;vector&lt;int&gt; &gt; g;
+vector&lt;int&gt; siz, wt, bel, dep, inv, cnt, ma, mb, qa, qb;
+
+struct Modification
+{
+    int id, p, inv, l;
+    Modification(int _id, int _p, int _inv, int _l): id(_id), p(_p), inv(_inv), l(_l) {}
+    bool operator&lt;(const Modification&amp; b) const { return p &lt; b.p; }
+    int k1() const { return inv; }
+    int b1() const { return p == l ? fast_mod((ll) (1 - l + mod) * k1()) : fast_mod((ll) (mod - p + 1) * k1()); }
+    int k2() const { return (ll) inv * dep[id] % mod; }
+    int b2() const { return p == l ? fast_mod((ll) (1 - l + mod) * k2()) : fast_mod((ll) (mod - p + 1) * k2()); }
+};
+
+vector&lt;Modification&gt; ms;
+
+struct Query
+{
+    int id, p, inv;
+    Query(int _id, int _p, int _inv): id(_id), p(_p), inv(_inv) {}
+    bool operator&lt;(const Query&amp; b) const { return p &lt; b.p; }
+    void calc(int x1, int x2, int type) const { ans = fast_mod(ans + type * fast_mod((ll) inv * (fast_mod((ll) dep[id] * x1 + x2))) + mod); }
+};
+
+vector&lt;Query&gt; qs;
+
+void getroot(int u, int pa)
+{
+    siz[u] = wt[u] = 1;
+    for (auto v : g[u])
+    {
+        if (v == pa || vis[v]) continue;
+        getroot(v, u);
+        siz[u] += siz[v];
+        wt[u] = max(wt[u], siz[v]);
+    }
+    wt[u] = max(wt[u], tsiz - siz[u]);
+    if (!rt || wt[u] &lt; wt[rt]) rt = u;
+}
+
+void calc(int l, int r, int type)
+{
+    int k1 = 0, b1 = 0, k2 = 0, b2 = 0, i = l;
+    for (int j = l; j &lt;= r; ++j)
+    {
+        Query&amp; q = qs[qa[j]];
+        while (i &lt;= r)
+        {
+            Modification&amp; m = ms[ma[i]];
+            if (m.p &gt; q.p) break;
+            k1 = modadd(k1, m.k1());
+            b1 = modadd(b1, m.b1());
+            k2 = modadd(k2, m.k2());
+            b2 = modadd(b2, m.b2());
+            ++i;
+        }
+        q.calc(fast_mod((ll) k1 * q.p + b1), fast_mod((ll) k2 * q.p + b2), type);
+    }
+}
+
+void dfs(int u, int pa)
+{
+    cnt[bel[u]] += 2;
+    for (auto v : g[u])
+    {
+        if (v == pa || vis[v]) continue;
+        dep[v] = dep[u] + 1;
+        bel[v] = bel[u];
+        dfs(v, u); 
+    }
+}
+
+void solve(int u, int l, int r)
+{
+    vis[u] = true;
+    int soncnt = bel[u] = dep[u] = 0;
+    cnt[0] = l + 1;
+    for (auto v : g[u])
+    {
+        if (vis[v]) continue;
+        bel[v] = ++soncnt;
+        cnt[bel[v]] = cnt[bel[v] - 1];
+        dep[v] = 1;
+        dfs(v, u);
+    }
+    calc(l, r, 1);
+    vector&lt;int&gt; cnt2(cnt.begin(), cnt.begin() + soncnt + 1);
+    for (int i = r; i &gt;= l; --i) mb[cnt2[bel[ms[ma[i]].id]]--] = ma[i];
+    for (int i = l; i &lt;= r; ++i) ma[i] = mb[i];
+    for (int i = 0; i &lt;= soncnt; ++i) cnt2[i] = cnt[i];
+    for (int i = r; i &gt;= l; --i) qb[cnt2[bel[qs[qa[i]].id]]--] = qa[i];
+    for (int i = l; i &lt;= r; ++i) qa[i] = qb[i];
+    for (int i = 0; i &lt;= soncnt; ++i) cnt2[i] = cnt[i];
+    for (auto v : g[u])
+    {
+        if (vis[v]) continue;
+        calc(cnt2[bel[v] - 1] + 1, cnt2[bel[v]], -1);
+        tsiz = siz[v];
+        rt = 0;
+        getroot(v, u);
+        solve(rt, cnt2[bel[v] - 1] + 1, cnt2[bel[v]]);
+    }
+}
+
+int main()
+{
+    scanf(&quot;%d&quot;, &amp;n);
+
+    g.resize(n + 1);
+    siz.resize(n + 1, 0);
+    vis.resize(n + 1, false);
+    wt = bel = dep = inv = cnt = siz;
+
+    int mul = (mod + 1) / 2;
+
+    for (int i = 1; i &lt;= n; ++i)
+    {
+        int l, r;
+        scanf(&quot;%d%d&quot;, &amp;l, &amp;r);
+        mul = fast_mod((ll) mul * (r - l + 1));
+        inv[i] = qpow(r - l + 1, mod - 2);
+        ms.push_back(Modification(i, l, inv[i], l));
+        ms.push_back(Modification(i, r + 1, mod - inv[i], l));
+        qs.push_back(Query(i, l - 1, mod - inv[i]));
+        qs.push_back(Query(i, r, inv[i]));
+    }
+
+    for (int i = 1; i &lt; n; ++i)
+    {
+        int u, v;
+        scanf(&quot;%d%d&quot;, &amp;u, &amp;v);
+        g[u].push_back(v);
+        g[v].push_back(u);
+    }
+
+    ma.resize(n * 2);
+    mb = qa = qb = ma;
+    for (int i = 0; i &lt; n * 2; ++i) ma[i] = qa[i] = i;
+
+    sort(ma.begin(), ma.end(), [](int x, int y) {
+        return ms[x] &lt; ms[y];
+    });
+    sort(qa.begin(), qa.end(), [](int x, int y) {
+        return qs[x] &lt; qs[y];
+    });
+
+    tsiz = n;
+    getroot(1, 0);
+    solve(rt, 0, 2 * n - 1);
+
+    cout &lt;&lt; fast_mod((ll) ans * mul);
+
+    return 0;
+}
+</code></pre>
+</details>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content" title="2020-02-08 18:37:53 &#43;0800 &#43;0800">
+        2020-02-08
+        <a href="https://github.com/ouuan/hugo-blog/commit/da8aa41962b5f5a65348e9b2f49d8519daa2fc8d" title="Add aliases" target="_blank">(da8aa41)</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E7%82%B9%E5%88%86%E6%B2%BB/">点分治</a>
+          <a href="/tags/%E5%B7%AE%E5%88%86/">差分</a>
+          <a href="/tags/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/">基数排序</a>
+          <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+          <a href="/tags/%E6%A6%82%E7%8E%87%E6%9C%9F%E6%9C%9B/">概率期望</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cf901c-bipartite-segments%E4%BA%8C%E5%88%86%E5%9B%BE/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">CF901C Bipartite Segments（二分图）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/uoj-%E6%97%A0%E9%99%90-waiting-%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">
+            <span class="next-text nav-default">UOJ 无限 waiting 的解决方法</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/hexo-blog-utterances"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span>
+    <span class="author">ouuan</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/tomorrow.min.css" rel="stylesheet">
+  <script>hljs.configure({tabReplace: '    '});</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.63725abf.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157787819-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

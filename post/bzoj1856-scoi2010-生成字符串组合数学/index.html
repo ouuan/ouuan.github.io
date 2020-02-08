@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>BZOJ1856 [SCOI2010]生成字符串（组合数学） - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="题目链接 洛谷
+darkbzoj
+题意简述 $n$ 个入栈操作，$m$ 个出栈操作，问合法操作序列数。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.64.0 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/bzoj1856-scoi2010-%E7%94%9F%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.6e1b3b90.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="BZOJ1856 [SCOI2010]生成字符串（组合数学）" />
+<meta property="og:description" content="题目链接
+洛谷
+darkbzoj
+题意简述
+$n$ 个入栈操作，$m$ 个出栈操作，问合法操作序列数。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/bzoj1856-scoi2010-%E7%94%9F%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" />
+<meta property="article:published_time" content="2019-02-12T14:56:42+08:00" />
+<meta property="article:modified_time" content="2020-02-08T18:37:53+08:00" />
+<meta itemprop="name" content="BZOJ1856 [SCOI2010]生成字符串（组合数学）">
+<meta itemprop="description" content="题目链接
+洛谷
+darkbzoj
+题意简述
+$n$ 个入栈操作，$m$ 个出栈操作，问合法操作序列数。">
+<meta itemprop="datePublished" content="2019-02-12T14:56:42&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-08T18:37:53&#43;08:00" />
+<meta itemprop="wordCount" content="535">
+
+
+
+<meta itemprop="keywords" content="组合数学," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="BZOJ1856 [SCOI2010]生成字符串（组合数学）"/>
+<meta name="twitter:description" content="题目链接
+洛谷
+darkbzoj
+题意简述
+$n$ 个入栈操作，$m$ 个出栈操作，问合法操作序列数。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/links/">
+        <li class="mobile-menu-item">链接</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/links/">链接</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">BZOJ1856 [SCOI2010]生成字符串（组合数学）</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2019-02-12 14:56:42 &#43;0800 &#43;0800"> 2019-02-12 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents"></nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="题目链接">题目链接</h1>
+<p><a href="https://www.luogu.org/problemnew/show/P1641" target="_blank">洛谷</a></p>
+<p><a href="https://darkbzoj.tk/problem/1856" target="_blank">darkbzoj</a></p>
+<h1 id="题意简述">题意简述</h1>
+<p>$n$ 个入栈操作，$m$ 个出栈操作，问合法操作序列数。</p>
+<h1 id="简要做法">简要做法</h1>
+<p>借用一下<a href="https://www.luogu.org/blog/user29936/solution-p1641" target="_blank">这篇题解</a>（的图）。</p>
+<p>选了 $x$ 个数，$1$ 与 $0$ 个数之差为 $y$，如下图：</p>
+<p><img src="http://img.blog.csdn.net/20170826103642649?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQveHl6MzI3Njg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>不考虑限制条件，方案数为从 $(0,0)$ 到 $(n+m,n-m)$ 的折线数，即从 $n+m$ 次操作中选择 $m$ 次向下： $\binom{n+m}m$。考虑某一种不合法的情况，把这条折线第一次碰到 $y=-1$ 前的部分以 $y=-1$ 为轴翻折，这样就建立了 <strong>从 $(0,0)$ 到 $(n+m,n-m)$ 且碰到了 $y=-1$ 的折线</strong> 与 <strong>从 $(0,-2)$ 到 $(n+m,n-m)$ 的折线</strong> 的一一对应，所以不合法的情况个数为 $\binom{n+m}{m-1}$，答案为 $\binom{n+m}m-\binom{n+m}{m-1}$。</p>
+<p>（<del>上面看懂了这段可以不看，这段是废话证明</del>）为什么这玩意是双射（一一对应）..其实很简单，每条 <strong>从 $(0,0)$ 到 $(n+m,n-m)$ 且碰到了 $y=-1$ 的折线</strong> 在第一次碰到 $y=-1$ 前的部分以 $y=-1$ 为轴翻折可以得到唯一一条 <strong>从 $(0,-2)$ 到 $(n+m,n-m)$ 的折线</strong>，而一条 <strong>从 $(0,-2)$ 到 $(n+m,n-m)$ 的折线</strong> 必然会碰到 $y=-1$，同样可以把它在第一次碰到 $y=-1$ 前的部分以 $y=-1$ 为轴翻折，就会得到唯一一条 <strong>从 $(0,0)$ 到 $(n+m,n-m)$ 且碰到了 $y=-1$ 的折线</strong>。</p>
+<p><del>最后吐槽一句。你谷完全不接受做法相同的题解，无法对已有做法进行阐述，所以并没有尝试在你谷发题解。</del></p>
+<h1 id="代码">代码</h1>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+
+using namespace std;
+
+typedef long long ll;
+
+const int N=1000010;
+const int mod=20100403;
+
+int qpow(int x,int y);
+int c(int x,int y);
+
+int jc[N&lt;&lt;1];
+
+int main()
+{
+    int n,m;
+
+    cin&gt;&gt;n&gt;&gt;m;
+
+    jc[0]=1;
+    for (int i=1;i&lt;=n+m;++i) jc[i]=(ll)jc[i-1]*i%mod;
+
+    cout&lt;&lt;(c(n+m,m)-c(n+m,m-1)+mod)%mod;
+
+    return 0;
+}
+
+int qpow(int x,int y)
+{
+    int out=1;
+    while (y)
+    {
+        if (y&amp;1) out=(ll)out*x%mod;
+        x=(ll)x*x%mod;
+        y&gt;&gt;=1;
+    }
+    return out;
+}
+
+int c(int x,int y)
+{
+    return (ll)jc[x]*qpow(jc[y],mod-2)%mod*qpow(jc[x-y],mod-2)%mod;
+}
+</code></pre>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content" title="2020-02-08 18:37:53 &#43;0800 &#43;0800">
+        2020-02-08
+        <a href="https://github.com/ouuan/hugo-blog/commit/da8aa41962b5f5a65348e9b2f49d8519daa2fc8d" title="Add aliases" target="_blank">(da8aa41)</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/">组合数学</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/p2870-usaco07dec-best-cow-line-gold%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">P2870 [USACO07DEC]Best Cow Line, Gold（后缀数组）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/n%E6%96%B9%E8%BF%87%E7%99%BE%E4%B8%87-%E6%9A%B4%E5%8A%9B%E7%A2%BE%E6%A0%87%E7%AE%97%E6%8C%87%E4%BB%A4%E9%9B%86%E4%BC%98%E5%8C%96%E7%9A%84%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/">
+            <span class="next-text nav-default">n方过百万 暴力碾标算——指令集优化的基础使用</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/hexo-blog-utterances"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span>
+    <span class="author">ouuan</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/tomorrow.min.css" rel="stylesheet">
+  <script>hljs.configure({tabReplace: '    '});</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.63725abf.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157787819-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

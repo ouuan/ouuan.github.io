@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>线性基学习笔记 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="又是在网上搜不到讲的比较清楚的博客的算法&amp;hellip;虽然没找到写的好的博客，但结合若干篇写的不算太差的博客，勉强是学会了..
+线性基在 OI 中特指集合为若干个非负整数，运算为异或的线性基，通常用来处理一些异或相关的问题。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.64.0 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/%E7%BA%BF%E6%80%A7%E5%9F%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.6e1b3b90.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="线性基学习笔记" />
+<meta property="og:description" content="又是在网上搜不到讲的比较清楚的博客的算法&hellip;虽然没找到写的好的博客，但结合若干篇写的不算太差的博客，勉强是学会了..
+线性基在 OI 中特指集合为若干个非负整数，运算为异或的线性基，通常用来处理一些异或相关的问题。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/%E7%BA%BF%E6%80%A7%E5%9F%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
+<meta property="article:published_time" content="2019-06-12T15:20:12+08:00" />
+<meta property="article:modified_time" content="2020-02-08T18:37:53+08:00" />
+<meta itemprop="name" content="线性基学习笔记">
+<meta itemprop="description" content="又是在网上搜不到讲的比较清楚的博客的算法&hellip;虽然没找到写的好的博客，但结合若干篇写的不算太差的博客，勉强是学会了..
+线性基在 OI 中特指集合为若干个非负整数，运算为异或的线性基，通常用来处理一些异或相关的问题。">
+<meta itemprop="datePublished" content="2019-06-12T15:20:12&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-08T18:37:53&#43;08:00" />
+<meta itemprop="wordCount" content="2052">
+
+
+
+<meta itemprop="keywords" content="线性基,线性代数," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="线性基学习笔记"/>
+<meta name="twitter:description" content="又是在网上搜不到讲的比较清楚的博客的算法&hellip;虽然没找到写的好的博客，但结合若干篇写的不算太差的博客，勉强是学会了..
+线性基在 OI 中特指集合为若干个非负整数，运算为异或的线性基，通常用来处理一些异或相关的问题。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/links/">
+        <li class="mobile-menu-item">链接</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/links/">链接</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">线性基学习笔记</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2019-06-12 15:20:12 &#43;0800 &#43;0800"> 2019-06-12 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%AE%97%E6%B3%95/"> 算法 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#线性空间">线性空间</a></li>
+    <li><a href="#线性基的定义">线性基的定义</a>
+      <ul>
+        <li><a href="#线性基所在的线性空间">线性基所在的线性空间</a></li>
+        <li><a href="#线性基">线性基</a></li>
+      </ul>
+    </li>
+    <li><a href="#线性基的构造">线性基的构造</a>
+      <ul>
+        <li><a href="#构造出的线性基额外满足的性质">构造出的线性基额外满足的性质</a></li>
+        <li><a href="#构造方式">构造方式</a></li>
+      </ul>
+    </li>
+    <li><a href="#线性基的经典应用">线性基的经典应用</a>
+      <ul>
+        <li><a href="#判断一个数能否由若干数的子集异或得到">判断一个数能否由若干数的子集异或得到</a></li>
+        <li><a href="#最大子集异或和">最大子集异或和</a></li>
+        <li><a href="#第-k-小子集异或和">第 $k$ 小子集异或和</a></li>
+      </ul>
+    </li>
+    <li><a href="#一些例题">一些例题</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>又是在网上搜不到讲的比较清楚的博客的算法&hellip;虽然没找到写的好的博客，但结合若干篇写的不算太差的博客，勉强是学会了..</p>
+<p>线性基在 OI 中特指集合为若干个非负整数，运算为异或的线性基，通常用来处理一些异或相关的问题。</p>
+<h2 id="线性空间">线性空间</h2>
+<p><a href="https://baike.baidu.com/item/%E5%90%91%E9%87%8F%E7%A9%BA%E9%97%B4/5936597" target="_blank">百度百科</a>说的就非常详细了，请完整阅读一遍。</p>
+<p><a href="https://www.bilibili.com/video/av6731067" target="_blank">3b1b 的视频</a>也很不错，如果不了解线性代数相关知识可以看一看。（如果打不开可以尝试复制网址打开）</p>
+<h2 id="线性基的定义">线性基的定义</h2>
+<p>下文中的“线性基”均指 OI 中“线性基”的常见意思。</p>
+<h3 id="线性基所在的线性空间">线性基所在的线性空间</h3>
+<ul>
+<li>
+<p>元素集合：若干个非负整数（线性基可以说是关于若干个非负整数的，在有的教程中称其为“异或集合”）。</p>
+</li>
+<li>
+<p>数域： $\{0,1\}$（也就是说，线性组合是选择一个子集异或起来，$0$, $1$ 就分别代表不选或选某个元素）。</p>
+</li>
+<li>
+<p>元素间运算：异或。</p>
+</li>
+<li>
+<p>数乘：普通的数乘。</p>
+</li>
+</ul>
+<h3 id="线性基">线性基</h3>
+<p>线性基就是上文所述的线性空间的一组基底，它具有以下性质：</p>
+<ol>
+<li>
+<p>在线性基中任取若干个元素，它们的异或不为零。即它们线性无关。</p>
+</li>
+<li>
+<p>其所在线性空间中每个元素都有唯一的方案由线性基中元素异或得到。</p>
+</li>
+<li>
+<p>选取线性基中若干个元素异或起来得到一个元素，用这个元素去替换原线性基中任意一个元素，得到的新线性基张成的空间不变。</p>
+</li>
+</ol>
+<p>可以发现这就是线性空间基底的性质和线性基所在线性空间的定义合在一起。</p>
+<h2 id="线性基的构造">线性基的构造</h2>
+<h3 id="构造出的线性基额外满足的性质">构造出的线性基额外满足的性质</h3>
+<p>线性基中的每个元素的二进制最高位均不同，并且，我们称二进制最高位为第 $i$ 位的元素称为“线性基的第 $i$ 位”。</p>
+<p>这个性质在构造和实际应用中非常方便，但要注意，它并不是线性基所在线性空间的基底所满足的必要条件。然而下文所述线性基均满足此性质，因为它真的很实用。</p>
+<h3 id="构造方式">构造方式</h3>
+<p>我们考虑如何在已有一组线性基的情况下，向线性空间的元素集合中插入一个元素。</p>
+<p>插入新的元素后，我们需要满足：</p>
+<ol>
+<li>线性基张成的空间中包含新插入的元素。</li>
+<li>线性基仍然线性无关。</li>
+</ol>
+<p>具体地，我们依次考虑新插入元素的每个为一的二进制位，若线性基不存在这一位，那么将这个新元素加入线性基中。</p>
+<p>否则，将新元素异或上线性基的这一位，然后继续处理下一位。</p>
+<p>因为插入一个元素等同于插入其异或上线性基中的一个元素，所以性质一满足。</p>
+<p>从构造过程中就可以看出，已有线性基无法异或得到这个新元素，所以性质二满足。</p>
+<p>参考代码：</p>
+<pre><code class="language-cpp">// p[i] 表示线性基的第 j 位
+
+for (i = 1; i &lt;= n; ++i)
+{
+    cin &gt;&gt; x;
+    for (j = 60; ~j; --j)
+    {
+        if (((x &gt;&gt; j) &amp; 1))
+        {
+            if (p[j]) x ^= p[j];
+            else
+            {
+                p[j] = x;
+                break;
+            }
+        }
+    }
+}
+</code></pre>
+<h2 id="线性基的经典应用">线性基的经典应用</h2>
+<h3 id="判断一个数能否由若干数的子集异或得到">判断一个数能否由若干数的子集异或得到</h3>
+<p>假装你要把它插入到线性空间的元素集合中，看线性基是否需要新增元素即可。</p>
+<h3 id="最大子集异或和">最大子集异或和</h3>
+<p>求出线性基，依次考虑线性基的每一位，若异或上能让答案更大（即答案的这一位为零）就异或上。因为如果不异或上，这一位就是零，无论后面的位如何，都比这一位为 $1$ 劣。</p>
+<p><a href="https://www.luogu.org/problemnew/show/P3812" target="_blank">Luogu P3812 【模板】线性基</a></p>
+<h3 id="第-k-小子集异或和">第 $k$ 小子集异或和</h3>
+<p>需要构造特殊的线性基，满足线性基中有的位都只在线性基中的一个数中出现。例如：原线性基为 <code>1100</code> 和 <code>0111</code>，这时线性基中有 $2,3$ 两位，而第二位（$2^2$ 这一位）在 <code>1100</code> 和 <code>0111</code> 中都出现了，所以应该修改为 <code>1011</code> 和 <code>0111</code>。</p>
+<p>这可以用一个类似于高斯消元的过程完成：处理第 $i$ 位时，依次考虑每个比 $i$ 小的线性基中的位，若第 $i$ 位的该二进制位为 $1$ 就异或这一位。除了先用普通方法构建线性基再转化，也可以在构建时就进行处理（详见代码）。无论哪种方式，复杂度都会再乘上一个额外的二进制位数。</p>
+<p>得到这样一个具有特殊性质的线性基后，就可以构造第 $k$ 小子集异或和了：把 $k$ 二进制拆分，每一位的 $0$ / $1$ 对应异或时选 / 不选线性基<strong>存在的</strong>这一位（比如说，二进制位的 $2^3$ 位对应线性基中第四小的存在的位）。证明也很简单，线性基中存在的位的 <code>0/1</code> 唯一确定了一个异或出的数，由于每个位只在一个基中为 $1​$，这些位组成的二进制数的大小就可以代表异或出的数的大小。</p>
+<p><a href="https://loj.ac/problem/114" target="_blank">LOJ #114. k 大异或和</a>，毒瘤题，先不说题目名是假的，这个“非空集合”的限制非常的无聊..$0$ 本来就是线性基的线性组合之一，非要选“非空集合”，就得判一下给你的数中有没有能被其它线性基表示的数，实际上判一下线性基中元素个数是否为 $n​$ 即可。</p>
+<details class="admonition note"><summary class="admonition-title">参考代码</summary>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cctype&gt;
+#include &lt;cstring&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+typedef unsigned long long ull;
+
+const int N = 100010;
+
+int n, m, cnt;
+ull p[60], a[60];
+
+int main()
+{
+    int i, j;
+    ull x, k;
+
+    scanf(&quot;%d&quot;, &amp;n);
+
+    for (i = 1; i &lt;= n; ++i)
+    {
+        scanf(&quot;%llu&quot;, &amp;x);
+        for (j = 51; ~j; --j)
+        {
+            if ((x &gt;&gt; j) &amp; 1)
+            {
+                if (p[j]) x ^= p[j];
+                else
+                {
+                    for (k = j - 1; ~k; --k) if ((x &gt;&gt; k) &amp; 1) x ^= p[k];
+                    for (k = j + 1; k &lt;= 60; ++k) if ((p[k] &gt;&gt; j) &amp; 1) p[k] ^= x;
+                    p[j] = x;
+                    break;
+                }
+            }
+        }
+    }
+
+    for (i = 0; i &lt;= 51; ++i) if (p[i]) a[cnt++] = p[i];
+
+    scanf(&quot;%d&quot;, &amp;m);
+
+    while (m--)
+    {
+        scanf(&quot;%lld&quot;, &amp;k);
+        if (k &gt;= (1ull &lt;&lt; cnt) + (cnt != n))
+        {
+            puts(&quot;-1&quot;);
+            continue;
+        }
+        if (cnt != n) --k;
+        for (x = i = 0; i &lt; cnt; ++i)
+        {
+            if ((k &gt;&gt; i) &amp; 1ull)
+            {
+                x ^= a[i];
+            }
+        }
+        printf(&quot;%llu\n&quot;, x);
+    }
+
+    return 0;
+}
+</code></pre>
+</details>
+<h2 id="一些例题">一些例题</h2>
+<p><a href="https://www.luogu.org/problemnew/show/P3292" target="_blank">[SCOI2016]幸运数字</a><font color = "white">，由于不带修，倍增维护线性基即可。用点分治可以一个 log 解决。</font></p>
+<p><a href="https://www.luogu.org/problemnew/show/P4570" target="_blank">[BJWC2011]元素</a><font color = "white">，贪心，从大到小判断是否能加入线性基。</font></p>
+<p><a href="https://www.luogu.org/problemnew/show/P3265" target="_blank">[JLOI2015]装备购买</a><font color = "white">，和上一题基本一样，就是把异或换成高斯消元。</font></p>
+<p><a href="https://www.luogu.org/problemnew/show/P4301" target="_blank">[CQOI2013]新Nim游戏</a><font color = "white">，结合 Nim 游戏经典结论，还是和上面两题一样的。</font></p>
+<p><a href="https://www.luogu.org/problemnew/show/P4151" target="_blank">[WC2011]最大XOR和路径</a><font color = "white">，异或的结果必然是一条链异或上若干个环，找出任意一条链以及只含一条返祖边的环即可线性基解决。</font></p>
+<p><a href="http://darkbzoj.tk/problem/4184" target="_blank">shallot</a><font color = "white">，线段树分治维护线性基。</font></p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content" title="2020-02-08 18:37:53 &#43;0800 &#43;0800">
+        2020-02-08
+        <a href="https://github.com/ouuan/hugo-blog/commit/da8aa41962b5f5a65348e9b2f49d8519daa2fc8d" title="Add aliases" target="_blank">(da8aa41)</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E7%BA%BF%E6%80%A7%E5%9F%BA/">线性基</a>
+          <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">线性代数</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/bzoj2460-bjwc2011-%E5%85%83%E7%B4%A0%E7%BA%BF%E6%80%A7%E5%9F%BA%E8%B4%AA%E5%BF%83/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">BZOJ2460 [BJWC2011]元素（线性基，贪心）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/bad-round-%E4%B8%8E%E5%87%BA%E9%A2%98%E4%BA%BA%E7%9A%84%E5%9D%9A%E5%AE%88/">
+            <span class="next-text nav-default">bad round 与出题人的坚守</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/hexo-blog-utterances"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span>
+    <span class="author">ouuan</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/tomorrow.min.css" rel="stylesheet">
+  <script>hljs.configure({tabReplace: '    '});</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.63725abf.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157787819-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

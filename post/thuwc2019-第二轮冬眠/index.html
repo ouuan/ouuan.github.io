@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>THUWC2019 第二轮冬眠 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="非常荣幸能够参加这场跨度 300&#43; 天的比赛。
+上接 2019THUWC/WC冬眠记 。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.64.0 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/thuwc2019-%E7%AC%AC%E4%BA%8C%E8%BD%AE%E5%86%AC%E7%9C%A0/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.6e1b3b90.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="THUWC2019 第二轮冬眠" />
+<meta property="og:description" content="非常荣幸能够参加这场跨度 300&#43; 天的比赛。
+上接 2019THUWC/WC冬眠记 。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/thuwc2019-%E7%AC%AC%E4%BA%8C%E8%BD%AE%E5%86%AC%E7%9C%A0/" />
+<meta property="article:published_time" content="2019-12-20T20:37:57+08:00" />
+<meta property="article:modified_time" content="2020-02-08T18:37:53+08:00" />
+<meta itemprop="name" content="THUWC2019 第二轮冬眠">
+<meta itemprop="description" content="非常荣幸能够参加这场跨度 300&#43; 天的比赛。
+上接 2019THUWC/WC冬眠记 。">
+<meta itemprop="datePublished" content="2019-12-20T20:37:57&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-08T18:37:53&#43;08:00" />
+<meta itemprop="wordCount" content="3529">
+
+
+
+<meta itemprop="keywords" content="清华营," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="THUWC2019 第二轮冬眠"/>
+<meta name="twitter:description" content="非常荣幸能够参加这场跨度 300&#43; 天的比赛。
+上接 2019THUWC/WC冬眠记 。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/links/">
+        <li class="mobile-menu-item">链接</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/links/">链接</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">THUWC2019 第二轮冬眠</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2019-12-20 20:37:57 &#43;0800 &#43;0800"> 2019-12-20 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%B8%B8%E8%AE%B0/"> 游记 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#day-333">Day 333</a></li>
+    <li><a href="#day-334">Day 334</a></li>
+    <li><a href="#day-335">Day 335</a>
+      <ul>
+        <li><a href="#赛前">赛前</a></li>
+        <li><a href="#简要题意">简要题意</a></li>
+        <li><a href="#比赛">比赛</a></li>
+      </ul>
+    </li>
+    <li><a href="#day-336">Day 336</a>
+      <ul>
+        <li><a href="#简要题意-1">简要题意</a></li>
+        <li><a href="#比赛-1">比赛</a></li>
+        <li><a href="#下午">下午</a></li>
+        <li><a href="#day-336-1">Day 336+</a></li>
+      </ul>
+    </li>
+    <li><a href="#day-337">Day 337</a>
+      <ul>
+        <li><a href="#面试">面试</a></li>
+        <li><a href="#宣讲">宣讲</a></li>
+        <li><a href="#发奖">发奖</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><del>非常荣幸能够参加这场跨度 300+ 天的比赛。</del></p>
+<p><del>上接 <a href="/2019THUWC-WC%e5%86%ac%e7%9c%a0%e8%ae%b0">2019THUWC/WC冬眠记</a> 。</del></p>
+<h2 id="day-333">Day 333</h2>
+<p>收到通知比赛环境的邮件。</p>
+<p>今年环境怎么啥额外软件都没有（没有 GIMP 也没有 WireShark 什么的）。也没看到题型/赛制说明什么的..没法押 Day2+ 了 T_T</p>
+<p>上午把前一天晚上（其实是当天凌晨）海子姐（@七海Nana7mi）的相簿分享会补了（幸好没顶着强行看直播，不然人没了.png）。</p>
+<p>下午和晚上把远古巨坑填了：<a href="https://www.bilibili.com/video/av79877987" target="_blank">chen_zhe的号哭</a> 。</p>
+<p>全部做好之后渲染，2min 后电脑卡了..重启之后重新渲染，这个时候海子姐已经开播了（</p>
+<p>因为电脑在渲染，所以就只能一边用手机看直播一边渲染（</p>
+<p>最后在显示还剩 2min 渲染完毕的时候又卡住了..正当我长按关机键还不到 10s 时，电脑突然活过来了..赶紧松开关机键，差点人没了。</p>
+<p>然后就一边看直播一边传视频，成功掉进海子姐发 8 给 9 投票的陷阱..还第一次被海子姐读弹幕了（在大家投票时发了一句“第一步下角第二步必须下 5”，然后大家投的 9，最后还平了..）。</p>
+<p>总结：<del>因为 SC 考了 WireShark，所以来看鲨鱼直播准备 Day2+。</del></p>
+<h2 id="day-334">Day 334</h2>
+<p>一天大部分时间（？其实算一算并没有）都在高铁上。</p>
+<p>大概是 BEASTARS + 海子姐录播 + 三狮漫画。</p>
+<p>高铁还是一如既往的吵，一直戴着耳机，到了北京之后人都晕了。</p>
+<p>然后晚上不是去宾馆，而是住一个亲戚家。</p>
+<p>由于亲戚家孩子刚开始时在旁边看着，于是就佯装看自己博客里的题解。之后就顺势看下去了..赛前看看自己写的题解或许的确不错..</p>
+<p>说起来，不到 18 点的时候路过天津，20:39 收到天津文旅局短信是什么操作（</p>
+<h2 id="day-335">Day 335</h2>
+<h3 id="赛前">赛前</h3>
+<p>自然醒好评（</p>
+<p>试机 10 点多才去，T1 照例 A+B，T2 是之前看游记见到过的 THUWC2018 签到题，然而一开始想了个假做法，半个多小时才过掉..过掉的时候大家都跑路了，所以我也没去看剩下两题，但记得题目名，回来一查果然是 THUWC2018 的另外两题。</p>
+<p>开营式比 SC 短了接近 1h，所以比赛没咕，好评（</p>
+<h3 id="简要题意">简要题意</h3>
+<h4 id="t1">T1</h4>
+<p>给你 $n$ 个在长为 $k$ 的数列 $a_1,a_2,\ldots,a_n$ 上进行的操作，第 $i$ 个操作形如 “$p(i)$, $b(i)_1, b(i)_2, \ldots, b(i)_k$”，表示“若 $a_{p_i}&lt; b(i)_{p_i}$，则将 $a$ 修改为 $b(i)$”。再给你 $m$ 个初始序列 $a$，求依次进行这 $n$ 个操作后会得到什么数列。</p>
+<p>$1\le n, m\le 10^5$ , $1\le k\le 20$ ，时限 $\mathtt{3s}$。</p>
+<h4 id="t2">T2</h4>
+<p>给你一张带非负边权的有向图，你需要在上面移动棋子。棋子的移动规则：选择 <strong>权值</strong> 非零的出边中 <strong>编号</strong> 最小的一条移动，然后将这条边的 <strong>权值</strong> 减一。每次操作会给你棋子的初始位置以及移动步数上限，棋子会在无法移动或移动步数达到上限时停止移动，你需要求出每次操作的棋子停下来的位置。前面的操作会对后面的操作产生影响。</p>
+<p>点数、询问数 $10^5$ ，边数 $1.5\cdot 10^5$ ，时限 $\mathtt{8s}$ 。</p>
+<h4 id="t3">T3</h4>
+<p>给你一张所有边长度都为 $1$ 的树 $G=(V, E)$ 以及常量 $k$ ，记 $G$ 中两点 $u$ 和 $v$ 之间的距离为 $dis(u, v)$ ，构造无向图 $H=(V, \{(u, v)|dis(u, v)\le k\})$ ，$q$ 次询问，每次给出 $l$ 和 $r$ ，求 $H$ 在 $[l, r]$ 上的导出子图（即仅保留 $[l, r]$ 内的点以及它们之间的所有连边得到的子图）的连通块数量。</p>
+<p>点数 $3\cdot 10^5$ ，边数 $6\cdot 10^5$ ，时限 $\mathtt{6s}$ 。</p>
+<h3 id="比赛">比赛</h3>
+<p>登录用户名竟然是 &ldquo;THUWC2020&rdquo; 开头，明明是 2019 年的比赛（</p>
+<p>T1 看了一小会儿就会了，写完之后把编译错误改完就 pp 了。</p>
+<p>过了之后去把 <code>lower_bound</code> 改成了 <code>upper_bound</code> ，然后 <del>并不愉快地</del> 又 pp 了..说好的实质 IOI 赛制呢 QAQ。于是跑去写了个对拍，<code>upper_bound</code> 很快拍出错了，一开始的版本几万组没出错，极限数据不开 O2 过不了，开 O2 $\mathtt{1.5s}$ 。于是 T1 就搞了 1h+&hellip;</p>
+<p>一开始的题面还没写值域，结果提问发出去的 20s 前发了个公告补充了值域，然后就得到了“请仔细阅读公告”的回复&hellip;</p>
+<p>看了眼 T2 和 T3，发现都不太会做。</p>
+<p>T3 不知道为什么，第一眼我就把它转化成了“求每个点编号左右编号最靠近它的距离不超过 $k$ 的点，然后莫队”，对着这个想了好久，然后发现这是个明显的假转化，然后发现自己连 $k=1$ 的数普通连通块都不会做了，然后发现链并不保证编号是顺着来的所以链也不会了，就滚去看 T2 了..</p>
+<p>T2 的“数据随机”那档部分分给的很迷，说什么“每条边出现概率为 $\dfrac{1}{n^2}$”，听起来像是期望只有一条边的感觉，然后我交上去测了一下，发现不止 $10$ 条边，怀疑是笔误..只不过这档大概是给暴力的吧，我暴力也过了这档，就没提问了..</p>
+<p>然而问题在于，暴力甚至可以过环套树加上不超过 $50$ 条额外边的那档..（过不了环套树那档。）</p>
+<p>然后去写不需要考虑删边那档，一开始我去写了个拓扑排序找环，快写完的时候突然发现自己没有处理步数上限既没到链的末尾也没到环上的情况，立刻想到可以用倍增处理，紧接着想到这档除了倍增啥都不用写，然后就把写了半天的拓扑排序全删了..</p>
+<p>然后去写树的部分分，一开始一个地方想错写自闭了，然后去写 T3 的 $8$ 分，写完回来发现自己 sb 了，然后写完了树的部分分，结果调了 1h..然后就考试结束了。</p>
+<p>感觉少想一会儿正解，部分分打快点，环套树就可以写出来了..</p>
+<p>PT 是 $165$ 分，但环套树加上不超过 $50$ 条额外边显然过不了，所以大概是 $100+49+8=157$ 分。看起来就很大众分的样子，然而持续两天的比赛第一天结束当然是不能去看别人多少分的。</p>
+<h2 id="day-336">Day 336</h2>
+<h3 id="简要题意-1">简要题意</h3>
+<h4 id="t1-1">T1</h4>
+<p>给你一个数以及 $n$ 个对一个数进行的操作，其中第 $i$ 个操作是将 $x$ 变成 $a_i|x|+b_ix+c_i$ ，你可以改变操作进行的顺序，求最后得到的数的最大值。</p>
+<p>$1\le n\le 15$ ，$-15\le a_i, b_i, c_i\le 15$ ，时限 $\mathtt{1s}$ 。</p>
+<h4 id="t2-1">T2</h4>
+<p>给你一张有向无环图 $G$ ，令 $G$ 的 DFS 树为 $T$（以 $1$ 为根，优先访问编号小的点），多组询问，每次给出 $a$ 和 $b$ ，保证 $a$ 在 $T$ 上是 $b$ 的祖先，询问“在 $G$ 中删去 $T$ 上 $a$ 到 $b$ 的简单路径上的边之后，$T$ 中以 $b$ 为根的子树内的点有多少个在 $G$ 中是从 $1$ 出发不可达的”。</p>
+<p>点数、询问数 $10^5$ ，边数 $1.5\cdot 10^5$ ，时限 $\mathtt{1s}$ 。</p>
+<h4 id="t3-1">T3</h4>
+<p>给你一棵点权是一个排列的树，多组询问，每次给出两个点和一个非负整数 $k$ ，求这两点间路径上的点权构成的序列可以由多少个不同的序列由恰好 $k$ <strong>轮</strong> 冒泡排序得到。</p>
+<p>点数、询问数 $5\cdot 10^5$ ，时限 $\mathtt{4s}$ 。</p>
+<h3 id="比赛-1">比赛</h3>
+<p>今天 T1 怎么不会做..今天 T2 和 T3 依然不会做..</p>
+<p>把 T1 暴力打了。</p>
+<p>把 T2 暴力打了。</p>
+<p>把 T3 暴力打了。怎么 T 掉了..</p>
+<p>T3 打个表，啥规律都没有。</p>
+<p>把 T1 部分分打全了。</p>
+<p>我好像会 T2 所有部分分？</p>
+<p>写完 subtask2，假了。</p>
+<p>写完 subtask4，假了。</p>
+<p>写完 subtask3，还剩不到 1h 了。</p>
+<p>卡了下 T3 暴力常数，暴力过了。</p>
+<p>我自闭了。</p>
+<p>今天 pt 好像更弱（？），好像 T1 随便写都能过若干 subtask，subtask1 没过剩下都过、subtask2 没过剩下都过之类的。反正我的部分分都对拍了，应该没啥问题..</p>
+<p>好像是比大众分低但是并不知道的 $55+31+8=94$ 。</p>
+<h3 id="下午">下午</h3>
+<p>下午好短啊..我怎么写个游记就快要吃饭了 QAQ</p>
+<p>本来还想学一下 Python 二进制文件读写的..</p>
+<h3 id="day-336-1">Day 336+</h3>
+<p>这次不用二进制文件读写了，任务是模拟 Cache。</p>
+<p>开场前一直在想：“APIO 上到底讲了啥&hellip;”</p>
+<p>开场先读了 10min 学习手册，发现不对劲，回想一下自己平时写工程时的流程（需要什么 → 搜什么 → 发现哪看不懂 → DFS 前置知识）以及前两次工程题的教训，于是就先去看了看题，直接去找学习手册中对应的部分，然后发现题目名称和学习手册标题顺序是相反的（</p>
+<p>5min 后发现 T1 需要用到的只有倒数第二页的一张表格..然后非常愉快地 OOP 实现了一发，然后因为语文问题没过样例，过样例之后交上去只过了 subtask1，仔细阅读之后发现还是语文问题，改了之后就过了。此时 1:20 左右。</p>
+<p>T2 好像差不多就是 APIO 上讲的那个东西，写着写着就只剩半小时了..</p>
+<p>然后把 T3 的 subtask1 写完就只剩不到 10min 了..</p>
+<p>T3 剩下的 subtask 差不多就是把 T2 封装一下用上去，感觉 20min 就可以写完..</p>
+<p>最后是大众分 $40+56+16=112$ 。</p>
+<h2 id="day-337">Day 337</h2>
+<h3 id="面试">面试</h3>
+<p>听说 0 点半的时候教练收到了面试通知..</p>
+<p>依然是按字典序排序，又等到了接近 12 点，但这次没有要求关手机，于是可以愉快地水群。</p>
+<p>面试的时候说了一下之前颓 OI Wiki 时学的时间复杂性理论，还有 capacity scaling 什么的，然后果然被问了“什么是 NP 问题？什么是 NPC 问题？”。</p>
+<p>英语阅读是一篇图论基础概念（点和边的定义之类的），之前写 OI Wiki 的时候也查过很多图论相关的 en Wikipedia，所以感觉很稳，然后读完之后，用英语问了我“你知道图论在生活中有哪些运用吗？”，突然不按剧本，然后就随便说了个导航，然后阅读部分竟然就结束了..这和图论基础概念到底有什么关系啊..</p>
+<p>然后是“还有一分钟，要不问你个数学题吧”。上次没问数学题，但看很多人游记都有提到，而且据说很简单。问的是“一支铅笔折三次，组成三角形的概率是多大”。题面非常迷惑，我向考官确认了一下，意思就是“将一条线段均匀随机地分成三段，这三段能够组成三角形的概率是多大”。然而我从小不擅长当面回答问题，当时半分钟脑子一片空白，考官问我有什么思路，我说了个“最长那段要小于二分之一”，被回了个“显然”，然后时间就到了。</p>
+<p>出考场后瞬间会做，感觉自己没救了。</p>
+<h3 id="宣讲">宣讲</h3>
+<p>感觉这次宣讲是今年 WC 第一轮（指 2019 年 1 月那次）和今年 SC 的结合，总体效果感觉和 WC 第一轮差不多，没有 SC 那么无聊（</p>
+<p>然而这次完全没有讲题，连 Day336+ T6（期待你的声音）的分享都没有（</p>
+<h3 id="发奖">发奖</h3>
+<p>今年没进面试都有奖（</p>
+<p>为啥线这么低啊..</p>
+<p>我好像压线 1= 了。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content" title="2020-02-08 18:37:53 &#43;0800 &#43;0800">
+        2020-02-08
+        <a href="https://github.com/ouuan/hugo-blog/commit/da8aa41962b5f5a65348e9b2f49d8519daa2fc8d" title="Add aliases" target="_blank">(da8aa41)</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%B8%85%E5%8D%8E%E8%90%A5/">清华营</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/noi2018%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97sam%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">「NOI2018」你的名字（SAM，线段树合并）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cf786c-till-i-collapse%E6%A0%B9%E5%8F%B7%E5%88%86%E6%B2%BB%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88-%E4%B8%BB%E5%B8%AD%E6%A0%91%E8%B0%83%E5%92%8C%E7%BA%A7%E6%95%B0/">
+            <span class="next-text nav-default">CF786C Till I Collapse（根号分治，二分答案 / 主席树，调和级数）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/hexo-blog-utterances"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span>
+    <span class="author">ouuan</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/tomorrow.min.css" rel="stylesheet">
+  <script>hljs.configure({tabReplace: '    '});</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.63725abf.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157787819-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
