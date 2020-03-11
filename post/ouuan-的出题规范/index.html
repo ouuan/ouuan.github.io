@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>ouuan 的出题规范 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="首先，你需要意识到，自己出的题是要 给别人做 的。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.67.0 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/ouuan-%E7%9A%84%E5%87%BA%E9%A2%98%E8%A7%84%E8%8C%83/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.6e1b3b90.min.css" rel="stylesheet">
+
+
+
+<meta property="og:title" content="ouuan 的出题规范" />
+<meta property="og:description" content="首先，你需要意识到，自己出的题是要 给别人做 的。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/ouuan-%E7%9A%84%E5%87%BA%E9%A2%98%E8%A7%84%E8%8C%83/" />
+<meta property="article:published_time" content="2019-06-16T11:24:12+08:00" />
+<meta property="article:modified_time" content="2020-02-08T18:37:53+08:00" />
+<meta itemprop="name" content="ouuan 的出题规范">
+<meta itemprop="description" content="首先，你需要意识到，自己出的题是要 给别人做 的。">
+<meta itemprop="datePublished" content="2019-06-16T11:24:12&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-08T18:37:53&#43;08:00" />
+<meta itemprop="wordCount" content="6400">
+
+
+
+<meta itemprop="keywords" content="出题规范," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ouuan 的出题规范"/>
+<meta name="twitter:description" content="首先，你需要意识到，自己出的题是要 给别人做 的。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/links/">
+        <li class="mobile-menu-item">链接</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/links/">链接</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">ouuan 的出题规范</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2019-06-16 11:24:12 &#43;0800 &#43;0800"> 2019-06-16 </span>
+        <div class="post-category">
+            <a href="/categories/%E5%87%BA%E9%A2%98/"> 出题 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#题目内容">题目内容</a>
+          <ul>
+            <li><a href="#关于原题">关于原题</a></li>
+            <li><a href="#关于毒瘤题">关于毒瘤题</a></li>
+          </ul>
+        </li>
+        <li><a href="#题面">题面</a>
+          <ul>
+            <li><a href="#题目背景">题目背景</a></li>
+            <li><a href="#题目描述">题目描述</a></li>
+            <li><a href="#输入输出格式">输入输出格式</a></li>
+            <li><a href="#数据范围">数据范围</a></li>
+            <li><a href="#样例">样例</a></li>
+            <li><a href="#样例解释">样例解释</a></li>
+          </ul>
+        </li>
+        <li><a href="#时限空间限制与部分分">时限、空间限制与部分分</a></li>
+        <li><a href="#数据">数据</a>
+          <ul>
+            <li><a href="#数据的多样性与强度">数据的多样性与强度</a></li>
+            <li><a href="#如果有-pretests">如果有 pretests</a></li>
+            <li><a href="#使用-testlibh-造数据">使用 testlib.h 造数据</a></li>
+          </ul>
+        </li>
+        <li><a href="#special-judge">Special Judge</a></li>
+        <li><a href="#题解">题解</a>
+          <ul>
+            <li><a href="#关于部分分">关于部分分</a></li>
+            <li><a href="#关于知识点">关于知识点</a></li>
+            <li><a href="#关于定义">关于定义</a></li>
+            <li><a href="#关于细节">关于细节</a></li>
+            <li><a href="#标程">标程</a></li>
+          </ul>
+        </li>
+        <li><a href="#比赛">比赛</a>
+          <ul>
+            <li><a href="#比赛通知中的题目难度需真实">比赛通知中的题目难度需真实</a></li>
+            <li><a href="#题目难度的分配">题目难度的分配</a></li>
+            <li><a href="#题目知识点的分配">题目知识点的分配</a></li>
+          </ul>
+        </li>
+        <li><a href="#参考资料">参考资料</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>首先，你需要意识到，自己出的题是要 <strong>给别人做</strong> 的。</p>
+<p>请不要说这是一句废话。这是做一名好的出题人必须要明白的。</p>
+<p>出题比起展示自己，更是服务他人。</p>
+<p>UPD: 本文已于 <a href="https://github.com/OI-wiki/OI-wiki/pull/1672" target="_blank">pr #1672</a> 经优化、扩充后合并至 <a href="https://oi-wiki.org/topic/problemsetting" target="_blank">OI-wiki</a>，推荐在 <a href="https://oi-wiki.org/topic/problemsetting" target="_blank">OI-wiki</a> 上阅读。</p>
+<h2 id="题目内容">题目内容</h2>
+<h3 id="关于原题">关于原题</h3>
+<p>原题大致可分为完全一致、几乎一致和做法一致三种。</p>
+<ul>
+<li>完全一致：使用一题的 AC 代码可以 AC 另一题。</li>
+<li>几乎一致：由一题的 AC 代码改动至另一题的 AC 代码可以由一个不会该题的人完成。</li>
+<li>做法一致：核心思路、做法一致，但代码实现上、不那么关键的细节上有差异。</li>
+</ul>
+<p>这三种原题自下而上为包含关系。</p>
+<p>以下情况不应出现：</p>
+<ol>
+<li>在明知有“几乎一致”的原题的情况下出原题。</li>
+<li>由于未使用搜索引擎查找导致自己不清楚有原题，从而出了“几乎一致”的原题。</li>
+<li>在“做法一致”的原题广为人知（如：NOIp、NOI 原题）时出原题。</li>
+<li>在带有选拔性的考试的非送分题中出现“做法一致”的原题。</li>
+</ol>
+<p>以下情况最好不要出现：</p>
+<ol>
+<li>在明知有至少为“做法一致”的原题的情况下出原题。</li>
+<li>由于未使用搜索引擎查找导致自己不清楚有原题，从而出了“做法一致”的原题。</li>
+<li>在任何情况下出“几乎一致”的原题。</li>
+</ol>
+<p>可以放宽要求的例外情况：</p>
+<ol>
+<li>校内模拟赛。</li>
+<li>以专题训练为目的的模拟赛。</li>
+<li>难度较低的比赛，或是定位为送分题的题目。</li>
+</ol>
+<h3 id="关于毒瘤题">关于毒瘤题</h3>
+<p>“毒瘤题”是一个非常模糊而主观的观念，我在这只是引用一些前人关于此的探讨，加以自己的一些理解。这个话题是非常开放的，欢迎大家来发表自己的观点。</p>
+<blockquote>
+<p>一道好题不应该是两道题拼在一起，一道好题会有自己的idea —— 而它应该不加过多包装地突出这个idea。</p>
+<p>一道好题应该新颖。真正的好题，应该是能让人脑洞出新的好题的好题。</p>
+<p>—— vfk《UOJ精神之源流》</p>
+</blockquote>
+<p>例子：<a href="https://www.luogu.org/problemnew/show/P5346" target="_blank">【XR-1】柯南家族</a>，做法的前后两部分完全割裂，前半部分为<a href="https://www.luogu.org/problemnew/show/P5353" target="_blank">【模板】树上后缀排序</a>，后半部分是经典树上问题。</p>
+<blockquote>
+<p>一类OI题以数学为主，无论是题目描述还是做法都是数学题的特征，并且解法中不含算法相关的知识点，这类OI题目统称为纯数学题。</p>
+<p>—— 王天懿《论偏题的危害》</p>
+</blockquote>
+<p>经典例子：<a href="https://www.luogu.org/problemnew/show/P3951" target="_blank">NOIP2017 小凯的疑惑</a></p>
+<p>我自己的标准是：尽量不要出数学填空题。但这样的纯数学题也不是完全不可取，有时纯粹地考察一些 OI 常用数学知识也是可以接受的。</p>
+<blockquote>
+<p>一部分偏题中牵涉到了大学物理的内容，导致选手在面对这些从未接触过的物理知识点时变得不知所措，造成了知识上的隔膜。</p>
+<p>—— 王天懿《论偏题的危害》</p>
+</blockquote>
+<p>经典例子：<a href="http://uoj.ac/problem/159" target="_blank">【清华集训2015】多边形下海</a></p>
+<p>不止是物理，OI 题目中不应过多涉及到其它学科的知识，如果涉及应当给予详细的解释，不应使其它学科的知识作为解题的重大障碍。</p>
+<blockquote>
+<p>一道好题无论难度如何，都应该具有自己的思维难度，需要选手去思考并发现一些性质。</p>
+<p>一道好题的代码可以长，但一定不是通过强行嵌套或者增加条件而让代码变长，而是长得自然，让人感觉这个题的代码就应该是这么长。</p>
+<p>—— 王天懿《论偏题的危害》</p>
+</blockquote>
+<p>经典例子：<a href="https://www.luogu.org/problemnew/show/P2482" target="_blank">[SDOI2010]猪国杀</a>，<a href="http://uoj.ac/problem/98" target="_blank">【集训队互测2015】未来程序·改</a></p>
+<p>在一般的 OI 比赛中，思维难度应占主要部分。当然，如 THUWC / THUSC 的 Day 2+ 那样的工程题也有其存在的道理 —— 毕竟体验营的目的除了考察选手的算法设计能力，还有和大学学习对接的工程代码以及文档学习能力。但在一般的 OI 比赛中，考察更多的应当还是算法设计与思维能力。</p>
+<h2 id="题面">题面</h2>
+<h3 id="题目背景">题目背景</h3>
+<p>题目背景最好尽量简短。</p>
+<p>在题目背景较长时，应当与题目描述分开。</p>
+<p>需要绝对避免的情况：题目背景严重影响题意的理解。</p>
+<p>必要时，可以提供与背景结合的题目描述与简洁的题目描述两个版本。</p>
+<h3 id="题目描述">题目描述</h3>
+<p>简而言之，题目描述需要<strong>清晰易懂</strong>。</p>
+<p>题面中的每个可能不被理解的定义都应得到解释，不应凭空冒出未加定义的概念。例如：在 <a href="https://codeforces.com/problemset/problem/1172/D" target="_blank">CF1172D Nauuo and Portals</a> 中，你必须在题面中解释什么是“传送门”。</p>
+<p>题面中涉及到的每个概念应当使用单一的词汇来描述。例如：不应一会儿说“费用”，一会儿说“代价“。</p>
+<p>不应不加说明地使用与原义、常见义不同的词汇。例如：不应不加说明地用“路径”代指一条边。</p>
+<p>你需要保证你的题面不会自相矛盾。例如：在 <a href="https://codeforces.com/problemset/problem/1173/A" target="_blank">CF 1173A Nauuo and Votes</a> 中，没有把 &ldquo;?&rdquo; 作为一种 &ldquo;result&rdquo;，是因为 &ldquo;?&rdquo; 的含义是 &ldquo;there are more than one possible results&rdquo;。</p>
+<p>你需要保证你的题面不能被错误理解而自圆其说，即使这种理解是反常识、没有人会这么去想的。例如：在 <a href="https://codeforces.com/problemset/problem/1172/D" target="_blank">CF1172D Nauuo and Portals</a> 中，之所以要繁琐地定义 &ldquo;walk into&rdquo; 并与 &ldquo;teleport&rdquo; 区分，是为了防止这种理解：通过传送门可以到另一个传送门，而到了传送门会传送，因此会反复横跳。</p>
+<p>顺着读题目描述应当能看懂每一句话，并理解题目的任务与要求。至少在紧接着的下一段话中疑惑能够得到解释，而不是需要在若干段后才能得到解释，或者要看了输入输出格式才能明白题意，甚至需要根据样例来猜题意。例如：在 <a href="https://guoj.icu/problem/1171" target="_blank">「GuOJ Round #1」琪露诺的冰雪宴会</a> 中，在输出格式才第一次出现了题目的目标“雾之湖最终能接收到的最大水量”，再加上“灵梦当然能很快算出来清理完全部小溪的总费用是多少”这句带有误解性质的话，更容易使人读错题意，这是不可取的，应当在题目描述中就对题目的目标进行说明。（在这个例子中还存在题目背景严重影响题意理解的问题。）</p>
+<h3 id="输入输出格式">输入输出格式</h3>
+<p>输入输出格式清晰<strong>完整</strong>即可，没有死板的要求，个人建议参照 CF 的题目来写输入输出格式，具体可以参考 <a href="/bad-round-%e4%b8%8e%e5%87%ba%e9%a2%98%e4%ba%ba%e7%9a%84%e5%9d%9a%e5%ae%88/rules.jpg">cf 出题人须知</a>。</p>
+<p>需要特别注意的是，如果输出中含有小数，请尽量使用 SPJ。如果无法使用 SPJ，请保证对精度的要求是有限的。</p>
+<p>如果没有保证，对精度的要求可能是无限的。例如：要求保留三位小数，实际答案为 $0.0015$，此时只要有任意大小的误差导致计算出的答案小于 $0.0015$，即使计算出的答案是 $0.0014999999999\cdots$ 也会输出错误的答案。</p>
+<p>保证对精度要求有限的例子：请输出答案四舍五入后保留小数点后三位的结果。令标准答案为 $ans$，数据保证对于任意满足 $\frac{|x-ans|}{\max(1,ans)}&lt;10^{-9}$ 的 $x$，四舍五入后结果与 $ans$ 四舍五入后相同。</p>
+<p>可以参考的一些句子：</p>
+<pre><code>输入的第一行包含三个正整数 $n$, $m$, $k$ ($1\le n,m\le 2\cdot 10^5$, $1\le k\le 100$) — $n$ 表示数列的长度，$m$ 表示操作个数，$k$ 的意义见题目描述。
+</code></pre>
+<pre><code>输入的第二行包含 $n$ 个非负整数 $a_1,a_2,\ldots,a_n$ ($1\le a_i\le 10^9$) — 题目给出的数列。
+</code></pre>
+<pre><code>接下来的 $m$ 行中的第 $i$ 行包含两个正整数 $l_i$ 和 $r_i$ ($1\le l_i\le r_i\le n$)，表示第 $i$ 次操作在区间 $[l_i,r_i]$ 上进行。
+</code></pre>
+<pre><code>接下来的 $n-1$ 行，每行包含两个正整数 $u$ 和 $v$ ($1\le u,v\le n$)，表示 $u$ 和 $v$ 之间由一条边相连。
+
+数据保证给出的边能构成一棵树。
+</code></pre>
+<pre><code>输入的唯一一行包含一个由小写英文字母构成的非空字符串，其长度不超过 $10^6$。
+</code></pre>
+<pre><code>输入的第二行包含一个小数点后不超过三位的实数 $x$ ($-10^6\le x\le 10^6$)，意义见题目描述。
+</code></pre>
+<pre><code>输出包含一个实数，当你的输出与标准答案之间的绝对误差或相对误差小于 $10^{-6}$ 时视作正确。
+</code></pre>
+<pre><code>输出的第二行包含 $n$ 个正整数，表示你构造的一组方案 — 其中第 $i$ 个数表示你打出的第 $i$ 张牌的编号。
+
+如果有多组合法的答案，可以任意输出其中一组。
+</code></pre>
+<h3 id="数据范围">数据范围</h3>
+<p>按照 CF 的要求，数据范围要写在输入格式里，但在国内，数据范围往往是写在题目的最后的。</p>
+<p>数据范围中最容易犯的错误就是不完整。输入中的每一个数、每一个字符串都应该有清晰的界定。在上文所给出的输入输出格式示例中就有一些数据范围的正确写法。</p>
+<p>数据范围的常见遗漏：</p>
+<ol>
+<li>“整数”中的“整”。</li>
+<li>题面中只说了是“整数”没说是“正整数”，并且数据范围中只有上限没有下限。</li>
+<li>字符串没说字符集。</li>
+<li>实数没说小数点后位数。</li>
+<li>某些变量没有给范围。</li>
+</ol>
+<p>你需要保证标程可以通过满足题面所述数据范围的任何一组数据。</p>
+<h3 id="样例">样例</h3>
+<p>样例应当有一定的强度，能够查出一些简单的错误。读错题意的人应当能够通过样例发现自己读错了题意。</p>
+<p>有多种操作的题，每种操作都应在样例中出现。</p>
+<p>有多种输出的题（如 <a href="https://codeforces.com/problemset/problem/1173/A" target="_blank">CF 1173A Nauuo and Votes</a>），每种输出都应在样例中出现。例外：实际上不可能无解，但要求判断是否有解的题目。</p>
+<h3 id="样例解释">样例解释</h3>
+<p>题目描述越复杂、越不易理解就越应当有详细的样例解释。</p>
+<p>题目难度越简单就越应当有详细的样例解释。</p>
+<p>详细的样例解释可以选择配上图片。</p>
+<p>较大的样例可以没有样例解释。</p>
+<p>为了照顾色觉障碍者，最好不要使颜色成为理解样例解释所必备的。可以用彩色图片来美化样例解释，但如果一定要用颜色传递一些必要的信息，最好不要同时出现红黄或者红绿。</p>
+<h2 id="时限空间限制与部分分">时限、空间限制与部分分</h2>
+<p>时限与空间限制的目的是卡掉复杂度错误的做法。（当然，也是为了防止评测用时过长，如：只对交互次数有限制而对时间复杂度没有限制的交互题也有时间限制。）</p>
+<p>因此，原则上时间限制应当选取不使错误做法通过的尽量大的值。</p>
+<p>一般地，时限应满足以下要求：</p>
+<ol>
+<li>至少为 std 在最坏情况下用时的两倍。</li>
+<li>如果比赛允许使用 Java，应使 Java 能够通过。</li>
+<li>不应使错误做法通过（实在卡不掉、想放某种错解过除外）。</li>
+</ol>
+<p>为了更好地在放大常数做法过的同时卡掉错解，一般可以采用同时增大数据范围和时限的方法。但要注意，有时正解（由于缓存等玄学问题）会在数据范围增大时有极大的常数增加，此时增大数据范围不一定能够增大正解与错解之间用时的差距。</p>
+<p>在有部分分的赛制中，还可以通过设置有梯度的数据、数据范围稍小的数据来使较为优秀的错解和大常数正解不能通过，同时使其获得较高的部分分。</p>
+<p>需要注意的是，在数据范围小于 $5\cdot 10^5$ 时，应当考虑是否能使用<a href="/n%e6%96%b9%e8%bf%87%e7%99%be%e4%b8%87-%e6%9a%b4%e5%8a%9b%e7%a2%be%e6%a0%87%e7%ae%97%e2%80%94%e2%80%94%e6%8c%87%e4%bb%a4%e9%9b%86%e4%bc%98%e5%8c%96%e7%9a%84%e5%9f%ba%e7%a1%80%e4%bd%bf%e7%94%a8">指令集</a>通过。</p>
+<p>一般情况下空间限制应当设置的足够大，除非空间复杂度更优的做法的确十分巧妙，值得卡掉空间复杂度大的做法。这种情况下可以考虑设置空间限制较松的部分分。值得注意的是，如果不想卡掉空间消耗较大的做法，数据结构题一般需要设置较大的空间限制。</p>
+<blockquote>
+<p>一道好题应该具有它的选拔性质，具有足够的区分度。应该至少4档部分分，让新手可以拿到分，让高手能够展示自己的实力。</p>
+<p>—— vfk《UOJ精神之源流》</p>
+</blockquote>
+<p>部分分一般分为较小数据范围与特殊性质两种。</p>
+<p>较小数据范围一般要设置多档，即使你想不到某种复杂度的做法，也可以考虑给这种复杂度一档分。一般来说，为了避免卡常，可以设置一档极限数据除以二的部分分。</p>
+<p>“数据有梯度”最好用多档部分分替代。</p>
+<p>特殊性质部分分的设置要依具体题目而定。理想的特殊性质部分分应当是能够引导选手思考正解的。与较小数据范围部分分不同，在你不会针对某种特殊性质的做法时，最好不要给这种特殊性质一档分。例如：<a href="https://www.luogu.org/problemnew/show/P5400" target="_blank">[CTS2019]随机立方体</a> 的 $k=1$ 这档部分分在讲题时就被很多人吐槽，称这档部分分妨碍了思考正解。</p>
+<p>如果不是测试点等分且总分为测试点得分相加（如：绑 Subtask 测试），一定要在题面中说明。</p>
+<h2 id="数据">数据</h2>
+<h3 id="数据的多样性与强度">数据的多样性与强度</h3>
+<p>在不绑 Subtask，按测试点给分时，本部分内容可以酌情不遵守。</p>
+<p>数据中应当包含每个变量的最小值与最大值。</p>
+<p>数据中应当包含各种各样的构造，即使你不知道什么错解会挂在这组构造上。</p>
+<p>当然，如果你已知一个（正常人能想的到、写的出的）正确性有问题的错解，要尽量卡掉它。（时间复杂度有问题的错解已在上文讨论过了。）</p>
+<p>需要特别提醒的是，如果有整型溢出的可能，一定要卡掉会溢出的做法。在有部分分的赛制中，不应使不开 long long 的人得到和暴力一样甚至更低的分数。</p>
+<h3 id="如果有-pretests">如果有 pretests</h3>
+<p>pretests 应尽量强（，同时尽量少）。换言之，你需要在 pt 中（用尽量少的数据组数）包含该题的所有已知叉点。（括号中为个人观点。）</p>
+<p>如果你希望出现少量而非没有 fst，你可以问问 Sooke 对这件事的看法（Sooke 曾经坚称“fst 是 CF 的灵魂”，在我的强烈要求下，在 <a href="https://codeforces.com/problemset/problem/1172/A" target="_blank">CF1172A Nauuo and Cards</a> 中，他构造了许多数据，在 pt 中卡掉了所有已知错解，最后，这题在比赛中 Div.2 的 fst 率为 $18.5%$）。</p>
+<h3 id="使用-testlibh-造数据">使用 testlib.h 造数据</h3>
+<p>在平常的出题中使用 <a href="https://polygon.codeforces.com/" target="_blank">Polygon</a> 可能不是最为方便的选择（事实上如果是多人协作出题，即使不是出 cf，使用 Polygon 依然是非常棒的选择），但 Polygon 为我们提供的出题方式十分值得借鉴。</p>
+<p>简而言之，在 Polygon 中，数据要么是手造，要么由 generator 生成。而这个 generator 使用 <a href="https://github.com/MikeMirzayanov/testlib" target="_blank">testlib.h</a>，并且使用命令行参数来设置数据范围、构造类型等参数。</p>
+<p>使用 testlib.h 的好处是，它内置了随机数生成器 <code>rnd.next()</code>，它在不同平台上返回同样的结果，并且其种子是基于整个命令行参数生成的，不用手动设置种子，并且在参数一样时生成的数据总是一样的。</p>
+<p>使用命令行参数的好处是，你可以写一个 .bat 文件（或者 Linux 下的 .sh 文件），把生成数据的命令写进去，可以十分方便地生成数据。</p>
+<p>一个简单的 generator 例子：</p>
+<pre><code class="language-cpp">// gen.cpp
+
+#include &quot;testlib.h&quot;
+
+using namespace std;
+
+int n, m, k;
+vector&lt;int&gt; p;
+
+int main(int argc, char* argv[])
+{
+    registerGen(argc, argv, 1);
+
+    int i;
+
+    n = atoi(argv[1]);
+    m = atoi(argv[2]);
+    k = rnd.next(1, n);
+
+    for (i = 1; i &lt;= n; ++i) p.push_back(i);
+    shuffle(p.begin(), p.end()); // testlib.h 自带的 random_shuffle，使用 rnd.next() 进行 shuffle
+
+    printf(&quot;%d %d %d\n&quot;, n, m, k);
+    for (i = 0; i &lt; n; ++i) printf(&quot;%d%c&quot;, p[i], &quot; \n&quot;[i == n - 1]); // 把字符串当作数组用，中间空格，末尾换行，是一个造数据时常用的技巧
+
+    return 0;
+}
+</code></pre>
+<pre><code class="language-bash">gen 10 10 &gt; 1.in
+gen 1 1 &gt; 2.in
+gen 100 200 &gt; 3.in
+gen 2000 1000 &gt; 4.in
+gen 100000 100000 &gt; 5.in
+</code></pre>
+<p><a href="https://codeforces.com/blog/entry/18291" target="_blank">官方 generator 教程</a>。</p>
+<p>如果你愿意，还可以写一个 validator。validator 是用来检查数据合法性的，在 cf 赛制中由于 hack 的存在是必备的，而在其它赛制中，validator 相当于给数据上了一道保险锁，个人十分推荐写一个 validator。</p>
+<p><a href="https://codeforces.com/blog/entry/18426" target="_blank">官方 validator 教程</a>。</p>
+<p>最后推荐一个我自己经常使用的生成输出文件的 bat：</p>
+<pre><code class="language-bash">@echo off
+for /R &quot;%cd%&quot; %%i in (*.in) do ( 
+echo %%i
+validator &lt; %%i
+if errorlevel 1 pause
+std &lt; %%i &gt; %%~ni.out
+)
+pause
+</code></pre>
+<h2 id="special-judge">Special Judge</h2>
+<p>输出方案题和输出浮点数题是两种较为常见的需要使用 SPJ 的题型，其它题目视情况也需要使用 SPJ。在 CF 上，所有题目都必须使用基于 testlib.h 的 checker，例如：题目要求输出若干个整数时，你可以任意输出空白字符（既可以空格也可以换行）。</p>
+<p>checker 一般使用 testlib.h 编写，<a href="/%e4%bd%bf%e7%94%a8-testlib-h-%e5%86%99-lemon-SPJ/">在 lemon 中也可以使用 testlib.h</a>。一般来说，不使用 testlib.h 是很难写好 checker 的，因为你要应对各种各样的不合法输出，需要极强的鲁棒性。</p>
+<p>编写 checker 需要注意以下两点：</p>
+<ol>
+<li>你需要应对各种不合法的输出，因此，请检查读入的每个变量是否在合法范围中（<code>readInt(minvalue, maxvalue)</code>）。例如：读入一个在 check 过程中会作为数组下标的变量时必须检查其范围，否则可能引发数组越界，有时这会导致 RE，有时则可能判为 AC。</li>
+<li>原则上 checker 中不应检查空白字符（即，不应使用 readSpace()、readEoln()、readEof()，值得一提的是，testlib.h 会自动检查是否有多余的输出）。</li>
+</ol>
+<p><a href="https://codeforces.com/blog/entry/18431" target="_blank">官方 checker 教程</a>。</p>
+<h2 id="题解">题解</h2>
+<p>题解的目标是让预计会来参加比赛的人都能看懂。所以官方题解详细程度的要求会比一般的题解高。</p>
+<h3 id="关于部分分">关于部分分</h3>
+<p>在有部分分的题目中，题解里可以考虑写一写部分分的做法。</p>
+<h3 id="关于知识点">关于知识点</h3>
+<p>解题中用到的知识点应当写出来。对于一些难度和题目难度相当的知识点，最好给出学习该知识点的资料（比如一篇博客的地址）。“这样，再这样，然后<strong>用一些技巧</strong>就可以了”，而其中的“一些技巧”并不是谁都会的，这种情况要绝对避免。</p>
+<h3 id="关于定义">关于定义</h3>
+<p>题解中不要凭空冒出来一些概念。</p>
+<p>例如：dp 的题解要解释清楚状态的定义。</p>
+<p>再例如：cy 曾经写过一版 <a href="https://codeforces.com/problemset/problem/1172/F" target="_blank">CF1172F Nauuo and Bug</a> 的题解，其中对“分段函数”没有定义，这是绝对不可取的。</p>
+<h3 id="关于细节">关于细节</h3>
+<p>具体的实现细节如果比较巧妙最好写出来，否则的话“详见代码”也是可以的。如果“详见代码”的话，最好在代码中加上一定的注释。</p>
+<h3 id="标程">标程</h3>
+<p>标程中最好去掉冗余部分。比如，有人在题解中保留了完整的 define 模板（为了提高做题速度，包含大量 define 与常用函数，常用于 CF 等在线比赛），并且其中很大一部分都没有用到，这是不好的。</p>
+<p>上文已经说过了，如果涉及到一些题解中没有详细说明的实现细节，最好加上适量的注释。</p>
+<h2 id="比赛">比赛</h2>
+<h3 id="比赛通知中的题目难度需真实">比赛通知中的题目难度需真实</h3>
+<p>感觉这个是比赛通知中比较需要注意的一点。</p>
+<p>如果不会评难度可以不评..</p>
+<blockquote>
+<p>Remember that authors tend to underestimate the difficulty of their problems.</p>
+<p>—— Codeforces PROPOSE A PROBLEM 页面的提醒</p>
+</blockquote>
+<p>需要特别强调的是，如果你以 CF 的难度来进行类比（如：该比赛为 Div.2 A ~ Div.2 E 难度），不仅是难度需要与 CF Div.2 类似，题型也应当是 CF 风格。</p>
+<h3 id="题目难度的分配">题目难度的分配</h3>
+<p>在类国内 OI 的模拟赛中，往往是三道题的整体难度与比赛难度相当即可。</p>
+<p>在类 CF / ATC 这种线上赛的比赛中，需要尽量保证难度的递增（虽然由于对难度的误估很多时候都并不能真正做到），并且尽量避免出现大的 difficulty gap。可以通过把一题分为难易两题（两个 Subtask）来减少 difficulty gap。</p>
+<h3 id="题目知识点的分配">题目知识点的分配</h3>
+<p>一场比赛应尽量涵盖较广的知识点（专题训练赛当然除外）。</p>
+<p>经典反例：涵盖了动态规划、期望、组合计数、容斥原理、多项式等多种知识点的 CTS2019。（<del>组题人：我要从五道题里选六道，我也很无奈啊。</del>）</p>
+<h2 id="参考资料">参考资料</h2>
+<ol>
+<li><a href="http://vfleaking.blog.uoj.ac/blog/909" target="_blank">vfk《UOJ精神之源流》</a></li>
+<li><a href="/ouuan-%e7%9a%84%e5%87%ba%e9%a2%98%e8%a7%84%e8%8c%83/7-%e7%8e%8b%e5%a4%a9%e6%87%bf-%e8%ae%ba%e5%81%8f%e9%a2%98%e7%9a%84%e5%8d%b1%e5%ae%b3.ppt">王天懿《论偏题的危害》</a></li>
+<li><a href="/bad-round-%e4%b8%8e%e5%87%ba%e9%a2%98%e4%ba%ba%e7%9a%84%e5%9d%9a%e5%ae%88/rules.jpg">cf 出题人须知</a></li>
+<li><a href="https://blog.csdn.net/VFleaKing/article/details/90521383" target="_blank">vfk 博客</a>中的<a href="https://www.luogu.org/paste/sxvu97yz" target="_blank">CF出题人的自我修养</a></li>
+</ol>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        <span title="2020-02-08 18:37:53 &#43;0800 &#43;0800">2020-02-08</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/da8aa41962b5f5a65348e9b2f49d8519daa2fc8d" title="Add aliases" target="_blank">(da8aa41)</a>
+        ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/ouuan-%e7%9a%84%e5%87%ba%e9%a2%98%e8%a7%84%e8%8c%83.md" target="_blank">更新历史</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%87%BA%E9%A2%98%E8%A7%84%E8%8C%83/">出题规范</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/bzoj2115-wc2011-%E6%9C%80%E5%A4%A7xor%E5%92%8C%E8%B7%AF%E5%BE%84%E7%BA%BF%E6%80%A7%E5%9F%BA%E5%9B%BE%E8%AE%BA/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">BZOJ2115 [WC2011]最大XOR和路径（线性基，图论）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/bzoj2460-bjwc2011-%E5%85%83%E7%B4%A0%E7%BA%BF%E6%80%A7%E5%9F%BA%E8%B4%AA%E5%BF%83/">
+            <span class="next-text nav-default">BZOJ2460 [BJWC2011]元素（线性基，贪心）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/blog-comments"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:ouuansteve@gmail.com" class="iconfont icon-email" title="email" target="_blank"></a>
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span> 
+    <span class="author">ouuan</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/tomorrow.min.css" rel="stylesheet">
+  <script>hljs.configure({tabReplace: '    '});</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  
+<script type="text/javascript" src="/dist/even.63725abf.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157787819-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

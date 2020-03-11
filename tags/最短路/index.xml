@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>最短路 on ouuan的博客</title>
+    <link>https://ouuan.github.io/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/</link>
+    <description>Recent content in 最短路 on ouuan的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 16 Sep 2019 08:58:32 +0800</lastBuildDate>
+    
+	<atom:link href="https://ouuan.github.io/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>CF1209F Koala and Notebook（BFS，最短路）</title>
+      <link>https://ouuan.github.io/post/cf1209f-koala-and-notebookbfs%E6%9C%80%E7%9F%AD%E8%B7%AF/</link>
+      <pubDate>Mon, 16 Sep 2019 08:58:32 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/cf1209f-koala-and-notebookbfs%E6%9C%80%E7%9F%AD%E8%B7%AF/</guid>
+      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;http://codeforces.com/contest/1209/problem/F&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
+&lt;p&gt;给你一张 $n$ 个点 $m$ 条边的无向连通图，一条路径的权值是路径上的边的编号（十进制）顺次连接而成的数字。求 $1$ 到每个点的最短路，&lt;strong&gt;输出&lt;/strong&gt; 对 $10^9+7$ 取模。&lt;/p&gt;
+&lt;p&gt;$2\le n\le10^5$, $n-1\le m\le10^5$。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>分治 on ouuan的博客</title>
+    <link>https://ouuan.github.io/tags/%E5%88%86%E6%B2%BB/</link>
+    <description>Recent content in 分治 on ouuan的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 26 Feb 2020 23:12:33 +0800</lastBuildDate>
+    
+	<atom:link href="https://ouuan.github.io/tags/%E5%88%86%E6%B2%BB/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>「HNOI2010」城市建设（线段树分治，LCT/Kruskal）</title>
+      <link>https://ouuan.github.io/post/hnoi2010-%E5%9F%8E%E5%B8%82%E5%BB%BA%E8%AE%BE/</link>
+      <pubDate>Wed, 26 Feb 2020 23:12:33 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/hnoi2010-%E5%9F%8E%E5%B8%82%E5%BB%BA%E8%AE%BE/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.luogu.com.cn/problem/P3206&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.lydsy.com/JudgeOnline/problem.php?id=2001&#34; target=&#34;_blank&#34;&gt;BZOJ&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;admonition question&#34;&gt;
+  &lt;p class=&#34;admonition-title&#34;&gt;题目描述&lt;/p&gt;
+&lt;p&gt;给你一张边带权的无向连通图，多次修改，每次修改一条边的边权，每次修改完后求最小生成树的边权之和。&lt;/p&gt;
+&lt;p&gt;点数 $2\cdot 10^4$, 边数和修改数 $5\cdot 10^4$，时限 3s。&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>CF603E Pastoral Oddities（结论，LCT/分治&#43;并查集）</title>
+      <link>https://ouuan.github.io/post/cf603e/</link>
+      <pubDate>Tue, 18 Feb 2020 11:45:02 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/cf603e/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/603/problem/E&#34; target=&#34;_blank&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;admonition question&#34;&gt;
+  &lt;p class=&#34;admonition-title&#34;&gt;题意简述&lt;/p&gt;
+&lt;p&gt;给你一张边带权且边从 $1$ 到 $m$ 编号的无向图 $G$，称一张图 $H$ 是“好的”，当且仅当存在一个 $H$ 的生成子图 $F$ 使得 $F$ 中每个点的度数都是奇数。现在，你需要回答 $m$ 个问题，第 $i$ 个问题是：求最小的 $x$，使得仅保留 $G$ 中编号不超过 $i$ 且边权不超过 $x$ 的边时，得到的生成子图是“好的”，或者指出不存在这样的 $x$。&lt;/p&gt;
+&lt;p&gt;$2\le n\le 10^5$, $1\le m\le 3\cdot 10^5$, TL 4s。&lt;/p&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>整体二分学习笔记</title>
+      <link>https://ouuan.github.io/post/parallel-binary-search/</link>
+      <pubDate>Fri, 14 Feb 2020 14:50:32 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/parallel-binary-search/</guid>
+      <description>&lt;p&gt;整体二分是一种离线算法，可以将一个修改同时作用于多个询问，从而减少不必要的开销，将二分答案从单次询问扩展到多次询问。&lt;/p&gt;
+&lt;p&gt;在一些题目中，相比与其它解法，整体二分可以避免复杂的数据结构，降低代码难度与空间复杂度。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>CF1260F Colored Tree（点分治，差分，基数排序）</title>
+      <link>https://ouuan.github.io/post/cf1260f-colored-tree%E7%82%B9%E5%88%86%E6%B2%BB%E5%B7%AE%E5%88%86%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Fri, 29 Nov 2019 14:00:53 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/cf1260f-colored-tree%E7%82%B9%E5%88%86%E6%B2%BB%E5%B7%AE%E5%88%86%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/</guid>
+      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/1260/problem/F&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
+&lt;p&gt;给你一棵树，每个点的颜色为一个区间内的整数，一种染色方案的权值是所有同色无序点对的距离之和，求所有不同染色方案的权值之和。&lt;/p&gt;
+&lt;p&gt;点数、颜色数均不超过 $10^5$ 。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>「NOI2014」购票（斜率优化，点分治）</title>
+      <link>https://ouuan.github.io/post/noi2014%E8%B4%AD%E7%A5%A8%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96%E7%82%B9%E5%88%86%E6%B2%BB/</link>
+      <pubDate>Mon, 25 Nov 2019 16:07:04 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/noi2014%E8%B4%AD%E7%A5%A8%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96%E7%82%B9%E5%88%86%E6%B2%BB/</guid>
+      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;http://uoj.ac/problem/7&#34; target=&#34;_blank&#34;&gt;UOJ&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.luogu.com.cn/problem/P2305&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
+&lt;p&gt;给你一棵树，$i$ 号点有 $p_i$、$q_i$ 和 $l_i$ 三个属性，每条边有给定的长度。&lt;/p&gt;
+&lt;p&gt;从一个点出发可以到达其祖先中与其距离不超过 $l_i$ 的点，费用为 $p_i\cdot dis+q_i$，求每个点到根的最小费用。&lt;/p&gt;
+&lt;p&gt;点数不超过 $2\cdot 10^5$ 。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>cdq分治学习笔记</title>
+      <link>https://ouuan.github.io/post/cdq%E5%88%86%E6%B2%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Tue, 26 Mar 2019 18:49:44 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/cdq%E5%88%86%E6%B2%BB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>&lt;p&gt;cdq分治也是咕了好久了..最近总算把它学了。&lt;/p&gt;
+&lt;p&gt;&lt;del&gt;cdq分治是一种离线算法，可以代替一些复杂的数据结构，降低代码难度，减小常数。&lt;/del&gt;废话大家都知道。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

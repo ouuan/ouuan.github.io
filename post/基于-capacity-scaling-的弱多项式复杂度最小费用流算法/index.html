@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>基于 Capacity Scaling 的弱多项式复杂度最小费用流算法 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="大多数人所使用的费用流算法，即每次求出残量网络中 $s$ 到 $t$ 关于费用的最短路进行增广（将 Dinic 最大流算法中的 BFS 改为 SPFA），是伪多项式复杂度的，最坏情况下复杂度为 $O(nmf)$，其中 $f$ 为最大流。已知有一种在点数为 $n$，边数为 $O(n^2)$，值域为 $O(2^{n/2})$ 时将其用时卡成关于 $n$ 的指数级复杂度的构造方法。
+本文将介绍一种复杂度为进行 $O(m\log U)$ 次（$U$ 表示边的最大容量）无负权边单源最短路（使用 priority_queue 实现 Dijkstra 算法，总复杂度即为 $O(m^2\log U\log m)$）的弱多项式复杂度算法。
+其实这个算法并不是很复杂（只是相关资料比较少，会对学习造成一定困难，这也是我写这篇博客的原因），最小费用最大流的模板也只需要 $2.5KB$，并不比常见的伪多项式复杂度算法长很多。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.67.0 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/%E5%9F%BA%E4%BA%8E-capacity-scaling-%E7%9A%84%E5%BC%B1%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%9C%80%E5%B0%8F%E8%B4%B9%E7%94%A8%E6%B5%81%E7%AE%97%E6%B3%95/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.6e1b3b90.min.css" rel="stylesheet">
+
+
+
+<meta property="og:title" content="基于 Capacity Scaling 的弱多项式复杂度最小费用流算法" />
+<meta property="og:description" content="大多数人所使用的费用流算法，即每次求出残量网络中 $s$ 到 $t$ 关于费用的最短路进行增广（将 Dinic 最大流算法中的 BFS 改为 SPFA），是伪多项式复杂度的，最坏情况下复杂度为 $O(nmf)$，其中 $f$ 为最大流。已知有一种在点数为 $n$，边数为 $O(n^2)$，值域为 $O(2^{n/2})$ 时将其用时卡成关于 $n$ 的指数级复杂度的构造方法。
+本文将介绍一种复杂度为进行 $O(m\log U)$ 次（$U$ 表示边的最大容量）无负权边单源最短路（使用 priority_queue 实现 Dijkstra 算法，总复杂度即为 $O(m^2\log U\log m)$）的弱多项式复杂度算法。
+其实这个算法并不是很复杂（只是相关资料比较少，会对学习造成一定困难，这也是我写这篇博客的原因），最小费用最大流的模板也只需要 $2.5KB$，并不比常见的伪多项式复杂度算法长很多。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/%E5%9F%BA%E4%BA%8E-capacity-scaling-%E7%9A%84%E5%BC%B1%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%9C%80%E5%B0%8F%E8%B4%B9%E7%94%A8%E6%B5%81%E7%AE%97%E6%B3%95/" />
+<meta property="article:published_time" content="2019-10-26T19:50:25+08:00" />
+<meta property="article:modified_time" content="2020-02-10T16:02:40+08:00" />
+<meta itemprop="name" content="基于 Capacity Scaling 的弱多项式复杂度最小费用流算法">
+<meta itemprop="description" content="大多数人所使用的费用流算法，即每次求出残量网络中 $s$ 到 $t$ 关于费用的最短路进行增广（将 Dinic 最大流算法中的 BFS 改为 SPFA），是伪多项式复杂度的，最坏情况下复杂度为 $O(nmf)$，其中 $f$ 为最大流。已知有一种在点数为 $n$，边数为 $O(n^2)$，值域为 $O(2^{n/2})$ 时将其用时卡成关于 $n$ 的指数级复杂度的构造方法。
+本文将介绍一种复杂度为进行 $O(m\log U)$ 次（$U$ 表示边的最大容量）无负权边单源最短路（使用 priority_queue 实现 Dijkstra 算法，总复杂度即为 $O(m^2\log U\log m)$）的弱多项式复杂度算法。
+其实这个算法并不是很复杂（只是相关资料比较少，会对学习造成一定困难，这也是我写这篇博客的原因），最小费用最大流的模板也只需要 $2.5KB$，并不比常见的伪多项式复杂度算法长很多。">
+<meta itemprop="datePublished" content="2019-10-26T19:50:25&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-10T16:02:40&#43;08:00" />
+<meta itemprop="wordCount" content="6622">
+
+
+
+<meta itemprop="keywords" content="图论,网络流,费用流," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="基于 Capacity Scaling 的弱多项式复杂度最小费用流算法"/>
+<meta name="twitter:description" content="大多数人所使用的费用流算法，即每次求出残量网络中 $s$ 到 $t$ 关于费用的最短路进行增广（将 Dinic 最大流算法中的 BFS 改为 SPFA），是伪多项式复杂度的，最坏情况下复杂度为 $O(nmf)$，其中 $f$ 为最大流。已知有一种在点数为 $n$，边数为 $O(n^2)$，值域为 $O(2^{n/2})$ 时将其用时卡成关于 $n$ 的指数级复杂度的构造方法。
+本文将介绍一种复杂度为进行 $O(m\log U)$ 次（$U$ 表示边的最大容量）无负权边单源最短路（使用 priority_queue 实现 Dijkstra 算法，总复杂度即为 $O(m^2\log U\log m)$）的弱多项式复杂度算法。
+其实这个算法并不是很复杂（只是相关资料比较少，会对学习造成一定困难，这也是我写这篇博客的原因），最小费用最大流的模板也只需要 $2.5KB$，并不比常见的伪多项式复杂度算法长很多。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/links/">
+        <li class="mobile-menu-item">链接</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/links/">链接</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">基于 Capacity Scaling 的弱多项式复杂度最小费用流算法</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2019-10-26 19:50:25 &#43;0800 &#43;0800"> 2019-10-26 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/"> 知识点 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#hack-常见的费用流算法">hack 常见的费用流算法</a></li>
+        <li><a href="#前置知识">前置知识</a></li>
+        <li><a href="#一些定义">一些定义</a></li>
+        <li><a href="#将最小费用最大流问题转化为无源汇最小费用流问题">将最小费用最大流问题转化为无源汇最小费用流问题</a></li>
+        <li><a href="#负环">负环</a></li>
+        <li><a href="#节点势能--边的-reduced-cost">节点势能 &amp; 边的 reduced cost</a></li>
+        <li><a href="#capacity-scaling">capacity scaling</a></li>
+        <li><a href="#给一条边的容量加一">给一条边的容量加一</a></li>
+        <li><a href="#防止溢出">防止溢出</a></li>
+        <li><a href="#流程总结">流程总结</a></li>
+        <li><a href="#代码">代码</a></li>
+        <li><a href="#关于-spfa">关于 SPFA</a></li>
+        <li><a href="#关于出题">关于出题</a></li>
+        <li><a href="#参考资料">参考资料</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>大多数人所使用的费用流算法，即每次求出残量网络中 $s$ 到 $t$ 关于费用的最短路进行增广（将 Dinic 最大流算法中的 BFS 改为 SPFA），是伪多项式复杂度的，最坏情况下复杂度为 $O(nmf)$，其中 $f$ 为最大流。已知有一种在点数为 $n$，边数为 $O(n^2)$，值域为 $O(2^{n/2})$ 时将其用时卡成关于 $n$ 的指数级复杂度的构造方法。</p>
+<p>本文将介绍一种复杂度为进行 $O(m\log U)$ 次（$U$ 表示边的最大容量）无负权边单源最短路（使用 <code>priority_queue</code> 实现 Dijkstra 算法，总复杂度即为 $O(m^2\log U\log m)$）的弱多项式复杂度算法。</p>
+<p>其实这个算法并不是很复杂（只是相关资料比较少，会对学习造成一定困难，这也是我写这篇博客的原因），最小费用最大流的模板也只需要 $2.5KB$，并不比常见的伪多项式复杂度算法长很多。</p>
+<h2 id="hack-常见的费用流算法">hack 常见的费用流算法</h2>
+<p>可以参考 <a href="https://min-25.hatenablog.com/entry/2018/03/19/235802" target="_blank">这篇博客</a>，里面给出了一个用 Python 写的数据生成器，调用函数 <code>mcmf_worst_instance(k)</code> 可以得到 $2k+2$ 个点的数据，格式为第一行点数和边数，后面每行描述一条边（起点、终点、容量、费用），源点是 $1$ 汇点是 $2k+2$。</p>
+<details class="admonition note"><summary class="admonition-title">k=20 生成的数据</summary>
+<pre><code class="language-plain">42 421
+1 2 1 0
+1 3 3 0
+1 4 5 0
+1 5 10 0
+1 6 20 0
+1 7 40 0
+1 8 80 0
+1 9 160 0
+1 10 320 0
+1 11 640 0
+1 12 1280 0
+1 13 2560 0
+1 14 5120 0
+1 15 10240 0
+1 16 20480 0
+1 17 40960 0
+1 18 81920 0
+1 19 163840 0
+1 20 327680 0
+1 21 655360 0
+2 22 5242880 0
+2 23 5242880 1
+2 24 5242880 3
+2 25 5242880 7
+2 26 5242880 15
+2 27 5242880 31
+2 28 5242880 63
+2 29 5242880 127
+2 30 5242880 255
+2 31 5242880 511
+2 32 5242880 1023
+2 33 5242880 2047
+2 34 5242880 4095
+2 35 5242880 8191
+2 36 5242880 16383
+2 37 5242880 32767
+2 38 5242880 65535
+2 39 5242880 131071
+2 40 5242880 262143
+2 41 5242880 524287
+3 22 5242880 1
+3 24 5242880 3
+3 25 5242880 7
+3 26 5242880 15
+3 27 5242880 31
+3 28 5242880 63
+3 29 5242880 127
+3 30 5242880 255
+3 31 5242880 511
+3 32 5242880 1023
+3 33 5242880 2047
+3 34 5242880 4095
+3 35 5242880 8191
+3 36 5242880 16383
+3 37 5242880 32767
+3 38 5242880 65535
+3 39 5242880 131071
+3 40 5242880 262143
+3 41 5242880 524287
+4 22 5242880 3
+4 23 5242880 3
+4 25 5242880 7
+4 26 5242880 15
+4 27 5242880 31
+4 28 5242880 63
+4 29 5242880 127
+4 30 5242880 255
+4 31 5242880 511
+4 32 5242880 1023
+4 33 5242880 2047
+4 34 5242880 4095
+4 35 5242880 8191
+4 36 5242880 16383
+4 37 5242880 32767
+4 38 5242880 65535
+4 39 5242880 131071
+4 40 5242880 262143
+4 41 5242880 524287
+5 22 5242880 7
+5 23 5242880 7
+5 24 5242880 7
+5 26 5242880 15
+5 27 5242880 31
+5 28 5242880 63
+5 29 5242880 127
+5 30 5242880 255
+5 31 5242880 511
+5 32 5242880 1023
+5 33 5242880 2047
+5 34 5242880 4095
+5 35 5242880 8191
+5 36 5242880 16383
+5 37 5242880 32767
+5 38 5242880 65535
+5 39 5242880 131071
+5 40 5242880 262143
+5 41 5242880 524287
+6 22 5242880 15
+6 23 5242880 15
+6 24 5242880 15
+6 25 5242880 15
+6 27 5242880 31
+6 28 5242880 63
+6 29 5242880 127
+6 30 5242880 255
+6 31 5242880 511
+6 32 5242880 1023
+6 33 5242880 2047
+6 34 5242880 4095
+6 35 5242880 8191
+6 36 5242880 16383
+6 37 5242880 32767
+6 38 5242880 65535
+6 39 5242880 131071
+6 40 5242880 262143
+6 41 5242880 524287
+7 22 5242880 31
+7 23 5242880 31
+7 24 5242880 31
+7 25 5242880 31
+7 26 5242880 31
+7 28 5242880 63
+7 29 5242880 127
+7 30 5242880 255
+7 31 5242880 511
+7 32 5242880 1023
+7 33 5242880 2047
+7 34 5242880 4095
+7 35 5242880 8191
+7 36 5242880 16383
+7 37 5242880 32767
+7 38 5242880 65535
+7 39 5242880 131071
+7 40 5242880 262143
+7 41 5242880 524287
+8 22 5242880 63
+8 23 5242880 63
+8 24 5242880 63
+8 25 5242880 63
+8 26 5242880 63
+8 27 5242880 63
+8 29 5242880 127
+8 30 5242880 255
+8 31 5242880 511
+8 32 5242880 1023
+8 33 5242880 2047
+8 34 5242880 4095
+8 35 5242880 8191
+8 36 5242880 16383
+8 37 5242880 32767
+8 38 5242880 65535
+8 39 5242880 131071
+8 40 5242880 262143
+8 41 5242880 524287
+9 22 5242880 127
+9 23 5242880 127
+9 24 5242880 127
+9 25 5242880 127
+9 26 5242880 127
+9 27 5242880 127
+9 28 5242880 127
+9 30 5242880 255
+9 31 5242880 511
+9 32 5242880 1023
+9 33 5242880 2047
+9 34 5242880 4095
+9 35 5242880 8191
+9 36 5242880 16383
+9 37 5242880 32767
+9 38 5242880 65535
+9 39 5242880 131071
+9 40 5242880 262143
+9 41 5242880 524287
+10 22 5242880 255
+10 23 5242880 255
+10 24 5242880 255
+10 25 5242880 255
+10 26 5242880 255
+10 27 5242880 255
+10 28 5242880 255
+10 29 5242880 255
+10 31 5242880 511
+10 32 5242880 1023
+10 33 5242880 2047
+10 34 5242880 4095
+10 35 5242880 8191
+10 36 5242880 16383
+10 37 5242880 32767
+10 38 5242880 65535
+10 39 5242880 131071
+10 40 5242880 262143
+10 41 5242880 524287
+11 22 5242880 511
+11 23 5242880 511
+11 24 5242880 511
+11 25 5242880 511
+11 26 5242880 511
+11 27 5242880 511
+11 28 5242880 511
+11 29 5242880 511
+11 30 5242880 511
+11 32 5242880 1023
+11 33 5242880 2047
+11 34 5242880 4095
+11 35 5242880 8191
+11 36 5242880 16383
+11 37 5242880 32767
+11 38 5242880 65535
+11 39 5242880 131071
+11 40 5242880 262143
+11 41 5242880 524287
+12 22 5242880 1023
+12 23 5242880 1023
+12 24 5242880 1023
+12 25 5242880 1023
+12 26 5242880 1023
+12 27 5242880 1023
+12 28 5242880 1023
+12 29 5242880 1023
+12 30 5242880 1023
+12 31 5242880 1023
+12 33 5242880 2047
+12 34 5242880 4095
+12 35 5242880 8191
+12 36 5242880 16383
+12 37 5242880 32767
+12 38 5242880 65535
+12 39 5242880 131071
+12 40 5242880 262143
+12 41 5242880 524287
+13 22 5242880 2047
+13 23 5242880 2047
+13 24 5242880 2047
+13 25 5242880 2047
+13 26 5242880 2047
+13 27 5242880 2047
+13 28 5242880 2047
+13 29 5242880 2047
+13 30 5242880 2047
+13 31 5242880 2047
+13 32 5242880 2047
+13 34 5242880 4095
+13 35 5242880 8191
+13 36 5242880 16383
+13 37 5242880 32767
+13 38 5242880 65535
+13 39 5242880 131071
+13 40 5242880 262143
+13 41 5242880 524287
+14 22 5242880 4095
+14 23 5242880 4095
+14 24 5242880 4095
+14 25 5242880 4095
+14 26 5242880 4095
+14 27 5242880 4095
+14 28 5242880 4095
+14 29 5242880 4095
+14 30 5242880 4095
+14 31 5242880 4095
+14 32 5242880 4095
+14 33 5242880 4095
+14 35 5242880 8191
+14 36 5242880 16383
+14 37 5242880 32767
+14 38 5242880 65535
+14 39 5242880 131071
+14 40 5242880 262143
+14 41 5242880 524287
+15 22 5242880 8191
+15 23 5242880 8191
+15 24 5242880 8191
+15 25 5242880 8191
+15 26 5242880 8191
+15 27 5242880 8191
+15 28 5242880 8191
+15 29 5242880 8191
+15 30 5242880 8191
+15 31 5242880 8191
+15 32 5242880 8191
+15 33 5242880 8191
+15 34 5242880 8191
+15 36 5242880 16383
+15 37 5242880 32767
+15 38 5242880 65535
+15 39 5242880 131071
+15 40 5242880 262143
+15 41 5242880 524287
+16 22 5242880 16383
+16 23 5242880 16383
+16 24 5242880 16383
+16 25 5242880 16383
+16 26 5242880 16383
+16 27 5242880 16383
+16 28 5242880 16383
+16 29 5242880 16383
+16 30 5242880 16383
+16 31 5242880 16383
+16 32 5242880 16383
+16 33 5242880 16383
+16 34 5242880 16383
+16 35 5242880 16383
+16 37 5242880 32767
+16 38 5242880 65535
+16 39 5242880 131071
+16 40 5242880 262143
+16 41 5242880 524287
+17 22 5242880 32767
+17 23 5242880 32767
+17 24 5242880 32767
+17 25 5242880 32767
+17 26 5242880 32767
+17 27 5242880 32767
+17 28 5242880 32767
+17 29 5242880 32767
+17 30 5242880 32767
+17 31 5242880 32767
+17 32 5242880 32767
+17 33 5242880 32767
+17 34 5242880 32767
+17 35 5242880 32767
+17 36 5242880 32767
+17 38 5242880 65535
+17 39 5242880 131071
+17 40 5242880 262143
+17 41 5242880 524287
+18 22 5242880 65535
+18 23 5242880 65535
+18 24 5242880 65535
+18 25 5242880 65535
+18 26 5242880 65535
+18 27 5242880 65535
+18 28 5242880 65535
+18 29 5242880 65535
+18 30 5242880 65535
+18 31 5242880 65535
+18 32 5242880 65535
+18 33 5242880 65535
+18 34 5242880 65535
+18 35 5242880 65535
+18 36 5242880 65535
+18 37 5242880 65535
+18 39 5242880 131071
+18 40 5242880 262143
+18 41 5242880 524287
+19 22 5242880 131071
+19 23 5242880 131071
+19 24 5242880 131071
+19 25 5242880 131071
+19 26 5242880 131071
+19 27 5242880 131071
+19 28 5242880 131071
+19 29 5242880 131071
+19 30 5242880 131071
+19 31 5242880 131071
+19 32 5242880 131071
+19 33 5242880 131071
+19 34 5242880 131071
+19 35 5242880 131071
+19 36 5242880 131071
+19 37 5242880 131071
+19 38 5242880 131071
+19 40 5242880 262143
+19 41 5242880 524287
+20 22 5242880 262143
+20 23 5242880 262143
+20 24 5242880 262143
+20 25 5242880 262143
+20 26 5242880 262143
+20 27 5242880 262143
+20 28 5242880 262143
+20 29 5242880 262143
+20 30 5242880 262143
+20 31 5242880 262143
+20 32 5242880 262143
+20 33 5242880 262143
+20 34 5242880 262143
+20 35 5242880 262143
+20 36 5242880 262143
+20 37 5242880 262143
+20 38 5242880 262143
+20 39 5242880 262143
+20 41 5242880 524287
+21 22 5242880 524287
+21 23 5242880 524287
+21 24 5242880 524287
+21 25 5242880 524287
+21 26 5242880 524287
+21 27 5242880 524287
+21 28 5242880 524287
+21 29 5242880 524287
+21 30 5242880 524287
+21 31 5242880 524287
+21 32 5242880 524287
+21 33 5242880 524287
+21 34 5242880 524287
+21 35 5242880 524287
+21 36 5242880 524287
+21 37 5242880 524287
+21 38 5242880 524287
+21 39 5242880 524287
+21 40 5242880 524287
+22 42 2 0
+23 42 2 0
+24 42 5 0
+25 42 10 0
+26 42 20 0
+27 42 40 0
+28 42 80 0
+29 42 160 0
+30 42 320 0
+31 42 640 0
+32 42 1280 0
+33 42 2560 0
+34 42 5120 0
+35 42 10240 0
+36 42 20480 0
+37 42 40960 0
+38 42 81920 0
+39 42 163840 0
+40 42 327680 0
+41 42 655360 0
+</code></pre>
+</details>
+<h2 id="前置知识">前置知识</h2>
+<p>本文假定读者对网络流有基本的了解（掌握并大致理解了最大流的增广路解法（EK / Dinic）即可）。</p>
+<p>还要会解决无负权边的单源最短路问题（会 Dijkstra 算法即可）。</p>
+<h2 id="一些定义">一些定义</h2>
+<p>无源汇的流，每个点需要满足流入量等于流出量（流量平衡），并且每条边的流量不超过上限。</p>
+<p>有源汇的流，存在源点 $s$ 和汇点 $t$，$s$ 只流出不流入，$t$ 只流入不流出，其它点满足流量平衡，并且每条边的流量不超过上限。</p>
+<p>最大流问题，只在有源汇的流中有意义，即最大化 $s$ 的流出量（也就是 $t$ 的流入量）。</p>
+<p>流的费用，是每条边的流量与费用之积的和。</p>
+<p>最小费用最大流问题，在最大流的前提下，最小化流的费用。</p>
+<p>（无源汇）最小费用流问题，只用最小化流的费用。</p>
+<p>残量网络，是原图中每条没满流的边以及每条有流的边的反边（反边指方向相反，费用为相反数）构成的图。</p>
+<p>增广路，在有源汇的流中指残量网络上一条 $s$ 到 $t$ 的路径，在无源汇的流中指残量网络上的一个环。</p>
+<p>增广，指的是将一条增广路流量加一（增广路上的边容量减一，对应的反边容量加一）。</p>
+<p>不加说明时，边的长度 / 路径的长度 / 环的长度（当然还有“最长路径”、“负环”之类的表述）中的“长度”都指费用。</p>
+<p>$(u, v)$ 表示从 $u$ 到 $v$ 的有向边（本文只讨论原图为简单图的情况，非简单图是类似的），$cap(u, v)$ 表示 $(u, v)$ 这条边的容量，$cost(u, v)$ 表示 $(u, v)$ 这条边的费用。</p>
+<h2 id="将最小费用最大流问题转化为无源汇最小费用流问题">将最小费用最大流问题转化为无源汇最小费用流问题</h2>
+<p>最小费用最大流问题可以转化为无源汇最小费用流问题，方法是连一条 $t$ 到 $s$，容量足够大，费用足够小（为一个负数）的边。这里的“容量足够大”指的是不小于最大流，“费用足够小”指的是小于 $s$ 到 $t$ 的最长简单路径费用的相反数。</p>
+<p>由于“费用足够小”，若没有达成最大流，即存在 $s$ 到 $t$ 的增广路，任何一条不经过正环（若存在经过正环的增广路，一定也存在不经过正环的增广路）的 $s$ 到 $t$ 的增广路加上 $(t, s)$ 这条边的费用一定为负，所以通过这条增广路增广总费用一定更小，这说明，无源汇流中满足最小费用时，原问题同时满足了最小费用与最大流。</p>
+<p>下文中讨论的都是无源汇最小费用流问题，也不会再次强调“无源汇”。</p>
+<h2 id="负环">负环</h2>
+<p>一个流是最小费用流，当且仅当其残量网络中没有负环。</p>
+<details class="admonition note"><summary class="admonition-title">证明</summary>
+<p>仅当（必要条件）：若存在负环可以在负环上增广，从而得到费用更小的流。</p>
+<p>当（充分条件）：令所考虑的这个流为 $f$，取任意一个最小费用流 $f^{\ast}$，计算它们之间的差 $f^{\ast}-f$（对应边流量相减）。假设 $f$ 不是最小费用流，那么 $f^{\ast}-f$ 的总费用一定为负。由于 $f$ 和 $f^{\ast}$ 都流量平衡，$f^{\ast}-f$ 一定也流量平衡，所以它也是个合法的流，而一个流一定可以拆成若干个环（由于流量平衡，每个联通部分都有欧拉回路），若总费用为负就一定包含负环。又因为 $f^{\ast}-f$ 是在 $f$ 的基础上增广的，$f^{\ast}-f$ 一定是 $f$ 残量网络的一个子图，而其包含负环与 $f$ 的残量网络中没有负环矛盾，所以假设不成立。</p>
+</details>
+<h2 id="节点势能--边的-reduced-cost">节点势能 &amp; 边的 reduced cost</h2>
+<p>这两个概念的提出与最小费用流的线性规划形式的对偶问题相关，但了解这个对偶问题并不是必要的，所以本篇博客中不会提及。</p>
+<p>给每个节点 $u$ 指定一个任意的势能 $p(u)$。（这个概念看起来很突兀，总之就是给每个节点新增了一个属性，它的值是任意的。）（本质上是线性规划对偶问题中的一个无限制变量。）</p>
+<p>定义一条边 $(u, v)$ 关于某一组势能 $p$ 的 reduced cost（并不知道怎么翻译..）$C_p(u, v)$ 为 $p(u)+cost(u, v)-p(v)$。</p>
+<p>reduced cost 有两个很好的性质：</p>
+<ol>
+<li>
+<p>将原费用替换为 reduced cost 不影响最短路。（不是不影响最短路长度，而是不影响最短路是哪一条。）</p>
+</li>
+<li>
+<p>将原费用替换为 reduced cost 不影响环的总费用。</p>
+</li>
+</ol>
+<p>这两个性质都可以由 $C_p(u, v)+C_p(v, w)=p(u)+cost(u, v)+cost(v, w)-p(w)$（中间经过的点的势能相加后抵消）说明。</p>
+<p>如果大家有了解过 Johnson 全源最短路径算法，里面也有类似的操作，用于保证边权非负，使得 Dijkstra 算法可以得到应用。在本文所介绍的最小费用流算法中也是一样，为了能够使用 Dijkstra 算法计算最短路，在过程中需要保证 reduced cost 非负。</p>
+<h2 id="capacity-scaling">capacity scaling</h2>
+<p>（这个也不知道怎么翻译..）</p>
+<p>capacity scaling 从高到低考虑容量的最高若干位（比如容量为 $5$ ($101_2$)，第一次迭代时考虑最高一位，即 $1$ ($1_2$)，第二次迭代时考虑最高两位，即 $2$ ($10_2$)，第三次迭代时考虑最高三位，即 $5$ ($101_2$)），每次加入更低的位后更新答案。（这个过程和求快速幂有点像。）</p>
+<p>它基于一个性质：将原图中每条边的容量乘二后，最小费用流每条边的流量分别乘二。</p>
+<p>那么，若计算出了以 $\left\lfloor\frac{cap(u, v)}{2^k}\right\rfloor$ 为边 $(u, v)$ 的容量的最小费用流，现在要得到以 $\left\lfloor\frac{cap(u, v)}{2^{k-1}}\right\rfloor$ 为边 $(u, v)$ 的容量的最小费用流，只需要先将流乘二，然后对每条二进制中该位为 $1$ 的边进行容量加一的操作即可。</p>
+<p>所以，问题转化为了给一条边的容量加一，更新最小费用流。</p>
+<h2 id="给一条边的容量加一">给一条边的容量加一</h2>
+<p>在上文中已经证明，最小费用流等价于残量网络中没有负环。</p>
+<p>所以，若容量加一后若产生负环，进行增广即可。</p>
+<p>为了优化常数，可以特判掉容量加一前该边已存在于残量网络的情况，直接跳过。</p>
+<p>令容量加一的这条边为 $(u, v)$，找负环可以先求出从 $v$ 出发以 reduced cost 为长度到每个点 $i$ 的最短路 $d(i)$（这个最短路不包括 $(u, v)$ 这条边， 由于当前维护的残量网络是容量加一之前的最小费用流，不存在负环，所以最短路是可以求的），判断 $d(u)+C_p(u, v)$ 是否小于 $0$ 即可。</p>
+<p>为了使用 Dijkstra 算法，还需要保证 reduced cost 非负，所以需要调整节点的势能。</p>
+<p>这里直接给出一种做法：求出上文所述的最短路 $d(i)$（若 $x$ 不可达就将 $d(x)$ 设为 $\max_{\text{节点 }i\text{ 可达}}\{d(i)\}+max(0, -C_p(u, v))$），然后将每个点 $i$ 的势能加上 $d(i)$（用 $p&rsquo;(i)$ 表示节点 $i$ 更新后的势能）。</p>
+<details class="admonition note"><summary class="admonition-title">这样调整后残量网络中的每一条边的 reduced cost 依然非负的证明</summary>
+<p>对于 $(u, v)$ 这条边，若 $u$ 不可达，那么：</p>
+<p>$$
+\begin{aligned}
+C_{p&rsquo;}(u, v)
+&amp;=p&rsquo;(u)+cost(u, v)-p&rsquo;(v)\\<br>
+&amp;=p(u)+max(0, -C_p(u, v))+cost(u, v)-p(v)\\<br>
+&amp;\ge p(u)-(p(u)+cost(u, v)-p(v))+cost(u, v)-p(v)\\<br>
+&amp;=0
+\end{aligned}
+$$</p>
+<p>若 $u$ 可达且 $(u, v)$ 这条边加入后产生了负环，负环会被增广，$(u, v)$ 这条边就不存在了。</p>
+<p>若 $u$ 可达且 $(u, v)$ 这条边加入后没有产生负环，即 $d(u)+C_p(u, v)\ge 0$，那么 $C_{p&rsquo;}(u, v)=d(u)+C_p(u, v)-d(v)=d(u)+C_p(u, v)\ge 0$。</p>
+<p>capacity scaling 算法在初始时所有边容量均为 $0$（也就是说残量网络为空），所以可以在除 $(u, v)$ 外每条边的 reduced cost 均非负的基础上归纳证明。</p>
+<p>对于其它从 $u$ 可达的边 $(x, y)$，由于 $d(y)\le d(x)+C_p(x, y)$（最短路的性质），即 $d(y)\le d(x)+p(x)+cost(x, y)-p(y)$，所以 $p(x)+d(x)+cost(x, y)-(p(y)+d(y))\ge 0$，即 $p&rsquo;(x)+cost(x, y)-p&rsquo;(y)\ge 0$，也就是说 $u$ 可达的边 reduced cost 调整后非负。</p>
+<p>对于其它从 $u$ 可达与从 $u$ 不可达交界处的边 $(x, y)$（由于这条边不可达，一定是 $x$ 不可达 $y$ 可达），由于 $C_p(x, y)\ge 0$ 且 $d(x)=\max_{\text{节点 }i\text{ 可达}}\{d(i)\}+max(0, -C_p(u, v))\ge d(y)$，这样的边调整后 reduced cost 也非负。</p>
+<p>对于连接从 $u$ 不可达的两个点 $x$，$y$ 的边，$d(x)=d(y)$，调整后 reduced cost 也非负。</p>
+<p>综上所述，调整后残量网络中的每一条边的 reduced cost 依然非负。</p>
+</details>
+<p>进而我们还可以得出，上述流程结束后，残量网络中不存在负环，即上述流程可以计算出当前的最小费用流。</p>
+<h2 id="防止溢出">防止溢出</h2>
+<p>上一部分中给出的势能调整方式能够保证 reduced cost 非负，但在实际实现时会有势能太大从而溢出的风险。</p>
+<p>防止溢出的方法也很简单，新建一个点 $k$，从 $k$ 向所有点连长度为 $0$ 的边，求从 $k$ 出发以原费用（而非 reduced cost）为长度的最短路（由于更新后的残量网络是当前的最小费用流，不存在负环，新增的 $k$ 以及 $k$ 连向其它节点的边也不会带来新的负环，所以最短路是可以求的），以 $k$ 到 $i$ 的最短路作为调整后节点 $i$ 的势能。这样调整后，$C_p(x, y)=d(x)+cost(x, y)-d(y)\ge 0$（由最短路性质得到），并且每个节点的势能的值域不会超过 $[\min(0, (n-1)\min\{cost(u, v)\}), 0]$。</p>
+<p>虽然是以原费用为长度，计算最短路时还是可以利用 reduced cost 来计算。由于只有从 $k$ 连出的边可能 reduced cost 为负，而 $k$ 又是第一个松弛的，所以这不会影响 Dijkstra 算法的正确性（当然，也可以为 $k$ 设置一个足够大的势能来保证从 $k$ 连出的边 reduced cost 也非负）。</p>
+<h2 id="流程总结">流程总结</h2>
+<p>若求的是最小费用最大流，首先通过加一条 $t$ 到 $s$ 的边转化为无源汇最小费用流。</p>
+<p>使用 capacity scaling，枚举考虑容量的最高 $k$ 位，每次迭代开始时将残量网络中每条边的容量以及答案乘二，然后枚举每条二进制中该位为 $1$ 的边，使其容量加一。</p>
+<p>给一条边容量加一时，先特判掉这条边本来就在残量网络中的情况（优化常数），然后判是否产生了负环，若产生了负环就增广这个负环，然后调整节点势能使得所有 reduced cost 非负，最后通过计算新增节点到每个节点的最短路来更新节点势能防止溢出。</p>
+<p>复杂度瓶颈在求无负权边单源最短路上，总共需要计算 $O(m\log U)$ 次（$U$ 为边的最大容量）最短路，如果使用 <code>priority_queue</code> 来实现 Dijkstra 算法，总复杂度为 $O(m^2\log U\log m)$。</p>
+<h2 id="代码">代码</h2>
+<p><a href="http://uoj.ac/problem/487" target="_blank">模板题</a>。</p>
+<details class="admonition note"><summary class="admonition-title">代码</summary>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;queue&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+typedef long long ll;
+typedef pair&lt;ll, int&gt; pli;
+
+const ll INF = 1e18;
+const ll LARGE = 1e12;
+
+int n, m;
+vector&lt;bool&gt; vis;
+vector&lt;int&gt; head, nxt, from, to, pre;
+vector&lt;ll&gt; raw_cap, cap, cost, p, dis;
+priority_queue&lt;pli, vector&lt;pli&gt;, greater&lt;pli&gt; &gt; q;
+
+void add(int u, int v, ll f, ll w)
+{
+    nxt.push_back(head[u]);
+    head[u] = to.size();
+    from.push_back(u);
+    to.push_back(v);
+    raw_cap.push_back(f);
+    cap.push_back(0);
+    cost.push_back(w);
+}
+
+void add_edge(int u, int v, ll f, ll w)
+{
+    add(u, v, f, w);
+    add(v, u, 0, -w);
+}
+
+ll c(int id)
+{
+    return p[from[id]] + cost[id] - p[to[id]];
+}
+
+void dijkstra(int s)
+{
+    vis.assign(n + 2, false);
+    dis.assign(n + 2, INF);
+    pre.assign(n + 2, -1);
+    dis[s] = 0;
+    q.push(pli(0, s));
+
+    while (!q.empty())
+    {
+        int u = q.top().second;
+        ll w = q.top().first;
+        q.pop();
+        if (vis[u]) continue;
+        vis[u] = true;
+        for (int i = head[u]; ~i; i = nxt[i])
+        {
+            int v = to[i];
+            if (cap[i] &amp;&amp; dis[v] &gt; w + c(i))
+            {
+                dis[v] = w + c(i);
+                pre[v] = i;
+                q.push(pli(dis[v], v));
+            }
+        }
+    }
+}
+
+void add_one_cap(int id)
+{
+    int u = from[id];
+    int v = to[id];
+    if (cap[id])
+    {
+        ++cap[id];
+        return;
+    }
+    dijkstra(v);
+    if (dis[u] &lt; INF &amp;&amp; dis[u] + c(id) &lt; 0)
+    {
+        ++cap[id ^ 1];
+        while (u != v)
+        {
+            int x = pre[u];
+            --cap[x];
+            ++cap[x ^ 1];
+            u = from[x];
+        }
+    }
+    else ++cap[id];
+    ll max_dis = 0;
+    ll cur_len = c(id);
+    for (int i = 1; i &lt;= n; ++i) if (dis[i] &lt; INF) max_dis = max(max_dis, dis[i]);
+    for (int i = 1; i &lt;= n; ++i) p[i] += dis[i] &lt; INF ? dis[i] : max_dis + max(0ll, -cur_len);
+
+    dijkstra(n + 1);
+    for (int i = 1; i &lt;= n; ++i) p[i] += dis[i];
+}
+
+int main()
+{
+    int s, t;
+
+    cin &gt;&gt; n &gt;&gt; m &gt;&gt; s &gt;&gt; t;
+
+    head.resize(n + 2, -1);
+    p.resize(n + 2, 0);
+
+    for (int i = 1; i &lt;= m; ++i)
+    {
+        ll u, v, f, w;
+        cin &gt;&gt; u &gt;&gt; v &gt;&gt; f &gt;&gt; w;
+        add_edge(u, v, f, w);
+    }
+
+    add_edge(t, s, LARGE, -LARGE);
+
+    for (int i = 1; i &lt;= n; ++i)
+    {
+        add_edge(n + 1, i, 0, 0);
+        cap[to.size() - 2] = 1;
+    }
+
+    for (int i = 40; i &gt;= 0; --i)
+    {
+        for (int j = 0; j &lt;= m * 2 + 1; ++j) cap[j] &lt;&lt;= 1;
+        for (int j = 0; j &lt;= m * 2; j += 2)
+        {
+            if ((raw_cap[j] &gt;&gt; i) &amp; 1)
+            {
+                add_one_cap(j);
+            }
+        }
+    }
+
+    ll min_cost = 0;
+
+    for (int i = 0; i &lt; m; ++i) min_cost += cap[i &lt;&lt; 1 | 1] * cost[i &lt;&lt; 1];
+
+    cout &lt;&lt; cap[m &lt;&lt; 1 | 1] &lt;&lt; ' ' &lt;&lt; min_cost;
+
+    return 0;
+}
+</code></pre>
+</details>
+<h2 id="关于-spfa">关于 SPFA</h2>
+<p>如果把算法中的 Dijkstra 换成 SPFA，reduced cost 就不需要了，调整势能和防止溢出两部分都可以去掉，加上 SPFA 本身就略微比 Dijkstra 好写，总体会好写不少，复杂度是 $O(nm^2\log U)$，但很难卡满，而且由于不用防止溢出，少跑很多遍最短路，总体跑的非常快。</p>
+<details class="admonition note"><summary class="admonition-title">代码</summary>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;queue&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+typedef long long ll;
+typedef pair&lt;ll, int&gt; pli;
+
+const ll INF = 1e18;
+const ll LARGE = 1e12;
+
+int n, m;
+queue&lt;int&gt; q;
+vector&lt;bool&gt; inq;
+vector&lt;ll&gt; raw_cap, cap, cost, dis;
+vector&lt;int&gt; head, nxt, from, to, pre;
+
+void add(int u, int v, ll f, ll w)
+{
+    nxt.push_back(head[u]);
+    head[u] = to.size();
+    from.push_back(u);
+    to.push_back(v);
+    raw_cap.push_back(f);
+    cap.push_back(0);
+    cost.push_back(w);
+}
+
+void add_edge(int u, int v, ll f, ll w)
+{
+    add(u, v, f, w);
+    add(v, u, 0, -w);
+}
+
+void spfa(int s)
+{
+    inq.assign(n + 2, false);
+    dis.assign(n + 2, INF);
+    pre.assign(n + 2, -1);
+    dis[s] = 0;
+    q.push(s);
+
+    while (!q.empty())
+    {
+        int u = q.front();
+        inq[u] = false;
+        q.pop();
+
+        for (int i = head[u]; ~i; i = nxt[i])
+        {
+            int v = to[i];
+            ll w = cost[i];
+            if (cap[i] &amp;&amp; dis[v] &gt; dis[u] + w)
+            {
+                dis[v] = dis[u] + w;
+                pre[v] = i;
+                if (!inq[v])
+                {
+                    inq[v] = true;
+                    q.push(v);
+                }
+            }
+        }
+    }
+}
+
+void add_one_cap(int id)
+{
+    int u = from[id];
+    int v = to[id];
+    if (cap[id])
+    {
+        ++cap[id];
+        return;
+    }
+    spfa(v);
+    if (dis[u] &lt; INF &amp;&amp; dis[u] + cost[id] &lt; 0)
+    {
+        ++cap[id ^ 1];
+        while (u != v)
+        {
+            int x = pre[u];
+            --cap[x];
+            ++cap[x ^ 1];
+            u = from[x];
+        }
+    }
+    else ++cap[id];
+}
+
+int main()
+{
+    int s, t; 
+
+    cin &gt;&gt; n &gt;&gt; m &gt;&gt; s &gt;&gt; t;
+
+    head.resize(n + 2, -1);
+
+    for (int i = 1; i &lt;= m; ++i)
+    {
+        ll u, v, f, w;
+        cin &gt;&gt; u &gt;&gt; v &gt;&gt; f &gt;&gt; w;
+        add_edge(u, v, f, w);
+    }
+
+    add_edge(t, s, LARGE, -LARGE);
+
+    for (int i = 1; i &lt;= n; ++i)
+    {
+        add_edge(n + 1, i, 0, 0);
+        cap[to.size() - 2] = 1;
+    }
+
+    for (int i = 40; i &gt;= 0; --i)
+    {
+        for (int j = 0; j &lt;= m * 2 + 1; ++j) cap[j] &lt;&lt;= 1;
+        for (int j = 0; j &lt;= m * 2; j += 2)
+        {
+            if ((raw_cap[j] &gt;&gt; i) &amp; 1)
+            {
+                add_one_cap(j);
+            }
+        }
+    }
+
+    ll min_cost = 0;
+
+    for (int i = 0; i &lt; m; ++i) min_cost += cap[i &lt;&lt; 1 | 1] * cost[i &lt;&lt; 1];
+
+    cout &lt;&lt; cap[m &lt;&lt; 1 | 1] &lt;&lt; ' ' &lt;&lt; min_cost;
+
+    return 0;
+}
+</code></pre>
+</details>
+<h2 id="关于出题">关于出题</h2>
+<p>尽管多数人使用的费用流算法是伪多项式复杂度的，我并不建议在题目中卡掉它。</p>
+<p>但需要注意的是，“不卡掉”是指设置合适的数据范围，使得常见费用流算法可以确保通过。如果设置了不合理的数据范围而测试数据中没有卡掉常见费用流算法，那么不仅 <strong>卡了</strong> 常见费用流算法，数据也造的不合格。</p>
+<h2 id="参考资料">参考资料</h2>
+<ol>
+<li>
+<p><a href="https://min-25.hatenablog.com/entry/2018/03/19/235802" target="_blank">Min_25 最小費用最大流の悪例題</a></p>
+</li>
+<li>
+<p><a href="https://web.stanford.edu/class/cs361b/files/cs361b-notes.pdf" target="_blank">Stanford CS 361B: Advanced Algorithms, Spring 2014 Lecture Notes</a></p>
+</li>
+<li>
+<p><a href="https://www.math.ubc.ca/~anstee/math523/StronglyPolynomialNetworkFlow.pdf" target="_blank">A Faster Strongly Polynomial Minimum Cost Flow Algorithm</a></p>
+</li>
+<li>
+<p><a href="https://web.eecs.umich.edu/~pettie/matching/Edmonds-Karp-network-flow.pdf" target="_blank">Theoretical Improvements in Algorithmic Efficiency for Network Flow Problems</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Laakeri/tiralabra" target="_blank">Github repo Laakeri/tiralabra</a></p>
+</li>
+</ol>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        <span title="2020-02-10 16:02:40 &#43;0800 &#43;0800">2020-02-10</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/c91730c6e3c187a11c9ff6fce8a37803733200e1" title="Move category 算法 to 知识点" target="_blank">(c91730c)</a>
+        ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/%e5%9f%ba%e4%ba%8e-Capacity-Scaling-%e7%9a%84%e5%bc%b1%e5%a4%9a%e9%a1%b9%e5%bc%8f%e5%a4%8d%e6%9d%82%e5%ba%a6%e6%9c%80%e5%b0%8f%e8%b4%b9%e7%94%a8%e6%b5%81%e7%ae%97%e6%b3%95.md" target="_blank">更新历史</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%9B%BE%E8%AE%BA/">图论</a>
+          <a href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/">网络流</a>
+          <a href="/tags/%E8%B4%B9%E7%94%A8%E6%B5%81/">费用流</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E6%82%AC%E5%B4%96%E8%BE%B9%E7%9A%84%E8%B8%9F%E8%B9%B0-csp-s-2019/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">悬崖边的踟蹰 —— CSP-S 2019</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cf3d-least-cost-bracket-sequence%E8%B4%AA%E5%BF%83/">
+            <span class="next-text nav-default">CF3D Least Cost Bracket Sequence（贪心）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/blog-comments"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:ouuansteve@gmail.com" class="iconfont icon-email" title="email" target="_blank"></a>
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span> 
+    <span class="author">ouuan</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/tomorrow.min.css" rel="stylesheet">
+  <script>hljs.configure({tabReplace: '    '});</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  
+<script type="text/javascript" src="/dist/even.63725abf.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157787819-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

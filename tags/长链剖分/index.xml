@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>长链剖分 on ouuan的博客</title>
+    <link>https://ouuan.github.io/tags/%E9%95%BF%E9%93%BE%E5%89%96%E5%88%86/</link>
+    <description>Recent content in 长链剖分 on ouuan的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 23 Jul 2019 20:24:05 +0800</lastBuildDate>
+    
+	<atom:link href="https://ouuan.github.io/tags/%E9%95%BF%E9%93%BE%E5%89%96%E5%88%86/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>BZOJ1758 [WC2010]重建计划（二分答案，长链剖分）</title>
+      <link>https://ouuan.github.io/post/bzoj1758-wc2010-%E9%87%8D%E5%BB%BA%E8%AE%A1%E5%88%92%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88%E9%95%BF%E9%93%BE%E5%89%96%E5%88%86/</link>
+      <pubDate>Tue, 23 Jul 2019 20:24:05 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/bzoj1758-wc2010-%E9%87%8D%E5%BB%BA%E8%AE%A1%E5%88%92%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88%E9%95%BF%E9%93%BE%E5%89%96%E5%88%86/</guid>
+      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P4292&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
+&lt;p&gt;给你一棵带边权的树，求所有长度在 $[L,U]$ 这个范围内的路径里平均权值（总权值除以边数）的最大值。&lt;/p&gt;
+&lt;p&gt;$2\le n\le 10^5$，保证至少有一条满足要求的路径。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

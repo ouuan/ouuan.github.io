@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>CF603E Pastoral Oddities（结论，LCT/分治&#43;并查集） - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="题目链接
+题意简述
+给你一张边带权且边从 $1$ 到 $m$ 编号的无向图 $G$，称一张图 $H$ 是“好的”，当且仅当存在一个 $H$ 的生成子图 $F$ 使得 $F$ 中每个点的度数都是奇数。现在，你需要回答 $m$ 个问题，第 $i$ 个问题是：求最小的 $x$，使得仅保留 $G$ 中编号不超过 $i$ 且边权不超过 $x$ 的边时，得到的生成子图是“好的”，或者指出不存在这样的 $x$。
+$2\le n\le 10^5$, $1\le m\le 3\cdot 10^5$, TL 4s。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.67.0 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/cf603e/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.6e1b3b90.min.css" rel="stylesheet">
+
+
+
+<meta property="og:title" content="CF603E Pastoral Oddities（结论，LCT/分治&#43;并查集）" />
+<meta property="og:description" content="题目链接
+
+  题意简述
+给你一张边带权且边从 $1$ 到 $m$ 编号的无向图 $G$，称一张图 $H$ 是“好的”，当且仅当存在一个 $H$ 的生成子图 $F$ 使得 $F$ 中每个点的度数都是奇数。现在，你需要回答 $m$ 个问题，第 $i$ 个问题是：求最小的 $x$，使得仅保留 $G$ 中编号不超过 $i$ 且边权不超过 $x$ 的边时，得到的生成子图是“好的”，或者指出不存在这样的 $x$。
+$2\le n\le 10^5$, $1\le m\le 3\cdot 10^5$, TL 4s。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/cf603e/" />
+<meta property="article:published_time" content="2020-02-18T11:45:02+08:00" />
+<meta property="article:modified_time" content="2020-02-27T13:10:31+08:00" />
+<meta itemprop="name" content="CF603E Pastoral Oddities（结论，LCT/分治&#43;并查集）">
+<meta itemprop="description" content="题目链接
+
+  题意简述
+给你一张边带权且边从 $1$ 到 $m$ 编号的无向图 $G$，称一张图 $H$ 是“好的”，当且仅当存在一个 $H$ 的生成子图 $F$ 使得 $F$ 中每个点的度数都是奇数。现在，你需要回答 $m$ 个问题，第 $i$ 个问题是：求最小的 $x$，使得仅保留 $G$ 中编号不超过 $i$ 且边权不超过 $x$ 的边时，得到的生成子图是“好的”，或者指出不存在这样的 $x$。
+$2\le n\le 10^5$, $1\le m\le 3\cdot 10^5$, TL 4s。
+">
+<meta itemprop="datePublished" content="2020-02-18T11:45:02&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-27T13:10:31&#43;08:00" />
+<meta itemprop="wordCount" content="3660">
+
+
+
+<meta itemprop="keywords" content="结论,图论,LCT,分治,并查集," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CF603E Pastoral Oddities（结论，LCT/分治&#43;并查集）"/>
+<meta name="twitter:description" content="题目链接
+
+  题意简述
+给你一张边带权且边从 $1$ 到 $m$ 编号的无向图 $G$，称一张图 $H$ 是“好的”，当且仅当存在一个 $H$ 的生成子图 $F$ 使得 $F$ 中每个点的度数都是奇数。现在，你需要回答 $m$ 个问题，第 $i$ 个问题是：求最小的 $x$，使得仅保留 $G$ 中编号不超过 $i$ 且边权不超过 $x$ 的边时，得到的生成子图是“好的”，或者指出不存在这样的 $x$。
+$2\le n\le 10^5$, $1\le m\le 3\cdot 10^5$, TL 4s。
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/links/">
+        <li class="mobile-menu-item">链接</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/links/">链接</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">CF603E Pastoral Oddities（结论，LCT/分治&#43;并查集）</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2020-02-18 11:45:02 &#43;0800 &#43;0800"> 2020-02-18 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#简要做法">简要做法</a>
+          <ul>
+            <li><a href="#第一步转化">第一步转化</a></li>
+            <li><a href="#lct-做法">LCT 做法</a></li>
+            <li><a href="#分治做法">分治做法</a></li>
+          </ul>
+        </li>
+        <li><a href="#参考代码">参考代码</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><a href="https://codeforces.com/contest/603/problem/E" target="_blank">题目链接</a></p>
+<div class="admonition question">
+  <p class="admonition-title">题意简述</p>
+<p>给你一张边带权且边从 $1$ 到 $m$ 编号的无向图 $G$，称一张图 $H$ 是“好的”，当且仅当存在一个 $H$ 的生成子图 $F$ 使得 $F$ 中每个点的度数都是奇数。现在，你需要回答 $m$ 个问题，第 $i$ 个问题是：求最小的 $x$，使得仅保留 $G$ 中编号不超过 $i$ 且边权不超过 $x$ 的边时，得到的生成子图是“好的”，或者指出不存在这样的 $x$。</p>
+<p>$2\le n\le 10^5$, $1\le m\le 3\cdot 10^5$, TL 4s。</p>
+</div>
+<h2 id="简要做法">简要做法</h2>
+<h3 id="第一步转化">第一步转化</h3>
+<p>这道题题意就非常绕口，不转化一下很难下手。</p>
+<p>我们需要得到这样一个结论：</p>
+<p>$G$ 的一个生成子图是“好的”，当且仅当它的每一个连通块都包含偶数个点。</p>
+<details class="admonition note"><summary class="admonition-title">结论的证明</summary>
+<p><strong>必要性</strong></p>
+<p>如果存在一个连通块有奇数个点，这张图的任何一个生成子图都必然包含一个包含奇数个点的连通块。由于无向图中所有点的度数之和为偶数，一个包含奇数个点的连通块中必然存在度数为偶数的点，从而不符合题意。</p>
+<p><strong>充分性</strong></p>
+<p>一句话说明：对每个包含偶数个点的连通块找一个生成树，每个点如果有奇数个儿子就断开与父亲的边，就构造出来了。</p>
+<p>下面是详细的证明。</p>
+<p>先是问题的转化：</p>
+<p>需证一张图是“好的”，只需证明它的每一个连通块都是“好的”。</p>
+<p>需证一张连通图是“好的”，只需证明它的任意一个生成树都是“好的”。</p>
+<p>需证任意一张每个连通块都包含偶数个点的图都是“好的”，只需证明任意一棵包含偶数个点的树都是“好的”。</p>
+<p>下面开始证明任意一棵包含偶数个点的树都是“好的”：</p>
+<p>首先，任选一个点作为树根。</p>
+<p>约定：一个单点的高度是 $1$，树根的所有儿子均是叶子的树高度为 $2$。</p>
+<p>接着，使用归纳法证明。</p>
+<p>归纳基础：高度为 $2$ 且有偶数个点的树显然是“好的”。高度为 $1$ 或 $2$ 且有奇数个点的树显然有且仅有根的度数为偶数。</p>
+<p>归纳假设：高度不超过 $i$ 且有偶数个点的树是“好的”，高度不超过 $i$ 且有奇数个点的树可以通过删边使得有且仅有根的度数为偶数。</p>
+<p>归纳证明：</p>
+<ol>
+<li>
+<p>高度为 $i+1$ 且有偶数个点的树是“好的”</p>
+<p>删去树根与包含偶数个点的子树之间的连边，由归纳假设得到这些子树都是“好的”，所以只需证明剩下没被删去的部分是“好的”。</p>
+<p>删去后，整棵树依然包含偶数个点，因此，根有奇数个儿子，也就是说根的度数为奇数。由归纳假设得到剩下的每棵子树都可以转化成有且仅有根的度数为偶数的树，加上与根相连的这条边，所有子树内的点的度数就都为奇数了。所以，高度为 $i+1$ 且有偶数个点的树是“好的”。</p>
+</li>
+<li>
+<p>高度为 $i+1$ 且有奇数个点的树可以通过删边使得有且仅有根的度数为偶数。</p>
+<p>与上面类似，唯一不同的地方在于删去包含偶数个点的子树后根有偶数个儿子，此时有且仅有根的度数为偶数。</p>
+</li>
+</ol>
+<p>通过上述归纳可以得到，任意一棵包含偶数个点的树都是“好的”，从而充分性得证。</p>
+</details>
+<p>有了这个结论之后，问题就变成了：对于前 $i$ ($1\le i\le m$) 条边，至少要保留其中边权不大于多少的边，才能使得图中所有连通块都包含偶数个点（或者保留所有前 $i$ 条边依然无法满足）。</p>
+<h3 id="lct-做法">LCT 做法</h3>
+<p>考虑按编号顺序加边，用堆/<code>priority_queue</code> 按边权大小维护边，每加一条边就按边权从大到小删边直至出现大小为奇数的连通块，最后删掉的那条边的边权就是答案。由于边权大的边总是先被删掉，可以用 LCT 维护最小生成森林而非整张图。</p>
+<p>复杂度 $O(n+m\log n)$ 。</p>
+<h3 id="分治做法">分治做法</h3>
+<p>这题还有一个神奇的分治做法。</p>
+<p>首先，“编号”和“边权”可以看成是两维坐标，从而可以把每条边视作二维平面上的一个点，“编号不超过 $x$ 且边权不超过 $y$ 的边”就对应着 $(0, 0)$ 到 $(x, y)$ 这个矩形。</p>
+<p>在下文中，用 $(x_1, y_1, x_2, y_2)$ 表示编号在 $[x_1, x_2]$ 之内，边权在 $[y_1, y_2]$ 之内的所有边构成的集合。</p>
+<p>于是，原问题就转变成了，对于每个横坐标 $x$，求出最小的 $y$，使得原图仅保留 $(0, 0, x, y)$ 内的边时，所有连通块都包含偶数个点。</p>
+<p>为了方便，下文不考虑无解的情况，写代码时简单判一判就好了。</p>
+<p>分治的概述：</p>
+<ol>
+<li>全局维护一个支持撤销的并查集。</li>
+<li><code>solve(xl, xr, yl, yr)</code> 会算出 $[xl, xr]$ 的答案，已知这些答案都在 $[yl, yr]$ 内。调用之前需要保证并查集内的边集为 $(0, 0, xl - 1, yl - 1)$。</li>
+<li>令 $xmid = (xl + xr) / 2$，<code>solve(xl, xr, yl, yr)</code> 先计算出 $xmid$ 的答案为 $ans[xmid]$，然后递归计算 <code>solve(xl, xmid - 1, ans[xmid], yr)</code> 和 <code>solve(xmid + 1, xr, yl, ans[xmid])</code>。</li>
+</ol>
+<p>这带来了两个问题：</p>
+<ol>
+<li>递归下去时如何保证并查集内分别含有 $(0, 0, xl-1, ansmid-1)$ 和 $(0, 0, xmid, yl-1)$？</li>
+<li>总的时间复杂度是多少？</li>
+</ol>
+<p>解决这两个问题前，我们先来看一下更加完整的流程：</p>
+<pre><code class="language-plain">solve(xl, xr, yl, yr):
+   如果 xl &gt; xr:
+      return
+   如果 yl = yr:
+      [xl, xr] 的答案为 yl
+      return
+   令此时的并查集状态为 ver1 = (0, 0, xl - 1, yl - 1)
+   加上 (xl, 0, xmid, yl - 1) 的边
+   令此时的并查集状态为 ver2 = (0, 0, xmid, yl - 1)
+   将 (0, yl, xmid, yr) 的边按纵坐标（边权）顺序从小到大加入，直至图中没有奇连通块
+   上一步中最后加入的边的边权即为 xmid 的答案 ans[xmid]
+   回退至 ver2 = (0, 0, xmid, yl - 1)
+   solve(xmid + 1, xr, yl, ans[xmid])
+   回退至 ver1 = (0, 0, xl - 1, yl - 1)
+   加上 (0, yl, xl - 1, ans[xmid] - 1) 的边，此时并查集内的边为 (0, 0, xl - 1, ansmid - 1)
+   solve(xl, xmid - 1, ans[xmid], yr)
+   回退至 ver1 = (0, 0, xl - 1, yl - 1)
+</code></pre>
+<p>结合图来理解：</p>
+<img src="/post_img/CF603E/solve.png" alt="solve">
+<ol>
+<li>一开始并查集里是 ①。</li>
+<li>加上 ②。</li>
+<li>在 ③ + ④ 中按边权从小到大加边，直至只有偶连通块。真正加了的边是 ④，ans[xmid] 是 ④ 的顶端。</li>
+<li>删掉 ④，递归解决红色部分。</li>
+<li>删掉 ②，加上 ⑤，递归解决蓝色部分。</li>
+</ol>
+<p>还有一个细节：为了快速获取一个矩形内的边，可以将 $(0, 0, xr, yr)\setminus(0, 0, xl-1, yl-1)$ 这些边作为 <code>solve</code> 的参数。</p>
+<p>有了这个完整流程，第一个问题（正确性）解决了。</p>
+<p>接下来是第二个问题：时间复杂度是多少？</p>
+<p>我们来看每一层分治的 <code>solve</code> 函数的参数构成的的这些矩形，实际上是从左上到右下排列，而 <code>solve</code> 函数中添加/回退/作为参数的边是向左和向下的两条。可以看出：在每一层分治内，每条边最多在三个 <code>solve</code> 函数内带来了常数次操作。（并不会出现多个高度为 $1$ 的矩形排成一排的情况，因为高度为 $1$ 时直接得到答案终止递归了。）</p>
+<img src="/post_img/CF603E/layer.png" alt="layer">
+<p>于是，每一层分治的时间复杂度是 $O(m\log n)$，总时间复杂度就是 $O(n+m\log^2 n+m\log m)$。</p>
+<p>虽然两个 log，但它是分治和并查集，所以跑的比 LCT 快。</p>
+<p>我写的空间复杂度是 $O(n+m\log n)$。貌似可以不在参数里放 $(0, 0, xr, yr)\setminus(0, 0, xl-1, yl-1)$，然后可以线性空间复杂度，不是很懂..（<del>如果追求理论复杂度的话 LCT 它不香吗；否则，只要能过，且体会到这个做法的精髓就好。</del>）</p>
+<p>P.S. 我是在 <a href="https://www.cnblogs.com/zzqsblog/p/5927422.html" target="_blank">一些常用的数据结构维护手法 - zzq</a> 看到这题和这个做法的（其实是我一开始没看懂他的伪码在干嘛，后来自己想出来的..）。我个人觉得这个和整体二分差的挺大的，套不到 <a href="/post/parallel-binary-search/#%e7%ae%97%e6%b3%95%e6%a1%86%e6%9e%b6">整体二分的框架</a> 中。但我也不知道整体二分有没有一个官方而精确的定义，大家各自的定义或狭义或广义，读者可以自行判断是否要把这个做法视作一种整体二分。（把这个视作整体二分的人多半会认为决策单调性优化 DP 那个分治也是整体二分吧..）</p>
+<h2 id="参考代码">参考代码</h2>
+<details class="admonition note"><summary class="admonition-title">LCT 做法</summary>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;stack&gt;
+#include &lt;cctype&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int INF = 2e9;
+
+int read()
+{
+	int out = 0;
+	char c;
+	while (!isdigit(c = getchar()));
+	for (; isdigit(c); c = getchar()) out = out * 10 + c - '0';
+	return out;
+}
+
+struct Edge
+{
+	int u, v, w, id;
+	bool operator&lt;(const Edge &amp;b) const
+	{
+		return w &lt; b.w;
+	}
+};
+
+struct LCT
+{
+	struct Node
+	{
+		vector&lt;int&gt; ch;
+		int pa;
+		bool node, odd, vir, rev;
+		Edge e, mx;
+		Node() : ch(2, 0), pa(0), node(true), odd(true), vir(false), rev(false), e({0, 0, 0, 0}), mx({0, 0, 0, 0}) {}
+		Node(int u, int v, int w, int id) : ch(2, 0), pa(0), node(false), odd(false), vir(false), rev(false), e({u, v, w, id}), mx({u, v, w, id}) {}
+	};
+	
+	int odd;
+	vector&lt;Node&gt; t;
+	
+	LCT(int n, int m)
+	{
+		t.resize(n + 1);
+		t[0] = Node(0, 0, 0, 0);
+		t.reserve(n + m + 1);
+		odd = n;
+	}
+	
+	bool nroot(int x)
+	{
+		return x == t[t[x].pa].ch[0] || x == t[t[x].pa].ch[1];
+	}
+	
+	void pushup(int x)
+	{
+		t[x].mx = max(t[x].e, max(t[t[x].ch[0]].mx, t[t[x].ch[1]].mx));
+		t[x].odd = t[t[x].ch[0]].odd ^ t[t[x].ch[1]].odd ^ t[x].vir ^ t[x].node;
+	}
+	
+	void rotate(int x)
+	{
+		int y = t[x].pa;
+		int z = t[y].pa;
+		int k = x == t[y].ch[1];
+		if (nroot(y)) t[z].ch[y == t[z].ch[1]] = x;
+		t[x].pa = z;
+		t[y].ch[k] = t[x].ch[k ^ 1];
+		t[t[x].ch[k ^ 1]].pa = y;
+		t[x].ch[k ^ 1] = y;
+		t[y].pa = x;
+		pushup(y);
+		pushup(x);
+	}
+	
+	void reverse(int x)
+	{
+		swap(t[x].ch[0], t[x].ch[1]);
+		t[x].rev ^= 1;
+	}
+	
+	void pushdown(int x)
+	{
+		if (t[x].rev)
+		{
+			reverse(t[x].ch[0]);
+			reverse(t[x].ch[1]);
+			t[x].rev = false;
+		}
+	}
+	
+	void Splay(int x)
+	{
+		static vector&lt;int&gt; stk; // 一件玄学的事是这里 vector 1.7s, stack 2.8s...
+		int u = x;
+		stk.push_back(x);
+		while (nroot(u)) stk.push_back(u = t[u].pa);
+		while (!stk.empty())
+		{
+			pushdown(stk.back());
+			stk.pop_back();
+		}
+		while (nroot(x))
+		{
+			int y = t[x].pa;
+			int z = t[y].pa;
+			if (nroot(y)) (x == t[y].ch[1]) ^ (y == t[z].ch[1]) ? rotate(x) : rotate(y);
+			rotate(x);
+		}
+	}
+	
+	void access(int x)
+	{
+		for (int y = 0; x; x = t[y = x].pa)
+		{
+			Splay(x);
+			t[x].vir ^= t[y].odd ^ t[t[x].ch[1]].odd;
+			t[x].ch[1] = y;
+			pushup(x);
+		}
+	}
+	
+	void makeroot(int x)
+	{
+		access(x);
+		Splay(x);
+		reverse(x);
+	}
+	
+	int findroot(int x)
+	{
+		access(x);
+		Splay(x);
+		while (t[x].ch[0])
+		{
+			pushdown(x);
+			x = t[x].ch[0];
+		}
+		Splay(x);
+		return x;
+	}
+	
+	void link(int x, int y, int w, int id)
+	{
+		int e = t.size();
+		t.emplace_back(x, y, w, id);
+		makeroot(x);
+		makeroot(y);
+		odd -= t[x].odd + t[y].odd;
+		t[x].pa = t[y].pa = e;
+		t[e].vir = t[x].odd ^ t[y].odd;
+		pushup(e);
+		odd += t[e].odd;
+	}
+	
+	void cut(int x, int y, int id)
+	{
+		makeroot(x);
+		if (findroot(y) == x)
+		{
+			if (t[t[x].ch[1]].e.id == id || t[t[t[x].ch[1]].ch[0]].e.id == id)
+			{
+				odd -= t[x].odd;
+				t[x].ch[1] = t[y].pa = t[y].ch[0] = 0;
+				pushup(x);
+				pushup(y);
+				odd += t[x].odd + t[y].odd;
+			}
+		}
+	}
+};
+
+int main()
+{
+	int n = read();
+	int m = read();
+	
+	LCT t(n, m);
+	
+	priority_queue&lt;Edge&gt; q;
+	
+	int ans = INF;
+	
+	for (int i = 1; i &lt;= m; ++i)
+	{
+		int u = read();
+		int v = read();
+		int w = read();
+		q.push({u, v, w, i});
+		t.makeroot(u);
+		if (t.findroot(v) == u)
+		{
+			Edge e = t.t[u].mx;
+			if (e.w &gt; w)
+			{
+				t.cut(e.u, e.v, e.id);
+				t.link(u, v, w, i);
+			}
+			else if (!t.odd) ans = min(ans, w);
+		}
+		else t.link(u, v, w, i);
+		
+		while (!t.odd)
+		{
+			Edge e = q.top();
+			q.pop();
+			ans = min(ans, e.w);
+			t.cut(e.u, e.v, e.id);
+		}
+		
+		printf(&quot;%d\n&quot;, ans == INF ? -1 : ans);
+	}
+	
+	return 0;
+}
+</code></pre>
+</details>
+<details class="admonition note"><summary class="admonition-title">分治做法</summary>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cctype&gt;
+#include &lt;stack&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+int read()
+{
+	int out = 0;
+	char c;
+	while (!isdigit(c = getchar()));
+	for (; isdigit(c); c = getchar()) out = out * 10 + c - '0';
+	return out;
+}
+
+const int INF = 1e9 + 1;
+
+struct UFS
+{
+	int odd;
+	vector&lt;int&gt; f, s;
+	
+	struct Change
+	{
+		int x, y, s;
+	};
+	stack&lt;Change&gt; c;
+	
+	void init(int n)
+	{
+		f.resize(n + 1, 0);
+		s.resize(n + 1, 1);
+		
+		for (int i = 1; i &lt;= n; ++i) f[i] = i;
+		odd = n;
+	}
+	
+	int find(int x)
+	{
+		return x == f[x] ? x : find(f[x]);
+	}
+	
+	void merge(int x, int y)
+	{
+		x = find(x);
+		y = find(y);
+		if (x == y) return;
+		if (s[x] &lt; s[y]) swap(x, y);
+		c.push({x, y, s[x]});
+		if ((s[x] &amp; 1) &amp;&amp; (s[y] &amp; 1)) odd -= 2;
+		s[x] += s[y];
+		f[y] = x;
+	}
+	
+	void rollback(int x)
+	{
+		while ((int)c.size() &gt; x)
+		{
+			Change t = c.top();
+			c.pop();
+			if ((t.s &amp; 1) &amp;&amp; (s[t.y] &amp; 1)) odd += 2;
+			s[t.x] = t.s;
+			f[t.y] = t.y;
+		}
+	}
+	
+	int status() const { return c.size(); }
+} ufs;
+
+struct Edge
+{
+	int u, v, w, id;
+	bool operator&lt;(const Edge &amp;b) const
+	{
+		return w &lt; b.w;
+	}
+	bool in(int x1, int y1, int x2, int y2) const
+	{
+		return id &gt;= x1 &amp;&amp; id &lt;= x2 &amp;&amp; w &gt;= y1 &amp;&amp; w &lt;= y2;
+	}
+};
+
+vector&lt;int&gt; ans;
+
+void solve(int xl, int xr, int yl, int yr, vector&lt;Edge&gt;&amp; e)
+{
+	if (xl &gt; xr) return;
+	if (yl == yr)
+	{
+		for (int i = xl; i &lt;= xr; ++i) ans[i] = yl;
+		return;
+	}
+	int ver1 = ufs.status();
+	int xmid = (xl + xr) &gt;&gt; 1;
+	int p;
+	for (p = 0; p &lt; (int)e.size() &amp;&amp; e[p].w &lt; yl; ++p)
+		if (e[p].in(xl, 0, xmid, yl - 1)) ufs.merge(e[p].u, e[p].v);
+	int ver2 = ufs.status();
+	for (int i = p; i &lt; (int)e.size(); ++i)
+	{
+		if (e[i].in(0, yl, xmid, yr))
+		{
+			ufs.merge(e[i].u, e[i].v);
+			if (!ufs.odd)
+			{
+				ans[xmid] = e[i].w;
+				break;
+			}
+		}
+	}
+	vector&lt;Edge&gt; le, re;
+	for (auto x : e) if (x.in(0, 0, xr, ans[xmid]) &amp;&amp; !x.in(0, 0, xmid, yl - 1)) re.push_back(x);
+	for (auto x : e) if (x.in(0, 0, xmid - 1, yr) &amp;&amp; !x.in(0, 0, xl - 1, ans[xmid] - 1)) le.push_back(x);
+	ufs.rollback(ver2);
+	solve(xmid + 1, xr, yl, ans[xmid], re);
+	if (ans[xmid] &lt; INF)
+	{
+		ufs.rollback(ver1);
+		for (int i = p; i &lt; (int)e.size(); ++i)
+			if (e[i].in(0, yl, xl - 1, ans[xmid] - 1)) ufs.merge(e[i].u, e[i].v);
+		solve(xl, xmid - 1, ans[xmid], yr, le);
+	}
+	ufs.rollback(ver1);
+}
+
+int main()
+{
+	int n = read();
+	int m = read();
+	
+	vector&lt;Edge&gt; e;
+	
+	for (int i = 0; i &lt; m; ++i)
+	{
+		int u = read();
+		int v = read();
+		int w = read();
+		e.push_back({u, v, w, i});
+	}
+	
+	sort(e.begin(), e.end());
+	
+	ans.resize(m, INF);
+	
+	ufs.init(n);
+	
+	solve(0, m - 1, 1, INF, e);
+	
+	for (auto x : ans) printf(&quot;%d\n&quot;, x == INF ? -1 : x);
+	
+	return 0;
+}
+</code></pre>
+</details>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        <span title="2020-02-27 13:10:31 &#43;0800 &#43;0800">2020-02-27</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/ffb870cbaab3dbdfec12a0027ce60913bc850366" title="添加 CF603E 结论充分性的一句话说明" target="_blank">(ffb870c)</a>
+        ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/CF603E.md" target="_blank">更新历史</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E7%BB%93%E8%AE%BA/">结论</a>
+          <a href="/tags/%E5%9B%BE%E8%AE%BA/">图论</a>
+          <a href="/tags/lct/">LCT</a>
+          <a href="/tags/%E5%88%86%E6%B2%BB/">分治</a>
+          <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/hnoi2010-%E5%9F%8E%E5%B8%82%E5%BB%BA%E8%AE%BE/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">「HNOI2010」城市建设（线段树分治，LCT/Kruskal）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/parallel-binary-search/">
+            <span class="next-text nav-default">整体二分学习笔记</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/blog-comments"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:ouuansteve@gmail.com" class="iconfont icon-email" title="email" target="_blank"></a>
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span> 
+    <span class="author">ouuan</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/tomorrow.min.css" rel="stylesheet">
+  <script>hljs.configure({tabReplace: '    '});</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  
+<script type="text/javascript" src="/dist/even.63725abf.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157787819-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

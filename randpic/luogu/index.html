@@ -1,0 +1,108 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+  		<meta name="referrer" content="no-referrer" />
+		</script>
+		<title>
+			随机图片-洛谷图床
+		</title>
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+	</head>
+	<body style="margin: 0px; background: #0e0e0e;">
+		<script type="text/javascript">
+			var cur = 1;
+			var xx = 0;
+			var yy = 0;
+			var rx = 0;
+			var ry = 0;
+			var nw;
+			var nh;
+			var mw;
+			var mh;
+			var w;
+			var h;
+			function setSize() {
+				if (cur == 1) {
+					var p = document.getElementsByTagName("img")[0];
+					nw = p.naturalWidth;
+					nh = p.naturalHeight;
+					mw = window.innerWidth;
+					mh = window.innerHeight;
+					if (nw > mw || nh > mh) {
+						p.style = "cursor: zoom-in";
+					} else {
+						p.style = "cursor: auto";
+					}
+					if (nw * mh > nh * mw) {
+						h = nh * mw / nw;
+						w = mw;
+					} else {
+						w = nw * mh / nh;
+						h = mh;
+					}
+					p.style.width = w;
+					p.style.height = h;
+					p.style.marginTop = (mh - h) / 2;
+					p.style.marginLeft = (mw - w) / 2;
+				} else {
+					if (nw > mw || nh > mh) {
+						p.style = "cursor: zoom-out";
+					} else {
+						p.style = "cursor: auto";
+					}
+				}
+			}
+			function picLoaded() {
+				setSize();
+				window.onresize = function() {
+					setSize();
+				}
+			}
+			function BigSmall() {
+				mw = window.innerWidth;
+				mh = window.innerHeight;
+				if (nw > mw || nh > mh) {
+					if (cur == 1) {
+						cur = 2;
+						var p = document.getElementsByTagName("img")[0];
+						p.style = "cursor: zoom-out";
+						var e = event || window.event;
+						mw = window.innerWidth;
+						mh = window.innerHeight;
+						if (nw * mh > nh * mw) {
+							h = nh * mw / nw;
+							w = mw;
+						} else {
+							w = nw * mh / nh;
+							h = mh;
+						}
+						if (nw <= mw) {
+							xx = (mw - nw) / 2;
+							rx = 0;
+						} else {
+							xx = 0;
+							rx = (nw - mw) * (e.clientX - (mw - w) / 2) / w;
+						}
+						if (nh <= mh) {
+							yy = (mh - nh) / 2;
+							ry = 0;
+						} else {
+							yy = 0;
+							ry = (nh - mh) * (e.clientY - (mh - h) / 2) / h;
+						}
+						p.style.marginTop = yy;
+						p.style.marginLeft = xx;
+						document.body.scrollLeft = rx;
+						document.body.scrollTop = ry;
+					} else {
+						cur = 1;
+						setSize();
+					}
+				}
+			}
+		    var r=Math.floor(Math.random()*58000);
+			document.write("<img src=https://cdn.luogu.org/upload/pic/"+r+".png onload=\"picLoaded()\" onclick=\"BigSmall()\">");
+		</script>
+	</body>
+</html>

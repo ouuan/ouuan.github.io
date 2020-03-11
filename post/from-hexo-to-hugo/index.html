@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>从 Hexo 到 Hugo - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="该博客的前身是自 2018 年 12 月搭建的 hexo 博客，于 2020 年 2 月搬迁至 hugo。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.67.0 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/from-hexo-to-hugo/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<link href="/dist/even.6e1b3b90.min.css" rel="stylesheet">
+
+
+
+<meta property="og:title" content="从 Hexo 到 Hugo" />
+<meta property="og:description" content="该博客的前身是自 2018 年 12 月搭建的 hexo 博客，于 2020 年 2 月搬迁至 hugo。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/from-hexo-to-hugo/" />
+<meta property="article:published_time" content="2020-02-06T23:07:17+08:00" />
+<meta property="article:modified_time" content="2020-02-15T20:45:27+08:00" />
+<meta itemprop="name" content="从 Hexo 到 Hugo">
+<meta itemprop="description" content="该博客的前身是自 2018 年 12 月搭建的 hexo 博客，于 2020 年 2 月搬迁至 hugo。">
+<meta itemprop="datePublished" content="2020-02-06T23:07:17&#43;08:00" />
+<meta itemprop="dateModified" content="2020-02-15T20:45:27&#43;08:00" />
+<meta itemprop="wordCount" content="1447">
+
+
+
+<meta itemprop="keywords" content="博客," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="从 Hexo 到 Hugo"/>
+<meta name="twitter:description" content="该博客的前身是自 2018 年 12 月搭建的 hexo 博客，于 2020 年 2 月搬迁至 hugo。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/links/">
+        <li class="mobile-menu-item">链接</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/links/">链接</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">从 Hexo 到 Hugo</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2020-02-06 23:07:17 &#43;0800 &#43;0800"> 2020-02-06 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%8A%80%E6%9C%AF/"> 技术 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#motivation">Motivation</a></li>
+        <li><a href="#process">Process</a>
+          <ul>
+            <li><a href="#站内搜索">站内搜索</a></li>
+            <li><a href="#代码高亮">代码高亮</a></li>
+            <li><a href="#代码复制按钮">代码复制按钮</a></li>
+            <li><a href="#gitinfo-with-unicode">GitInfo with Unicode</a></li>
+            <li><a href="#table-of-content-with-h1">Table Of Content with h1</a></li>
+            <li><a href="#html-in-links">HTML in links</a></li>
+          </ul>
+        </li>
+        <li><a href="#issues">Issues</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>该博客的前身是自 2018 年 12 月搭建的 hexo 博客，于 2020 年 2 月搬迁至 hugo。</p>
+<h2 id="motivation">Motivation</h2>
+<p>这次搬迁最直接的原因，是我把 hexo 博客从 Windows 搬到 Linux 失败了..</p>
+<p>之前魔改太多，主题里各种文件都改过，甚至 node_modules 里面都被我改过很多地方，之前因此都放弃升级 hexo 和 NexT 主题，而最近开始主用 Manjaro，于是博客必须得搬到 Linux 上，但无论是简单复制过来还是重新使用 npm 安装包都未能如愿。</p>
+<p>其实说不定还有很多解决方法，但我之前就听说过 hugo，于是就决定干脆搬过来好了。</p>
+<p>但为什么是搬到 hugo，而不是升级 hexo 呢？</p>
+<p>从 hugo 本身来说，它最显著的优点，就是快：</p>
+<ol>
+<li>安装快。这在本地安装时倒影响不大，而且如果你要修改主题还得用 yarn 安装包，得装上几分钟。最主要的是，安装快使得 CI 快，使用 CI 发布 hugo 博客就会非常容易且快捷。</li>
+<li>构建快。hugo 比起 hexo 的构建速度不是快了一点点，hexo 需要几十秒才能构建完的博客，hugo 只需不到一秒。这点更加重要，它不仅加速了 CI，而且本地构建几乎没有延时，加上 server 预览使用 websocket，直接分屏当预览写博客体验良好。</li>
+</ol>
+<p>但弊端也同样明显：没有插件，导致很多功能得自己写，或者复制别人的代码。只不过对于 hexo 都能改到 node_modules 里面的魔改玩家来说，这都不算什么（</p>
+<p>只不过我一直用的是 2018 年 12 月那时的 hexo 和 NexT，这一年来 hexo 可能也有很多改进，所以我的比较不一定准确。</p>
+<h2 id="process">Process</h2>
+<p>hugo 的配置步骤就不说了，网上很多教程，而且这个博客是 <a href="https://github.com/ouuan/hugo-blog" target="_blank">开源</a> 的，可以自己看。稍微提醒一下，CI 配置中的 <code>$GITHUB_TOKEN</code> 需要在 travis.ci 上进行设置。</p>
+<p>从 hexo 搬到 hugo 可以参考这篇博客：<a href="https://io-oi.me/tech/hugo-vs-hexo/" target="_blank">Hugo 与 Hexo 的异同 | reuixiy</a> 。</p>
+<p>我自己使用的脚本（fork 然后稍微改了一点）：<a href="https://github.com/ouuan/hexo2hugo" target="_blank">ouuan/hexo2hugo</a> 。</p>
+<p>hugo 还支持 <a href="https://gohugo.io/content-management/urls/#aliases" target="_blank">aliases</a>，所以链接改动可以轻松处理。</p>
+<p>如果对我博客的配置感兴趣，还可以参考 <a href="https://github.com/ouuan/hugo-blog/commits/master/config.toml" target="_blank">config.toml</a> 和 <a href="https://github.com/ouuan/hugo-theme-even/commits/" target="_blank">even 主题</a> 的历史记录。</p>
+<p>几个值得提醒的地方：（大约是我认为“已经完全搞好了！”之后遇到的问题，也就是你按网上的教程搞完之后仍然容易遇到的问题）</p>
+<h3 id="站内搜索">站内搜索</h3>
+<p>可以参考 <a href="https://github.com/ouuan/hugo-blog/commit/1d0901fca6725480450581bb7bec28e0b2afc4d6" target="_blank">1d0901f</a>，如果主题不是 even 的话我这个应该就不太能直接用了，得改一下 <code>layout/_default/search.html</code> 还有 <code>static/js/search.js</code> 中的 <code>render</code> 函数。</p>
+<h3 id="代码高亮">代码高亮</h3>
+<p>推荐使用 highlight.js 而不是 chroma。even 主题把 highlight.js 的 CSS 放到了自己的 <code>_code.scss</code> 里，所以光是加上一个 highlight.js 的 CSS 是不够的，还得在 <code>_code.scss</code> 里把 hljs 相关的删掉，如果是 dark theme 还得修改背景颜色。</p>
+<h3 id="代码复制按钮">代码复制按钮</h3>
+<p>可以参考 <a href="https://github.com/ouuan/hugo-theme-even/commit/8347acfe30f386f00dd81c843a879755377cccf5" target="_blank">8347acf</a>。全靠搜索引擎学来的 CSS 果然不够..就这么点东西我搞了四个小时，主要是滚动条、字体大小、行高、padding 之类杂七杂八的问题。</p>
+<h3 id="gitinfo-with-unicode">GitInfo with Unicode</h3>
+<p>如果路径有中文，想用 GitInfo 的话就得 <code>git config --global core.quotePath false</code>，参见 <a href="https://github.com/gohugoio/hugo/issues/3071" target="_blank">gohugoio/hugo#3071</a> 。</p>
+<h3 id="table-of-content-with-h1">Table Of Content with h1</h3>
+<p>默认情况下右侧目录是从 <code>&lt;h2&gt;</code> 开始的，如果你的文章中含有 <code>&lt;h1&gt;</code>（也就是 Markdown 中的单个 <code>#</code>），目录就会挂掉。在文章中使用 <code>&lt;h1&gt;</code> 是 <strong>不被推荐</strong> 的，但我自己一年前写的一些博客里有 <code>&lt;h1&gt;</code>，虽然批量修改也不难，但还有一种解决方案：在 <code>config.toml</code> 中加入：</p>
+<pre><code class="language-toml">[markup.tableOfContents]
+  startLevel = 1
+  endLevel = 4
+</code></pre>
+<p>这样从 <code>&lt;h1&gt;</code> 到 <code>&lt;h4&gt;</code> 都会在目录中显示。</p>
+<h3 id="html-in-links">HTML in links</h3>
+<p>例如：<code>[~~qwq~~](/post/from-hexo-to-hugo)</code>, <code>[![favicon](/favicon.ico)](/favicon.ico)</code>。</p>
+<p>默认情况下会渲染成这样：</p>
+<p><a href="/post/from-hexo-to-hugo">&lt;del&gt;qwq&lt;/del&gt;</a></p>
+<p><a href="/favicon.ico">&lt;img src=&rdquo;/favicon.ico&rdquo; alt=&quot;favicon&rdquo;&gt;</a></p>
+<p>可以将 <code>/layouts/_default/_markup/render-link.html</code> 设成这样：（这个板子还包含了外链打开新标签页，不被渲染成 HTML 源码的关键在于 <code>safeHTML</code>）</p>
+<pre><code class="language-html">&lt;a href=&quot;{{ .Destination | safeURL }}&quot;{{ with .Title}} title=&quot;{{ . }}&quot;{{ end }}{{ if strings.HasPrefix .Destination &quot;http&quot; }} target=&quot;_blank&quot;{{ end }}&gt;{{ safeHTML .Text }}&lt;/a&gt;
+</code></pre>
+<p>然后就好了：</p>
+<p><a href="/post/from-hexo-to-hugo"><del>qwq</del></a></p>
+<p><a href="/favicon.ico"><img src="/favicon.ico" alt="favicon"></a></p>
+<h2 id="issues">Issues</h2>
+<p>因为是用脚本批量改的，改完之后也没有一篇篇去检查，难免会有改错的地方以及一些死链，可以直接在评论区指出，多谢大家了。</p>
+<p>如果有原博客链接没有 redirect 而是 404 了，也请务必告诉我。</p>
+<p>如果需要原 hexo 博客的，可以看 <a href="https://github.com/ouuan/ouuan.github.io/tree/hexo-archive" target="_blank">ouuan.github.io/hexo-archive</a> 。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        <span title="2020-02-15 20:45:27 &#43;0800 &#43;0800">2020-02-15</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/4bd6e9639a38f5b36dc239e5945cfb089375563d" title="feat: Display h4 in toc" target="_blank">(4bd6e96)</a>
+        ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/from-hexo-to-hugo.md" target="_blank">更新历史</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%8D%9A%E5%AE%A2/">博客</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
+            <span class="next-text nav-default">一些注意事项</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/blog-comments"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:ouuansteve@gmail.com" class="iconfont icon-email" title="email" target="_blank"></a>
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2020
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span> 
+    <span class="author">ouuan</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="/lib/highlight/highlight.pack.js?v=20171001"></script>
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.10/styles/tomorrow.min.css" rel="stylesheet">
+  <script>hljs.configure({tabReplace: '    '});</script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  
+<script type="text/javascript" src="/dist/even.63725abf.min.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"  integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-157787819-1', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
