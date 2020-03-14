@@ -47,6 +47,17 @@
     </item>
     
     <item>
+      <title>使用 GitHub Project 创建一份 To Do List</title>
+      <link>https://ouuan.github.io/post/use-github-project-to-create-a-to-do-list/</link>
+      <pubDate>Sat, 14 Mar 2020 13:14:15 +0800</pubDate>
+      
+      <guid>https://ouuan.github.io/post/use-github-project-to-create-a-to-do-list/</guid>
+      <description>&lt;p&gt;大家知道我整天在 GitHub 上&lt;del&gt;根本&lt;/del&gt;几乎不做题，那为什么不利用 GitHub 来督促自己做题呢？&lt;/p&gt;
+&lt;p&gt;GitHub 的 Projects 功能正好适合这么做。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/users/ouuan/projects/2&#34; target=&#34;_blank&#34;&gt;我的 Project&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>「HNOI2010」城市建设（线段树分治，LCT/Kruskal）</title>
       <link>https://ouuan.github.io/post/hnoi2010-%E5%9F%8E%E5%B8%82%E5%BB%BA%E8%AE%BE/</link>
       <pubDate>Wed, 26 Feb 2020 23:12:33 +0800</pubDate>
