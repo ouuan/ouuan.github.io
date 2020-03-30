@@ -1,58 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>KMP on ouuan的博客</title>
-    <link>https://ouuan.github.io/tags/kmp/</link>
-    <description>Recent content in KMP on ouuan的博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Fri, 10 May 2019 21:56:54 +0800</lastBuildDate>
-    
-	<atom:link href="https://ouuan.github.io/tags/kmp/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>CF432D Prefixes and Suffixes（KMP）</title>
-      <link>https://ouuan.github.io/post/cf432d-prefixes-and-suffixeskmp/</link>
-      <pubDate>Fri, 10 May 2019 21:56:54 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf432d-prefixes-and-suffixeskmp/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/CF432D&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/432/problem/D&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一个字符串，分别求出每个长度的既是其前缀又是其后缀的串出现的次数。&lt;/p&gt;
-&lt;p&gt;字符串长度小于等于 $10^5$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF494B Obsessive String (KMP,计数dp)</title>
-      <link>https://ouuan.github.io/post/cf494b-obsessive-string-kmp-%E8%AE%A1%E6%95%B0dp/</link>
-      <pubDate>Sun, 05 May 2019 13:16:44 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf494b-obsessive-string-kmp-%E8%AE%A1%E6%95%B0dp/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/CF494B&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/494/problem/B&#34; target=&#34;_blank&#34;&gt;CF contest&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;http://codeforces.com/problemset/problem/494/B&#34; target=&#34;_blank&#34;&gt;CF problemset&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你两个字符串 $S$ 和 $T$，你需要在 $S$ 中取若干个（至少一个）不相交的子串，使得每个子串都包含 $T$，求方案数模 $10^9+7$。&lt;/p&gt;
-&lt;p&gt;字符串长度小于等于 $10^5$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>BZOJ1009 [HNOI2008]GT考试（KMP/AC自动机，矩阵乘法）</title>
-      <link>https://ouuan.github.io/post/bzoj1009-hnoi2008-gt%E8%80%83%E8%AF%95kmp-ac%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/</link>
-      <pubDate>Fri, 03 May 2019 19:07:11 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/bzoj1009-hnoi2008-gt%E8%80%83%E8%AF%95kmp-ac%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P3193&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://darkbzoj.tk/problem/1009&#34; target=&#34;_blank&#34;&gt;darkbzoj&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给一个长为 $m$ 的字符串，字符集 $0$ ~ $9$，求长为 $n$ 的字符串中不含给定字符串作为子串的字符串有多少个，对 $k$ 取模。&lt;/p&gt;
-&lt;p&gt;$n\le10^9$，$m\le20$，$k\le1000$。&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>KMP on ouuan的博客</title><link>https://ouuan.github.io/tags/kmp/</link><description>Recent content in KMP on ouuan的博客</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 10 May 2019 21:56:54 +0800</lastBuildDate><atom:link href="https://ouuan.github.io/tags/kmp/index.xml" rel="self" type="application/rss+xml"/><item><title>CF432D Prefixes and Suffixes（KMP）</title><link>https://ouuan.github.io/post/cf432d-prefixes-and-suffixeskmp/</link><pubDate>Fri, 10 May 2019 21:56:54 +0800</pubDate><guid>https://ouuan.github.io/post/cf432d-prefixes-and-suffixeskmp/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/CF432D" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://codeforces.com/contest/432/problem/D" target="_blank">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一个字符串，分别求出每个长度的既是其前缀又是其后缀的串出现的次数。&lt;/p>
+&lt;p>字符串长度小于等于 $10^5$。&lt;/p></description></item><item><title>CF494B Obsessive String (KMP,计数dp)</title><link>https://ouuan.github.io/post/cf494b-obsessive-string-kmp-%E8%AE%A1%E6%95%B0dp/</link><pubDate>Sun, 05 May 2019 13:16:44 +0800</pubDate><guid>https://ouuan.github.io/post/cf494b-obsessive-string-kmp-%E8%AE%A1%E6%95%B0dp/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/CF494B" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://codeforces.com/contest/494/problem/B" target="_blank">CF contest&lt;/a>&lt;/p>
+&lt;p>&lt;a href="http://codeforces.com/problemset/problem/494/B" target="_blank">CF problemset&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你两个字符串 $S$ 和 $T$，你需要在 $S$ 中取若干个（至少一个）不相交的子串，使得每个子串都包含 $T$，求方案数模 $10^9+7$。&lt;/p>
+&lt;p>字符串长度小于等于 $10^5$。&lt;/p></description></item><item><title>BZOJ1009 [HNOI2008]GT考试（KMP/AC自动机，矩阵乘法）</title><link>https://ouuan.github.io/post/bzoj1009-hnoi2008-gt%E8%80%83%E8%AF%95kmp-ac%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/</link><pubDate>Fri, 03 May 2019 19:07:11 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj1009-hnoi2008-gt%E8%80%83%E8%AF%95kmp-ac%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P3193" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://darkbzoj.tk/problem/1009" target="_blank">darkbzoj&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给一个长为 $m$ 的字符串，字符集 $0$ ~ $9$，求长为 $n$ 的字符串中不含给定字符串作为子串的字符串有多少个，对 $k$ 取模。&lt;/p>
+&lt;p>$n\le10^9$，$m\le20$，$k\le1000$。&lt;/p></description></item></channel></rss>

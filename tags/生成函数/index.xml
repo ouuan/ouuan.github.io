@@ -1,28 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>生成函数 on ouuan的博客</title>
-    <link>https://ouuan.github.io/tags/%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0/</link>
-    <description>Recent content in 生成函数 on ouuan的博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Wed, 04 Sep 2019 09:22:32 +0800</lastBuildDate>
-    
-	<atom:link href="https://ouuan.github.io/tags/%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>LOJ6077 逆序对（生成函数，计数dp）</title>
-      <link>https://ouuan.github.io/post/loj6077-%E9%80%86%E5%BA%8F%E5%AF%B9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E8%AE%A1%E6%95%B0dp/</link>
-      <pubDate>Wed, 04 Sep 2019 09:22:32 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/loj6077-%E9%80%86%E5%BA%8F%E5%AF%B9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E8%AE%A1%E6%95%B0dp/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://loj.ac/problem/6089&#34; target=&#34;_blank&#34;&gt;LOJ&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;求长度为 $n$ 逆序对数为 $k$ 的排列个数。&lt;/p&gt;
-&lt;p&gt;$1\le n, k\le 10^5$，$k\le \binom n 2$&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>生成函数 on ouuan的博客</title><link>https://ouuan.github.io/tags/%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0/</link><description>Recent content in 生成函数 on ouuan的博客</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 04 Sep 2019 09:22:32 +0800</lastBuildDate><atom:link href="https://ouuan.github.io/tags/%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>LOJ6077 逆序对（生成函数，计数dp）</title><link>https://ouuan.github.io/post/loj6077-%E9%80%86%E5%BA%8F%E5%AF%B9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E8%AE%A1%E6%95%B0dp/</link><pubDate>Wed, 04 Sep 2019 09:22:32 +0800</pubDate><guid>https://ouuan.github.io/post/loj6077-%E9%80%86%E5%BA%8F%E5%AF%B9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E8%AE%A1%E6%95%B0dp/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://loj.ac/problem/6089" target="_blank">LOJ&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>求长度为 $n$ 逆序对数为 $k$ 的排列个数。&lt;/p>
+&lt;p>$1\le n, k\le 10^5$，$k\le \binom n 2$&lt;/p></description></item></channel></rss>

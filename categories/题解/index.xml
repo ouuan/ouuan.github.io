@@ -1,687 +1,232 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>题解 on ouuan的博客</title>
-    <link>https://ouuan.github.io/categories/%E9%A2%98%E8%A7%A3/</link>
-    <description>Recent content in 题解 on ouuan的博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Wed, 26 Feb 2020 23:12:33 +0800</lastBuildDate>
-    
-	<atom:link href="https://ouuan.github.io/categories/%E9%A2%98%E8%A7%A3/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>「HNOI2010」城市建设（线段树分治，LCT/Kruskal）</title>
-      <link>https://ouuan.github.io/post/hnoi2010-%E5%9F%8E%E5%B8%82%E5%BB%BA%E8%AE%BE/</link>
-      <pubDate>Wed, 26 Feb 2020 23:12:33 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/hnoi2010-%E5%9F%8E%E5%B8%82%E5%BB%BA%E8%AE%BE/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://www.luogu.com.cn/problem/P3206&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.lydsy.com/JudgeOnline/problem.php?id=2001&#34; target=&#34;_blank&#34;&gt;BZOJ&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&#34;admonition question&#34;&gt;
-  &lt;p class=&#34;admonition-title&#34;&gt;题目描述&lt;/p&gt;
-&lt;p&gt;给你一张边带权的无向连通图，多次修改，每次修改一条边的边权，每次修改完后求最小生成树的边权之和。&lt;/p&gt;
-&lt;p&gt;点数 $2\cdot 10^4$, 边数和修改数 $5\cdot 10^4$，时限 3s。&lt;/p&gt;
-&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF603E Pastoral Oddities（结论，LCT/分治&#43;并查集）</title>
-      <link>https://ouuan.github.io/post/cf603e/</link>
-      <pubDate>Tue, 18 Feb 2020 11:45:02 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf603e/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/603/problem/E&#34; target=&#34;_blank&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&#34;admonition question&#34;&gt;
-  &lt;p class=&#34;admonition-title&#34;&gt;题意简述&lt;/p&gt;
-&lt;p&gt;给你一张边带权且边从 $1$ 到 $m$ 编号的无向图 $G$，称一张图 $H$ 是“好的”，当且仅当存在一个 $H$ 的生成子图 $F$ 使得 $F$ 中每个点的度数都是奇数。现在，你需要回答 $m$ 个问题，第 $i$ 个问题是：求最小的 $x$，使得仅保留 $G$ 中编号不超过 $i$ 且边权不超过 $x$ 的边时，得到的生成子图是“好的”，或者指出不存在这样的 $x$。&lt;/p&gt;
-&lt;p&gt;$2\le n\le 10^5$, $1\le m\le 3\cdot 10^5$, TL 4s。&lt;/p&gt;
-&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>「HNOI2016」最小公倍数（回滚莫队，并查集）</title>
-      <link>https://ouuan.github.io/post/hnoi2016%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E5%9B%9E%E6%BB%9A%E8%8E%AB%E9%98%9F%E5%B9%B6%E6%9F%A5%E9%9B%86/</link>
-      <pubDate>Wed, 08 Jan 2020 14:49:06 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/hnoi2016%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E5%9B%9E%E6%BB%9A%E8%8E%AB%E9%98%9F%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://loj.ac/problem/2048&#34; target=&#34;_blank&#34;&gt;LOJ&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.com.cn/problem/P3247&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一张带边权的无向图，边权都形如 $2^a3^b$ ，若干询问，每次问是否存在 $u$ 到 $v$ 且边权的最小公倍数为 $2^a3^b$ 的途径（可以不是简单路径）。&lt;/p&gt;
-&lt;p&gt;点数 $5\cdot 10^4$，边数 $10^5$，询问数 $5\cdot 10^4$ 。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>「NOI2018」你的名字（SAM，线段树合并）</title>
-      <link>https://ouuan.github.io/post/noi2018%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97sam%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/</link>
-      <pubDate>Tue, 07 Jan 2020 18:33:42 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/noi2018%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97sam%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://uoj.ac/problem/395&#34; target=&#34;_blank&#34;&gt;UOJ&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://loj.ac/problem/2720&#34; target=&#34;_blank&#34;&gt;LOJ&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.com.cn/problem/P4770&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一个字符串 $S$，有 $q$ 次询问，每次给你询问串 $T$ 以及左右端点 $l$, $r$，询问 $T$ 有多少个 &lt;strong&gt;本质不同&lt;/strong&gt; 的子串 &lt;strong&gt;不是&lt;/strong&gt; $S[l..r]$ 的子串。&lt;/p&gt;
-&lt;p&gt;$|S|\le 5\cdot 10^5$, $\sum|T|\le 10^6$, $q\le 10^5$ 。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF786C Till I Collapse（根号分治，二分答案 / 主席树，调和级数）</title>
-      <link>https://ouuan.github.io/post/cf786c-till-i-collapse%E6%A0%B9%E5%8F%B7%E5%88%86%E6%B2%BB%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88-%E4%B8%BB%E5%B8%AD%E6%A0%91%E8%B0%83%E5%92%8C%E7%BA%A7%E6%95%B0/</link>
-      <pubDate>Fri, 06 Dec 2019 19:24:14 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf786c-till-i-collapse%E6%A0%B9%E5%8F%B7%E5%88%86%E6%B2%BB%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88-%E4%B8%BB%E5%B8%AD%E6%A0%91%E8%B0%83%E5%92%8C%E7%BA%A7%E6%95%B0/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/786/problem/C&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一个长为 $n$ 的数列，对于 $1\le k\le n$ 的所有整数 $k$，求出这个问题的答案：将数列划分成若干连续段，每段内最多有 $k$ 个 &lt;strong&gt;不同&lt;/strong&gt; 的数，至少要划分成几段？&lt;/p&gt;
-&lt;p&gt;$n\le 10^5$ 。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF594D REQ（数颜色，莫队，树状数组，数论）</title>
-      <link>https://ouuan.github.io/post/cf594d-req%E6%95%B0%E9%A2%9C%E8%89%B2%E8%8E%AB%E9%98%9F%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E6%95%B0%E8%AE%BA/</link>
-      <pubDate>Thu, 05 Dec 2019 16:41:23 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf594d-req%E6%95%B0%E9%A2%9C%E8%89%B2%E8%8E%AB%E9%98%9F%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E6%95%B0%E8%AE%BA/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/594/problem/D&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一个正整数序列，多次询问给定区间内每个数之积的欧拉函数 ($\varphi$)，对 $10^9+7$ 取模。&lt;/p&gt;
-&lt;p&gt;数列长度、询问个数不超过 $2\cdot 10^5$，数的大小不超过 $10^6$ 。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF455D Serega and Fun（分块 / 平衡树）</title>
-      <link>https://ouuan.github.io/post/cf455d-serega-and-fun%E5%88%86%E5%9D%97-%E5%B9%B3%E8%A1%A1%E6%A0%91/</link>
-      <pubDate>Wed, 04 Dec 2019 15:20:52 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf455d-serega-and-fun%E5%88%86%E5%9D%97-%E5%B9%B3%E8%A1%A1%E6%A0%91/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/455/problem/D&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一个序列，在线地支持两个操作：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;将一个区间循环移位。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;查询一个区间中某个数出现的次数。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;序列长度、查询个数都不超过 $10^5$，时限 $\texttt{4s}$ 。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF901C Bipartite Segments（二分图）</title>
-      <link>https://ouuan.github.io/post/cf901c-bipartite-segments%E4%BA%8C%E5%88%86%E5%9B%BE/</link>
-      <pubDate>Fri, 29 Nov 2019 20:54:11 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf901c-bipartite-segments%E4%BA%8C%E5%88%86%E5%9B%BE/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/901/problem/D&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;定义一个“偶环”为边数为偶数的回路（回路又被称作“边简单环”，即不经过重复边且首尾点相同的途径）。&lt;/p&gt;
-&lt;p&gt;给你一张不含“偶环”的无向图。称一个区间是“好的”，当且仅当编号在这个区间中的点的导出子图是一张二分图。&lt;/p&gt;
-&lt;p&gt;多组询问，每次询问一个给定区间有多少个子区间是“好的”。&lt;/p&gt;
-&lt;p&gt;点数、边数、询问数均不超过 $3\cdot 10^5$ 。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF1260F Colored Tree（点分治，差分，基数排序）</title>
-      <link>https://ouuan.github.io/post/cf1260f-colored-tree%E7%82%B9%E5%88%86%E6%B2%BB%E5%B7%AE%E5%88%86%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/</link>
-      <pubDate>Fri, 29 Nov 2019 14:00:53 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf1260f-colored-tree%E7%82%B9%E5%88%86%E6%B2%BB%E5%B7%AE%E5%88%86%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/1260/problem/F&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一棵树，每个点的颜色为一个区间内的整数，一种染色方案的权值是所有同色无序点对的距离之和，求所有不同染色方案的权值之和。&lt;/p&gt;
-&lt;p&gt;点数、颜色数均不超过 $10^5$ 。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>「NOI2014」购票（斜率优化，点分治）</title>
-      <link>https://ouuan.github.io/post/noi2014%E8%B4%AD%E7%A5%A8%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96%E7%82%B9%E5%88%86%E6%B2%BB/</link>
-      <pubDate>Mon, 25 Nov 2019 16:07:04 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/noi2014%E8%B4%AD%E7%A5%A8%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96%E7%82%B9%E5%88%86%E6%B2%BB/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://uoj.ac/problem/7&#34; target=&#34;_blank&#34;&gt;UOJ&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.com.cn/problem/P2305&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一棵树，$i$ 号点有 $p_i$、$q_i$ 和 $l_i$ 三个属性，每条边有给定的长度。&lt;/p&gt;
-&lt;p&gt;从一个点出发可以到达其祖先中与其距离不超过 $l_i$ 的点，费用为 $p_i\cdot dis+q_i$，求每个点到根的最小费用。&lt;/p&gt;
-&lt;p&gt;点数不超过 $2\cdot 10^5$ 。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF3D Least Cost Bracket Sequence（贪心）</title>
-      <link>https://ouuan.github.io/post/cf3d-least-cost-bracket-sequence%E8%B4%AA%E5%BF%83/</link>
-      <pubDate>Wed, 16 Oct 2019 21:50:44 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf3d-least-cost-bracket-sequence%E8%B4%AA%E5%BF%83/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/3/problem/D&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;有一个长为 $n$ 的括号序列，其中一些位置是问号，每个问号替换成左括号或替换成右括号各有给定的代价，判断是否能够构造出一个合法的括号序列，如果可以，求出最小代价。&lt;/p&gt;
-&lt;p&gt;$n\le 5\cdot 10^4$（实际上可以大很多）。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF512C Fox And Dinner（二分图，最大流）</title>
-      <link>https://ouuan.github.io/post/cf512c-fox-and-dinner%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E6%B5%81/</link>
-      <pubDate>Tue, 15 Oct 2019 19:50:54 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf512c-fox-and-dinner%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E6%B5%81/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/512/problem/C&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你 $n$ 个整数，需要将它们分成任意个至少包含 $3$ 个数的环，使得每相邻两个数加起来是一个质数。&lt;/p&gt;
-&lt;p&gt;判断是否有解，若有解输出任意一组解。&lt;/p&gt;
-&lt;p&gt;$3\le n\le 200$, 数的范围是 $[2,10^4]$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF508D Tanya and Password（欧拉路径）</title>
-      <link>https://ouuan.github.io/post/cf508d-tanya-and-password%E6%AC%A7%E6%8B%89%E8%B7%AF%E5%BE%84/</link>
-      <pubDate>Tue, 15 Oct 2019 15:01:00 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf508d-tanya-and-password%E6%AC%A7%E6%8B%89%E8%B7%AF%E5%BE%84/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/508/problem/D&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;有一个字符串 $S[1..n+2]$，告诉你 $\forall 1\le i\le n, S[i..i+2]$（所有长为 $3$ 的子串），求任意一个满足条件的 $S$。&lt;/p&gt;
-&lt;p&gt;$1\le n\le 2\cdot 10^5$，字符集为大小写字母 + 数字。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>gym102268D Dates（贪心，二分图匹配，线段树）</title>
-      <link>https://ouuan.github.io/post/gym102268d-dates%E8%B4%AA%E5%BF%83%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D%E7%BA%BF%E6%AE%B5%E6%A0%91/</link>
-      <pubDate>Fri, 11 Oct 2019 11:30:32 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/gym102268d-dates%E8%B4%AA%E5%BF%83%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D%E7%BA%BF%E6%AE%B5%E6%A0%91/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/gym/102268/problem/D&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一张二分图：左边 $t$ 个位置，第 $i$ 个位置上有 $a_i$ 个点；右边 $n$ 个带权的点，第 $i$ 个点与位置在 $[l_i, r_i]$ 之间的所有左边的点有连边；匹配权值为匹配中右边点的权值之和；求最大权匹配。&lt;/p&gt;
-&lt;p&gt;$1\le n,t\le 3\cdot 10^5$，保证 $l_i\le l_{i+1}$, $r_i\le r_{i+1}$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF878E Numbers on the blackboard（贪心，并查集）</title>
-      <link>https://ouuan.github.io/post/cf878e-numbers-on-the-blackboard%E8%B4%AA%E5%BF%83%E5%B9%B6%E6%9F%A5%E9%9B%86/</link>
-      <pubDate>Tue, 08 Oct 2019 20:49:18 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf878e-numbers-on-the-blackboard%E8%B4%AA%E5%BF%83%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/878/problem/E&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;对于一个数列，每次操作可以将相邻的两个数 $x$ 和 $y$ 合并成一个数 $x+2y$，定义一个数列的权值为进行操作直至只剩一个数能得到的最大值。&lt;/p&gt;
-&lt;p&gt;多组询问，每次给定一个区间，求这个区间的权值。&lt;/p&gt;
-&lt;p&gt;数列值域 $-10^9\sim10^9$，数列长度和询问个数不超过 $10^5$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>BJOI2019 删数（贪心，线段树）</title>
-      <link>https://ouuan.github.io/post/bjoi2019-%E5%88%A0%E6%95%B0%E8%B4%AA%E5%BF%83%E7%BA%BF%E6%AE%B5%E6%A0%91/</link>
-      <pubDate>Mon, 16 Sep 2019 11:11:10 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/bjoi2019-%E5%88%A0%E6%95%B0%E8%B4%AA%E5%BF%83%E7%BA%BF%E6%AE%B5%E6%A0%91/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problem/P5324&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://loj.ac/problem/3094&#34; target=&#34;_blank&#34;&gt;LOJ&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.lydsy.com/JudgeOnline/problem.php?id=5528&#34; target=&#34;_blank&#34;&gt;BZOJ&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;一个数列是“可删除的”，当且仅当可以通过这种操作将其清空：将数列中等于这个数列长度的数删去。&lt;/p&gt;
-&lt;p&gt;如，$[1, 2, 4, 4]$ 是“可删除的”，第一次操作删成 $[1, 2]$，第二次操作删成 $[1]$，第三次操作清空。&lt;/p&gt;
-&lt;p&gt;定义一个数列的权值为至少需要进行的单点修改数目，使得这个数列变成“可删除的”。&lt;/p&gt;
-&lt;p&gt;现在给你一个数列 $a_{1..n}$，以及 $m$ 次修改操作，你需要在每次修改后回答这个数列的权值。&lt;/p&gt;
-&lt;p&gt;修改操作有三种：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;单点修改。&lt;/li&gt;
-&lt;li&gt;全局加一。&lt;/li&gt;
-&lt;li&gt;全局减一。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;$1\le n,m\le 150000$，数列初始值以及单点修改成的值在 $[1,n]$ 内，但全局修改可能使数列中的元素超过这个范围。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF1209F Koala and Notebook（BFS，最短路）</title>
-      <link>https://ouuan.github.io/post/cf1209f-koala-and-notebookbfs%E6%9C%80%E7%9F%AD%E8%B7%AF/</link>
-      <pubDate>Mon, 16 Sep 2019 08:58:32 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf1209f-koala-and-notebookbfs%E6%9C%80%E7%9F%AD%E8%B7%AF/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;http://codeforces.com/contest/1209/problem/F&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一张 $n$ 个点 $m$ 条边的无向连通图，一条路径的权值是路径上的边的编号（十进制）顺次连接而成的数字。求 $1$ 到每个点的最短路，&lt;strong&gt;输出&lt;/strong&gt; 对 $10^9+7$ 取模。&lt;/p&gt;
-&lt;p&gt;$2\le n\le10^5$, $n-1\le m\le10^5$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF516D Drazil and Morning Exercise（up and down，并查集）</title>
-      <link>https://ouuan.github.io/post/cf516d-drazil-and-morning-exerciseup-and-down%E5%B9%B6%E6%9F%A5%E9%9B%86/</link>
-      <pubDate>Tue, 10 Sep 2019 13:37:12 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf516d-drazil-and-morning-exerciseup-and-down%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;http://codeforces.com/contest/516/problem/D&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problem/CF516D&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给定一棵 $n$ 个点带边权的树，定义 $d(u)$ 为树上离它最远的点到它的距离，$q$ 次询问，每次询问给定 $l$，求一个最大的树上连通块 $V&#39;$ 的大小，满足 $\forall u, v\in V&#39;$，$|d(u)-d(v)|\le l$。&lt;/p&gt;
-&lt;p&gt;$1\le n\le 10^5$, $1\le q\le 50$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>LOJ6519 魔力环（Burnside引理，容斥原理）</title>
-      <link>https://ouuan.github.io/post/loj6519-%E9%AD%94%E5%8A%9B%E7%8E%AFburnside%E5%BC%95%E7%90%86%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/</link>
-      <pubDate>Thu, 05 Sep 2019 10:45:59 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/loj6519-%E9%AD%94%E5%8A%9B%E7%8E%AFburnside%E5%BC%95%E7%90%86%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://loj.ac/problem/6519&#34; target=&#34;_blank&#34;&gt;LOJ&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problem/P4916&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;你需要给 $n$ 颗珠子的项链染 $m$ 颗黑色，$n-m$ 颗白色，不能有连续的一串黑色珠子长度超过 $k$，求旋转同构下本质不同的染色方案数。&lt;/p&gt;
-&lt;p&gt;$1\le m,k\le n\le10^5$&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>LOJ6077 逆序对（生成函数，计数dp）</title>
-      <link>https://ouuan.github.io/post/loj6077-%E9%80%86%E5%BA%8F%E5%AF%B9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E8%AE%A1%E6%95%B0dp/</link>
-      <pubDate>Wed, 04 Sep 2019 09:22:32 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/loj6077-%E9%80%86%E5%BA%8F%E5%AF%B9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E8%AE%A1%E6%95%B0dp/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://loj.ac/problem/6089&#34; target=&#34;_blank&#34;&gt;LOJ&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;求长度为 $n$ 逆序对数为 $k$ 的排列个数。&lt;/p&gt;
-&lt;p&gt;$1\le n, k\le 10^5$，$k\le \binom n 2$&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>LOJ6089 小Y的背包计数问题（根号分治，计数dp）</title>
-      <link>https://ouuan.github.io/post/loj6089-%E5%B0%8Fy%E7%9A%84%E8%83%8C%E5%8C%85%E8%AE%A1%E6%95%B0%E9%97%AE%E9%A2%98%E6%A0%B9%E5%8F%B7%E5%88%86%E6%B2%BB%E8%AE%A1%E6%95%B0dp/</link>
-      <pubDate>Wed, 04 Sep 2019 09:21:35 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/loj6089-%E5%B0%8Fy%E7%9A%84%E8%83%8C%E5%8C%85%E8%AE%A1%E6%95%B0%E9%97%AE%E9%A2%98%E6%A0%B9%E5%8F%B7%E5%88%86%E6%B2%BB%E8%AE%A1%E6%95%B0dp/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://loj.ac/problem/6089&#34; target=&#34;_blank&#34;&gt;LOJ&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;你有体积为 $i$ ($1\le i\le n$) 的物品 $i$ 个，同体积物品在计数时没有区别，求装满大小为 $n$ 的背包的方案数。&lt;/p&gt;
-&lt;p&gt;$1\le n\le 10^5$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF1208G Polygons（数论）</title>
-      <link>https://ouuan.github.io/post/cf1208g-polygons%E6%95%B0%E8%AE%BA/</link>
-      <pubDate>Tue, 27 Aug 2019 20:08:56 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf1208g-polygons%E6%95%B0%E8%AE%BA/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;http://codeforces.com/contest/1208/problem/G&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problem/CF1208G&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给定 $n$ 和 $k$，你需要在圆上画 $k$ 个不超过 $n$ 条边的正多边形，求顶点去重后至少有多少个。&lt;/p&gt;
-&lt;p&gt;$3\le n\le10^6$，$1\le k\le n-2$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>AGC007F Shik and Copying String（贪心，实现）</title>
-      <link>https://ouuan.github.io/post/agc007f-shik-and-copying-string%E8%B4%AA%E5%BF%83%E5%AE%9E%E7%8E%B0/</link>
-      <pubDate>Fri, 16 Aug 2019 23:34:10 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/agc007f-shik-and-copying-string%E8%B4%AA%E5%BF%83%E5%AE%9E%E7%8E%B0/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problem/AT2173&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://atcoder.jp/contests/agc007/tasks/agc007_f&#34; target=&#34;_blank&#34;&gt;AtCoder&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你初始串 $S_0$ 和目标串 $T$，每一步操作可以将当前串 $S_i$ 变成 $S_{i+1}$，其中：&lt;/p&gt;
-&lt;p&gt;$$S_{i+1}[j]=\begin{cases}S_i[1]&amp;amp;j=1\\S_i[j]\text{ 或 }S_{i+1}[j-1]&amp;amp;j&amp;gt;1\end{cases}$$&lt;/p&gt;
-&lt;p&gt;求最少需要几次操作可以将当前串变为 $T$。&lt;/p&gt;
-&lt;p&gt;串长 $10^6​$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>BZOJ1758 [WC2010]重建计划（二分答案，长链剖分）</title>
-      <link>https://ouuan.github.io/post/bzoj1758-wc2010-%E9%87%8D%E5%BB%BA%E8%AE%A1%E5%88%92%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88%E9%95%BF%E9%93%BE%E5%89%96%E5%88%86/</link>
-      <pubDate>Tue, 23 Jul 2019 20:24:05 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/bzoj1758-wc2010-%E9%87%8D%E5%BB%BA%E8%AE%A1%E5%88%92%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88%E9%95%BF%E9%93%BE%E5%89%96%E5%88%86/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P4292&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一棵带边权的树，求所有长度在 $[L,U]$ 这个范围内的路径里平均权值（总权值除以边数）的最大值。&lt;/p&gt;
-&lt;p&gt;$2\le n\le 10^5$，保证至少有一条满足要求的路径。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF708C Centroids（树形dp，up and down）</title>
-      <link>https://ouuan.github.io/post/cf708c-centroids%E6%A0%91%E5%BD%A2dpup-and-down/</link>
-      <pubDate>Sun, 23 Jun 2019 21:34:21 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf708c-centroids%E6%A0%91%E5%BD%A2dpup-and-down/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforc.es/contest/708/problem/C&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/CF708C&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一棵 $n$ 个点的树，对每个点，判断能否删去一条边再加上一条边，使得这个点成为树的重心。（树的重心：将其删去后每个联通块大小不超过 $\frac n 2$）&lt;/p&gt;
-&lt;p&gt;$2\le n\le 4\cdot10^5​$&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>BZOJ2115 [WC2011]最大XOR和路径（线性基，图论）</title>
-      <link>https://ouuan.github.io/post/bzoj2115-wc2011-%E6%9C%80%E5%A4%A7xor%E5%92%8C%E8%B7%AF%E5%BE%84%E7%BA%BF%E6%80%A7%E5%9F%BA%E5%9B%BE%E8%AE%BA/</link>
-      <pubDate>Sun, 16 Jun 2019 20:46:02 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/bzoj2115-wc2011-%E6%9C%80%E5%A4%A7xor%E5%92%8C%E8%B7%AF%E5%BE%84%E7%BA%BF%E6%80%A7%E5%9F%BA%E5%9B%BE%E8%AE%BA/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P4151&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://darkbzoj.tk/problem/2115&#34; target=&#34;_blank&#34;&gt;darkbzoj&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一张带边权的无向图，求 $1$ 到 $n$ 的边权异或和最大的路径。&lt;/p&gt;
-&lt;p&gt;点数 $5\times 10^4$，边数 $10^5$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>BZOJ2460 [BJWC2011]元素（线性基，贪心）</title>
-      <link>https://ouuan.github.io/post/bzoj2460-bjwc2011-%E5%85%83%E7%B4%A0%E7%BA%BF%E6%80%A7%E5%9F%BA%E8%B4%AA%E5%BF%83/</link>
-      <pubDate>Fri, 14 Jun 2019 22:00:27 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/bzoj2460-bjwc2011-%E5%85%83%E7%B4%A0%E7%BA%BF%E6%80%A7%E5%9F%BA%E8%B4%AA%E5%BF%83/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P4570&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;http://darkbzoj.tk/problem/2460&#34; target=&#34;_blank&#34;&gt;darkbzoj&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你 $n$ 个带权值的数（数和权值是两个东西），求一个权值最大的异或线性无关子集，即取这个子集的任意一个非空子集，异或和都不为零。&lt;/p&gt;
-&lt;p&gt;原题 $n\le1000$，实际上可以轻松 $n\le10^5$。数 $10^{18}$，权值 $10^4$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Codeforces Round #564 中文题解</title>
-      <link>https://ouuan.github.io/post/codeforces-round-564-%E4%B8%AD%E6%96%87%E9%A2%98%E8%A7%A3/</link>
-      <pubDate>Fri, 07 Jun 2019 22:38:47 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/codeforces-round-564-%E4%B8%AD%E6%96%87%E9%A2%98%E8%A7%A3/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://ouuan.github.io/bad-round-%e4%b8%8e%e5%87%ba%e9%a2%98%e4%ba%ba%e7%9a%84%e5%9d%9a%e5%ae%88&#34;&gt;台前幕后&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/1172&#34; target=&#34;_blank&#34;&gt;contest on CF&lt;/a&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF17E Palisection（manacher）</title>
-      <link>https://ouuan.github.io/post/cf17e-palisectionmanacher/</link>
-      <pubDate>Fri, 10 May 2019 22:06:18 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf17e-palisectionmanacher/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/CF17E&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/17/problem/E&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一个字符串，求有多少对相交的回文子串。（包含算作相交，&lt;del&gt;自交不算&lt;/del&gt;）&lt;/p&gt;
-&lt;p&gt;字符串长度小于等于 $2\times 10^6$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF432D Prefixes and Suffixes（KMP）</title>
-      <link>https://ouuan.github.io/post/cf432d-prefixes-and-suffixeskmp/</link>
-      <pubDate>Fri, 10 May 2019 21:56:54 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf432d-prefixes-and-suffixeskmp/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/CF432D&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/432/problem/D&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一个字符串，分别求出每个长度的既是其前缀又是其后缀的串出现的次数。&lt;/p&gt;
-&lt;p&gt;字符串长度小于等于 $10^5$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF494B Obsessive String (KMP,计数dp)</title>
-      <link>https://ouuan.github.io/post/cf494b-obsessive-string-kmp-%E8%AE%A1%E6%95%B0dp/</link>
-      <pubDate>Sun, 05 May 2019 13:16:44 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf494b-obsessive-string-kmp-%E8%AE%A1%E6%95%B0dp/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/CF494B&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/494/problem/B&#34; target=&#34;_blank&#34;&gt;CF contest&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;http://codeforces.com/problemset/problem/494/B&#34; target=&#34;_blank&#34;&gt;CF problemset&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你两个字符串 $S$ 和 $T$，你需要在 $S$ 中取若干个（至少一个）不相交的子串，使得每个子串都包含 $T$，求方案数模 $10^9+7$。&lt;/p&gt;
-&lt;p&gt;字符串长度小于等于 $10^5$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>BZOJ1009 [HNOI2008]GT考试（KMP/AC自动机，矩阵乘法）</title>
-      <link>https://ouuan.github.io/post/bzoj1009-hnoi2008-gt%E8%80%83%E8%AF%95kmp-ac%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/</link>
-      <pubDate>Fri, 03 May 2019 19:07:11 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/bzoj1009-hnoi2008-gt%E8%80%83%E8%AF%95kmp-ac%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P3193&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://darkbzoj.tk/problem/1009&#34; target=&#34;_blank&#34;&gt;darkbzoj&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给一个长为 $m$ 的字符串，字符集 $0$ ~ $9$，求长为 $n$ 的字符串中不含给定字符串作为子串的字符串有多少个，对 $k$ 取模。&lt;/p&gt;
-&lt;p&gt;$n\le10^9$，$m\le20$，$k\le1000$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>BZOJ2434 [NOI2011]阿狸的打字机（AC自动机，树状数组）</title>
-      <link>https://ouuan.github.io/post/bzoj2434-noi2011-%E9%98%BF%E7%8B%B8%E7%9A%84%E6%89%93%E5%AD%97%E6%9C%BAac%E8%87%AA%E5%8A%A8%E6%9C%BA%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/</link>
-      <pubDate>Mon, 29 Apr 2019 21:36:58 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/bzoj2434-noi2011-%E9%98%BF%E7%8B%B8%E7%9A%84%E6%89%93%E5%AD%97%E6%9C%BAac%E8%87%AA%E5%8A%A8%E6%9C%BA%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P2414&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://darkbzoj.tk/problem/2434&#34; target=&#34;_blank&#34;&gt;darkbzoj&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;初始一个空串，三种操作：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;添加一个字符。&lt;/li&gt;
-&lt;li&gt;删除一个字符。&lt;/li&gt;
-&lt;li&gt;打印当前字符串、&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;多组询问，每次问第 $x$ 个打印的字符串在第 $y$ 个打印的字符串中出现了几次。&lt;/p&gt;
-&lt;p&gt;操作数和询问数都不超过 $10^5$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>[NOI2010]航空管制（建反图，拓扑排序，优先队列）</title>
-      <link>https://ouuan.github.io/post/noi2010-%E8%88%AA%E7%A9%BA%E7%AE%A1%E5%88%B6%E5%BB%BA%E5%8F%8D%E5%9B%BE%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/</link>
-      <pubDate>Fri, 19 Apr 2019 13:00:29 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/noi2010-%E8%88%AA%E7%A9%BA%E7%AE%A1%E5%88%B6%E5%BB%BA%E5%8F%8D%E5%9B%BE%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P1954&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一个 DAG，每个点有个值 $k_i$。&lt;/p&gt;
-&lt;p&gt;第一问：求一个拓扑排序，使每个点出现的位置不超过 $k_i$。&lt;/p&gt;
-&lt;p&gt;第二问：在满足第一问的拓扑排序中，求每个点分别的最早出现位置。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>BZOJ4259 残缺的字符串（FFT）</title>
-      <link>https://ouuan.github.io/post/bzoj4259-%E6%AE%8B%E7%BC%BA%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2fft/</link>
-      <pubDate>Tue, 19 Mar 2019 16:27:51 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/bzoj4259-%E6%AE%8B%E7%BC%BA%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2fft/</guid>
-      <description>&lt;h1 id=&#34;题目链接&#34;&gt;题目链接&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P4173&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://darkbzoj.tk/problem/4259&#34; target=&#34;_blank&#34;&gt;darkbzoj&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;题意简述&#34;&gt;题意简述&lt;/h1&gt;
-&lt;p&gt;带通配符的单模式串、单文本串匹配。&lt;/p&gt;
-&lt;p&gt;字符串长度 $3\times10^5$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>BZOJ3622 已经没有什么好害怕的了（二项式反演，组合数学）</title>
-      <link>https://ouuan.github.io/post/bzoj3622-%E5%B7%B2%E7%BB%8F%E6%B2%A1%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%AE%B3%E6%80%95%E7%9A%84%E4%BA%86%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%8F%8D%E6%BC%94%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</link>
-      <pubDate>Fri, 15 Mar 2019 12:48:17 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/bzoj3622-%E5%B7%B2%E7%BB%8F%E6%B2%A1%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%AE%B3%E6%80%95%E7%9A%84%E4%BA%86%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%8F%8D%E6%BC%94%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</guid>
-      <description>&lt;h1 id=&#34;题目链接&#34;&gt;题目链接&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P4859&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://darkbzoj.tk/problem/3622&#34; target=&#34;_blank&#34;&gt;darkbzoj&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;题意简述&#34;&gt;题意简述&lt;/h1&gt;
-&lt;p&gt;给你两个长为 $n$ 、无重复元素的数列 $a,b$，求将 $b$ 重排后 $\left(\sum\limits_{i=1}^n[a_i&amp;gt;b_i]\right)-\left(\sum\limits_{i=1}^n[a_i&amp;lt;b_i]\right)=k$（$k$ 给定）的方案数。&lt;/p&gt;
-&lt;p&gt;$n\le2000$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>BZOJ4665 小w的喜糖（容斥原理，组合数学）</title>
-      <link>https://ouuan.github.io/post/bzoj4665-%E5%B0%8Fw%E7%9A%84%E5%96%9C%E7%B3%96%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</link>
-      <pubDate>Wed, 13 Mar 2019 21:10:56 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/bzoj4665-%E5%B0%8Fw%E7%9A%84%E5%96%9C%E7%B3%96%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</guid>
-      <description>&lt;h1 id=&#34;题目链接&#34;&gt;题目链接&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://darkbzoj.tk/problem/4665&#34; target=&#34;_blank&#34;&gt;darkbzoj&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;题意简述&#34;&gt;题意简述&lt;/h1&gt;
-&lt;p&gt;给你一个数列，求重排后每个位置都变了的方案数。&lt;/p&gt;
-&lt;p&gt;数列长度和值域都是 $2000$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>BZOJ4003 [JLOI2015]城池攻占（左偏树）</title>
-      <link>https://ouuan.github.io/post/bzoj4003-jloi2015-%E5%9F%8E%E6%B1%A0%E6%94%BB%E5%8D%A0%E5%B7%A6%E5%81%8F%E6%A0%91/</link>
-      <pubDate>Tue, 12 Mar 2019 16:14:15 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/bzoj4003-jloi2015-%E5%9F%8E%E6%B1%A0%E6%94%BB%E5%8D%A0%E5%B7%A6%E5%81%8F%E6%A0%91/</guid>
-      <description>&lt;h1 id=&#34;题目链接&#34;&gt;题目链接&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P3261&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://darkbzoj.tk/problem/4003&#34; target=&#34;_blank&#34;&gt;darkbzoj&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;题意简述&#34;&gt;题意简述&lt;/h1&gt;
-&lt;p&gt;给你一棵树，每个节点有 $h$ 值，一个勇士来到一个节点时如果他的战斗力大于等于 $h$ 就能占领城池并前往这个节点的父亲（除非已经到了根节点），否则阵亡；攻占一个节点后，勇士的战斗力会加/减/乘一个正整数（根据节点而定）；每个勇士有初始战斗力和想占领的第一个节点。问，每个节点各有多少个勇士阵亡，每个勇士各占领了几个节点。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF235C Cyclical Quest（SAM）</title>
-      <link>https://ouuan.github.io/post/cf235c-cyclical-questsam/</link>
-      <pubDate>Wed, 27 Feb 2019 13:23:19 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf235c-cyclical-questsam/</guid>
-      <description>&lt;h1 id=&#34;题目链接&#34;&gt;题目链接&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/CF235C&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/problemset/problem/235/C&#34; target=&#34;_blank&#34;&gt;CF problemset&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/235/problem/C&#34; target=&#34;_blank&#34;&gt;CF contest&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;题意简述&#34;&gt;题意简述&lt;/h1&gt;
-&lt;p&gt;给你一个字符串 $s$ 和 $n$ 个字符串 $x_{1..n}$，对每个 $x_i$，求有多少个 $s$ 的子串可以由 $x_i$ 旋转得到。&lt;/p&gt;
-&lt;p&gt;旋转一个字符串就是把它的一个前缀移到后面，如 &lt;code&gt;abcd&lt;/code&gt; 可以旋转得到的字符串有 &lt;code&gt;abcd&lt;/code&gt;，&lt;code&gt;bcda&lt;/code&gt;，&lt;code&gt;cdab&lt;/code&gt;，&lt;code&gt;dabc&lt;/code&gt;。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>P3804 【模板】后缀自动机（SAM/后缀数组）</title>
-      <link>https://ouuan.github.io/post/p3804-%E6%A8%A1%E6%9D%BF%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/</link>
-      <pubDate>Thu, 21 Feb 2019 15:47:52 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/p3804-%E6%A8%A1%E6%9D%BF%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/</guid>
-      <description>&lt;h1 id=&#34;题目链接&#34;&gt;题目链接&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P3804&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;题意简述&#34;&gt;题意简述&lt;/h1&gt;
-&lt;p&gt;求 &lt;strong&gt;出现次数不为 $1$ 的子串的 出现次数 $\times$ 长度&lt;/strong&gt; 的最大值。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>BZOJ4516 [SDOI2016]生成魔咒（SAM）</title>
-      <link>https://ouuan.github.io/post/bzoj4516-sdoi2016-%E7%94%9F%E6%88%90%E9%AD%94%E5%92%92sam/</link>
-      <pubDate>Thu, 21 Feb 2019 14:10:35 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/bzoj4516-sdoi2016-%E7%94%9F%E6%88%90%E9%AD%94%E5%92%92sam/</guid>
-      <description>&lt;h1 id=&#34;题目链接&#34;&gt;题目链接&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P4070&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://darkbzoj.tk/problem/4516&#34; target=&#34;_blank&#34;&gt;dark bzoj&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;题意简述&#34;&gt;题意简述&lt;/h1&gt;
-&lt;p&gt;给你一个字符串（字符集大小 $10^9$，长度 $10^5$），求每个前缀的本质不同子串数。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>BZOJ4566 [HAOI2016]找相同字符（后缀数组）</title>
-      <link>https://ouuan.github.io/post/bzoj4566-haoi2016-%E6%89%BE%E7%9B%B8%E5%90%8C%E5%AD%97%E7%AC%A6%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/</link>
-      <pubDate>Thu, 14 Feb 2019 11:22:18 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/bzoj4566-haoi2016-%E6%89%BE%E7%9B%B8%E5%90%8C%E5%AD%97%E7%AC%A6%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/</guid>
-      <description>&lt;h1 id=&#34;题目链接&#34;&gt;题目链接&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P3181&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://darkbzoj.tk/problem/4566&#34; target=&#34;_blank&#34;&gt;dark bzoj&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;题意简述&#34;&gt;题意简述&lt;/h1&gt;
-&lt;p&gt;给你两个字符串，从中各取一个子串使这两个子串相同，求方案数。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>P2852 [USACO06DEC]Milk Patterns（后缀数组）</title>
-      <link>https://ouuan.github.io/post/p2852-usaco06dec-milk-patterns%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/</link>
-      <pubDate>Thu, 14 Feb 2019 11:21:26 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/p2852-usaco06dec-milk-patterns%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/</guid>
-      <description>&lt;h1 id=&#34;题目链接&#34;&gt;题目链接&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P2852&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;题意简述&#34;&gt;题意简述&lt;/h1&gt;
-&lt;p&gt;给你一个字符串，求最长的出现了至少 $k$ 次的子串的长度。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>P2870 [USACO07DEC]Best Cow Line, Gold（后缀数组）</title>
-      <link>https://ouuan.github.io/post/p2870-usaco07dec-best-cow-line-gold%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/</link>
-      <pubDate>Thu, 14 Feb 2019 11:20:59 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/p2870-usaco07dec-best-cow-line-gold%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/</guid>
-      <description>&lt;h1 id=&#34;题目链接&#34;&gt;题目链接&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P2870&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;题意简述&#34;&gt;题意简述&lt;/h1&gt;
-&lt;p&gt;给你一个字符串，每次从首或尾取一个字符组成字符串，问所有能够组成的字符串中字典序最小的一个。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>BZOJ1856 [SCOI2010]生成字符串（组合数学）</title>
-      <link>https://ouuan.github.io/post/bzoj1856-scoi2010-%E7%94%9F%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</link>
-      <pubDate>Tue, 12 Feb 2019 14:56:42 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/bzoj1856-scoi2010-%E7%94%9F%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</guid>
-      <description>&lt;h1 id=&#34;题目链接&#34;&gt;题目链接&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P1641&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://darkbzoj.tk/problem/1856&#34; target=&#34;_blank&#34;&gt;darkbzoj&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;题意简述&#34;&gt;题意简述&lt;/h1&gt;
-&lt;p&gt;$n$ 个入栈操作，$m$ 个出栈操作，问合法操作序列数。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>UER #8 —— 通信题：打雪仗</title>
-      <link>https://ouuan.github.io/post/uer-8-%E6%B8%B8%E8%AE%B0-%E9%80%9A%E4%BF%A1%E9%A2%98%E6%89%93%E9%9B%AA%E4%BB%97/</link>
-      <pubDate>Sat, 22 Dec 2018 23:03:25 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/uer-8-%E6%B8%B8%E8%AE%B0-%E9%80%9A%E4%BF%A1%E9%A2%98%E6%89%93%E9%9B%AA%E4%BB%97/</guid>
-      <description>T1题目链接 大意：Alice 有一个长度为 $2n$ 的 $01$ 串 $s_{1..2n}$，Bob 有 $n$ 个下标 $p_{1..n}$，Alice 和 Bob 只能用 $01$ 通信，需</description>
-    </item>
-    
-    <item>
-      <title>WC2019 全国模拟赛第二场 T1 题解</title>
-      <link>https://ouuan.github.io/post/wc2019-%E5%85%A8%E5%9B%BD%E6%A8%A1%E6%8B%9F%E8%B5%9B%E7%AC%AC%E4%BA%8C%E5%9C%BA-t1-%E9%A2%98%E8%A7%A3/</link>
-      <pubDate>Sat, 08 Dec 2018 12:04:29 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/wc2019-%E5%85%A8%E5%9B%BD%E6%A8%A1%E6%8B%9F%E8%B5%9B%E7%AC%AC%E4%BA%8C%E5%9C%BA-t1-%E9%A2%98%E8%A7%A3/</guid>
-      <description>又只会写T1&amp;hellip; 题目链接 题意简述 给你一个排列 $p_{1..n}$，$a_{1..n}$ 为任意的一个排列，定义 $b[a_i]=a[</description>
-    </item>
-    
-    <item>
-      <title>WC2019 全国模拟赛第一场 T1 题解</title>
-      <link>https://ouuan.github.io/post/wc2019-%E5%85%A8%E5%9B%BD%E6%A8%A1%E6%8B%9F%E8%B5%9B%E7%AC%AC%E4%B8%80%E5%9C%BA-t1-%E9%A2%98%E8%A7%A3/</link>
-      <pubDate>Tue, 04 Dec 2018 20:29:47 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/wc2019-%E5%85%A8%E5%9B%BD%E6%A8%A1%E6%8B%9F%E8%B5%9B%E7%AC%AC%E4%B8%80%E5%9C%BA-t1-%E9%A2%98%E8%A7%A3/</guid>
-      <description>由于只会T1，没法写游记，只好来写题解了&amp;hellip; 题目链接 题目大意 给你一个数列，每次可以任取两个不相交的区间，取一次的贡献是这两个区间</description>
-    </item>
-    
-    <item>
-      <title>二维莫队解题报告</title>
-      <link>https://ouuan.github.io/post/%E4%BA%8C%E7%BB%B4%E8%8E%AB%E9%98%9F%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/</link>
-      <pubDate>Tue, 02 Oct 2018 18:23:00 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/%E4%BA%8C%E7%BB%B4%E8%8E%AB%E9%98%9F%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/</guid>
-      <description>我写的莫队教程 其实这是一道bzoj上的题（bzoj2639，貌似是权限题，反正我看不了），在YALI做模拟赛的时候遇到了. 然后在网上查到了几</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>题解 on ouuan的博客</title><link>https://ouuan.github.io/categories/%E9%A2%98%E8%A7%A3/</link><description>Recent content in 题解 on ouuan的博客</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 26 Feb 2020 23:12:33 +0800</lastBuildDate><atom:link href="https://ouuan.github.io/categories/%E9%A2%98%E8%A7%A3/index.xml" rel="self" type="application/rss+xml"/><item><title>「HNOI2010」城市建设（线段树分治，LCT/Kruskal）</title><link>https://ouuan.github.io/post/hnoi2010-%E5%9F%8E%E5%B8%82%E5%BB%BA%E8%AE%BE/</link><pubDate>Wed, 26 Feb 2020 23:12:33 +0800</pubDate><guid>https://ouuan.github.io/post/hnoi2010-%E5%9F%8E%E5%B8%82%E5%BB%BA%E8%AE%BE/</guid><description>&lt;p>&lt;a href="https://www.luogu.com.cn/problem/P3206" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.lydsy.com/JudgeOnline/problem.php?id=2001" target="_blank">BZOJ&lt;/a>&lt;/p>
+&lt;div class="admonition question">
+&lt;p class="admonition-title">题目描述&lt;/p>
+&lt;p>给你一张边带权的无向连通图，多次修改，每次修改一条边的边权，每次修改完后求最小生成树的边权之和。&lt;/p>
+&lt;p>点数 $2\cdot 10^4$, 边数和修改数 $5\cdot 10^4$，时限 3s。&lt;/p>
+&lt;/div></description></item><item><title>CF603E Pastoral Oddities（结论，LCT/分治+并查集）</title><link>https://ouuan.github.io/post/cf603e/</link><pubDate>Tue, 18 Feb 2020 11:45:02 +0800</pubDate><guid>https://ouuan.github.io/post/cf603e/</guid><description>&lt;p>&lt;a href="https://codeforces.com/contest/603/problem/E" target="_blank">题目链接&lt;/a>&lt;/p>
+&lt;div class="admonition question">
+&lt;p class="admonition-title">题意简述&lt;/p>
+&lt;p>给你一张边带权且边从 $1$ 到 $m$ 编号的无向图 $G$，称一张图 $H$ 是“好的”，当且仅当存在一个 $H$ 的生成子图 $F$ 使得 $F$ 中每个点的度数都是奇数。现在，你需要回答 $m$ 个问题，第 $i$ 个问题是：求最小的 $x$，使得仅保留 $G$ 中编号不超过 $i$ 且边权不超过 $x$ 的边时，得到的生成子图是“好的”，或者指出不存在这样的 $x$。&lt;/p>
+&lt;p>$2\le n\le 10^5$, $1\le m\le 3\cdot 10^5$, TL 4s。&lt;/p>
+&lt;/div></description></item><item><title>「HNOI2016」最小公倍数（回滚莫队，并查集）</title><link>https://ouuan.github.io/post/hnoi2016%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E5%9B%9E%E6%BB%9A%E8%8E%AB%E9%98%9F%E5%B9%B6%E6%9F%A5%E9%9B%86/</link><pubDate>Wed, 08 Jan 2020 14:49:06 +0800</pubDate><guid>https://ouuan.github.io/post/hnoi2016%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E5%9B%9E%E6%BB%9A%E8%8E%AB%E9%98%9F%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://loj.ac/problem/2048" target="_blank">LOJ&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.luogu.com.cn/problem/P3247" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一张带边权的无向图，边权都形如 $2^a3^b$ ，若干询问，每次问是否存在 $u$ 到 $v$ 且边权的最小公倍数为 $2^a3^b$ 的途径（可以不是简单路径）。&lt;/p>
+&lt;p>点数 $5\cdot 10^4$，边数 $10^5$，询问数 $5\cdot 10^4$ 。&lt;/p></description></item><item><title>「NOI2018」你的名字（SAM，线段树合并）</title><link>https://ouuan.github.io/post/noi2018%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97sam%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/</link><pubDate>Tue, 07 Jan 2020 18:33:42 +0800</pubDate><guid>https://ouuan.github.io/post/noi2018%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97sam%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://uoj.ac/problem/395" target="_blank">UOJ&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://loj.ac/problem/2720" target="_blank">LOJ&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.luogu.com.cn/problem/P4770" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一个字符串 $S$，有 $q$ 次询问，每次给你询问串 $T$ 以及左右端点 $l$, $r$，询问 $T$ 有多少个 &lt;strong>本质不同&lt;/strong> 的子串 &lt;strong>不是&lt;/strong> $S[l..r]$ 的子串。&lt;/p>
+&lt;p>$|S|\le 5\cdot 10^5$, $\sum|T|\le 10^6$, $q\le 10^5$ 。&lt;/p></description></item><item><title>CF786C Till I Collapse（根号分治，二分答案 / 主席树，调和级数）</title><link>https://ouuan.github.io/post/cf786c-till-i-collapse%E6%A0%B9%E5%8F%B7%E5%88%86%E6%B2%BB%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88-%E4%B8%BB%E5%B8%AD%E6%A0%91%E8%B0%83%E5%92%8C%E7%BA%A7%E6%95%B0/</link><pubDate>Fri, 06 Dec 2019 19:24:14 +0800</pubDate><guid>https://ouuan.github.io/post/cf786c-till-i-collapse%E6%A0%B9%E5%8F%B7%E5%88%86%E6%B2%BB%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88-%E4%B8%BB%E5%B8%AD%E6%A0%91%E8%B0%83%E5%92%8C%E7%BA%A7%E6%95%B0/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://codeforces.com/contest/786/problem/C" target="_blank">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一个长为 $n$ 的数列，对于 $1\le k\le n$ 的所有整数 $k$，求出这个问题的答案：将数列划分成若干连续段，每段内最多有 $k$ 个 &lt;strong>不同&lt;/strong> 的数，至少要划分成几段？&lt;/p>
+&lt;p>$n\le 10^5$ 。&lt;/p></description></item><item><title>CF594D REQ（数颜色，莫队，树状数组，数论）</title><link>https://ouuan.github.io/post/cf594d-req%E6%95%B0%E9%A2%9C%E8%89%B2%E8%8E%AB%E9%98%9F%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E6%95%B0%E8%AE%BA/</link><pubDate>Thu, 05 Dec 2019 16:41:23 +0800</pubDate><guid>https://ouuan.github.io/post/cf594d-req%E6%95%B0%E9%A2%9C%E8%89%B2%E8%8E%AB%E9%98%9F%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E6%95%B0%E8%AE%BA/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://codeforces.com/contest/594/problem/D" target="_blank">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一个正整数序列，多次询问给定区间内每个数之积的欧拉函数 ($\varphi$)，对 $10^9+7$ 取模。&lt;/p>
+&lt;p>数列长度、询问个数不超过 $2\cdot 10^5$，数的大小不超过 $10^6$ 。&lt;/p></description></item><item><title>CF455D Serega and Fun（分块 / 平衡树）</title><link>https://ouuan.github.io/post/cf455d-serega-and-fun%E5%88%86%E5%9D%97-%E5%B9%B3%E8%A1%A1%E6%A0%91/</link><pubDate>Wed, 04 Dec 2019 15:20:52 +0800</pubDate><guid>https://ouuan.github.io/post/cf455d-serega-and-fun%E5%88%86%E5%9D%97-%E5%B9%B3%E8%A1%A1%E6%A0%91/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://codeforces.com/contest/455/problem/D" target="_blank">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一个序列，在线地支持两个操作：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>将一个区间循环移位。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>查询一个区间中某个数出现的次数。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>序列长度、查询个数都不超过 $10^5$，时限 $\texttt{4s}$ 。&lt;/p></description></item><item><title>CF901C Bipartite Segments（二分图）</title><link>https://ouuan.github.io/post/cf901c-bipartite-segments%E4%BA%8C%E5%88%86%E5%9B%BE/</link><pubDate>Fri, 29 Nov 2019 20:54:11 +0800</pubDate><guid>https://ouuan.github.io/post/cf901c-bipartite-segments%E4%BA%8C%E5%88%86%E5%9B%BE/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://codeforces.com/contest/901/problem/D" target="_blank">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>定义一个“偶环”为边数为偶数的回路（回路又被称作“边简单环”，即不经过重复边且首尾点相同的途径）。&lt;/p>
+&lt;p>给你一张不含“偶环”的无向图。称一个区间是“好的”，当且仅当编号在这个区间中的点的导出子图是一张二分图。&lt;/p>
+&lt;p>多组询问，每次询问一个给定区间有多少个子区间是“好的”。&lt;/p>
+&lt;p>点数、边数、询问数均不超过 $3\cdot 10^5$ 。&lt;/p></description></item><item><title>CF1260F Colored Tree（点分治，差分，基数排序）</title><link>https://ouuan.github.io/post/cf1260f-colored-tree%E7%82%B9%E5%88%86%E6%B2%BB%E5%B7%AE%E5%88%86%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/</link><pubDate>Fri, 29 Nov 2019 14:00:53 +0800</pubDate><guid>https://ouuan.github.io/post/cf1260f-colored-tree%E7%82%B9%E5%88%86%E6%B2%BB%E5%B7%AE%E5%88%86%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://codeforces.com/contest/1260/problem/F" target="_blank">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一棵树，每个点的颜色为一个区间内的整数，一种染色方案的权值是所有同色无序点对的距离之和，求所有不同染色方案的权值之和。&lt;/p>
+&lt;p>点数、颜色数均不超过 $10^5$ 。&lt;/p></description></item><item><title>「NOI2014」购票（斜率优化，点分治）</title><link>https://ouuan.github.io/post/noi2014%E8%B4%AD%E7%A5%A8%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96%E7%82%B9%E5%88%86%E6%B2%BB/</link><pubDate>Mon, 25 Nov 2019 16:07:04 +0800</pubDate><guid>https://ouuan.github.io/post/noi2014%E8%B4%AD%E7%A5%A8%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96%E7%82%B9%E5%88%86%E6%B2%BB/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://uoj.ac/problem/7" target="_blank">UOJ&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.luogu.com.cn/problem/P2305" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一棵树，$i$ 号点有 $p_i$、$q_i$ 和 $l_i$ 三个属性，每条边有给定的长度。&lt;/p>
+&lt;p>从一个点出发可以到达其祖先中与其距离不超过 $l_i$ 的点，费用为 $p_i\cdot dis+q_i$，求每个点到根的最小费用。&lt;/p>
+&lt;p>点数不超过 $2\cdot 10^5$ 。&lt;/p></description></item><item><title>CF3D Least Cost Bracket Sequence（贪心）</title><link>https://ouuan.github.io/post/cf3d-least-cost-bracket-sequence%E8%B4%AA%E5%BF%83/</link><pubDate>Wed, 16 Oct 2019 21:50:44 +0800</pubDate><guid>https://ouuan.github.io/post/cf3d-least-cost-bracket-sequence%E8%B4%AA%E5%BF%83/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://codeforces.com/contest/3/problem/D" target="_blank">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>有一个长为 $n$ 的括号序列，其中一些位置是问号，每个问号替换成左括号或替换成右括号各有给定的代价，判断是否能够构造出一个合法的括号序列，如果可以，求出最小代价。&lt;/p>
+&lt;p>$n\le 5\cdot 10^4$（实际上可以大很多）。&lt;/p></description></item><item><title>CF512C Fox And Dinner（二分图，最大流）</title><link>https://ouuan.github.io/post/cf512c-fox-and-dinner%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E6%B5%81/</link><pubDate>Tue, 15 Oct 2019 19:50:54 +0800</pubDate><guid>https://ouuan.github.io/post/cf512c-fox-and-dinner%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E6%B5%81/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://codeforces.com/contest/512/problem/C" target="_blank">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你 $n$ 个整数，需要将它们分成任意个至少包含 $3$ 个数的环，使得每相邻两个数加起来是一个质数。&lt;/p>
+&lt;p>判断是否有解，若有解输出任意一组解。&lt;/p>
+&lt;p>$3\le n\le 200$, 数的范围是 $[2,10^4]$。&lt;/p></description></item><item><title>CF508D Tanya and Password（欧拉路径）</title><link>https://ouuan.github.io/post/cf508d-tanya-and-password%E6%AC%A7%E6%8B%89%E8%B7%AF%E5%BE%84/</link><pubDate>Tue, 15 Oct 2019 15:01:00 +0800</pubDate><guid>https://ouuan.github.io/post/cf508d-tanya-and-password%E6%AC%A7%E6%8B%89%E8%B7%AF%E5%BE%84/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://codeforces.com/contest/508/problem/D" target="_blank">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>有一个字符串 $S[1..n+2]$，告诉你 $\forall 1\le i\le n, S[i..i+2]$（所有长为 $3$ 的子串），求任意一个满足条件的 $S$。&lt;/p>
+&lt;p>$1\le n\le 2\cdot 10^5$，字符集为大小写字母 + 数字。&lt;/p></description></item><item><title>gym102268D Dates（贪心，二分图匹配，线段树）</title><link>https://ouuan.github.io/post/gym102268d-dates%E8%B4%AA%E5%BF%83%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D%E7%BA%BF%E6%AE%B5%E6%A0%91/</link><pubDate>Fri, 11 Oct 2019 11:30:32 +0800</pubDate><guid>https://ouuan.github.io/post/gym102268d-dates%E8%B4%AA%E5%BF%83%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D%E7%BA%BF%E6%AE%B5%E6%A0%91/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://codeforces.com/gym/102268/problem/D" target="_blank">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一张二分图：左边 $t$ 个位置，第 $i$ 个位置上有 $a_i$ 个点；右边 $n$ 个带权的点，第 $i$ 个点与位置在 $[l_i, r_i]$ 之间的所有左边的点有连边；匹配权值为匹配中右边点的权值之和；求最大权匹配。&lt;/p>
+&lt;p>$1\le n,t\le 3\cdot 10^5$，保证 $l_i\le l_{i+1}$, $r_i\le r_{i+1}$。&lt;/p></description></item><item><title>CF878E Numbers on the blackboard（贪心，并查集）</title><link>https://ouuan.github.io/post/cf878e-numbers-on-the-blackboard%E8%B4%AA%E5%BF%83%E5%B9%B6%E6%9F%A5%E9%9B%86/</link><pubDate>Tue, 08 Oct 2019 20:49:18 +0800</pubDate><guid>https://ouuan.github.io/post/cf878e-numbers-on-the-blackboard%E8%B4%AA%E5%BF%83%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://codeforces.com/contest/878/problem/E" target="_blank">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>对于一个数列，每次操作可以将相邻的两个数 $x$ 和 $y$ 合并成一个数 $x+2y$，定义一个数列的权值为进行操作直至只剩一个数能得到的最大值。&lt;/p>
+&lt;p>多组询问，每次给定一个区间，求这个区间的权值。&lt;/p>
+&lt;p>数列值域 $-10^9\sim10^9$，数列长度和询问个数不超过 $10^5$。&lt;/p></description></item><item><title>BJOI2019 删数（贪心，线段树）</title><link>https://ouuan.github.io/post/bjoi2019-%E5%88%A0%E6%95%B0%E8%B4%AA%E5%BF%83%E7%BA%BF%E6%AE%B5%E6%A0%91/</link><pubDate>Mon, 16 Sep 2019 11:11:10 +0800</pubDate><guid>https://ouuan.github.io/post/bjoi2019-%E5%88%A0%E6%95%B0%E8%B4%AA%E5%BF%83%E7%BA%BF%E6%AE%B5%E6%A0%91/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problem/P5324" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://loj.ac/problem/3094" target="_blank">LOJ&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.lydsy.com/JudgeOnline/problem.php?id=5528" target="_blank">BZOJ&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>一个数列是“可删除的”，当且仅当可以通过这种操作将其清空：将数列中等于这个数列长度的数删去。&lt;/p>
+&lt;p>如，$[1, 2, 4, 4]$ 是“可删除的”，第一次操作删成 $[1, 2]$，第二次操作删成 $[1]$，第三次操作清空。&lt;/p>
+&lt;p>定义一个数列的权值为至少需要进行的单点修改数目，使得这个数列变成“可删除的”。&lt;/p>
+&lt;p>现在给你一个数列 $a_{1..n}$，以及 $m$ 次修改操作，你需要在每次修改后回答这个数列的权值。&lt;/p>
+&lt;p>修改操作有三种：&lt;/p>
+&lt;ol>
+&lt;li>单点修改。&lt;/li>
+&lt;li>全局加一。&lt;/li>
+&lt;li>全局减一。&lt;/li>
+&lt;/ol>
+&lt;p>$1\le n,m\le 150000$，数列初始值以及单点修改成的值在 $[1,n]$ 内，但全局修改可能使数列中的元素超过这个范围。&lt;/p></description></item><item><title>CF1209F Koala and Notebook（BFS，最短路）</title><link>https://ouuan.github.io/post/cf1209f-koala-and-notebookbfs%E6%9C%80%E7%9F%AD%E8%B7%AF/</link><pubDate>Mon, 16 Sep 2019 08:58:32 +0800</pubDate><guid>https://ouuan.github.io/post/cf1209f-koala-and-notebookbfs%E6%9C%80%E7%9F%AD%E8%B7%AF/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="http://codeforces.com/contest/1209/problem/F" target="_blank">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一张 $n$ 个点 $m$ 条边的无向连通图，一条路径的权值是路径上的边的编号（十进制）顺次连接而成的数字。求 $1$ 到每个点的最短路，&lt;strong>输出&lt;/strong> 对 $10^9+7$ 取模。&lt;/p>
+&lt;p>$2\le n\le10^5$, $n-1\le m\le10^5$。&lt;/p></description></item><item><title>CF516D Drazil and Morning Exercise（up and down，并查集）</title><link>https://ouuan.github.io/post/cf516d-drazil-and-morning-exerciseup-and-down%E5%B9%B6%E6%9F%A5%E9%9B%86/</link><pubDate>Tue, 10 Sep 2019 13:37:12 +0800</pubDate><guid>https://ouuan.github.io/post/cf516d-drazil-and-morning-exerciseup-and-down%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="http://codeforces.com/contest/516/problem/D" target="_blank">CF&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.luogu.org/problem/CF516D" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给定一棵 $n$ 个点带边权的树，定义 $d(u)$ 为树上离它最远的点到它的距离，$q$ 次询问，每次询问给定 $l$，求一个最大的树上连通块 $V'$ 的大小，满足 $\forall u, v\in V'$，$|d(u)-d(v)|\le l$。&lt;/p>
+&lt;p>$1\le n\le 10^5$, $1\le q\le 50$。&lt;/p></description></item><item><title>LOJ6519 魔力环（Burnside引理，容斥原理）</title><link>https://ouuan.github.io/post/loj6519-%E9%AD%94%E5%8A%9B%E7%8E%AFburnside%E5%BC%95%E7%90%86%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/</link><pubDate>Thu, 05 Sep 2019 10:45:59 +0800</pubDate><guid>https://ouuan.github.io/post/loj6519-%E9%AD%94%E5%8A%9B%E7%8E%AFburnside%E5%BC%95%E7%90%86%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://loj.ac/problem/6519" target="_blank">LOJ&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.luogu.org/problem/P4916" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>你需要给 $n$ 颗珠子的项链染 $m$ 颗黑色，$n-m$ 颗白色，不能有连续的一串黑色珠子长度超过 $k$，求旋转同构下本质不同的染色方案数。&lt;/p>
+&lt;p>$1\le m,k\le n\le10^5$&lt;/p></description></item><item><title>LOJ6077 逆序对（生成函数，计数dp）</title><link>https://ouuan.github.io/post/loj6077-%E9%80%86%E5%BA%8F%E5%AF%B9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E8%AE%A1%E6%95%B0dp/</link><pubDate>Wed, 04 Sep 2019 09:22:32 +0800</pubDate><guid>https://ouuan.github.io/post/loj6077-%E9%80%86%E5%BA%8F%E5%AF%B9%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E8%AE%A1%E6%95%B0dp/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://loj.ac/problem/6089" target="_blank">LOJ&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>求长度为 $n$ 逆序对数为 $k$ 的排列个数。&lt;/p>
+&lt;p>$1\le n, k\le 10^5$，$k\le \binom n 2$&lt;/p></description></item><item><title>LOJ6089 小Y的背包计数问题（根号分治，计数dp）</title><link>https://ouuan.github.io/post/loj6089-%E5%B0%8Fy%E7%9A%84%E8%83%8C%E5%8C%85%E8%AE%A1%E6%95%B0%E9%97%AE%E9%A2%98%E6%A0%B9%E5%8F%B7%E5%88%86%E6%B2%BB%E8%AE%A1%E6%95%B0dp/</link><pubDate>Wed, 04 Sep 2019 09:21:35 +0800</pubDate><guid>https://ouuan.github.io/post/loj6089-%E5%B0%8Fy%E7%9A%84%E8%83%8C%E5%8C%85%E8%AE%A1%E6%95%B0%E9%97%AE%E9%A2%98%E6%A0%B9%E5%8F%B7%E5%88%86%E6%B2%BB%E8%AE%A1%E6%95%B0dp/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://loj.ac/problem/6089" target="_blank">LOJ&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>你有体积为 $i$ ($1\le i\le n$) 的物品 $i$ 个，同体积物品在计数时没有区别，求装满大小为 $n$ 的背包的方案数。&lt;/p>
+&lt;p>$1\le n\le 10^5$。&lt;/p></description></item><item><title>CF1208G Polygons（数论）</title><link>https://ouuan.github.io/post/cf1208g-polygons%E6%95%B0%E8%AE%BA/</link><pubDate>Tue, 27 Aug 2019 20:08:56 +0800</pubDate><guid>https://ouuan.github.io/post/cf1208g-polygons%E6%95%B0%E8%AE%BA/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="http://codeforces.com/contest/1208/problem/G" target="_blank">CF&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.luogu.org/problem/CF1208G" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给定 $n$ 和 $k$，你需要在圆上画 $k$ 个不超过 $n$ 条边的正多边形，求顶点去重后至少有多少个。&lt;/p>
+&lt;p>$3\le n\le10^6$，$1\le k\le n-2$。&lt;/p></description></item><item><title>AGC007F Shik and Copying String（贪心，实现）</title><link>https://ouuan.github.io/post/agc007f-shik-and-copying-string%E8%B4%AA%E5%BF%83%E5%AE%9E%E7%8E%B0/</link><pubDate>Fri, 16 Aug 2019 23:34:10 +0800</pubDate><guid>https://ouuan.github.io/post/agc007f-shik-and-copying-string%E8%B4%AA%E5%BF%83%E5%AE%9E%E7%8E%B0/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problem/AT2173" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://atcoder.jp/contests/agc007/tasks/agc007_f" target="_blank">AtCoder&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你初始串 $S_0$ 和目标串 $T$，每一步操作可以将当前串 $S_i$ 变成 $S_{i+1}$，其中：&lt;/p>
+&lt;p>$$S_{i+1}[j]=\begin{cases}S_i[1]&amp;amp;j=1\\S_i[j]\text{ 或 }S_{i+1}[j-1]&amp;amp;j&amp;gt;1\end{cases}$$&lt;/p>
+&lt;p>求最少需要几次操作可以将当前串变为 $T$。&lt;/p>
+&lt;p>串长 $10^6​$。&lt;/p></description></item><item><title>BZOJ1758 [WC2010]重建计划（二分答案，长链剖分）</title><link>https://ouuan.github.io/post/bzoj1758-wc2010-%E9%87%8D%E5%BB%BA%E8%AE%A1%E5%88%92%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88%E9%95%BF%E9%93%BE%E5%89%96%E5%88%86/</link><pubDate>Tue, 23 Jul 2019 20:24:05 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj1758-wc2010-%E9%87%8D%E5%BB%BA%E8%AE%A1%E5%88%92%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88%E9%95%BF%E9%93%BE%E5%89%96%E5%88%86/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P4292" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一棵带边权的树，求所有长度在 $[L,U]$ 这个范围内的路径里平均权值（总权值除以边数）的最大值。&lt;/p>
+&lt;p>$2\le n\le 10^5$，保证至少有一条满足要求的路径。&lt;/p></description></item><item><title>CF708C Centroids（树形dp，up and down）</title><link>https://ouuan.github.io/post/cf708c-centroids%E6%A0%91%E5%BD%A2dpup-and-down/</link><pubDate>Sun, 23 Jun 2019 21:34:21 +0800</pubDate><guid>https://ouuan.github.io/post/cf708c-centroids%E6%A0%91%E5%BD%A2dpup-and-down/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://codeforc.es/contest/708/problem/C" target="_blank">CF&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/CF708C" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一棵 $n$ 个点的树，对每个点，判断能否删去一条边再加上一条边，使得这个点成为树的重心。（树的重心：将其删去后每个联通块大小不超过 $\frac n 2$）&lt;/p>
+&lt;p>$2\le n\le 4\cdot10^5​$&lt;/p></description></item><item><title>BZOJ2115 [WC2011]最大XOR和路径（线性基，图论）</title><link>https://ouuan.github.io/post/bzoj2115-wc2011-%E6%9C%80%E5%A4%A7xor%E5%92%8C%E8%B7%AF%E5%BE%84%E7%BA%BF%E6%80%A7%E5%9F%BA%E5%9B%BE%E8%AE%BA/</link><pubDate>Sun, 16 Jun 2019 20:46:02 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj2115-wc2011-%E6%9C%80%E5%A4%A7xor%E5%92%8C%E8%B7%AF%E5%BE%84%E7%BA%BF%E6%80%A7%E5%9F%BA%E5%9B%BE%E8%AE%BA/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P4151" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://darkbzoj.tk/problem/2115" target="_blank">darkbzoj&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一张带边权的无向图，求 $1$ 到 $n$ 的边权异或和最大的路径。&lt;/p>
+&lt;p>点数 $5\times 10^4$，边数 $10^5$。&lt;/p></description></item><item><title>BZOJ2460 [BJWC2011]元素（线性基，贪心）</title><link>https://ouuan.github.io/post/bzoj2460-bjwc2011-%E5%85%83%E7%B4%A0%E7%BA%BF%E6%80%A7%E5%9F%BA%E8%B4%AA%E5%BF%83/</link><pubDate>Fri, 14 Jun 2019 22:00:27 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj2460-bjwc2011-%E5%85%83%E7%B4%A0%E7%BA%BF%E6%80%A7%E5%9F%BA%E8%B4%AA%E5%BF%83/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P4570" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="http://darkbzoj.tk/problem/2460" target="_blank">darkbzoj&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你 $n$ 个带权值的数（数和权值是两个东西），求一个权值最大的异或线性无关子集，即取这个子集的任意一个非空子集，异或和都不为零。&lt;/p>
+&lt;p>原题 $n\le1000$，实际上可以轻松 $n\le10^5$。数 $10^{18}$，权值 $10^4$。&lt;/p></description></item><item><title>Codeforces Round #564 中文题解</title><link>https://ouuan.github.io/post/codeforces-round-564-%E4%B8%AD%E6%96%87%E9%A2%98%E8%A7%A3/</link><pubDate>Fri, 07 Jun 2019 22:38:47 +0800</pubDate><guid>https://ouuan.github.io/post/codeforces-round-564-%E4%B8%AD%E6%96%87%E9%A2%98%E8%A7%A3/</guid><description>&lt;p>&lt;a href="https://ouuan.github.io/bad-round-%e4%b8%8e%e5%87%ba%e9%a2%98%e4%ba%ba%e7%9a%84%e5%9d%9a%e5%ae%88">台前幕后&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://codeforces.com/contest/1172" target="_blank">contest on CF&lt;/a>&lt;/p></description></item><item><title>CF17E Palisection（manacher）</title><link>https://ouuan.github.io/post/cf17e-palisectionmanacher/</link><pubDate>Fri, 10 May 2019 22:06:18 +0800</pubDate><guid>https://ouuan.github.io/post/cf17e-palisectionmanacher/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/CF17E" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://codeforces.com/contest/17/problem/E" target="_blank">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一个字符串，求有多少对相交的回文子串。（包含算作相交，&lt;del>自交不算&lt;/del>）&lt;/p>
+&lt;p>字符串长度小于等于 $2\times 10^6$。&lt;/p></description></item><item><title>CF432D Prefixes and Suffixes（KMP）</title><link>https://ouuan.github.io/post/cf432d-prefixes-and-suffixeskmp/</link><pubDate>Fri, 10 May 2019 21:56:54 +0800</pubDate><guid>https://ouuan.github.io/post/cf432d-prefixes-and-suffixeskmp/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/CF432D" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://codeforces.com/contest/432/problem/D" target="_blank">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一个字符串，分别求出每个长度的既是其前缀又是其后缀的串出现的次数。&lt;/p>
+&lt;p>字符串长度小于等于 $10^5$。&lt;/p></description></item><item><title>CF494B Obsessive String (KMP,计数dp)</title><link>https://ouuan.github.io/post/cf494b-obsessive-string-kmp-%E8%AE%A1%E6%95%B0dp/</link><pubDate>Sun, 05 May 2019 13:16:44 +0800</pubDate><guid>https://ouuan.github.io/post/cf494b-obsessive-string-kmp-%E8%AE%A1%E6%95%B0dp/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/CF494B" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://codeforces.com/contest/494/problem/B" target="_blank">CF contest&lt;/a>&lt;/p>
+&lt;p>&lt;a href="http://codeforces.com/problemset/problem/494/B" target="_blank">CF problemset&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你两个字符串 $S$ 和 $T$，你需要在 $S$ 中取若干个（至少一个）不相交的子串，使得每个子串都包含 $T$，求方案数模 $10^9+7$。&lt;/p>
+&lt;p>字符串长度小于等于 $10^5$。&lt;/p></description></item><item><title>BZOJ1009 [HNOI2008]GT考试（KMP/AC自动机，矩阵乘法）</title><link>https://ouuan.github.io/post/bzoj1009-hnoi2008-gt%E8%80%83%E8%AF%95kmp-ac%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/</link><pubDate>Fri, 03 May 2019 19:07:11 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj1009-hnoi2008-gt%E8%80%83%E8%AF%95kmp-ac%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P3193" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://darkbzoj.tk/problem/1009" target="_blank">darkbzoj&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给一个长为 $m$ 的字符串，字符集 $0$ ~ $9$，求长为 $n$ 的字符串中不含给定字符串作为子串的字符串有多少个，对 $k$ 取模。&lt;/p>
+&lt;p>$n\le10^9$，$m\le20$，$k\le1000$。&lt;/p></description></item><item><title>BZOJ2434 [NOI2011]阿狸的打字机（AC自动机，树状数组）</title><link>https://ouuan.github.io/post/bzoj2434-noi2011-%E9%98%BF%E7%8B%B8%E7%9A%84%E6%89%93%E5%AD%97%E6%9C%BAac%E8%87%AA%E5%8A%A8%E6%9C%BA%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/</link><pubDate>Mon, 29 Apr 2019 21:36:58 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj2434-noi2011-%E9%98%BF%E7%8B%B8%E7%9A%84%E6%89%93%E5%AD%97%E6%9C%BAac%E8%87%AA%E5%8A%A8%E6%9C%BA%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P2414" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://darkbzoj.tk/problem/2434" target="_blank">darkbzoj&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>初始一个空串，三种操作：&lt;/p>
+&lt;ol>
+&lt;li>添加一个字符。&lt;/li>
+&lt;li>删除一个字符。&lt;/li>
+&lt;li>打印当前字符串、&lt;/li>
+&lt;/ol>
+&lt;p>多组询问，每次问第 $x$ 个打印的字符串在第 $y$ 个打印的字符串中出现了几次。&lt;/p>
+&lt;p>操作数和询问数都不超过 $10^5$。&lt;/p></description></item><item><title>[NOI2010]航空管制（建反图，拓扑排序，优先队列）</title><link>https://ouuan.github.io/post/noi2010-%E8%88%AA%E7%A9%BA%E7%AE%A1%E5%88%B6%E5%BB%BA%E5%8F%8D%E5%9B%BE%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/</link><pubDate>Fri, 19 Apr 2019 13:00:29 +0800</pubDate><guid>https://ouuan.github.io/post/noi2010-%E8%88%AA%E7%A9%BA%E7%AE%A1%E5%88%B6%E5%BB%BA%E5%8F%8D%E5%9B%BE%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P1954" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一个 DAG，每个点有个值 $k_i$。&lt;/p>
+&lt;p>第一问：求一个拓扑排序，使每个点出现的位置不超过 $k_i$。&lt;/p>
+&lt;p>第二问：在满足第一问的拓扑排序中，求每个点分别的最早出现位置。&lt;/p></description></item><item><title>BZOJ4259 残缺的字符串（FFT）</title><link>https://ouuan.github.io/post/bzoj4259-%E6%AE%8B%E7%BC%BA%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2fft/</link><pubDate>Tue, 19 Mar 2019 16:27:51 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj4259-%E6%AE%8B%E7%BC%BA%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2fft/</guid><description>&lt;h1 id="题目链接">题目链接&lt;/h1>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P4173" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://darkbzoj.tk/problem/4259" target="_blank">darkbzoj&lt;/a>&lt;/p>
+&lt;h1 id="题意简述">题意简述&lt;/h1>
+&lt;p>带通配符的单模式串、单文本串匹配。&lt;/p>
+&lt;p>字符串长度 $3\times10^5$。&lt;/p></description></item><item><title>BZOJ3622 已经没有什么好害怕的了（二项式反演，组合数学）</title><link>https://ouuan.github.io/post/bzoj3622-%E5%B7%B2%E7%BB%8F%E6%B2%A1%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%AE%B3%E6%80%95%E7%9A%84%E4%BA%86%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%8F%8D%E6%BC%94%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</link><pubDate>Fri, 15 Mar 2019 12:48:17 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj3622-%E5%B7%B2%E7%BB%8F%E6%B2%A1%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%AE%B3%E6%80%95%E7%9A%84%E4%BA%86%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%8F%8D%E6%BC%94%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</guid><description>&lt;h1 id="题目链接">题目链接&lt;/h1>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P4859" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://darkbzoj.tk/problem/3622" target="_blank">darkbzoj&lt;/a>&lt;/p>
+&lt;h1 id="题意简述">题意简述&lt;/h1>
+&lt;p>给你两个长为 $n$ 、无重复元素的数列 $a,b$，求将 $b$ 重排后 $\left(\sum\limits_{i=1}^n[a_i&amp;gt;b_i]\right)-\left(\sum\limits_{i=1}^n[a_i&amp;lt;b_i]\right)=k$（$k$ 给定）的方案数。&lt;/p>
+&lt;p>$n\le2000$。&lt;/p></description></item><item><title>BZOJ4665 小w的喜糖（容斥原理，组合数学）</title><link>https://ouuan.github.io/post/bzoj4665-%E5%B0%8Fw%E7%9A%84%E5%96%9C%E7%B3%96%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</link><pubDate>Wed, 13 Mar 2019 21:10:56 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj4665-%E5%B0%8Fw%E7%9A%84%E5%96%9C%E7%B3%96%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</guid><description>&lt;h1 id="题目链接">题目链接&lt;/h1>
+&lt;p>&lt;a href="https://darkbzoj.tk/problem/4665" target="_blank">darkbzoj&lt;/a>&lt;/p>
+&lt;h1 id="题意简述">题意简述&lt;/h1>
+&lt;p>给你一个数列，求重排后每个位置都变了的方案数。&lt;/p>
+&lt;p>数列长度和值域都是 $2000$。&lt;/p></description></item><item><title>BZOJ4003 [JLOI2015]城池攻占（左偏树）</title><link>https://ouuan.github.io/post/bzoj4003-jloi2015-%E5%9F%8E%E6%B1%A0%E6%94%BB%E5%8D%A0%E5%B7%A6%E5%81%8F%E6%A0%91/</link><pubDate>Tue, 12 Mar 2019 16:14:15 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj4003-jloi2015-%E5%9F%8E%E6%B1%A0%E6%94%BB%E5%8D%A0%E5%B7%A6%E5%81%8F%E6%A0%91/</guid><description>&lt;h1 id="题目链接">题目链接&lt;/h1>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P3261" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://darkbzoj.tk/problem/4003" target="_blank">darkbzoj&lt;/a>&lt;/p>
+&lt;h1 id="题意简述">题意简述&lt;/h1>
+&lt;p>给你一棵树，每个节点有 $h$ 值，一个勇士来到一个节点时如果他的战斗力大于等于 $h$ 就能占领城池并前往这个节点的父亲（除非已经到了根节点），否则阵亡；攻占一个节点后，勇士的战斗力会加/减/乘一个正整数（根据节点而定）；每个勇士有初始战斗力和想占领的第一个节点。问，每个节点各有多少个勇士阵亡，每个勇士各占领了几个节点。&lt;/p></description></item><item><title>CF235C Cyclical Quest（SAM）</title><link>https://ouuan.github.io/post/cf235c-cyclical-questsam/</link><pubDate>Wed, 27 Feb 2019 13:23:19 +0800</pubDate><guid>https://ouuan.github.io/post/cf235c-cyclical-questsam/</guid><description>&lt;h1 id="题目链接">题目链接&lt;/h1>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/CF235C" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://codeforces.com/problemset/problem/235/C" target="_blank">CF problemset&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://codeforces.com/contest/235/problem/C" target="_blank">CF contest&lt;/a>&lt;/p>
+&lt;h1 id="题意简述">题意简述&lt;/h1>
+&lt;p>给你一个字符串 $s$ 和 $n$ 个字符串 $x_{1..n}$，对每个 $x_i$，求有多少个 $s$ 的子串可以由 $x_i$ 旋转得到。&lt;/p>
+&lt;p>旋转一个字符串就是把它的一个前缀移到后面，如 &lt;code>abcd&lt;/code> 可以旋转得到的字符串有 &lt;code>abcd&lt;/code>，&lt;code>bcda&lt;/code>，&lt;code>cdab&lt;/code>，&lt;code>dabc&lt;/code>。&lt;/p></description></item><item><title>P3804 【模板】后缀自动机（SAM/后缀数组）</title><link>https://ouuan.github.io/post/p3804-%E6%A8%A1%E6%9D%BF%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/</link><pubDate>Thu, 21 Feb 2019 15:47:52 +0800</pubDate><guid>https://ouuan.github.io/post/p3804-%E6%A8%A1%E6%9D%BF%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/</guid><description>&lt;h1 id="题目链接">题目链接&lt;/h1>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P3804" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;h1 id="题意简述">题意简述&lt;/h1>
+&lt;p>求 &lt;strong>出现次数不为 $1$ 的子串的 出现次数 $\times$ 长度&lt;/strong> 的最大值。&lt;/p></description></item><item><title>BZOJ4516 [SDOI2016]生成魔咒（SAM）</title><link>https://ouuan.github.io/post/bzoj4516-sdoi2016-%E7%94%9F%E6%88%90%E9%AD%94%E5%92%92sam/</link><pubDate>Thu, 21 Feb 2019 14:10:35 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj4516-sdoi2016-%E7%94%9F%E6%88%90%E9%AD%94%E5%92%92sam/</guid><description>&lt;h1 id="题目链接">题目链接&lt;/h1>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P4070" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://darkbzoj.tk/problem/4516" target="_blank">dark bzoj&lt;/a>&lt;/p>
+&lt;h1 id="题意简述">题意简述&lt;/h1>
+&lt;p>给你一个字符串（字符集大小 $10^9$，长度 $10^5$），求每个前缀的本质不同子串数。&lt;/p></description></item><item><title>BZOJ4566 [HAOI2016]找相同字符（后缀数组）</title><link>https://ouuan.github.io/post/bzoj4566-haoi2016-%E6%89%BE%E7%9B%B8%E5%90%8C%E5%AD%97%E7%AC%A6%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/</link><pubDate>Thu, 14 Feb 2019 11:22:18 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj4566-haoi2016-%E6%89%BE%E7%9B%B8%E5%90%8C%E5%AD%97%E7%AC%A6%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/</guid><description>&lt;h1 id="题目链接">题目链接&lt;/h1>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P3181" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://darkbzoj.tk/problem/4566" target="_blank">dark bzoj&lt;/a>&lt;/p>
+&lt;h1 id="题意简述">题意简述&lt;/h1>
+&lt;p>给你两个字符串，从中各取一个子串使这两个子串相同，求方案数。&lt;/p></description></item><item><title>P2852 [USACO06DEC]Milk Patterns（后缀数组）</title><link>https://ouuan.github.io/post/p2852-usaco06dec-milk-patterns%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/</link><pubDate>Thu, 14 Feb 2019 11:21:26 +0800</pubDate><guid>https://ouuan.github.io/post/p2852-usaco06dec-milk-patterns%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/</guid><description>&lt;h1 id="题目链接">题目链接&lt;/h1>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P2852" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;h1 id="题意简述">题意简述&lt;/h1>
+&lt;p>给你一个字符串，求最长的出现了至少 $k$ 次的子串的长度。&lt;/p></description></item><item><title>P2870 [USACO07DEC]Best Cow Line, Gold（后缀数组）</title><link>https://ouuan.github.io/post/p2870-usaco07dec-best-cow-line-gold%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/</link><pubDate>Thu, 14 Feb 2019 11:20:59 +0800</pubDate><guid>https://ouuan.github.io/post/p2870-usaco07dec-best-cow-line-gold%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/</guid><description>&lt;h1 id="题目链接">题目链接&lt;/h1>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P2870" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;h1 id="题意简述">题意简述&lt;/h1>
+&lt;p>给你一个字符串，每次从首或尾取一个字符组成字符串，问所有能够组成的字符串中字典序最小的一个。&lt;/p></description></item><item><title>BZOJ1856 [SCOI2010]生成字符串（组合数学）</title><link>https://ouuan.github.io/post/bzoj1856-scoi2010-%E7%94%9F%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</link><pubDate>Tue, 12 Feb 2019 14:56:42 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj1856-scoi2010-%E7%94%9F%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/</guid><description>&lt;h1 id="题目链接">题目链接&lt;/h1>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P1641" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://darkbzoj.tk/problem/1856" target="_blank">darkbzoj&lt;/a>&lt;/p>
+&lt;h1 id="题意简述">题意简述&lt;/h1>
+&lt;p>$n$ 个入栈操作，$m$ 个出栈操作，问合法操作序列数。&lt;/p></description></item><item><title>UER #8 —— 通信题：打雪仗</title><link>https://ouuan.github.io/post/uer-8-%E6%B8%B8%E8%AE%B0-%E9%80%9A%E4%BF%A1%E9%A2%98%E6%89%93%E9%9B%AA%E4%BB%97/</link><pubDate>Sat, 22 Dec 2018 23:03:25 +0800</pubDate><guid>https://ouuan.github.io/post/uer-8-%E6%B8%B8%E8%AE%B0-%E9%80%9A%E4%BF%A1%E9%A2%98%E6%89%93%E9%9B%AA%E4%BB%97/</guid><description>T1题目链接 大意：Alice 有一个长度为 $2n$ 的 $01$ 串 $s_{1..2n}$，Bob 有 $n$ 个下标 $p_{1..n}$，Alice 和 Bob 只能用 $01$ 通信，需</description></item><item><title>WC2019 全国模拟赛第二场 T1 题解</title><link>https://ouuan.github.io/post/wc2019-%E5%85%A8%E5%9B%BD%E6%A8%A1%E6%8B%9F%E8%B5%9B%E7%AC%AC%E4%BA%8C%E5%9C%BA-t1-%E9%A2%98%E8%A7%A3/</link><pubDate>Sat, 08 Dec 2018 12:04:29 +0800</pubDate><guid>https://ouuan.github.io/post/wc2019-%E5%85%A8%E5%9B%BD%E6%A8%A1%E6%8B%9F%E8%B5%9B%E7%AC%AC%E4%BA%8C%E5%9C%BA-t1-%E9%A2%98%E8%A7%A3/</guid><description>又只会写T1&amp;hellip; 题目链接 题意简述 给你一个排列 $p_{1..n}$，$a_{1..n}$ 为任意的一个排列，定义 $b[a_i]=a[</description></item><item><title>WC2019 全国模拟赛第一场 T1 题解</title><link>https://ouuan.github.io/post/wc2019-%E5%85%A8%E5%9B%BD%E6%A8%A1%E6%8B%9F%E8%B5%9B%E7%AC%AC%E4%B8%80%E5%9C%BA-t1-%E9%A2%98%E8%A7%A3/</link><pubDate>Tue, 04 Dec 2018 20:29:47 +0800</pubDate><guid>https://ouuan.github.io/post/wc2019-%E5%85%A8%E5%9B%BD%E6%A8%A1%E6%8B%9F%E8%B5%9B%E7%AC%AC%E4%B8%80%E5%9C%BA-t1-%E9%A2%98%E8%A7%A3/</guid><description>由于只会T1，没法写游记，只好来写题解了&amp;hellip; 题目链接 题目大意 给你一个数列，每次可以任取两个不相交的区间，取一次的贡献是这两个区间</description></item><item><title>二维莫队解题报告</title><link>https://ouuan.github.io/post/%E4%BA%8C%E7%BB%B4%E8%8E%AB%E9%98%9F%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/</link><pubDate>Tue, 02 Oct 2018 18:23:00 +0800</pubDate><guid>https://ouuan.github.io/post/%E4%BA%8C%E7%BB%B4%E8%8E%AB%E9%98%9F%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/</guid><description>我写的莫队教程 其实这是一道bzoj上的题（bzoj2639，貌似是权限题，反正我看不了），在YALI做模拟赛的时候遇到了. 然后在网上查到了几</description></item></channel></rss>

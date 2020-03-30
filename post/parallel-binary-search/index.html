@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
 
 
-<meta name="generator" content="Hugo 0.67.0 with theme even" />
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
 
 
 <link rel="canonical" href="https://ouuan.github.io/post/parallel-binary-search/" />
@@ -46,13 +46,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ouuan.github.io/post/parallel-binary-search/" />
 <meta property="article:published_time" content="2020-02-14T14:50:32+08:00" />
-<meta property="article:modified_time" content="2020-02-25T17:01:59+08:00" />
+<meta property="article:modified_time" content="2020-03-30T16:33:20+08:00" />
 <meta itemprop="name" content="整体二分学习笔记">
 <meta itemprop="description" content="整体二分是一种离线算法，可以将一个修改同时作用于多个询问，从而减少不必要的开销，将二分答案从单次询问扩展到多次询问。
 在一些题目中，相比与其它解法，整体二分可以避免复杂的数据结构，降低代码难度与空间复杂度。">
 <meta itemprop="datePublished" content="2020-02-14T14:50:32&#43;08:00" />
-<meta itemprop="dateModified" content="2020-02-25T17:01:59&#43;08:00" />
-<meta itemprop="wordCount" content="3503">
+<meta itemprop="dateModified" content="2020-03-30T16:33:20&#43;08:00" />
+<meta itemprop="wordCount" content="3502">
 
 
 
@@ -254,7 +254,7 @@ $$</p>
 <p>这份伪代码维护了一个全局的贡献，每次加上左半修改的贡献后，先递归解决右半部分，然后将这些修改回退，再去解决左半部分。</p>
 <p>$$
 \begin{array}{rl}
-1&amp; current\gets(\mathbf{CONTRIBUTION}, +)\text{ 的单位元}\\<br>
+1&amp;current\gets(\mathbf{CONTRIBUTION}, +)\text{ 的单位元}\\<br>
 2&amp;\\<br>
 3&amp;\textbf{function}\text{ PARALLEL_BINARY_SEARCH}(l, r, M, Q)\\<br>
 4&amp;\qquad\textbf{if }Q=\varnothing\\<br>
@@ -612,8 +612,8 @@ int main()
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        <span title="2020-02-25 17:01:59 &#43;0800 &#43;0800">2020-02-25</span>
-        <a href="https://github.com/ouuan/hugo-blog/commit/47708b44ff6f59064271de2635788b26b6c1ad1b" title="Fix LaTeX error after minify" target="_blank">(47708b4)</a>
+        <span title="2020-03-30 16:33:20 &#43;0800 &#43;0800">2020-03-30</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/4acd804348cbde57358e1c24f89be99f8ee8ef93" title="performance: Use minify with HTML disabled" target="_blank">(4acd804)</a>
         ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/parallel-binary-search.md" target="_blank">更新历史</a>
     </span>
   </p>

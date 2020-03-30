@@ -1,37 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>出题 on ouuan的博客</title>
-    <link>https://ouuan.github.io/categories/%E5%87%BA%E9%A2%98/</link>
-    <description>Recent content in 出题 on ouuan的博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sun, 16 Jun 2019 11:24:12 +0800</lastBuildDate>
-    
-	<atom:link href="https://ouuan.github.io/categories/%E5%87%BA%E9%A2%98/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>ouuan 的出题规范</title>
-      <link>https://ouuan.github.io/post/ouuan-%E7%9A%84%E5%87%BA%E9%A2%98%E8%A7%84%E8%8C%83/</link>
-      <pubDate>Sun, 16 Jun 2019 11:24:12 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/ouuan-%E7%9A%84%E5%87%BA%E9%A2%98%E8%A7%84%E8%8C%83/</guid>
-      <description>&lt;p&gt;首先，你需要意识到，自己出的题是要 &lt;strong&gt;给别人做&lt;/strong&gt; 的。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>bad round 与出题人的坚守</title>
-      <link>https://ouuan.github.io/post/bad-round-%E4%B8%8E%E5%87%BA%E9%A2%98%E4%BA%BA%E7%9A%84%E5%9D%9A%E5%AE%88/</link>
-      <pubDate>Sun, 09 Jun 2019 12:56:10 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/bad-round-%E4%B8%8E%E5%87%BA%E9%A2%98%E4%BA%BA%E7%9A%84%E5%9D%9A%E5%AE%88/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;等你等了五千年，只为这一刹那的回眸一笑。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;这句话作为台前幕后的标准开头应该是没问题的。&lt;/p&gt;
-&lt;p&gt;只不过果然还是写不出 vfk 的水平啊&amp;hellip;写的比较散乱。而且是前后断断续续地写的，有的写于赛前，有的写于赛后，所以会有行文不连贯的地方，可能也会有后来忘记修正的地方。&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>出题 on ouuan的博客</title><link>https://ouuan.github.io/categories/%E5%87%BA%E9%A2%98/</link><description>Recent content in 出题 on ouuan的博客</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 16 Jun 2019 11:24:12 +0800</lastBuildDate><atom:link href="https://ouuan.github.io/categories/%E5%87%BA%E9%A2%98/index.xml" rel="self" type="application/rss+xml"/><item><title>ouuan 的出题规范</title><link>https://ouuan.github.io/post/ouuan-%E7%9A%84%E5%87%BA%E9%A2%98%E8%A7%84%E8%8C%83/</link><pubDate>Sun, 16 Jun 2019 11:24:12 +0800</pubDate><guid>https://ouuan.github.io/post/ouuan-%E7%9A%84%E5%87%BA%E9%A2%98%E8%A7%84%E8%8C%83/</guid><description>&lt;p>首先，你需要意识到，自己出的题是要 &lt;strong>给别人做&lt;/strong> 的。&lt;/p></description></item><item><title>bad round 与出题人的坚守</title><link>https://ouuan.github.io/post/bad-round-%E4%B8%8E%E5%87%BA%E9%A2%98%E4%BA%BA%E7%9A%84%E5%9D%9A%E5%AE%88/</link><pubDate>Sun, 09 Jun 2019 12:56:10 +0800</pubDate><guid>https://ouuan.github.io/post/bad-round-%E4%B8%8E%E5%87%BA%E9%A2%98%E4%BA%BA%E7%9A%84%E5%9D%9A%E5%AE%88/</guid><description>&lt;blockquote>
+&lt;p>等你等了五千年，只为这一刹那的回眸一笑。&lt;/p>
+&lt;/blockquote>
+&lt;p>这句话作为台前幕后的标准开头应该是没问题的。&lt;/p>
+&lt;p>只不过果然还是写不出 vfk 的水平啊&amp;hellip;写的比较散乱。而且是前后断断续续地写的，有的写于赛前，有的写于赛后，所以会有行文不连贯的地方，可能也会有后来忘记修正的地方。&lt;/p></description></item></channel></rss>

@@ -1,86 +1,27 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>并查集 on ouuan的博客</title>
-    <link>https://ouuan.github.io/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/</link>
-    <description>Recent content in 并查集 on ouuan的博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Wed, 26 Feb 2020 23:12:33 +0800</lastBuildDate>
-    
-	<atom:link href="https://ouuan.github.io/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>「HNOI2010」城市建设（线段树分治，LCT/Kruskal）</title>
-      <link>https://ouuan.github.io/post/hnoi2010-%E5%9F%8E%E5%B8%82%E5%BB%BA%E8%AE%BE/</link>
-      <pubDate>Wed, 26 Feb 2020 23:12:33 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/hnoi2010-%E5%9F%8E%E5%B8%82%E5%BB%BA%E8%AE%BE/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://www.luogu.com.cn/problem/P3206&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.lydsy.com/JudgeOnline/problem.php?id=2001&#34; target=&#34;_blank&#34;&gt;BZOJ&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&#34;admonition question&#34;&gt;
-  &lt;p class=&#34;admonition-title&#34;&gt;题目描述&lt;/p&gt;
-&lt;p&gt;给你一张边带权的无向连通图，多次修改，每次修改一条边的边权，每次修改完后求最小生成树的边权之和。&lt;/p&gt;
-&lt;p&gt;点数 $2\cdot 10^4$, 边数和修改数 $5\cdot 10^4$，时限 3s。&lt;/p&gt;
-&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF603E Pastoral Oddities（结论，LCT/分治&#43;并查集）</title>
-      <link>https://ouuan.github.io/post/cf603e/</link>
-      <pubDate>Tue, 18 Feb 2020 11:45:02 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf603e/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/603/problem/E&#34; target=&#34;_blank&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&#34;admonition question&#34;&gt;
-  &lt;p class=&#34;admonition-title&#34;&gt;题意简述&lt;/p&gt;
-&lt;p&gt;给你一张边带权且边从 $1$ 到 $m$ 编号的无向图 $G$，称一张图 $H$ 是“好的”，当且仅当存在一个 $H$ 的生成子图 $F$ 使得 $F$ 中每个点的度数都是奇数。现在，你需要回答 $m$ 个问题，第 $i$ 个问题是：求最小的 $x$，使得仅保留 $G$ 中编号不超过 $i$ 且边权不超过 $x$ 的边时，得到的生成子图是“好的”，或者指出不存在这样的 $x$。&lt;/p&gt;
-&lt;p&gt;$2\le n\le 10^5$, $1\le m\le 3\cdot 10^5$, TL 4s。&lt;/p&gt;
-&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>「HNOI2016」最小公倍数（回滚莫队，并查集）</title>
-      <link>https://ouuan.github.io/post/hnoi2016%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E5%9B%9E%E6%BB%9A%E8%8E%AB%E9%98%9F%E5%B9%B6%E6%9F%A5%E9%9B%86/</link>
-      <pubDate>Wed, 08 Jan 2020 14:49:06 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/hnoi2016%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E5%9B%9E%E6%BB%9A%E8%8E%AB%E9%98%9F%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://loj.ac/problem/2048&#34; target=&#34;_blank&#34;&gt;LOJ&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.com.cn/problem/P3247&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一张带边权的无向图，边权都形如 $2^a3^b$ ，若干询问，每次问是否存在 $u$ 到 $v$ 且边权的最小公倍数为 $2^a3^b$ 的途径（可以不是简单路径）。&lt;/p&gt;
-&lt;p&gt;点数 $5\cdot 10^4$，边数 $10^5$，询问数 $5\cdot 10^4$ 。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF878E Numbers on the blackboard（贪心，并查集）</title>
-      <link>https://ouuan.github.io/post/cf878e-numbers-on-the-blackboard%E8%B4%AA%E5%BF%83%E5%B9%B6%E6%9F%A5%E9%9B%86/</link>
-      <pubDate>Tue, 08 Oct 2019 20:49:18 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf878e-numbers-on-the-blackboard%E8%B4%AA%E5%BF%83%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/878/problem/E&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;对于一个数列，每次操作可以将相邻的两个数 $x$ 和 $y$ 合并成一个数 $x+2y$，定义一个数列的权值为进行操作直至只剩一个数能得到的最大值。&lt;/p&gt;
-&lt;p&gt;多组询问，每次给定一个区间，求这个区间的权值。&lt;/p&gt;
-&lt;p&gt;数列值域 $-10^9\sim10^9$，数列长度和询问个数不超过 $10^5$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF516D Drazil and Morning Exercise（up and down，并查集）</title>
-      <link>https://ouuan.github.io/post/cf516d-drazil-and-morning-exerciseup-and-down%E5%B9%B6%E6%9F%A5%E9%9B%86/</link>
-      <pubDate>Tue, 10 Sep 2019 13:37:12 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf516d-drazil-and-morning-exerciseup-and-down%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;http://codeforces.com/contest/516/problem/D&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problem/CF516D&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给定一棵 $n$ 个点带边权的树，定义 $d(u)$ 为树上离它最远的点到它的距离，$q$ 次询问，每次询问给定 $l$，求一个最大的树上连通块 $V&#39;$ 的大小，满足 $\forall u, v\in V&#39;$，$|d(u)-d(v)|\le l$。&lt;/p&gt;
-&lt;p&gt;$1\le n\le 10^5$, $1\le q\le 50$。&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>并查集 on ouuan的博客</title><link>https://ouuan.github.io/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/</link><description>Recent content in 并查集 on ouuan的博客</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 26 Feb 2020 23:12:33 +0800</lastBuildDate><atom:link href="https://ouuan.github.io/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/index.xml" rel="self" type="application/rss+xml"/><item><title>「HNOI2010」城市建设（线段树分治，LCT/Kruskal）</title><link>https://ouuan.github.io/post/hnoi2010-%E5%9F%8E%E5%B8%82%E5%BB%BA%E8%AE%BE/</link><pubDate>Wed, 26 Feb 2020 23:12:33 +0800</pubDate><guid>https://ouuan.github.io/post/hnoi2010-%E5%9F%8E%E5%B8%82%E5%BB%BA%E8%AE%BE/</guid><description>&lt;p>&lt;a href="https://www.luogu.com.cn/problem/P3206" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.lydsy.com/JudgeOnline/problem.php?id=2001" target="_blank">BZOJ&lt;/a>&lt;/p>
+&lt;div class="admonition question">
+&lt;p class="admonition-title">题目描述&lt;/p>
+&lt;p>给你一张边带权的无向连通图，多次修改，每次修改一条边的边权，每次修改完后求最小生成树的边权之和。&lt;/p>
+&lt;p>点数 $2\cdot 10^4$, 边数和修改数 $5\cdot 10^4$，时限 3s。&lt;/p>
+&lt;/div></description></item><item><title>CF603E Pastoral Oddities（结论，LCT/分治+并查集）</title><link>https://ouuan.github.io/post/cf603e/</link><pubDate>Tue, 18 Feb 2020 11:45:02 +0800</pubDate><guid>https://ouuan.github.io/post/cf603e/</guid><description>&lt;p>&lt;a href="https://codeforces.com/contest/603/problem/E" target="_blank">题目链接&lt;/a>&lt;/p>
+&lt;div class="admonition question">
+&lt;p class="admonition-title">题意简述&lt;/p>
+&lt;p>给你一张边带权且边从 $1$ 到 $m$ 编号的无向图 $G$，称一张图 $H$ 是“好的”，当且仅当存在一个 $H$ 的生成子图 $F$ 使得 $F$ 中每个点的度数都是奇数。现在，你需要回答 $m$ 个问题，第 $i$ 个问题是：求最小的 $x$，使得仅保留 $G$ 中编号不超过 $i$ 且边权不超过 $x$ 的边时，得到的生成子图是“好的”，或者指出不存在这样的 $x$。&lt;/p>
+&lt;p>$2\le n\le 10^5$, $1\le m\le 3\cdot 10^5$, TL 4s。&lt;/p>
+&lt;/div></description></item><item><title>「HNOI2016」最小公倍数（回滚莫队，并查集）</title><link>https://ouuan.github.io/post/hnoi2016%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E5%9B%9E%E6%BB%9A%E8%8E%AB%E9%98%9F%E5%B9%B6%E6%9F%A5%E9%9B%86/</link><pubDate>Wed, 08 Jan 2020 14:49:06 +0800</pubDate><guid>https://ouuan.github.io/post/hnoi2016%E6%9C%80%E5%B0%8F%E5%85%AC%E5%80%8D%E6%95%B0%E5%9B%9E%E6%BB%9A%E8%8E%AB%E9%98%9F%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://loj.ac/problem/2048" target="_blank">LOJ&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.luogu.com.cn/problem/P3247" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一张带边权的无向图，边权都形如 $2^a3^b$ ，若干询问，每次问是否存在 $u$ 到 $v$ 且边权的最小公倍数为 $2^a3^b$ 的途径（可以不是简单路径）。&lt;/p>
+&lt;p>点数 $5\cdot 10^4$，边数 $10^5$，询问数 $5\cdot 10^4$ 。&lt;/p></description></item><item><title>CF878E Numbers on the blackboard（贪心，并查集）</title><link>https://ouuan.github.io/post/cf878e-numbers-on-the-blackboard%E8%B4%AA%E5%BF%83%E5%B9%B6%E6%9F%A5%E9%9B%86/</link><pubDate>Tue, 08 Oct 2019 20:49:18 +0800</pubDate><guid>https://ouuan.github.io/post/cf878e-numbers-on-the-blackboard%E8%B4%AA%E5%BF%83%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://codeforces.com/contest/878/problem/E" target="_blank">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>对于一个数列，每次操作可以将相邻的两个数 $x$ 和 $y$ 合并成一个数 $x+2y$，定义一个数列的权值为进行操作直至只剩一个数能得到的最大值。&lt;/p>
+&lt;p>多组询问，每次给定一个区间，求这个区间的权值。&lt;/p>
+&lt;p>数列值域 $-10^9\sim10^9$，数列长度和询问个数不超过 $10^5$。&lt;/p></description></item><item><title>CF516D Drazil and Morning Exercise（up and down，并查集）</title><link>https://ouuan.github.io/post/cf516d-drazil-and-morning-exerciseup-and-down%E5%B9%B6%E6%9F%A5%E9%9B%86/</link><pubDate>Tue, 10 Sep 2019 13:37:12 +0800</pubDate><guid>https://ouuan.github.io/post/cf516d-drazil-and-morning-exerciseup-and-down%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="http://codeforces.com/contest/516/problem/D" target="_blank">CF&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.luogu.org/problem/CF516D" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给定一棵 $n$ 个点带边权的树，定义 $d(u)$ 为树上离它最远的点到它的距离，$q$ 次询问，每次询问给定 $l$，求一个最大的树上连通块 $V'$ 的大小，满足 $\forall u, v\in V'$，$|d(u)-d(v)|\le l$。&lt;/p>
+&lt;p>$1\le n\le 10^5$, $1\le q\le 50$。&lt;/p></description></item></channel></rss>

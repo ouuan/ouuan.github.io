@@ -1,41 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>二分答案 on ouuan的博客</title>
-    <link>https://ouuan.github.io/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/</link>
-    <description>Recent content in 二分答案 on ouuan的博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Fri, 06 Dec 2019 19:24:14 +0800</lastBuildDate>
-    
-	<atom:link href="https://ouuan.github.io/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>CF786C Till I Collapse（根号分治，二分答案 / 主席树，调和级数）</title>
-      <link>https://ouuan.github.io/post/cf786c-till-i-collapse%E6%A0%B9%E5%8F%B7%E5%88%86%E6%B2%BB%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88-%E4%B8%BB%E5%B8%AD%E6%A0%91%E8%B0%83%E5%92%8C%E7%BA%A7%E6%95%B0/</link>
-      <pubDate>Fri, 06 Dec 2019 19:24:14 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf786c-till-i-collapse%E6%A0%B9%E5%8F%B7%E5%88%86%E6%B2%BB%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88-%E4%B8%BB%E5%B8%AD%E6%A0%91%E8%B0%83%E5%92%8C%E7%BA%A7%E6%95%B0/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/786/problem/C&#34; target=&#34;_blank&#34;&gt;CF&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一个长为 $n$ 的数列，对于 $1\le k\le n$ 的所有整数 $k$，求出这个问题的答案：将数列划分成若干连续段，每段内最多有 $k$ 个 &lt;strong&gt;不同&lt;/strong&gt; 的数，至少要划分成几段？&lt;/p&gt;
-&lt;p&gt;$n\le 10^5$ 。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>BZOJ1758 [WC2010]重建计划（二分答案，长链剖分）</title>
-      <link>https://ouuan.github.io/post/bzoj1758-wc2010-%E9%87%8D%E5%BB%BA%E8%AE%A1%E5%88%92%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88%E9%95%BF%E9%93%BE%E5%89%96%E5%88%86/</link>
-      <pubDate>Tue, 23 Jul 2019 20:24:05 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/bzoj1758-wc2010-%E9%87%8D%E5%BB%BA%E8%AE%A1%E5%88%92%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88%E9%95%BF%E9%93%BE%E5%89%96%E5%88%86/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P4292&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一棵带边权的树，求所有长度在 $[L,U]$ 这个范围内的路径里平均权值（总权值除以边数）的最大值。&lt;/p&gt;
-&lt;p&gt;$2\le n\le 10^5$，保证至少有一条满足要求的路径。&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>二分答案 on ouuan的博客</title><link>https://ouuan.github.io/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/</link><description>Recent content in 二分答案 on ouuan的博客</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 06 Dec 2019 19:24:14 +0800</lastBuildDate><atom:link href="https://ouuan.github.io/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/index.xml" rel="self" type="application/rss+xml"/><item><title>CF786C Till I Collapse（根号分治，二分答案 / 主席树，调和级数）</title><link>https://ouuan.github.io/post/cf786c-till-i-collapse%E6%A0%B9%E5%8F%B7%E5%88%86%E6%B2%BB%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88-%E4%B8%BB%E5%B8%AD%E6%A0%91%E8%B0%83%E5%92%8C%E7%BA%A7%E6%95%B0/</link><pubDate>Fri, 06 Dec 2019 19:24:14 +0800</pubDate><guid>https://ouuan.github.io/post/cf786c-till-i-collapse%E6%A0%B9%E5%8F%B7%E5%88%86%E6%B2%BB%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88-%E4%B8%BB%E5%B8%AD%E6%A0%91%E8%B0%83%E5%92%8C%E7%BA%A7%E6%95%B0/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://codeforces.com/contest/786/problem/C" target="_blank">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一个长为 $n$ 的数列，对于 $1\le k\le n$ 的所有整数 $k$，求出这个问题的答案：将数列划分成若干连续段，每段内最多有 $k$ 个 &lt;strong>不同&lt;/strong> 的数，至少要划分成几段？&lt;/p>
+&lt;p>$n\le 10^5$ 。&lt;/p></description></item><item><title>BZOJ1758 [WC2010]重建计划（二分答案，长链剖分）</title><link>https://ouuan.github.io/post/bzoj1758-wc2010-%E9%87%8D%E5%BB%BA%E8%AE%A1%E5%88%92%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88%E9%95%BF%E9%93%BE%E5%89%96%E5%88%86/</link><pubDate>Tue, 23 Jul 2019 20:24:05 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj1758-wc2010-%E9%87%8D%E5%BB%BA%E8%AE%A1%E5%88%92%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88%E9%95%BF%E9%93%BE%E5%89%96%E5%88%86/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P4292" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一棵带边权的树，求所有长度在 $[L,U]$ 这个范围内的路径里平均权值（总权值除以边数）的最大值。&lt;/p>
+&lt;p>$2\le n\le 10^5$，保证至少有一条满足要求的路径。&lt;/p></description></item></channel></rss>

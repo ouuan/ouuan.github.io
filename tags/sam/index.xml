@@ -1,79 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>SAM on ouuan的博客</title>
-    <link>https://ouuan.github.io/tags/sam/</link>
-    <description>Recent content in SAM on ouuan的博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Tue, 07 Jan 2020 18:33:42 +0800</lastBuildDate>
-    
-	<atom:link href="https://ouuan.github.io/tags/sam/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>「NOI2018」你的名字（SAM，线段树合并）</title>
-      <link>https://ouuan.github.io/post/noi2018%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97sam%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/</link>
-      <pubDate>Tue, 07 Jan 2020 18:33:42 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/noi2018%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97sam%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://uoj.ac/problem/395&#34; target=&#34;_blank&#34;&gt;UOJ&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://loj.ac/problem/2720&#34; target=&#34;_blank&#34;&gt;LOJ&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.com.cn/problem/P4770&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你一个字符串 $S$，有 $q$ 次询问，每次给你询问串 $T$ 以及左右端点 $l$, $r$，询问 $T$ 有多少个 &lt;strong&gt;本质不同&lt;/strong&gt; 的子串 &lt;strong&gt;不是&lt;/strong&gt; $S[l..r]$ 的子串。&lt;/p&gt;
-&lt;p&gt;$|S|\le 5\cdot 10^5$, $\sum|T|\le 10^6$, $q\le 10^5$ 。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>CF235C Cyclical Quest（SAM）</title>
-      <link>https://ouuan.github.io/post/cf235c-cyclical-questsam/</link>
-      <pubDate>Wed, 27 Feb 2019 13:23:19 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/cf235c-cyclical-questsam/</guid>
-      <description>&lt;h1 id=&#34;题目链接&#34;&gt;题目链接&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/CF235C&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/problemset/problem/235/C&#34; target=&#34;_blank&#34;&gt;CF problemset&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/contest/235/problem/C&#34; target=&#34;_blank&#34;&gt;CF contest&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;题意简述&#34;&gt;题意简述&lt;/h1&gt;
-&lt;p&gt;给你一个字符串 $s$ 和 $n$ 个字符串 $x_{1..n}$，对每个 $x_i$，求有多少个 $s$ 的子串可以由 $x_i$ 旋转得到。&lt;/p&gt;
-&lt;p&gt;旋转一个字符串就是把它的一个前缀移到后面，如 &lt;code&gt;abcd&lt;/code&gt; 可以旋转得到的字符串有 &lt;code&gt;abcd&lt;/code&gt;，&lt;code&gt;bcda&lt;/code&gt;，&lt;code&gt;cdab&lt;/code&gt;，&lt;code&gt;dabc&lt;/code&gt;。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>后缀自动机（SAM）学习笔记</title>
-      <link>https://ouuan.github.io/post/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BAsam%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Fri, 22 Feb 2019 12:31:37 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BAsam%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
-      <description>&lt;p&gt;后缀自动机是一种处理字符串问题的有力工具（废话），它的码量不比后缀数组大（实际代码难度不比后缀数组小，但也不难），处理问题时的思维难度往往比后缀数组小，复杂度更优秀。若字符集大小为 $|\Sigma|$，则：构建时间复杂度 $O(n|\Sigma|)$，转移时间复杂度 $O(1)$，空间复杂度 $O(n|\Sigma|)$ 或 构建时间复杂度 $O(n\log|\Sigma|)$，转移时间复杂度 $O(\log|\Sigma|)$，空间复杂度 $O(n)$。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>P3804 【模板】后缀自动机（SAM/后缀数组）</title>
-      <link>https://ouuan.github.io/post/p3804-%E6%A8%A1%E6%9D%BF%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/</link>
-      <pubDate>Thu, 21 Feb 2019 15:47:52 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/p3804-%E6%A8%A1%E6%9D%BF%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/</guid>
-      <description>&lt;h1 id=&#34;题目链接&#34;&gt;题目链接&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P3804&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;题意简述&#34;&gt;题意简述&lt;/h1&gt;
-&lt;p&gt;求 &lt;strong&gt;出现次数不为 $1$ 的子串的 出现次数 $\times$ 长度&lt;/strong&gt; 的最大值。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>BZOJ4516 [SDOI2016]生成魔咒（SAM）</title>
-      <link>https://ouuan.github.io/post/bzoj4516-sdoi2016-%E7%94%9F%E6%88%90%E9%AD%94%E5%92%92sam/</link>
-      <pubDate>Thu, 21 Feb 2019 14:10:35 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/bzoj4516-sdoi2016-%E7%94%9F%E6%88%90%E9%AD%94%E5%92%92sam/</guid>
-      <description>&lt;h1 id=&#34;题目链接&#34;&gt;题目链接&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problemnew/show/P4070&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://darkbzoj.tk/problem/4516&#34; target=&#34;_blank&#34;&gt;dark bzoj&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;题意简述&#34;&gt;题意简述&lt;/h1&gt;
-&lt;p&gt;给你一个字符串（字符集大小 $10^9$，长度 $10^5$），求每个前缀的本质不同子串数。&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SAM on ouuan的博客</title><link>https://ouuan.github.io/tags/sam/</link><description>Recent content in SAM on ouuan的博客</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 07 Jan 2020 18:33:42 +0800</lastBuildDate><atom:link href="https://ouuan.github.io/tags/sam/index.xml" rel="self" type="application/rss+xml"/><item><title>「NOI2018」你的名字（SAM，线段树合并）</title><link>https://ouuan.github.io/post/noi2018%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97sam%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/</link><pubDate>Tue, 07 Jan 2020 18:33:42 +0800</pubDate><guid>https://ouuan.github.io/post/noi2018%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97sam%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://uoj.ac/problem/395" target="_blank">UOJ&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://loj.ac/problem/2720" target="_blank">LOJ&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.luogu.com.cn/problem/P4770" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一个字符串 $S$，有 $q$ 次询问，每次给你询问串 $T$ 以及左右端点 $l$, $r$，询问 $T$ 有多少个 &lt;strong>本质不同&lt;/strong> 的子串 &lt;strong>不是&lt;/strong> $S[l..r]$ 的子串。&lt;/p>
+&lt;p>$|S|\le 5\cdot 10^5$, $\sum|T|\le 10^6$, $q\le 10^5$ 。&lt;/p></description></item><item><title>CF235C Cyclical Quest（SAM）</title><link>https://ouuan.github.io/post/cf235c-cyclical-questsam/</link><pubDate>Wed, 27 Feb 2019 13:23:19 +0800</pubDate><guid>https://ouuan.github.io/post/cf235c-cyclical-questsam/</guid><description>&lt;h1 id="题目链接">题目链接&lt;/h1>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/CF235C" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://codeforces.com/problemset/problem/235/C" target="_blank">CF problemset&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://codeforces.com/contest/235/problem/C" target="_blank">CF contest&lt;/a>&lt;/p>
+&lt;h1 id="题意简述">题意简述&lt;/h1>
+&lt;p>给你一个字符串 $s$ 和 $n$ 个字符串 $x_{1..n}$，对每个 $x_i$，求有多少个 $s$ 的子串可以由 $x_i$ 旋转得到。&lt;/p>
+&lt;p>旋转一个字符串就是把它的一个前缀移到后面，如 &lt;code>abcd&lt;/code> 可以旋转得到的字符串有 &lt;code>abcd&lt;/code>，&lt;code>bcda&lt;/code>，&lt;code>cdab&lt;/code>，&lt;code>dabc&lt;/code>。&lt;/p></description></item><item><title>后缀自动机（SAM）学习笔记</title><link>https://ouuan.github.io/post/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BAsam%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Fri, 22 Feb 2019 12:31:37 +0800</pubDate><guid>https://ouuan.github.io/post/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BAsam%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;p>后缀自动机是一种处理字符串问题的有力工具（废话），它的码量不比后缀数组大（实际代码难度不比后缀数组小，但也不难），处理问题时的思维难度往往比后缀数组小，复杂度更优秀。若字符集大小为 $|\Sigma|$，则：构建时间复杂度 $O(n|\Sigma|)$，转移时间复杂度 $O(1)$，空间复杂度 $O(n|\Sigma|)$ 或 构建时间复杂度 $O(n\log|\Sigma|)$，转移时间复杂度 $O(\log|\Sigma|)$，空间复杂度 $O(n)$。&lt;/p></description></item><item><title>P3804 【模板】后缀自动机（SAM/后缀数组）</title><link>https://ouuan.github.io/post/p3804-%E6%A8%A1%E6%9D%BF%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/</link><pubDate>Thu, 21 Feb 2019 15:47:52 +0800</pubDate><guid>https://ouuan.github.io/post/p3804-%E6%A8%A1%E6%9D%BF%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/</guid><description>&lt;h1 id="题目链接">题目链接&lt;/h1>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P3804" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;h1 id="题意简述">题意简述&lt;/h1>
+&lt;p>求 &lt;strong>出现次数不为 $1$ 的子串的 出现次数 $\times$ 长度&lt;/strong> 的最大值。&lt;/p></description></item><item><title>BZOJ4516 [SDOI2016]生成魔咒（SAM）</title><link>https://ouuan.github.io/post/bzoj4516-sdoi2016-%E7%94%9F%E6%88%90%E9%AD%94%E5%92%92sam/</link><pubDate>Thu, 21 Feb 2019 14:10:35 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj4516-sdoi2016-%E7%94%9F%E6%88%90%E9%AD%94%E5%92%92sam/</guid><description>&lt;h1 id="题目链接">题目链接&lt;/h1>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P4070" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://darkbzoj.tk/problem/4516" target="_blank">dark bzoj&lt;/a>&lt;/p>
+&lt;h1 id="题意简述">题意简述&lt;/h1>
+&lt;p>给你一个字符串（字符集大小 $10^9$，长度 $10^5$），求每个前缀的本质不同子串数。&lt;/p></description></item></channel></rss>

@@ -1,31 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>实现 on ouuan的博客</title>
-    <link>https://ouuan.github.io/tags/%E5%AE%9E%E7%8E%B0/</link>
-    <description>Recent content in 实现 on ouuan的博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Fri, 16 Aug 2019 23:34:10 +0800</lastBuildDate>
-    
-	<atom:link href="https://ouuan.github.io/tags/%E5%AE%9E%E7%8E%B0/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>AGC007F Shik and Copying String（贪心，实现）</title>
-      <link>https://ouuan.github.io/post/agc007f-shik-and-copying-string%E8%B4%AA%E5%BF%83%E5%AE%9E%E7%8E%B0/</link>
-      <pubDate>Fri, 16 Aug 2019 23:34:10 +0800</pubDate>
-      
-      <guid>https://ouuan.github.io/post/agc007f-shik-and-copying-string%E8%B4%AA%E5%BF%83%E5%AE%9E%E7%8E%B0/</guid>
-      <description>&lt;h2 id=&#34;题目链接&#34;&gt;题目链接&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.luogu.org/problem/AT2173&#34; target=&#34;_blank&#34;&gt;洛谷&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://atcoder.jp/contests/agc007/tasks/agc007_f&#34; target=&#34;_blank&#34;&gt;AtCoder&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;题意简述&#34;&gt;题意简述&lt;/h2&gt;
-&lt;p&gt;给你初始串 $S_0$ 和目标串 $T$，每一步操作可以将当前串 $S_i$ 变成 $S_{i+1}$，其中：&lt;/p&gt;
-&lt;p&gt;$$S_{i+1}[j]=\begin{cases}S_i[1]&amp;amp;j=1\\S_i[j]\text{ 或 }S_{i+1}[j-1]&amp;amp;j&amp;gt;1\end{cases}$$&lt;/p&gt;
-&lt;p&gt;求最少需要几次操作可以将当前串变为 $T$。&lt;/p&gt;
-&lt;p&gt;串长 $10^6​$。&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>实现 on ouuan的博客</title><link>https://ouuan.github.io/tags/%E5%AE%9E%E7%8E%B0/</link><description>Recent content in 实现 on ouuan的博客</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 16 Aug 2019 23:34:10 +0800</lastBuildDate><atom:link href="https://ouuan.github.io/tags/%E5%AE%9E%E7%8E%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>AGC007F Shik and Copying String（贪心，实现）</title><link>https://ouuan.github.io/post/agc007f-shik-and-copying-string%E8%B4%AA%E5%BF%83%E5%AE%9E%E7%8E%B0/</link><pubDate>Fri, 16 Aug 2019 23:34:10 +0800</pubDate><guid>https://ouuan.github.io/post/agc007f-shik-and-copying-string%E8%B4%AA%E5%BF%83%E5%AE%9E%E7%8E%B0/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problem/AT2173" target="_blank">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://atcoder.jp/contests/agc007/tasks/agc007_f" target="_blank">AtCoder&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你初始串 $S_0$ 和目标串 $T$，每一步操作可以将当前串 $S_i$ 变成 $S_{i+1}$，其中：&lt;/p>
+&lt;p>$$S_{i+1}[j]=\begin{cases}S_i[1]&amp;amp;j=1\\S_i[j]\text{ 或 }S_{i+1}[j-1]&amp;amp;j&amp;gt;1\end{cases}$$&lt;/p>
+&lt;p>求最少需要几次操作可以将当前串变为 $T$。&lt;/p>
+&lt;p>串长 $10^6​$。&lt;/p></description></item></channel></rss>
