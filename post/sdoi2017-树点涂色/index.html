@@ -72,7 +72,7 @@
 ">
 <meta itemprop="datePublished" content="2020-04-17T12:38:34&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-17T13:35:31&#43;08:00" />
-<meta itemprop="wordCount" content="1645">
+<meta itemprop="wordCount" content="1601">
 
 
 
@@ -224,7 +224,7 @@
 <p>在图中，$2$ 和 $4$ 从关键点变成了非关键点，而 $6$ 和 $8$ 从非关键点变成了关键点。</p>
 <p>关键点和非关键点的转换其实就是子树加一或减一，于是，问题的关键就在于如何快速找到这两类点。</p>
 <p>可以发现，操作 1 其实就和 LCT 的 access 操作是一样的，LCT 中的实链即为本题中颜色相同的段，而使用 LCT 的确能快速找到这两类点（前一类是实链的顶端，即 Splay 中的最小点；后一类是被修改的末端的实儿子，即被修改的末端在 Splay 上的右子树中的最小点），具体怎么找这两类点可以参考下面的代码。</p>
-<p>时间复杂度貌似是 $O((n+m)\log^2 n)$（可能是 $O(n\log n+m\log^2 n)$？），由 LCT 复杂度得到上界是这个，$\Omega(m\log^2 n)$ 也是可以通过完全二叉树加上特定的操作 1 顺序卡到的。</p>
+<p>时间复杂度是 $O((n+m)\log^2 n)$（说不定是 $\Theta(n\log n+m\log^2 n)$ 或者 $\Theta(n\log^2 n+m\log n)$，不会算 /kk）。</p>
 <h2 id="参考代码">参考代码</h2>
 <pre><code class="language-cpp">#include &lt;iostream&gt;
 #include &lt;cstdio&gt;
@@ -488,7 +488,7 @@ int main()
     <span class="item-title">上次更新</span>
     <span class="item-content">
         <span title="2020-04-17 13:35:31 &#43;0800 &#43;0800">2020-04-17</span>
-        <a href="https://github.com/ouuan/hugo-blog/commit/f1da20d5175a0a1ada800b49d2439fb7579fb100" title="Add SDOI2017-树点涂色" target="_blank">(f1da20d)</a>
+        <a href="https://github.com/ouuan/hugo-blog/commit/6eec341c9463312e2a152041d61a41d311a559a6" title="Add SDOI2017-树点涂色" target="_blank">(6eec341)</a>
         ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/SDOI2017-%e6%a0%91%e7%82%b9%e6%b6%82%e8%89%b2.md" target="_blank">更新历史</a>
     </span>
   </p>
