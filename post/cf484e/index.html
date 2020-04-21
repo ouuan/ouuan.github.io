@@ -191,7 +191,7 @@
 <h3 id="onmlog2n-做法">O((n+m)log^2n) 做法</h3>
 <p>二分答案，记当前二分的值为 $x$，定义 $b_i=\begin{cases}1&amp;a_i\ge x\\-n&amp;a_i&lt;x\end{cases}$，那么答案不小于 $x$ 当且仅当 $b_{l..r}$ 的最大子段和不小于 $w$。</p>
 <p>最大子段和可以用线段树维护，记录每个区间的最大子段和，最大前缀，最大后缀，以及总和即可。</p>
-<p>然后用主席树或整体二分就能在 $O((n+m)\log^2n)$ 的时间复杂度内解决这道题。</p>
+<p>然后用主席树或 <a href="/post/parallel-binary-search/">整体二分</a> 就能在 $O((n+m)\log^2n)$ 的时间复杂度内解决这道题。</p>
 <p>（其实我自己没写主席树做法，听说别人都写的主席树，口胡了一下，感觉应该和整体二分做法差不多..）</p>
 <h3 id="onmlognlogm-做法">O((n+m)(logn+logm)) 做法</h3>
 <p>首先用单调栈求出每个点作为最小值最远能向左延伸到 $p_i$，向右延伸到 $q_i$。</p>
@@ -505,7 +505,7 @@ int main()
     <span class="item-title">上次更新</span>
     <span class="item-content">
         <span title="2020-04-21 00:01:30 &#43;0800 &#43;0800">2020-04-21</span>
-        <a href="https://github.com/ouuan/hugo-blog/commit/75327ad9acae42638ab31075820445f894f31356" title="Add CF484E" target="_blank">(75327ad)</a>
+        <a href="https://github.com/ouuan/hugo-blog/commit/77039d09320b8e521079e80a956174328a5a509f" title="Add CF484E" target="_blank">(77039d0)</a>
         ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/CF484E.md" target="_blank">更新历史</a>
     </span>
   </p>
