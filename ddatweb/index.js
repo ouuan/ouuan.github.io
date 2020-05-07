@@ -99,7 +99,7 @@
                     ws.send(res);
                     ++vm.thisSessionJobs;
                     ++vm.totalJobs;
-                    setCookie('totalJobs', vm.totalJobs);
+                    setCookie('totalJobs', vm.totalJobs, 2434);
                 }
                 timer = setTimeout(function() {
                     log('send', 'DDhttp');
