@@ -6,7 +6,23 @@
 &lt;p>我更喜欢做的事情是写点工程啥的 &amp;gt;_&amp;lt;&amp;hellip; 做做小游戏挺好玩的。&lt;/p>
 &lt;p>—— vfk 《四色的 NOI》&lt;/p>
 &lt;/blockquote>
-&lt;p>（&lt;del>这算哪门子引用啊&lt;/del>）&lt;/p></description></item><item><title>带修改的树上 DP 问题（动态 DP）</title><link>https://ouuan.github.io/post/tree-dp-with-modification/</link><pubDate>Thu, 07 May 2020 20:58:54 +0800</pubDate><guid>https://ouuan.github.io/post/tree-dp-with-modification/</guid><description>&lt;p>“动态 DP”通过树链剖分将带修改的树上 DP 问题拆分为规模更小的序列上的半群合并问题和树上 DP 问题，从而可以快速地支持修改。&lt;/p></description></item><item><title>CF484E Sign on Fence</title><link>https://ouuan.github.io/post/cf484e/</link><pubDate>Mon, 20 Apr 2020 23:05:37 +0800</pubDate><guid>https://ouuan.github.io/post/cf484e/</guid><description>&lt;p>&lt;a href="https://codeforces.com/contest/484/problem/E" target="_blank">题目链接&lt;/a>&lt;/p>
+&lt;p>（&lt;del>这算哪门子引用啊&lt;/del>）&lt;/p></description></item><item><title>2020省选自闭记</title><link>https://ouuan.github.io/post/hbsx2020/</link><pubDate>Sat, 20 Jun 2020 14:46:43 +0800</pubDate><guid>https://ouuan.github.io/post/hbsx2020/</guid><description>&lt;p>&lt;code>&amp;lt;area/&amp;gt;&lt;/code>
+&lt;code>&amp;lt;base/&amp;gt;&lt;/code>
+&lt;code>&amp;lt;br/&amp;gt;&lt;/code>
+&lt;code>&amp;lt;col/&amp;gt;&lt;/code>
+&lt;code>&amp;lt;command/&amp;gt;&lt;/code>
+&lt;code>&amp;lt;embed/&amp;gt;&lt;/code>
+&lt;code>&amp;lt;hr/&amp;gt;&lt;/code>
+&lt;code>&amp;lt;img/&amp;gt;&lt;/code>
+&lt;code>&amp;lt;input/&amp;gt;&lt;/code>
+&lt;code>&amp;lt;keygen/&amp;gt;&lt;/code>
+&lt;code>&amp;lt;link/&amp;gt;&lt;/code>
+&lt;code>&amp;lt;menuitem/&amp;gt;&lt;/code>
+&lt;code>&amp;lt;meta/&amp;gt;&lt;/code>
+&lt;code>&amp;lt;param/&amp;gt;&lt;/code>
+&lt;code>&amp;lt;source/&amp;gt;&lt;/code>
+&lt;code>&amp;lt;track/&amp;gt;&lt;/code>
+&lt;code>&amp;lt;wbr/&amp;gt;&lt;/code>&lt;/p></description></item><item><title>带修改的树上 DP 问题（动态 DP）</title><link>https://ouuan.github.io/post/tree-dp-with-modification/</link><pubDate>Thu, 07 May 2020 20:58:54 +0800</pubDate><guid>https://ouuan.github.io/post/tree-dp-with-modification/</guid><description>&lt;p>“动态 DP”通过树链剖分将带修改的树上 DP 问题拆分为规模更小的序列上的半群合并问题和树上 DP 问题，从而可以快速地支持修改。&lt;/p></description></item><item><title>CF484E Sign on Fence</title><link>https://ouuan.github.io/post/cf484e/</link><pubDate>Mon, 20 Apr 2020 23:05:37 +0800</pubDate><guid>https://ouuan.github.io/post/cf484e/</guid><description>&lt;p>&lt;a href="https://codeforces.com/contest/484/problem/E" target="_blank">题目链接&lt;/a>&lt;/p>
 &lt;div class="admonition question">
 &lt;p class="admonition-title">题目描述&lt;/p>
 &lt;p>给你一个数列 $a_{1..n}$，进行 $m$ 次询问，每次询问给出一个区间 $[l, r]$ 及参数 $w$，询问 $\max_{i = l}^{r-w+1}\{\min_{j=i}^{i+w-1}\{a_j\}\}$。&lt;/p>
