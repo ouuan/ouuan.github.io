@@ -881,9 +881,9 @@ void add_edge(int u, int v, ll f, ll w)
 
 void spfa(int s)
 {
-    inq.assign(n + 2, false);
-    dis.assign(n + 2, INF);
-    pre.assign(n + 2, -1);
+    inq.assign(n + 1, false);
+    dis.assign(n + 1, INF);
+    pre.assign(n + 1, -1);
     dis[s] = 0;
     q.push(s);
 
@@ -1006,7 +1006,7 @@ int main()
     <span class="item-title">上次更新</span>
     <span class="item-content">
         <span title="2020-07-15 18:56:29 &#43;0800 &#43;0800">2020-07-15</span>
-        <a href="https://github.com/ouuan/hugo-blog/commit/1aa863c9cf3d8572a65c5d414ff89299c9378d55" title="Remove redundant codes in SPFA capacity scaling" target="_blank">(1aa863c)</a>
+        <a href="https://github.com/ouuan/hugo-blog/commit/7b68cfe8829adaf4eedaff0fea3c96edf5c4e82d" title="Remove redundant codes in SPFA capacity scaling" target="_blank">(7b68cfe)</a>
         ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/%e5%9f%ba%e4%ba%8e-Capacity-Scaling-%e7%9a%84%e5%bc%b1%e5%a4%9a%e9%a1%b9%e5%bc%8f%e5%a4%8d%e6%9d%82%e5%ba%a6%e6%9c%80%e5%b0%8f%e8%b4%b9%e7%94%a8%e6%b5%81%e7%ae%97%e6%b3%95.md" target="_blank">更新历史</a>
     </span>
   </p>
