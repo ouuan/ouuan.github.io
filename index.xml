@@ -6,7 +6,13 @@
 &lt;p>我更喜欢做的事情是写点工程啥的 &amp;gt;_&amp;lt;&amp;hellip; 做做小游戏挺好玩的。&lt;/p>
 &lt;p>—— vfk 《四色的 NOI》&lt;/p>
 &lt;/blockquote>
-&lt;p>（&lt;del>这算哪门子引用啊&lt;/del>）&lt;/p></description></item><item><title>Firefox 的 Tree Style Tab 和 Duplicate Tabs Closer 插件</title><link>https://ouuan.github.io/post/firefox-tree-style-tab-and-duplicate-tabs-closer/</link><pubDate>Thu, 09 Jul 2020 13:00:46 +0800</pubDate><guid>https://ouuan.github.io/post/firefox-tree-style-tab-and-duplicate-tabs-closer/</guid><description>&lt;p>你在使用浏览器时是否有这样的烦恼？&lt;/p>
+&lt;p>（&lt;del>这算哪门子引用啊&lt;/del>）&lt;/p></description></item><item><title>CS Academy Round #18 - Expected Tree Degrees</title><link>https://ouuan.github.io/post/csacademy-expected-tree-degrees/</link><pubDate>Sun, 26 Jul 2020 22:33:07 +0800</pubDate><guid>https://ouuan.github.io/post/csacademy-expected-tree-degrees/</guid><description>&lt;p>&lt;a href="https://csacademy.com/contest/archive/task/expected-tree-degrees/" target="_blank">题目链接&lt;/a>&lt;/p>
+&lt;div class="admonition question">
+&lt;p class="admonition-title">题目描述&lt;/p>
+&lt;p>有一棵 $n$ 个点的树，由如下方式生成：&lt;/p>
+&lt;p>对于每个点 $i$ ($i\ge 2$)，在 $1$ 到 $i-1$ 中等概率选择一个点作为点 $i$ 的父亲。&lt;/p>
+&lt;p>求每个点的度数的平方和的期望，保留六位小数，$n\le 10^6$。&lt;/p>
+&lt;/div></description></item><item><title>Firefox 的 Tree Style Tab 和 Duplicate Tabs Closer 插件</title><link>https://ouuan.github.io/post/firefox-tree-style-tab-and-duplicate-tabs-closer/</link><pubDate>Thu, 09 Jul 2020 13:00:46 +0800</pubDate><guid>https://ouuan.github.io/post/firefox-tree-style-tab-and-duplicate-tabs-closer/</guid><description>&lt;p>你在使用浏览器时是否有这样的烦恼？&lt;/p>
 &lt;ul>
 &lt;li>到底开多少个标签页？
 &lt;ol>
