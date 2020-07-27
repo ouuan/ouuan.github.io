@@ -20,7 +20,7 @@
 题目描述
 有一棵 $n$ 个点的树，由如下方式生成：
 对于每个点 $i$ ($i\ge 2$)，在 $1$ 到 $i-1$ 中等概率选择一个点作为点 $i$ 的父亲。
-求每个点的度数的平方和的期望，保留六位小数，$n\le 10^6$。
+求每个点的度数的平方和的期望，要求绝对误差不超过 $10^{-6}$，$n\le 10^6$。
 " /><meta name="keywords" content="ouuan, blog, OI" />
 
 
@@ -50,7 +50,7 @@
   题目描述
 有一棵 $n$ 个点的树，由如下方式生成：
 对于每个点 $i$ ($i\ge 2$)，在 $1$ 到 $i-1$ 中等概率选择一个点作为点 $i$ 的父亲。
-求每个点的度数的平方和的期望，保留六位小数，$n\le 10^6$。
+求每个点的度数的平方和的期望，要求绝对误差不超过 $10^{-6}$，$n\le 10^6$。
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ouuan.github.io/post/csacademy-expected-tree-degrees/" />
@@ -62,11 +62,11 @@
   题目描述
 有一棵 $n$ 个点的树，由如下方式生成：
 对于每个点 $i$ ($i\ge 2$)，在 $1$ 到 $i-1$ 中等概率选择一个点作为点 $i$ 的父亲。
-求每个点的度数的平方和的期望，保留六位小数，$n\le 10^6$。
+求每个点的度数的平方和的期望，要求绝对误差不超过 $10^{-6}$，$n\le 10^6$。
 ">
 <meta itemprop="datePublished" content="2020-07-26T22:33:07&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-27T07:53:48&#43;08:00" />
-<meta itemprop="wordCount" content="1267">
+<meta itemprop="wordCount" content="1280">
 
 
 
@@ -77,7 +77,7 @@
   题目描述
 有一棵 $n$ 个点的树，由如下方式生成：
 对于每个点 $i$ ($i\ge 2$)，在 $1$ 到 $i-1$ 中等概率选择一个点作为点 $i$ 的父亲。
-求每个点的度数的平方和的期望，保留六位小数，$n\le 10^6$。
+求每个点的度数的平方和的期望，要求绝对误差不超过 $10^{-6}$，$n\le 10^6$。
 "/>
 
 <!--[if lte IE 9]>
@@ -192,7 +192,7 @@
   <p class="admonition-title">题目描述</p>
 <p>有一棵 $n$ 个点的树，由如下方式生成：</p>
 <p>对于每个点 $i$ ($i\ge 2$)，在 $1$ 到 $i-1$ 中等概率选择一个点作为点 $i$ 的父亲。</p>
-<p>求每个点的度数的平方和的期望，保留六位小数，$n\le 10^6$。</p>
+<p>求每个点的度数的平方和的期望，要求绝对误差不超过 $10^{-6}$，$n\le 10^6$。</p>
 </div>
 <h2 id="简要做法">简要做法</h2>
 <h3 id="状态设计与转移">状态设计与转移</h3>
@@ -237,7 +237,7 @@ i^2
 \end{bmatrix}
 $$</p>
 <p>所以，把 $A$ 作为 $x$ 带入生成函数中计算即可得到答案。</p>
-<p>然而，这样做会被卡精度..原因大概是题目要求的是绝对误差小于 $10^{-6}$，而我虽然相对误差小于 $10^{-10}$，绝对误差却有 $10^{-5}$&hellip; 怎么还有人出题要求绝对精度误差的 /fad</p>
+<p>然而，这样做会被卡精度..原因大概是题目要求的是绝对误差不超过 $10^{-6}$，而我虽然相对误差小于 $10^{-10}$，绝对误差却有 $10^{-5}$&hellip; 怎么还有人出题要求绝对精度误差的 /fad</p>
 <p>只不过要是出题人会求精确值的做法就可以取模了 /fad</p>
 <h2 id="求答案的精确值的参考代码">求答案的精确值的参考代码</h2>
 <pre><code class="language-cpp">
@@ -384,7 +384,7 @@ signed main()
     <span class="item-title">上次更新</span>
     <span class="item-content">
         <span title="2020-07-27 07:53:48 &#43;0800 &#43;0800">2020-07-27</span>
-        <a href="https://github.com/ouuan/hugo-blog/commit/947a5abad756d525983b6ba3c3a299e035d67db5" title="Add CS Academy Expected Tree Degrees" target="_blank">(947a5ab)</a>
+        <a href="https://github.com/ouuan/hugo-blog/commit/289587dd0c9719deea8d150591bf4a2c49c75058" title="Add CS Academy Expected Tree Degrees" target="_blank">(289587d)</a>
         ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/csacademy-expected-tree-degrees.md" target="_blank">更新历史</a>
     </span>
   </p>

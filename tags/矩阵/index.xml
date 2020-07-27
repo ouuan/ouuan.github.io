@@ -3,7 +3,7 @@
 &lt;p class="admonition-title">题目描述&lt;/p>
 &lt;p>有一棵 $n$ 个点的树，由如下方式生成：&lt;/p>
 &lt;p>对于每个点 $i$ ($i\ge 2$)，在 $1$ 到 $i-1$ 中等概率选择一个点作为点 $i$ 的父亲。&lt;/p>
-&lt;p>求每个点的度数的平方和的期望，保留六位小数，$n\le 10^6$。&lt;/p>
+&lt;p>求每个点的度数的平方和的期望，要求绝对误差不超过 $10^{-6}$，$n\le 10^6$。&lt;/p>
 &lt;/div></description></item><item><title>BZOJ1009 [HNOI2008]GT考试（KMP/AC自动机，矩阵乘法）</title><link>https://ouuan.github.io/post/bzoj1009-hnoi2008-gt%E8%80%83%E8%AF%95kmp-ac%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/</link><pubDate>Fri, 03 May 2019 19:07:11 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj1009-hnoi2008-gt%E8%80%83%E8%AF%95kmp-ac%E8%87%AA%E5%8A%A8%E6%9C%BA%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
 &lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P3193" target="_blank">洛谷&lt;/a>&lt;/p>
 &lt;p>&lt;a href="https://darkbzoj.tk/problem/1009" target="_blank">darkbzoj&lt;/a>&lt;/p>

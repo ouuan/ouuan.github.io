@@ -11,7 +11,7 @@
 &lt;p class="admonition-title">题目描述&lt;/p>
 &lt;p>有一棵 $n$ 个点的树，由如下方式生成：&lt;/p>
 &lt;p>对于每个点 $i$ ($i\ge 2$)，在 $1$ 到 $i-1$ 中等概率选择一个点作为点 $i$ 的父亲。&lt;/p>
-&lt;p>求每个点的度数的平方和的期望，保留六位小数，$n\le 10^6$。&lt;/p>
+&lt;p>求每个点的度数的平方和的期望，要求绝对误差不超过 $10^{-6}$，$n\le 10^6$。&lt;/p>
 &lt;/div></description></item><item><title>Firefox 的 Tree Style Tab 和 Duplicate Tabs Closer 插件</title><link>https://ouuan.github.io/post/firefox-tree-style-tab-and-duplicate-tabs-closer/</link><pubDate>Thu, 09 Jul 2020 13:00:46 +0800</pubDate><guid>https://ouuan.github.io/post/firefox-tree-style-tab-and-duplicate-tabs-closer/</guid><description>&lt;p>你在使用浏览器时是否有这样的烦恼？&lt;/p>
 &lt;ul>
 &lt;li>到底开多少个标签页？
