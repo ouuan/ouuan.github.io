@@ -66,7 +66,7 @@
 ">
 <meta itemprop="datePublished" content="2020-07-26T22:33:07&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-27T07:53:48&#43;08:00" />
-<meta itemprop="wordCount" content="1280">
+<meta itemprop="wordCount" content="1253">
 
 
 
@@ -177,6 +177,7 @@
             <li><a href="#状态设计与转移">状态设计与转移</a></li>
             <li><a href="#求答案的近似值">求答案的近似值</a></li>
             <li><a href="#求答案的精确值">求答案的精确值</a></li>
+            <li><a href="#坑">坑</a></li>
           </ul>
         </li>
         <li><a href="#求答案的精确值的参考代码">求答案的精确值的参考代码</a></li>
@@ -237,11 +238,11 @@ i^2
 \end{bmatrix}
 $$</p>
 <p>所以，把 $A$ 作为 $x$ 带入生成函数中计算即可得到答案。</p>
-<p>然而，这样做会被卡精度..原因大概是题目要求的是绝对误差不超过 $10^{-6}$，而我虽然相对误差小于 $10^{-10}$，绝对误差却有 $10^{-5}$&hellip; 怎么还有人出题要求绝对精度误差的 /fad</p>
+<h3 id="坑">坑</h3>
+<p>不用 <code>long double</code> 会被卡精度..原因大概是题目要求的是 <strong>绝对</strong> 误差不超过 $10^{-6}$&hellip; 怎么还有人出题要求绝对精度误差的 /fad</p>
 <p>只不过要是出题人会求精确值的做法就可以取模了 /fad</p>
 <h2 id="求答案的精确值的参考代码">求答案的精确值的参考代码</h2>
-<pre><code class="language-cpp">
-// Problem: Expected Tree Degrees
+<pre><code class="language-cpp">// Problem: Expected Tree Degrees
 // Contest: CS Academy
 // URL: https://csacademy.com/contest/archive/task/expected-tree-degrees/
 // Memory Limit: 128 MB
@@ -295,14 +296,16 @@ $$</p>
 
 /* ------------------------------------------------------------------------------------------------------------------- */
 
+typedef long double ld;
+
 struct Matrix
 {
-	vvd a;
+	ld a[3][3];
 	
-	Matrix() : a(3, vd(3)) {}
+	Matrix() { memset(a, 0, sizeof(a)); }
 	
-	vd &amp;operator[](int x) { return a[x]; }
-	const vd &amp;operator[](int x) const { return a[x]; }
+	ld *operator[](int x) { return a[x]; }
+	const ld *operator[](int x) const { return a[x]; }
 	
 	Matrix operator*(const Matrix &amp;b) const
 	{
@@ -320,7 +323,7 @@ struct Matrix
 		return res;
 	}
 	
-	Matrix operator*(double x) const
+	Matrix operator*(ld x) const
 	{
 		Matrix res;
 		For (i, 0, 2)
@@ -368,7 +371,7 @@ signed main()
 	
 	For (i, 2, n) res = res * (sq + one * (i - 2)) * (1.0l / (i - 1)) + sq;
 	
-	wtb(res[2][0]);
+	cout &lt;&lt; fixed &lt;&lt; setprecision(20) &lt;&lt; res[2][0];
 	
 	return 0;
 }
@@ -384,7 +387,7 @@ signed main()
     <span class="item-title">上次更新</span>
     <span class="item-content">
         <span title="2020-07-27 07:53:48 &#43;0800 &#43;0800">2020-07-27</span>
-        <a href="https://github.com/ouuan/hugo-blog/commit/289587dd0c9719deea8d150591bf4a2c49c75058" title="Add CS Academy Expected Tree Degrees" target="_blank">(289587d)</a>
+        <a href="https://github.com/ouuan/hugo-blog/commit/e3f455ca75b95a20494d3f0b293370968843908d" title="Add CS Academy Expected Tree Degrees" target="_blank">(e3f455c)</a>
         ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/csacademy-expected-tree-degrees.md" target="_blank">更新历史</a>
     </span>
   </p>
