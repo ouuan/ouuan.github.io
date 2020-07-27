@@ -66,7 +66,7 @@
 ">
 <meta itemprop="datePublished" content="2020-07-26T22:33:07&#43;08:00" />
 <meta itemprop="dateModified" content="2020-07-27T07:53:48&#43;08:00" />
-<meta itemprop="wordCount" content="1148">
+<meta itemprop="wordCount" content="1159">
 
 
 
@@ -197,18 +197,14 @@
 <h2 id="简要做法">简要做法</h2>
 <h3 id="状态设计与转移">状态设计与转移</h3>
 <p>令 $f_{i, j}$ 表示 $i$ 个点的树中度数为 $j$ 的点的个数的期望。</p>
-<p>那么：</p>
-<ol>
-<li>$f_{i, 1} = f_{i - 1, 1} - \frac{f_{i - 1, 1}}{i - 1} + 1$</li>
-<li>$f_{i, j} = f_{i - 1, j} - \frac{f_{i - 1, j}}{i - 1} + \frac{f_{i - 1, j - 1}}{i - 1}$</li>
-</ol>
-<p>其中 $\frac{f_{i - 1, j}}{i - 1}$ 表示点 $i$ 的父亲在只有前 $i-1$ 个点时度数为 $j$ 的概率。</p>
+<p>那么：$f_{i, j} = f_{i - 1, j} - \frac{f_{i - 1, j}}{i - 1} + \frac{f_{i - 1, j - 1}}{i - 1} + [j=1]$</p>
+<p>其中 $\frac{f_{i - 1, j}}{i - 1}$ 表示点 $i$ 的父亲在只有前 $i-1$ 个点时度数为 $j$ 的概率，$[j=1]$ 表示 <code>j == 1 ? 1 : 0</code>。</p>
 <p>然而，直接 DP 复杂度是 $O(n^2)$，无法通过此题。有两种处理方式，见下文。</p>
 <h3 id="求答案的近似值">求答案的近似值</h3>
 <p>可以猜测 $j$ 比较大时 $f_{i, j}$ 非常小，可以忽略不计。实际上 $f_{10^6, 50}$ 只有大约 $10^{-14}$，所以只用计算 $j\le 50$ 的 $f_{i, j}$。</p>
 <h3 id="求答案的精确值">求答案的精确值</h3>
 <p>虽然上面这种求近似值的方法可以通过本题，但本题实际上是可以线性地求答案的精确值的。</p>
-<p>首先，每个 $f_{i, 1..i}$ 可以视为一个生成函数，记作 $F_i$，而 $F_i$ 的 $x^j$ 项的系数表示 $f_{i, j}$。</p>
+<p>首先，每个 $f_{i, 1..i}$ 可以视为一个生成函数，记作 $F_i$，也就是说 $F_i$ 的 $x^j$ 项的系数表示 $f_{i, j}$。</p>
 <p>那么，转移方程可以表示为：</p>
 <p>$$
 \begin{aligned}
@@ -386,7 +382,7 @@ signed main()
     <span class="item-title">上次更新</span>
     <span class="item-content">
         <span title="2020-07-27 07:53:48 &#43;0800 &#43;0800">2020-07-27</span>
-        <a href="https://github.com/ouuan/hugo-blog/commit/d688db62230fe6383b496ac5fd5659bb6db40d04" title="Add CS Academy Expected Tree Degrees" target="_blank">(d688db6)</a>
+        <a href="https://github.com/ouuan/hugo-blog/commit/0b604dd6f6bff0a9c915e8db2071fc9ca6464886" title="Add CS Academy Expected Tree Degrees" target="_blank">(0b604dd)</a>
         ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/csacademy-expected-tree-degrees.md" target="_blank">更新历史</a>
     </span>
   </p>
