@@ -55,7 +55,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ouuan.github.io/post/csacademy-expected-tree-degrees/" />
 <meta property="article:published_time" content="2020-07-26T22:33:07+08:00" />
-<meta property="article:modified_time" content="2020-07-27T15:50:46+08:00" />
+<meta property="article:modified_time" content="2020-08-14T22:45:22+08:00" />
 <meta itemprop="name" content="CS Academy Round #10 - Expected Tree Degrees">
 <meta itemprop="description" content="题目链接
 
@@ -65,8 +65,8 @@
 求每个点的度数的平方和的期望，要求绝对误差不超过 $10^{-6}$，$n\le 10^6$。
 ">
 <meta itemprop="datePublished" content="2020-07-26T22:33:07&#43;08:00" />
-<meta itemprop="dateModified" content="2020-07-27T15:50:46&#43;08:00" />
-<meta itemprop="wordCount" content="1786">
+<meta itemprop="dateModified" content="2020-08-14T22:45:22&#43;08:00" />
+<meta itemprop="wordCount" content="2028">
 
 
 
@@ -175,7 +175,12 @@
         <li><a href="#状态设计与转移">状态设计与转移</a></li>
         <li><a href="#求答案的近似值">求答案的近似值</a></li>
         <li><a href="#用生成函数和矩阵求答案的精确值">用生成函数和矩阵求答案的精确值</a></li>
-        <li><a href="#推公式求答案的精确值">推公式求答案的精确值</a></li>
+        <li><a href="#推公式求答案的精确值">推公式求答案的精确值</a>
+          <ul>
+            <li><a href="#使用转移方程证明公式">使用转移方程证明公式</a></li>
+            <li><a href="#枚举两条边证明公式">枚举两条边证明公式</a></li>
+          </ul>
+        </li>
         <li><a href="#坑">坑</a></li>
       </ul>
     </li>
@@ -371,7 +376,8 @@ signed main()
 </details>
 <h2 id="推公式求答案的精确值">推公式求答案的精确值</h2>
 <p>在 <a href="https://csacademy.com/contest/round-10/task/expected-tree-degrees/discussion/" target="_blank">评论区</a> 看到的：答案为 $6(n-1) - 4(1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{n - 1})$。</p>
-<p>然而评论区除了这个公式啥都没有..我就自己试着把它推出来了..</p>
+<h3 id="使用转移方程证明公式">使用转移方程证明公式</h3>
+<p>评论区除了这个公式啥都没有..我就自己试着把它推出来了..</p>
 <p>考虑增加一个点对答案的贡献，分为两部分：</p>
 <ol>
 <li>新加的点度数为 $1$，贡献也为 $1$；</li>
@@ -390,6 +396,16 @@ $$</p>
 </ol>
 <p>所以，$g(i)=g(i-1)+5$。又因为由定义计算可得 $g(1)=1$，所以 $g(i)=5i-4$。</p>
 <p>所以，在一棵有 $i$ 个点的树上增加一个点的期望贡献为 $1+\frac{g(i)}{i}=6-\frac{4}{i}$，累加一下就可以得到最上面那个公式了。</p>
+<h3 id="枚举两条边证明公式">枚举两条边证明公式</h3>
+<p>这个做法是 @AprilGrimoire 告诉我的。</p>
+<p>枚举两条边，对答案的贡献为这两条边期望相同的顶点个数（除了两条边是同一条边的情况，即两条边有公共顶点的概率）。</p>
+<p>那么，答案为：</p>
+<p>$$
+2(n-1) + 2\sum\limits_{i=3}^n\sum\limits_{j=2}^{i-1}\frac{2}{i-1}
+$$</p>
+<p>其中，$2(n-1)$ 是枚举的两条边相同的贡献。</p>
+<p>后面则是枚举每两条不同的边：$i$ 到其父亲和 $j$ 到其父亲。有公共顶点的概率是编号小的点（$j$）的父亲随便选，而编号大的点的父亲需要是 $j$ 或 $j$ 的父亲，概率为 $\dfrac{2}{i-1}$。由于实际上需要枚举有序数对，再乘二。</p>
+<p>化简一下就可以得到公式。</p>
 <h2 id="坑">坑</h2>
 <p>不用 <code>long double</code> 可能会被卡精度..原因大概是题目要求的是 <strong>绝对</strong> 误差不超过 $10^{-6}$&hellip; 怎么还有人出题要求绝对精度误差的 /fad</p>
 <p>只不过标算是求近似值，要是出题人会求精确值的做法就可以取模了 /fad</p>
@@ -403,8 +419,8 @@ $$</p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        <span title="2020-07-27 15:50:46 &#43;0800 &#43;0800">2020-07-27</span>
-        <a href="https://github.com/ouuan/hugo-blog/commit/31fe900d7a9090fd18214ad3d4b68abce2556abc" title="refactor(expected tree degrees): update the structure" target="_blank">(31fe900)</a>
+        <span title="2020-08-14 22:45:22 &#43;0800 &#43;0800">2020-08-14</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/65fef939eaca3adc1fbf0c1ab61978109f9b21e2" title="feat(expected-tree-degrees): 添加枚举两条边证明公式" target="_blank">(65fef93)</a>
         ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/csacademy-expected-tree-degrees.md" target="_blank">更新历史</a>
     </span>
   </p>
