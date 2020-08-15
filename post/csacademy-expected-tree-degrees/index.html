@@ -66,7 +66,7 @@
 ">
 <meta itemprop="datePublished" content="2020-07-26T22:33:07&#43;08:00" />
 <meta itemprop="dateModified" content="2020-08-14T22:45:22&#43;08:00" />
-<meta itemprop="wordCount" content="2028">
+<meta itemprop="wordCount" content="2033">
 
 
 
@@ -404,7 +404,7 @@ $$</p>
 2(n-1) + 2\sum\limits_{i=3}^n\sum\limits_{j=2}^{i-1}\frac{2}{i-1}
 $$</p>
 <p>其中，$2(n-1)$ 是枚举的两条边相同的贡献。</p>
-<p>后面则是枚举每两条不同的边：$i$ 到其父亲和 $j$ 到其父亲。有公共顶点的概率是编号小的点（$j$）的父亲随便选，而编号大的点的父亲需要是 $j$ 或 $j$ 的父亲，概率为 $\dfrac{2}{i-1}$。由于实际上需要枚举有序数对，再乘二。</p>
+<p>后面则是枚举每两条不同的边：$i$ 到其父亲和 $j$ 到其父亲。有公共顶点的概率是编号小的点（$j$）的父亲随便选，而编号大的点（$i$）的父亲需要是 $j$ 或 $j$ 的父亲，概率为 $\dfrac{2}{i-1}$。由于实际上需要枚举有序数对，再乘二。</p>
 <p>化简一下就可以得到公式。</p>
 <h2 id="坑">坑</h2>
 <p>不用 <code>long double</code> 可能会被卡精度..原因大概是题目要求的是 <strong>绝对</strong> 误差不超过 $10^{-6}$&hellip; 怎么还有人出题要求绝对精度误差的 /fad</p>
@@ -420,7 +420,7 @@ $$</p>
     <span class="item-title">上次更新</span>
     <span class="item-content">
         <span title="2020-08-14 22:45:22 &#43;0800 &#43;0800">2020-08-14</span>
-        <a href="https://github.com/ouuan/hugo-blog/commit/65fef939eaca3adc1fbf0c1ab61978109f9b21e2" title="feat(expected-tree-degrees): 添加枚举两条边证明公式" target="_blank">(65fef93)</a>
+        <a href="https://github.com/ouuan/hugo-blog/commit/bcc5c6649bb67efedbb181dafbe6ab7b9a9adede" title="feat(expected-tree-degrees): 添加枚举两条边证明公式" target="_blank">(bcc5c66)</a>
         ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/csacademy-expected-tree-degrees.md" target="_blank">更新历史</a>
     </span>
   </p>
