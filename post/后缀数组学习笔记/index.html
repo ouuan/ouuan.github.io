@@ -37,7 +37,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.6fde27f437a6f23c1fa886917b913f082d5b3b0a8ba327bca31396788813c178.css" rel="stylesheet">
+<link href="/sass/main.min.044e344dbda25bb990d18800e8dae157b8a41b5913014bb364f4fc6f2e959e0f.css" rel="stylesheet">
 
 
 
@@ -545,8 +545,17 @@ int main()
   
 
   
-  <p class="comments">
-    <img class="loading" src="/img/spinner.svg">
+  <div class="comments">
+    <div class="loading post">
+      <img src="/img/spinner.svg">
+      <p class="post-content">
+        评论正在加载中...如果评论较长时间无法加载，你可以
+        <a href="https://github.com/ouuan/blog-comments/issues?q=is%3Aissue+is%3Aopen+%e5%90%8e%e7%bc%80%e6%95%b0%e7%bb%84%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2" target="_blank">搜索对应的 issue</a>
+        或者
+        <a href="https://github.com/ouuan/blog-comments/issues/new?title=%e5%90%8e%e7%bc%80%e6%95%b0%e7%bb%84%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2" target="_blank">新建一个 issue</a>
+        。
+      </p>
+    </div>
     <script src="https://utteranc.es/client.js"
             repo="ouuan/blog-comments"
             issue-term="title"
@@ -554,8 +563,8 @@ int main()
             crossorigin="anonymous"
             async>
     </script>
-    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
-  </p>
+    <noscript>请启用 JavaScript 来查看评论。</a></noscript>
+  </div>
 
       </div>
     </main>

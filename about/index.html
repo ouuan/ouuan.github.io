@@ -35,7 +35,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.6fde27f437a6f23c1fa886917b913f082d5b3b0a8ba327bca31396788813c178.css" rel="stylesheet">
+<link href="/sass/main.min.044e344dbda25bb990d18800e8dae157b8a41b5913014bb364f4fc6f2e959e0f.css" rel="stylesheet">
 
 
 
@@ -44,12 +44,12 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ouuan.github.io/about/" />
 <meta property="article:published_time" content="2018-12-05T13:40:21+08:00" />
-<meta property="article:modified_time" content="2020-09-05T11:54:48+08:00" />
+<meta property="article:modified_time" content="2020-09-05T12:55:36+08:00" />
 <meta itemprop="name" content="关于">
 <meta itemprop="description" content="在本博客，推荐安装 思源宋体 以获得更好的阅读体验。 本博客中还有少量含有中文的 LaTeX 公式，所以推荐安装 MathJax 的 Unicode 字体 Arial Unicode MS 。 Q: 博客里的 XX 功能是怎么做到的">
 <meta itemprop="datePublished" content="2018-12-05T13:40:21&#43;08:00" />
-<meta itemprop="dateModified" content="2020-09-05T11:54:48&#43;08:00" />
-<meta itemprop="wordCount" content="782">
+<meta itemprop="dateModified" content="2020-09-05T12:55:36&#43;08:00" />
+<meta itemprop="wordCount" content="642">
 
 
 
@@ -137,8 +137,6 @@
 <p>A: 本博客所有代码 <a href="https://github.com/ouuan/hugo-blog" target="_blank">开源</a>，请先自己找，还可以参考 <a href="/post/from-hexo-to-hugo/#process">从 Hexo 到 Hugo</a>，找不到可以在评论区问。</p>
 <p>Q: 为什么大部分题解里的题意简述数据范围不全，甚至不太看得懂？</p>
 <p>A: 因为这是题解不是题面，题意简述的目的是让人尽快知道题目大意，而不是确保能够让人读懂、能够据此写出 AC 代码。如果看不懂/想知道详细的数据范围，可以去 OJ 上看。</p>
-<p>Q: 为什么我没看见评论区？</p>
-<p>A: utterance 的加载是一件玄学的事情，有时加载速度会非常慢。如果实在加载不出来，可以直接在 <a href="https://github.com/ouuan/blog-comments/issues" target="_blank">issues</a> 里留言。如果新开 issue 需要注意一下 issue 标题的格式（可以在博客页面 F12 然后 Ctrl + F 搜索 <code>&lt;/title&gt;</code>，在 <code>&lt;title&gt;</code> 和 <code>&lt;/title&gt;</code> 之间就是标题）（在 chrome 中还可以收藏博客，把默认的标题复制下来）。</p>
 <hr>
 <p>头像不是我自己画的。</p>
 <hr>
@@ -185,8 +183,17 @@
   
 
   
-  <p class="comments">
-    <img class="loading" src="/img/spinner.svg">
+  <div class="comments">
+    <div class="loading post">
+      <img src="/img/spinner.svg">
+      <p class="post-content">
+        评论正在加载中...如果评论较长时间无法加载，你可以
+        <a href="https://github.com/ouuan/blog-comments/issues?q=is%3Aissue+is%3Aopen+%e5%85%b3%e4%ba%8e - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2" target="_blank">搜索对应的 issue</a>
+        或者
+        <a href="https://github.com/ouuan/blog-comments/issues/new?title=%e5%85%b3%e4%ba%8e - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2" target="_blank">新建一个 issue</a>
+        。
+      </p>
+    </div>
     <script src="https://utteranc.es/client.js"
             repo="ouuan/blog-comments"
             issue-term="title"
@@ -194,8 +201,8 @@
             crossorigin="anonymous"
             async>
     </script>
-    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
-  </p>
+    <noscript>请启用 JavaScript 来查看评论。</a></noscript>
+  </div>
 
       </div>
     </main>
