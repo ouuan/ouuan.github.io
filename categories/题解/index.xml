@@ -168,7 +168,7 @@
 &lt;h2 id="题意简述">题意简述&lt;/h2>
 &lt;p>给你 $n$ 个带权值的数（数和权值是两个东西），求一个权值最大的异或线性无关子集，即取这个子集的任意一个非空子集，异或和都不为零。&lt;/p>
 &lt;p>原题 $n\le1000$，实际上可以轻松 $n\le10^5$。数 $10^{18}$，权值 $10^4$。&lt;/p></description></item><item><title>Codeforces Round #564 中文题解</title><link>https://ouuan.github.io/post/codeforces-round-564-%E4%B8%AD%E6%96%87%E9%A2%98%E8%A7%A3/</link><pubDate>Fri, 07 Jun 2019 22:38:47 +0800</pubDate><guid>https://ouuan.github.io/post/codeforces-round-564-%E4%B8%AD%E6%96%87%E9%A2%98%E8%A7%A3/</guid><description>&lt;p>&lt;a href="https://ouuan.github.io/bad-round-%e4%b8%8e%e5%87%ba%e9%a2%98%e4%ba%ba%e7%9a%84%e5%9d%9a%e5%ae%88">台前幕后&lt;/a>&lt;/p>
-&lt;p>&lt;a href="https://codeforces.com/contest/1172" target="_blank">contest on CF&lt;/a>&lt;/p></description></item><item><title>CF17E Palisection（manacher）</title><link>https://ouuan.github.io/post/cf17e-palisectionmanacher/</link><pubDate>Fri, 10 May 2019 22:06:18 +0800</pubDate><guid>https://ouuan.github.io/post/cf17e-palisectionmanacher/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://codeforces.com/contests/1172,1173" target="_blank">比赛地址&lt;/a>&lt;/p></description></item><item><title>CF17E Palisection（manacher）</title><link>https://ouuan.github.io/post/cf17e-palisectionmanacher/</link><pubDate>Fri, 10 May 2019 22:06:18 +0800</pubDate><guid>https://ouuan.github.io/post/cf17e-palisectionmanacher/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
 &lt;p>&lt;a href="https://www.luogu.org/problemnew/show/CF17E" target="_blank">洛谷&lt;/a>&lt;/p>
 &lt;p>&lt;a href="https://codeforces.com/contest/17/problem/E" target="_blank">CF&lt;/a>&lt;/p>
 &lt;h2 id="题意简述">题意简述&lt;/h2>
