@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
 
 
-<meta name="generator" content="Hugo 0.69.2 with theme even" />
+<meta name="generator" content="Hugo 0.76.3 with theme even" />
 
 
 <link rel="canonical" href="https://ouuan.github.io/post/codeforces-round-564-%E4%B8%AD%E6%96%87%E9%A2%98%E8%A7%A3/" />
@@ -37,7 +37,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.52161d9c167ef3a98ba62d28c5cea0fb989c1d8fefbcde7ebf6a7b7377d9298b.css" rel="stylesheet">
+<link href="/sass/main.min.1a033f3ff00ce980be308cea1bee900c9b3a6fd48f5eb8ff81e1c9342110a2b0.css" rel="stylesheet">
 
 
 
@@ -51,13 +51,14 @@
 <meta itemprop="name" content="Codeforces Round #564 中文题解">
 <meta itemprop="description" content="台前幕后
 比赛地址">
-<meta itemprop="datePublished" content="2019-06-07T22:38:47&#43;08:00" />
-<meta itemprop="dateModified" content="2020-09-20T10:15:45&#43;08:00" />
-<meta itemprop="wordCount" content="5234">
+<meta itemprop="datePublished" content="2019-06-07T22:38:47+08:00" />
+<meta itemprop="dateModified" content="2020-09-20T10:15:45+08:00" />
+<meta itemprop="wordCount" content="5221">
 
 
 
-<meta itemprop="keywords" content="Codeforces," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Codeforces," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Codeforces Round #564 中文题解"/>
 <meta name="twitter:description" content="台前幕后
 比赛地址"/>
@@ -142,13 +143,13 @@
         <div class="post-category">
             <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
             </div>
-        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> %!(EXTRA string=<span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span>) </span>
       </div>
     </header>
 
     
 <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">文章目录</h2>
+  <h2 class="post-toc-title"></h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
@@ -348,7 +349,7 @@ int main()
 </details>
 <h1 id="1c-nauuo-and-pictureshttpscodeforcescomproblemsetproblem1172c2"><a href="https://codeforces.com/problemset/problem/1172/C2" target="_blank">1C Nauuo and Pictures</a></h1>
 <details class="admonition note"><summary class="admonition-title">题意</summary>
-<p>给你一个长度为 $n$ 的数列 $w_{1..n}$，其中有一些位置是&quot;被喜欢的&rdquo;，其它位置是“不被喜欢的”，进行 $m$ 次操作，每次随机选一个数，选到第 $i$ 个数的概率是 $\frac{w_i}{\sum_{j=1}^nw_j}$，如果选到一个“被喜欢的”位置，就会把这个位置上的数加一，否则减一。问 $m$ 次操作过后每个数的期望值，对 $998244353$ 取模。</p>
+<p>给你一个长度为 $n$ 的数列 $w_{1..n}$，其中有一些位置是&quot;被喜欢的&quot;，其它位置是“不被喜欢的”，进行 $m$ 次操作，每次随机选一个数，选到第 $i$ 个数的概率是 $\frac{w_i}{\sum_{j=1}^nw_j}$，如果选到一个“被喜欢的”位置，就会把这个位置上的数加一，否则减一。问 $m$ 次操作过后每个数的期望值，对 $998244353$ 取模。</p>
 <p>$1\le n\le2\times 10^5$，$1\le m\le3000$。</p>
 </details>
 <details class="admonition note"><summary class="admonition-title">题解</summary>
@@ -380,20 +381,20 @@ int main()
 <p>这样的话就只用计算 $f_1[i][j][k]$ 了。</p>
 </li>
 <li>
-<p>注意到 $i$, $j$, $k$, $m$ 有一些联系。实际上可以令 $f&rsquo;_w[i][j]$ 表示 $f_w[m-i-j][SA+i][SB-j]$（这里的 $SA$ 和 $SB$ 都是未操作时的初始值）。</p>
+<p>注意到 $i$, $j$, $k$, $m$ 有一些联系。实际上可以令 $f'_w[i][j]$ 表示 $f_w[m-i-j][SA+i][SB-j]$（这里的 $SA$ 和 $SB$ 都是未操作时的初始值）。</p>
 </li>
 </ol>
-<p>令 $g&rsquo;_1[i][j]$ 表示 $g_w[m-i-j][SA+i][SB-j]$，计算方式类似。</p>
+<p>令 $g'_1[i][j]$ 表示 $g_w[m-i-j][SA+i][SB-j]$，计算方式类似。</p>
 <p><strong>总结</strong></p>
 <p>$$
 \begin{aligned}
-f&rsquo;_1[i][j]&amp;=1&amp;(i+j=m)\\<br>
-f&rsquo;_1[i][j]&amp;=\frac{SA+i+1}{SA+SB+i-j}f&rsquo;_1[i+1][j]+\frac{SB-j}{SA+SB+i-j}f&rsquo;_1[i][j+1]&amp;(i+j&lt;m)\\<br>
-g&rsquo;_1[i][j]&amp;=1&amp;(i+j=m)\\<br>
-g&rsquo;_1[i][j]&amp;=\frac{SA+i}{SA+SB+i-j}g&rsquo;_1[i+1][j]+\frac{SB-j-1}{SA+SB+i-j}g&rsquo;_1[i][j+1]&amp;(i+j&lt;m)
+f'_1[i][j]&amp;=1&amp;(i+j=m)\\<br>
+f'_1[i][j]&amp;=\frac{SA+i+1}{SA+SB+i-j}f'_1[i+1][j]+\frac{SB-j}{SA+SB+i-j}f'_1[i][j+1]&amp;(i+j&lt;m)\\<br>
+g'_1[i][j]&amp;=1&amp;(i+j=m)\\<br>
+g'_1[i][j]&amp;=\frac{SA+i}{SA+SB+i-j}g'_1[i+1][j]+\frac{SB-j-1}{SA+SB+i-j}g'_1[i][j+1]&amp;(i+j&lt;m)
 \end{aligned}
 $$</p>
-<p>“被喜欢的”位置答案是 $w_if&rsquo;_1[0][0]$，“不被喜欢的”位置答案是 $w_ig&rsquo;_1[0][0]$。</p>
+<p>“被喜欢的”位置答案是 $w_if'_1[0][0]$，“不被喜欢的”位置答案是 $w_ig'_1[0][0]$。</p>
 <p>如果每次去算逆元就是 $\mathcal O(n+m^2\log p)$，预处理出来就是 $\mathcal O(n+m^2+m\log p)$。</p>
 </details>
 <details class="admonition note"><summary class="admonition-title">参考代码</summary>
@@ -851,11 +852,11 @@ int main() {
 
     <div class="post-copyright">
   <p class="copyright-item">
-    <span class="item-title">文章作者</span>
+    <span class="item-title"></span>
     <span class="item-content">ouuan</span>
   </p>
   <p class="copyright-item">
-    <span class="item-title">上次更新</span>
+    <span class="item-title"></span>
     <span class="item-content">
         <span title="2020-09-20 10:15:45 &#43;0800 &#43;0800">2020-09-20</span>
         <a href="https://github.com/ouuan/hugo-blog/commit/a96ec94d728391eff719f5d356c78805e1b23ed6" title="feat(CF #564): add links for the rounds" target="_blank">(a96ec94)</a>
@@ -864,7 +865,7 @@ int main() {
   </p>
   
   <p class="copyright-item">
-    <span class="item-title">许可协议</span>
+    <span class="item-title"></span>
     <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a></span>
   </p>
 </div>
@@ -876,11 +877,11 @@ int main() {
         <a class="prev" href="/post/bad-round-%E4%B8%8E%E5%87%BA%E9%A2%98%E4%BA%BA%E7%9A%84%E5%9D%9A%E5%AE%88/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">bad round 与出题人的坚守</span>
-            <span class="prev-text nav-mobile">上一篇</span>
+            <span class="prev-text nav-mobile"></span>
           </a>
         <a class="next" href="/post/%E4%BD%BF%E7%94%A8-testlib-h-%E5%86%99-lemon-spj/">
             <span class="next-text nav-default">使用 testlib.h 写 lemon SPJ</span>
-            <span class="next-text nav-mobile">下一篇</span>
+            <span class="next-text nav-mobile"></span>
             <i class="iconfont icon-right"></i>
           </a>
       </nav>
@@ -926,18 +927,18 @@ int main() {
 
 <div class="copyright">
   <span class="power-by">
-    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a>)
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-    主题 - 
+     - 
     <a class="theme-link" href="https://github.com/ouuan/hugo-theme-even" target="_blank">Even</a>
   </span>
 
   <div class="busuanzi-footer">
-    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+    <span id="busuanzi_container_site_pv"> %!(EXTRA string=<span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span>) </span>
       <span class="division">|</span>
-    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+    <span id="busuanzi_container_site_uv"> %!(EXTRA string=<span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span>) </span>
   </div>
 
   <span class="copyright-year">
