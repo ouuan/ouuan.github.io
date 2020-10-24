@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-cn">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
 
 
-<meta name="generator" content="Hugo 0.76.3 with theme even" />
+<meta name="generator" content="Hugo 0.69.2 with theme even" />
 
 
 <link rel="canonical" href="https://ouuan.github.io/post/parallel-binary-search/" />
@@ -37,7 +37,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.1a033f3ff00ce980be308cea1bee900c9b3a6fd48f5eb8ff81e1c9342110a2b0.css" rel="stylesheet">
+<link href="/sass/main.min.52161d9c167ef3a98ba62d28c5cea0fb989c1d8fefbcde7ebf6a7b7377d9298b.css" rel="stylesheet">
 
 
 
@@ -51,14 +51,13 @@
 <meta itemprop="name" content="整体二分学习笔记">
 <meta itemprop="description" content="整体二分是一种离线算法，可以将一个修改同时作用于多个询问，从而减少不必要的开销，将二分答案从单次询问扩展到多次询问。
 在一些题目中，相比与其它解法，整体二分可以避免复杂的数据结构，降低代码难度与空间复杂度。">
-<meta itemprop="datePublished" content="2020-02-14T14:50:32+08:00" />
-<meta itemprop="dateModified" content="2020-04-17T22:16:50+08:00" />
-<meta itemprop="wordCount" content="3512">
+<meta itemprop="datePublished" content="2020-02-14T14:50:32&#43;08:00" />
+<meta itemprop="dateModified" content="2020-04-17T22:16:50&#43;08:00" />
+<meta itemprop="wordCount" content="3514">
 
 
 
-<meta itemprop="keywords" content="整体二分,离线算法,分治," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="整体二分,离线算法,分治," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="整体二分学习笔记"/>
 <meta name="twitter:description" content="整体二分是一种离线算法，可以将一个修改同时作用于多个询问，从而减少不必要的开销，将二分答案从单次询问扩展到多次询问。
 在一些题目中，相比与其它解法，整体二分可以避免复杂的数据结构，降低代码难度与空间复杂度。"/>
@@ -295,7 +294,7 @@ $$</p>
 <li>整体地计算多个修改对多个询问的贡献。</li>
 <li>伪代码 1 的 23 行处 / 伪代码 2 的先处理右半部分再回退左半修改，将左半修改对右半询问的贡献应用到整个处理右半部分的过程中，之后不再重复计算。</li>
 </ol>
-<p>令计算两个贡献之和的时间复杂度为 $O(f(\cdots))$，判定一个贡献是否达到一个询问的目标的时间复杂度为 $O(g(\cdots))$，那么总的时间复杂度为:（&quot;$\cdots$&quot; 表示会对复杂度造成影响的各种因素）</p>
+<p>令计算两个贡献之和的时间复杂度为 $O(f(\cdots))$，判定一个贡献是否达到一个询问的目标的时间复杂度为 $O(g(\cdots))$，那么总的时间复杂度为:（&ldquo;$\cdots$&rdquo; 表示会对复杂度造成影响的各种因素）</p>
 <p>$$O(((|M|+|Q|)\cdot f(\cdots)+|Q|\cdot g(\cdots))\cdot\log|\mathbf{INDEX}|)$$</p>
 <details class="admonition note"><summary class="admonition-title">为什么两侧操作个数分布不均而复杂度依然正确？</summary>
 <p>虽然操作划分到两侧后可能一侧操作多另一侧操作少，但指标的分布是均匀的，从而保证了分治的层数是 $O(\log|\mathbf{INDEX}|)$，而每一层的操作总数是固定的，总的复杂度就是正确的。</p>

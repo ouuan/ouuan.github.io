@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-cn">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
 
 
-<meta name="generator" content="Hugo 0.76.3 with theme even" />
+<meta name="generator" content="Hugo 0.69.2 with theme even" />
 
 
 <link rel="canonical" href="https://ouuan.github.io/post/from-hexo-to-hugo/" />
@@ -36,7 +36,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.1a033f3ff00ce980be308cea1bee900c9b3a6fd48f5eb8ff81e1c9342110a2b0.css" rel="stylesheet">
+<link href="/sass/main.min.52161d9c167ef3a98ba62d28c5cea0fb989c1d8fefbcde7ebf6a7b7377d9298b.css" rel="stylesheet">
 
 
 
@@ -48,14 +48,13 @@
 <meta property="article:modified_time" content="2020-05-14T17:10:52+08:00" />
 <meta itemprop="name" content="从 Hexo 到 Hugo">
 <meta itemprop="description" content="该博客的前身是自 2018 年 12 月搭建的 hexo 博客，于 2020 年 2 月搬迁至 hugo。">
-<meta itemprop="datePublished" content="2020-02-06T23:07:17+08:00" />
-<meta itemprop="dateModified" content="2020-05-14T17:10:52+08:00" />
+<meta itemprop="datePublished" content="2020-02-06T23:07:17&#43;08:00" />
+<meta itemprop="dateModified" content="2020-05-14T17:10:52&#43;08:00" />
 <meta itemprop="wordCount" content="1619">
 
 
 
-<meta itemprop="keywords" content="博客," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="博客," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="从 Hexo 到 Hugo"/>
 <meta name="twitter:description" content="该博客的前身是自 2018 年 12 月搭建的 hexo 博客，于 2020 年 2 月搬迁至 hugo。"/>
 
@@ -212,7 +211,7 @@
 <p>例如：<code>[~~qwq~~](/post/from-hexo-to-hugo)</code>, <code>[![favicon](/favicon.ico)](/favicon.ico)</code>。</p>
 <p>默认情况下会渲染成这样：</p>
 <p><a href="/post/from-hexo-to-hugo">&lt;del&gt;qwq&lt;/del&gt;</a></p>
-<p><a href="/favicon.ico">&lt;img src=&quot;/favicon.ico&quot; alt=&ldquo;favicon&rdquo;&gt;</a></p>
+<p><a href="/favicon.ico">&lt;img src=&rdquo;/favicon.ico&rdquo; alt=&quot;favicon&rdquo;&gt;</a></p>
 <p>可以将 <code>/layouts/_default/_markup/render-link.html</code> 设成这样：（这个板子还包含了外链打开新标签页，不被渲染成 HTML 源码的关键在于 <code>safeHTML</code>）</p>
 <pre><code class="language-html">&lt;a href=&quot;{{ .Destination | safeURL }}&quot;{{ with .Title}} title=&quot;{{ . }}&quot;{{ end }}{{ if strings.HasPrefix .Destination &quot;http&quot; }} target=&quot;_blank&quot;{{ end }}&gt;{{ safeHTML .Text }}&lt;/a&gt;
 </code></pre>

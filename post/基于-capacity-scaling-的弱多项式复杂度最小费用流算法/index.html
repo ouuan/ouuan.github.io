@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-cn">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -26,7 +26,7 @@
 <meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
 
 
-<meta name="generator" content="Hugo 0.76.3 with theme even" />
+<meta name="generator" content="Hugo 0.69.2 with theme even" />
 
 
 <link rel="canonical" href="https://ouuan.github.io/post/%E5%9F%BA%E4%BA%8E-capacity-scaling-%E7%9A%84%E5%BC%B1%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%9C%80%E5%B0%8F%E8%B4%B9%E7%94%A8%E6%B5%81%E7%AE%97%E6%B3%95/" />
@@ -38,7 +38,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.1a033f3ff00ce980be308cea1bee900c9b3a6fd48f5eb8ff81e1c9342110a2b0.css" rel="stylesheet">
+<link href="/sass/main.min.52161d9c167ef3a98ba62d28c5cea0fb989c1d8fefbcde7ebf6a7b7377d9298b.css" rel="stylesheet">
 
 
 
@@ -54,14 +54,13 @@
 <meta itemprop="description" content="大多数人所使用的费用流算法，即每次求出残量网络中 $s$ 到 $t$ 关于费用的最短路进行增广（将 Dinic 最大流算法中的 BFS 改为 SPFA），是伪多项式复杂度的，最坏情况下复杂度为 $O(nmf)$，其中 $f$ 为最大流。已知有一种在点数为 $n$，边数为 $O(n^2)$，值域为 $O(2^{n/2})$ 时将其用时卡成关于 $n$ 的指数级复杂度的构造方法。
 本文将介绍一种复杂度为进行 $O(m\log U)$ 次（$U$ 表示边的最大容量）无负权边单源最短路（使用 priority_queue 实现 Dijkstra 算法，总复杂度即为 $O(m^2\log U\log m)$）的弱多项式复杂度算法。
 其实这个算法并不是很复杂（只是相关资料比较少，会对学习造成一定困难，这也是我写这篇博客的原因），最小费用最大流的模板也只需要 $2.5KB$，并不比常见的伪多项式复杂度算法长很多。">
-<meta itemprop="datePublished" content="2019-10-26T19:50:25+08:00" />
-<meta itemprop="dateModified" content="2020-07-15T18:56:29+08:00" />
+<meta itemprop="datePublished" content="2019-10-26T19:50:25&#43;08:00" />
+<meta itemprop="dateModified" content="2020-07-15T18:56:29&#43;08:00" />
 <meta itemprop="wordCount" content="6600">
 
 
 
-<meta itemprop="keywords" content="图论,网络流,费用流," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="图论,网络流,费用流," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="基于 Capacity Scaling 的弱多项式复杂度最小费用流算法"/>
 <meta name="twitter:description" content="大多数人所使用的费用流算法，即每次求出残量网络中 $s$ 到 $t$ 关于费用的最短路进行增广（将 Dinic 最大流算法中的 BFS 改为 SPFA），是伪多项式复杂度的，最坏情况下复杂度为 $O(nmf)$，其中 $f$ 为最大流。已知有一种在点数为 $n$，边数为 $O(n^2)$，值域为 $O(2^{n/2})$ 时将其用时卡成关于 $n$ 的指数级复杂度的构造方法。
 本文将介绍一种复杂度为进行 $O(m\log U)$ 次（$U$ 表示边的最大容量）无负权边单源最短路（使用 priority_queue 实现 Dijkstra 算法，总复杂度即为 $O(m^2\log U\log m)$）的弱多项式复杂度算法。
@@ -662,22 +661,22 @@
 <p>为了优化常数，可以特判掉容量加一前该边已存在于残量网络的情况，直接跳过。</p>
 <p>令容量加一的这条边为 $(u, v)$，找负环可以先求出从 $v$ 出发以 reduced cost 为长度到每个点 $i$ 的最短路 $d(i)$（这个最短路不包括 $(u, v)$ 这条边， 由于当前维护的残量网络是容量加一之前的最小费用流，不存在负环，所以最短路是可以求的），判断 $d(u)+C_p(u, v)$ 是否小于 $0$ 即可。</p>
 <p>为了使用 Dijkstra 算法，还需要保证 reduced cost 非负，所以需要调整节点的势能。</p>
-<p>这里直接给出一种做法：求出上文所述的最短路 $d(i)$（若 $x$ 不可达就将 $d(x)$ 设为 $\max_{\text{节点 }i\text{ 可达}}\{d(i)\}+max(0, -C_p(u, v))$），然后将每个点 $i$ 的势能加上 $d(i)$（用 $p'(i)$ 表示节点 $i$ 更新后的势能）。</p>
+<p>这里直接给出一种做法：求出上文所述的最短路 $d(i)$（若 $x$ 不可达就将 $d(x)$ 设为 $\max_{\text{节点 }i\text{ 可达}}\{d(i)\}+max(0, -C_p(u, v))$），然后将每个点 $i$ 的势能加上 $d(i)$（用 $p&rsquo;(i)$ 表示节点 $i$ 更新后的势能）。</p>
 <details class="admonition note"><summary class="admonition-title">这样调整后残量网络中的每一条边的 reduced cost 依然非负的证明</summary>
 <p>对于 $(u, v)$ 这条边，若 $u$ 不可达，那么：</p>
 <p>$$
 \begin{aligned}
-C_{p'}(u, v)
-&amp;=p'(u)+cost(u, v)-p'(v)\\<br>
+C_{p&rsquo;}(u, v)
+&amp;=p&rsquo;(u)+cost(u, v)-p&rsquo;(v)\\<br>
 &amp;=p(u)+max(0, -C_p(u, v))+cost(u, v)-p(v)\\<br>
 &amp;\ge p(u)-(p(u)+cost(u, v)-p(v))+cost(u, v)-p(v)\\<br>
 &amp;=0
 \end{aligned}
 $$</p>
 <p>若 $u$ 可达且 $(u, v)$ 这条边加入后产生了负环，负环会被增广，$(u, v)$ 这条边就不存在了。</p>
-<p>若 $u$ 可达且 $(u, v)$ 这条边加入后没有产生负环，即 $d(u)+C_p(u, v)\ge 0$，那么 $C_{p'}(u, v)=d(u)+C_p(u, v)-d(v)=d(u)+C_p(u, v)\ge 0$。</p>
+<p>若 $u$ 可达且 $(u, v)$ 这条边加入后没有产生负环，即 $d(u)+C_p(u, v)\ge 0$，那么 $C_{p&rsquo;}(u, v)=d(u)+C_p(u, v)-d(v)=d(u)+C_p(u, v)\ge 0$。</p>
 <p>capacity scaling 算法在初始时所有边容量均为 $0$（也就是说残量网络为空），所以可以在除 $(u, v)$ 外每条边的 reduced cost 均非负的基础上归纳证明。</p>
-<p>对于其它从 $u$ 可达的边 $(x, y)$，由于 $d(y)\le d(x)+C_p(x, y)$（最短路的性质），即 $d(y)\le d(x)+p(x)+cost(x, y)-p(y)$，所以 $p(x)+d(x)+cost(x, y)-(p(y)+d(y))\ge 0$，即 $p'(x)+cost(x, y)-p'(y)\ge 0$，也就是说 $u$ 可达的边 reduced cost 调整后非负。</p>
+<p>对于其它从 $u$ 可达的边 $(x, y)$，由于 $d(y)\le d(x)+C_p(x, y)$（最短路的性质），即 $d(y)\le d(x)+p(x)+cost(x, y)-p(y)$，所以 $p(x)+d(x)+cost(x, y)-(p(y)+d(y))\ge 0$，即 $p&rsquo;(x)+cost(x, y)-p&rsquo;(y)\ge 0$，也就是说 $u$ 可达的边 reduced cost 调整后非负。</p>
 <p>对于其它从 $u$ 可达与从 $u$ 不可达交界处的边 $(x, y)$（由于这条边不可达，一定是 $x$ 不可达 $y$ 可达），由于 $C_p(x, y)\ge 0$ 且 $d(x)=\max_{\text{节点 }i\text{ 可达}}\{d(i)\}+max(0, -C_p(u, v))\ge d(y)$，这样的边调整后 reduced cost 也非负。</p>
 <p>对于连接从 $u$ 不可达的两个点 $x$，$y$ 的边，$d(x)=d(y)$，调整后 reduced cost 也非负。</p>
 <p>综上所述，调整后残量网络中的每一条边的 reduced cost 依然非负。</p>
