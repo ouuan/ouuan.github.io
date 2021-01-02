@@ -26,7 +26,7 @@ $n\le 5\cdot 10^4$（实际上可以大很多）。
 <meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
 
 
-<meta name="generator" content="Hugo 0.69.2 with theme even" />
+<meta name="generator" content="Hugo 0.80.0 with theme even" />
 
 
 <link rel="canonical" href="https://ouuan.github.io/post/cf3d-least-cost-bracket-sequence%E8%B4%AA%E5%BF%83/" />
@@ -38,7 +38,7 @@ $n\le 5\cdot 10^4$（实际上可以大很多）。
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.2ccc99aa18501eb0a20678a919404779fa1d9f66663cef10606eef97052b4b73.css" rel="stylesheet">
+<link href="/sass/main.min.3a394cace48c46ca9a5dc61fc056a34550323a9ae01cab94db3dd0af0f48c56e.css" rel="stylesheet">
 
 
 
@@ -58,13 +58,14 @@ CF
 题意简述
 有一个长为 $n$ 的括号序列，其中一些位置是问号，每个问号替换成左括号或替换成右括号各有给定的代价，判断是否能够构造出一个合法的括号序列，如果可以，求出最小代价。
 $n\le 5\cdot 10^4$（实际上可以大很多）。">
-<meta itemprop="datePublished" content="2019-10-16T21:50:44&#43;08:00" />
-<meta itemprop="dateModified" content="2020-02-08T18:37:53&#43;08:00" />
-<meta itemprop="wordCount" content="611">
+<meta itemprop="datePublished" content="2019-10-16T21:50:44+08:00" />
+<meta itemprop="dateModified" content="2020-02-08T18:37:53+08:00" />
+<meta itemprop="wordCount" content="605">
 
 
 
-<meta itemprop="keywords" content="贪心," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="贪心," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="CF3D Least Cost Bracket Sequence（贪心）"/>
 <meta name="twitter:description" content="题目链接
 CF
@@ -186,7 +187,7 @@ $n\le 5\cdot 10^4$（实际上可以大很多）。"/>
 <p>$n\le 5\cdot 10^4$（实际上可以大很多）。</p>
 <h2 id="简要做法">简要做法</h2>
 <p>考虑使用带反悔的贪心。</p>
-<p>如果用 $cnt[i]$ 表示 $\sum_{j=1}^i(-1)^{[a_i=&rsquo;)']}$（左括号比右括号多的个数），括号序列合法当且仅当 $\forall i,cnt[i]\ge 0$ 且 $cnt[n]=0$。</p>
+<p>如果用 $cnt[i]$ 表示 $\sum_{j=1}^i(-1)^{[a_i=')']}$（左括号比右括号多的个数），括号序列合法当且仅当 $\forall i,cnt[i]\ge 0$ 且 $cnt[n]=0$。</p>
 <p>如果把右括号反悔成左括号，一定可以保证 $cnt[i]\ge 0$ 这个条件依然满足。</p>
 <p>但是，如果把左括号反悔成右括号，有可能造成本来 $cnt[i]\ge 0$ 的位置小于 $0$。</p>
 <p>并且，如果选择了多余的左括号，还会导致 $cnt[n]&gt;0$。</p>

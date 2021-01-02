@@ -24,7 +24,7 @@
 <meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
 
 
-<meta name="generator" content="Hugo 0.69.2 with theme even" />
+<meta name="generator" content="Hugo 0.80.0 with theme even" />
 
 
 <link rel="canonical" href="https://ouuan.github.io/post/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BAsam%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
@@ -36,7 +36,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.2ccc99aa18501eb0a20678a919404779fa1d9f66663cef10606eef97052b4b73.css" rel="stylesheet">
+<link href="/sass/main.min.3a394cace48c46ca9a5dc61fc056a34550323a9ae01cab94db3dd0af0f48c56e.css" rel="stylesheet">
 
 
 
@@ -48,13 +48,14 @@
 <meta property="article:modified_time" content="2020-02-10T16:02:40+08:00" />
 <meta itemprop="name" content="后缀自动机（SAM）学习笔记">
 <meta itemprop="description" content="后缀自动机是一种处理字符串问题的有力工具（废话），它的码量不比后缀数组大（实际代码难度不比后缀数组小，但也不难），处理问题时的思维难度往往比后缀数组小，复杂度更优秀。若字符集大小为 $|\Sigma|$，则：构建时间复杂度 $O(n|\Sigma|)$，转移时间复杂度 $O(1)$，空间复杂度 $O(n|\Sigma|)$ 或 构建时间复杂度 $O(n\log|\Sigma|)$，转移时间复杂度 $O(\log|\Sigma|)$，空间复杂度 $O(n)$。">
-<meta itemprop="datePublished" content="2019-02-22T12:31:37&#43;08:00" />
-<meta itemprop="dateModified" content="2020-02-10T16:02:40&#43;08:00" />
-<meta itemprop="wordCount" content="6297">
+<meta itemprop="datePublished" content="2019-02-22T12:31:37+08:00" />
+<meta itemprop="dateModified" content="2020-02-10T16:02:40+08:00" />
+<meta itemprop="wordCount" content="6279">
 
 
 
-<meta itemprop="keywords" content="字符串,SAM," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="字符串,SAM," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="后缀自动机（SAM）学习笔记"/>
 <meta name="twitter:description" content="后缀自动机是一种处理字符串问题的有力工具（废话），它的码量不比后缀数组大（实际代码难度不比后缀数组小，但也不难），处理问题时的思维难度往往比后缀数组小，复杂度更优秀。若字符集大小为 $|\Sigma|$，则：构建时间复杂度 $O(n|\Sigma|)$，转移时间复杂度 $O(1)$，空间复杂度 $O(n|\Sigma|)$ 或 构建时间复杂度 $O(n\log|\Sigma|)$，转移时间复杂度 $O(\log|\Sigma|)$，空间复杂度 $O(n)$。"/>
 
@@ -247,7 +248,7 @@
 <h3 id="right-集合等价类与最简sam">$right$ 集合等价类与最简SAM</h3>
 <p>我们定义 $reg(v)$ 表示 <strong>从状态 $v$ 开始能识别的字符串的集合</strong>。即：$t\in reg(v)$ 当且仅当 $\delta(v,t)\in F$（$F$ 为接受状态集合）。</p>
 <p>如果在 $t$ 的后面补上一个字符串 $s[r_i..n]$（$r_i\in right(t)$，$n$ 表示 $s$ 的长度），就得到了 $s$ 的一个后缀。所以，若 $right(t_1)=right(t_2)$，那么 $reg(SAM(t_1))=reg(SAM(t_2))=\{s[r_i..n]|r_i\in right(t_1)\}$。</p>
-<p>对于每个状态 $v$，我们只关心 $reg(v)$，所以可以用SAM上的每一个状态去表示一个 $right$ 集合等价类，转移函数也相应地更改为对应的等价类（令 $f(v)$ 表示原状态 $v$ 对应的字符串的 $right$ 集合等价类在最简SAM中对应的状态，那么原来的转移函数 $\delta(u,c)=v$ 更改为 $\delta&rsquo;(f(u),c)=f(v)$。可以证明，若 $right(u_1)=right(u_2)$，那么 $right(\delta(u_1,c))=right(\delta(u_2,c))$，因为 $right(\delta(u,c))=\{r_i|r_i\in right(u),s[r_i]=c\}$）。</p>
+<p>对于每个状态 $v$，我们只关心 $reg(v)$，所以可以用SAM上的每一个状态去表示一个 $right$ 集合等价类，转移函数也相应地更改为对应的等价类（令 $f(v)$ 表示原状态 $v$ 对应的字符串的 $right$ 集合等价类在最简SAM中对应的状态，那么原来的转移函数 $\delta(u,c)=v$ 更改为 $\delta'(f(u),c)=f(v)$。可以证明，若 $right(u_1)=right(u_2)$，那么 $right(\delta(u_1,c))=right(\delta(u_2,c))$，因为 $right(\delta(u,c))=\{r_i|r_i\in right(u),s[r_i]=c\}$）。</p>
 <p>这样的SAM是状态数最少的，因为状态的 $reg$ 两两不同。这样的SAM若要和朴素SAM区分，可以叫做 <strong>最简SAM</strong>。但一般不加说明的SAM都指最简SAM。</p>
 <p>这样的SAM，从起始状态到某个状态可能有多条路径，每条路径都对应一个字符串，那么我们称这个状态 <strong>对应</strong> 着这些字符串。</p>
 <p>如，叒是串 &ldquo;abaaabaa​&rdquo; 的最简SAM：</p>
@@ -424,7 +425,7 @@ void insert(int x)
 <p>没有出边的非接受状态可以视作 $null$，而没有出边的接受状态按上文所述方法必定会被映射至同一状态。所以命题对没有出边的状态成立。</p>
 <p>假设一个状态所有出边的对应状态都已被证明，那么转移函数不同就等价于 $reg$ 不同，所以命题成立。</p>
 <p>接着，我们由 $reg$ 两两不同证明压缩至最简：</p>
-<p>若状态数继续减少，那么必然存在原来 $reg$ 不同的两个状态 $B(s_1)$ 和 $B(s_2)$ 被压缩到了一起，任取一个只在 $reg(B(s_1))$ 或只在 $reg(B(s_2))$ 中的字符串 $t$，原来 $B(s_1+t)\ne B(s_2+t)$，压缩后却使得 $B&rsquo;(s_1+t)=B&rsquo;(s_2+t)$，不符合要求。</p>
+<p>若状态数继续减少，那么必然存在原来 $reg$ 不同的两个状态 $B(s_1)$ 和 $B(s_2)$ 被压缩到了一起，任取一个只在 $reg(B(s_1))$ 或只在 $reg(B(s_2))$ 中的字符串 $t$，原来 $B(s_1+t)\ne B(s_2+t)$，压缩后却使得 $B'(s_1+t)=B'(s_2+t)$，不符合要求。</p>
 </details>
     </div>
 

@@ -28,7 +28,7 @@ BZOJ
 <meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
 
 
-<meta name="generator" content="Hugo 0.69.2 with theme even" />
+<meta name="generator" content="Hugo 0.80.0 with theme even" />
 
 
 <link rel="canonical" href="https://ouuan.github.io/post/hnoi2010-%E5%9F%8E%E5%B8%82%E5%BB%BA%E8%AE%BE/" />
@@ -40,7 +40,7 @@ BZOJ
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.2ccc99aa18501eb0a20678a919404779fa1d9f66663cef10606eef97052b4b73.css" rel="stylesheet">
+<link href="/sass/main.min.3a394cace48c46ca9a5dc61fc056a34550323a9ae01cab94db3dd0af0f48c56e.css" rel="stylesheet">
 
 
 
@@ -64,13 +64,14 @@ BZOJ
 给你一张边带权的无向连通图，多次修改，每次修改一条边的边权，每次修改完后求最小生成树的边权之和。
 点数 $2\cdot 10^4$, 边数和修改数 $5\cdot 10^4$，时限 3s。
 ">
-<meta itemprop="datePublished" content="2020-02-26T23:12:33&#43;08:00" />
-<meta itemprop="dateModified" content="2020-02-27T00:32:41&#43;08:00" />
+<meta itemprop="datePublished" content="2020-02-26T23:12:33+08:00" />
+<meta itemprop="dateModified" content="2020-02-27T00:32:41+08:00" />
 <meta itemprop="wordCount" content="1459">
 
 
 
-<meta itemprop="keywords" content="线段树分治,分治,LCT,并查集,Kruskal," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="线段树分治,分治,LCT,并查集,Kruskal," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="「HNOI2010」城市建设（线段树分治，LCT/Kruskal）"/>
 <meta name="twitter:description" content="洛谷
 BZOJ
@@ -206,7 +207,7 @@ BZOJ
 <p>然而，Kruskal 算法要求边权从小到大加入，直接线段树分治无法满足这个要求。</p>
 <p>（注：为了严谨，你可以认为下文中在比较大小时给第 $i$ ($1\le i\le m$) 条边的边权加上了 $2^{-i}$，这样保证了 MST 是唯一的。当然，在代码中无需如此。）</p>
 <p>可以观察到，随着分治区间越来越小，修改的边也越来越少，图中大多数的边是不会被修改的。正因如此，可以猜想，大多数边在或不在 MST 中是固定的，而我们需要关注的，只有那些因会修改的边的边权变化而既可能在 MST 中又可能不在 MST 中的边。</p>
-<p>如果我们有一张图 $G=(V, E)$，其中 $E&rsquo;\subseteq E$ 是以后会被修改的边，那么，如何求出那些无论 $E'$ 中的边边权如何变化都一定在 MST 中/一定不在 MST 中的边呢？</p>
+<p>如果我们有一张图 $G=(V, E)$，其中 $E'\subseteq E$ 是以后会被修改的边，那么，如何求出那些无论 $E'$ 中的边边权如何变化都一定在 MST 中/一定不在 MST 中的边呢？</p>
 <ol>
 <li>将 $E'$ 中的边边权设为正无穷，求 MST，此时不在 $E'$ 中且不在 MST 中的边，无论 $E'$ 中的边边权如何变化，都不在 MST 中，下文中称这些边为“一类边”。</li>
 <li>将 $E'$ 中的边边权设为 $0$，求 MST，此时不在 $E'$ 中且在 MST 中的边，无论 $E'$ 中的边边权如何变化，都在 MST 中，下文中称这些边为“二类边”。</li>

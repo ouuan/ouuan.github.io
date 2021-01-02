@@ -25,7 +25,7 @@
 <meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
 
 
-<meta name="generator" content="Hugo 0.69.2 with theme even" />
+<meta name="generator" content="Hugo 0.80.0 with theme even" />
 
 
 <link rel="canonical" href="https://ouuan.github.io/post/codeforces-round-564-%E4%B8%AD%E6%96%87%E9%A2%98%E8%A7%A3/" />
@@ -37,7 +37,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.2ccc99aa18501eb0a20678a919404779fa1d9f66663cef10606eef97052b4b73.css" rel="stylesheet">
+<link href="/sass/main.min.3a394cace48c46ca9a5dc61fc056a34550323a9ae01cab94db3dd0af0f48c56e.css" rel="stylesheet">
 
 
 
@@ -51,13 +51,14 @@
 <meta itemprop="name" content="Codeforces Round #564 中文题解">
 <meta itemprop="description" content="台前幕后
 比赛地址">
-<meta itemprop="datePublished" content="2019-06-07T22:38:47&#43;08:00" />
-<meta itemprop="dateModified" content="2020-09-20T10:15:45&#43;08:00" />
-<meta itemprop="wordCount" content="5234">
+<meta itemprop="datePublished" content="2019-06-07T22:38:47+08:00" />
+<meta itemprop="dateModified" content="2020-09-20T10:15:45+08:00" />
+<meta itemprop="wordCount" content="5221">
 
 
 
-<meta itemprop="keywords" content="Codeforces," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Codeforces," />
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Codeforces Round #564 中文题解"/>
 <meta name="twitter:description" content="台前幕后
 比赛地址"/>
@@ -352,7 +353,7 @@ int main()
 </details>
 <h1 id="1c-nauuo-and-pictureshttpscodeforcescomproblemsetproblem1172c2"><a href="https://codeforces.com/problemset/problem/1172/C2" target="_blank">1C Nauuo and Pictures</a></h1>
 <details class="admonition note"><summary class="admonition-title">题意</summary>
-<p>给你一个长度为 $n$ 的数列 $w_{1..n}$，其中有一些位置是&quot;被喜欢的&rdquo;，其它位置是“不被喜欢的”，进行 $m$ 次操作，每次随机选一个数，选到第 $i$ 个数的概率是 $\frac{w_i}{\sum_{j=1}^nw_j}$，如果选到一个“被喜欢的”位置，就会把这个位置上的数加一，否则减一。问 $m$ 次操作过后每个数的期望值，对 $998244353$ 取模。</p>
+<p>给你一个长度为 $n$ 的数列 $w_{1..n}$，其中有一些位置是&quot;被喜欢的&quot;，其它位置是“不被喜欢的”，进行 $m$ 次操作，每次随机选一个数，选到第 $i$ 个数的概率是 $\frac{w_i}{\sum_{j=1}^nw_j}$，如果选到一个“被喜欢的”位置，就会把这个位置上的数加一，否则减一。问 $m$ 次操作过后每个数的期望值，对 $998244353$ 取模。</p>
 <p>$1\le n\le2\times 10^5$，$1\le m\le3000$。</p>
 </details>
 <details class="admonition note"><summary class="admonition-title">题解</summary>
@@ -384,20 +385,20 @@ int main()
 <p>这样的话就只用计算 $f_1[i][j][k]$ 了。</p>
 </li>
 <li>
-<p>注意到 $i$, $j$, $k$, $m$ 有一些联系。实际上可以令 $f&rsquo;_w[i][j]$ 表示 $f_w[m-i-j][SA+i][SB-j]$（这里的 $SA$ 和 $SB$ 都是未操作时的初始值）。</p>
+<p>注意到 $i$, $j$, $k$, $m$ 有一些联系。实际上可以令 $f'_w[i][j]$ 表示 $f_w[m-i-j][SA+i][SB-j]$（这里的 $SA$ 和 $SB$ 都是未操作时的初始值）。</p>
 </li>
 </ol>
-<p>令 $g&rsquo;_1[i][j]$ 表示 $g_w[m-i-j][SA+i][SB-j]$，计算方式类似。</p>
+<p>令 $g'_1[i][j]$ 表示 $g_w[m-i-j][SA+i][SB-j]$，计算方式类似。</p>
 <p><strong>总结</strong></p>
 <p>$$
 \begin{aligned}
-f&rsquo;_1[i][j]&amp;=1&amp;(i+j=m)\\<br>
-f&rsquo;_1[i][j]&amp;=\frac{SA+i+1}{SA+SB+i-j}f&rsquo;_1[i+1][j]+\frac{SB-j}{SA+SB+i-j}f&rsquo;_1[i][j+1]&amp;(i+j&lt;m)\\<br>
-g&rsquo;_1[i][j]&amp;=1&amp;(i+j=m)\\<br>
-g&rsquo;_1[i][j]&amp;=\frac{SA+i}{SA+SB+i-j}g&rsquo;_1[i+1][j]+\frac{SB-j-1}{SA+SB+i-j}g&rsquo;_1[i][j+1]&amp;(i+j&lt;m)
+f'_1[i][j]&amp;=1&amp;(i+j=m)\\<br>
+f'_1[i][j]&amp;=\frac{SA+i+1}{SA+SB+i-j}f'_1[i+1][j]+\frac{SB-j}{SA+SB+i-j}f'_1[i][j+1]&amp;(i+j&lt;m)\\<br>
+g'_1[i][j]&amp;=1&amp;(i+j=m)\\<br>
+g'_1[i][j]&amp;=\frac{SA+i}{SA+SB+i-j}g'_1[i+1][j]+\frac{SB-j-1}{SA+SB+i-j}g'_1[i][j+1]&amp;(i+j&lt;m)
 \end{aligned}
 $$</p>
-<p>“被喜欢的”位置答案是 $w_if&rsquo;_1[0][0]$，“不被喜欢的”位置答案是 $w_ig&rsquo;_1[0][0]$。</p>
+<p>“被喜欢的”位置答案是 $w_if'_1[0][0]$，“不被喜欢的”位置答案是 $w_ig'_1[0][0]$。</p>
 <p>如果每次去算逆元就是 $\mathcal O(n+m^2\log p)$，预处理出来就是 $\mathcal O(n+m^2+m\log p)$。</p>
 </details>
 <details class="admonition note"><summary class="admonition-title">参考代码</summary>
