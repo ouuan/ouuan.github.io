@@ -55,7 +55,7 @@ CF contest
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ouuan.github.io/post/cf235c-cyclical-questsam/" />
 <meta property="article:published_time" content="2019-02-27T13:23:19+08:00" />
-<meta property="article:modified_time" content="2021-01-10T11:45:50+08:00" />
+<meta property="article:modified_time" content="2021-01-31T11:47:02+08:00" />
 <meta itemprop="name" content="CF235C Cyclical Quest（SAM）">
 <meta itemprop="description" content="题目链接
 洛谷
@@ -65,7 +65,7 @@ CF contest
 给你一个字符串 $s$ 和 $n$ 个字符串 $x_{1..n}$，对每个 $x_i$，求有多少个 $s$ 的子串可以由 $x_i$ 旋转得到。
 旋转一个字符串就是把它的一个前缀移到后面，如 abcd 可以旋转得到的字符串有 abcd，bcda，cdab，dabc。">
 <meta itemprop="datePublished" content="2019-02-27T13:23:19+08:00" />
-<meta itemprop="dateModified" content="2021-01-10T11:45:50+08:00" />
+<meta itemprop="dateModified" content="2021-01-31T11:47:02+08:00" />
 <meta itemprop="wordCount" content="939">
 
 
@@ -192,7 +192,7 @@ CF contest
 <p>给你一个字符串 $s$ 和 $n$ 个字符串 $x_{1..n}$，对每个 $x_i$，求有多少个 $s$ 的子串可以由 $x_i$ 旋转得到。</p>
 <p>旋转一个字符串就是把它的一个前缀移到后面，如 <code>abcd</code> 可以旋转得到的字符串有 <code>abcd</code>，<code>bcda</code>，<code>cdab</code>，<code>dabc</code>。</p>
 <h1 id="简要做法">简要做法</h1>
-<p>对 $s$ 建 SAM，把 $x_i$ 旋转得到的每个字符串用 SAM 读入，就可以求答案了。（SAM 求子串出现次数是经典问题，可以参考<a href="/post/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA%EF%BC%88SAM%EF%BC%89%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#%E5%AD%90%E4%B8%B2%E5%87%BA%E7%8E%B0%E6%AC%A1%E6%95%B0">我的博客</a>）</p>
+<p>对 $s$ 建 SAM，把 $x_i$ 旋转得到的每个字符串用 SAM 读入，就可以求答案了。（SAM 求子串出现次数是经典问题，可以参考<a href="/post/%e5%90%8e%e7%bc%80%e8%87%aa%e5%8a%a8%e6%9c%basam%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0/#%e5%ad%90%e4%b8%b2%e5%87%ba%e7%8e%b0%e6%ac%a1%e6%95%b0">我的博客</a>）</p>
 <p>分开读入每个 $x_i$ 旋转得到的字符串显然会超时，然而，SAM 读入字符串是支持删除首字符的：记录当前读入的长度 $l$ 以及所处状态 $u$，删除字符就把 $l$ 减一，若减一后 $l=len(parent(u))$，则转移到 $parent(u)$（把 $u$ 赋值为 $parent(t)$）。需要注意的是，如果读入一个字符的时候当前状态没有这个字符的出边，就需要在 $parent$ 树上向上跳，直到有这个字符的出边，同时更新 $l$ 。这样的话，删除字符前就要先判断 $l$ 与需要保留的字符串的长度的关系。具体细节可以参考代码及注释。</p>
 <p>所以，先读入 $x_i$ 统计答案，再删去首字符读入 $x_i[0]$ 统计答案，删去首字符读入 $x_i[1]$ 统计答案……就只用读入 $O(len(x_i))​$ 个字符。</p>
 <p>还有一个问题，就是去重。$s$ 的一个子串可能可以和 $x_i$ 不同的旋转匹配。解决这个问题有两个方法，第一个是求出 $x_i​$ 的周期（可以用 kmp 求），第二个方法是在 SAM 上打标记。我用的是打标记的方法，具体细节还是可以参考代码及注释。</p>
@@ -336,8 +336,8 @@ void dfs(int u) //遍历parent树，计算每个状态的出现次数
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        <span title="2021-01-10 11:45:50 &#43;0800 &#43;0800">2021-01-10</span>
-        <a href="https://github.com/ouuan/hugo-blog/commit/74ce994137c63654e6b1b61def1dc148a79013c6" title="ci: deploy on Gitee" target="_blank">(74ce994)</a>
+        <span title="2021-01-31 11:47:02 &#43;0800 &#43;0800">2021-01-31</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/dcfc89d31844b6b830061da957ce8d3cb533fb5b" title="fix: fix internal links" target="_blank">(dcfc89d)</a>
         ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/CF235C-Cyclical-Quest%ef%bc%88SAM%ef%bc%89.md" target="_blank">更新历史</a>
     </span>
   </p>
