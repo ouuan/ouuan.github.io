@@ -27,7 +27,7 @@
 
 <nav >
     
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#cacheFor">cacheFor</a></li><li><a href="global.html#getAuthors">getAuthors</a></li><li><a href="global.html#readCache">readCache</a></li><li><a href="global.html#writeCache">writeCache</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#getAuthors">getAuthors</a></li><li><a href="global.html#newCache">newCache</a></li><li><a href="global.html#readCache">readCache</a></li><li><a href="global.html#writeCache">writeCache</a></li></ul>
 </nav>
 
 <div id="main">
@@ -64,6 +64,7 @@ const exec = promisify(require('child_process').exec);
 const assert = require('assert').strict;
 const path = require('path');
 const fs = require('fs').promises;
+const async = require('async');
 const axios = require('axios').default;
 
 /**
@@ -96,50 +97,73 @@ function checkRepo(repo) {
   assert(/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(repo), `Invalid repository name: ${repo}`);
 }
 
-/**
- * @callback OnErrorCallback
- * @param {string} [sha] - The sha of the commit which caused the error.
- * @param {string} [email] - The email of the author to the commit which caused the error.
- * @param {any} [error] - The error.
- */
-
-/**
- * Get the authors of a file in a GitHub repository.
- * @param {Object} configs
- * @param {string} configs.repo - The GitHub repository, in the "owner/name" format.
- * @param {string} configs.filePath - The path to the file which you want to know its authors.
- * It's a normal file path (either absolute or relative to pwd), NOT relative to the repository.
- * @param {string|null=} [configs.token=process.env.GITHUB_TOKEN] - A GitHub Personal Access Token,
- * or null if you don't want to use tokens.
- * @param {Map&lt;string, string>=} [configs.cache=new Map()] - The cache. The emails of the authors of
- * ${filePath} will be added in the cache.
- * @param {boolean=} [configs.follow=true] - Whether to use the "--follow" option of "git log" or
- * not. i.e. Continue listing the history of a file beyond renames.
- * @param {OnErrorCallback=} [configs.onerror=console.error(...)]
- * The callback function when error happens.
- * @param {string=} [configs.git='git'] - The command (path to the binary file) for Git.
- * @returns {Promise&lt;string[]>} The authors of the file.
- * @async
- * @date 2021-02-13
- */
-async function getAuthors({
-  repo,
-  filePath,
-  token = process.env.GITHUB_TOKEN,
-  cache = new Map(),
-  follow = true,
+function defaultOnError(sha, email, error) {
   // eslint-disable-next-line no-console
-  onerror = (sha, email, error) => console.error(`Failed to get the author of ${sha} with the email &lt;${email}>: ${error}`),
-  git = 'git',
-}) {
+  console.error(`Failed to get the author of ${sha} with the email &lt;${email}>: ${error}`);
+}
+
+function getErrorCallback(onerror) {
+  if (onerror === undefined) return defaultOnError;
+  if (typeof onerror === 'function') return onerror;
+  return () => {};
+}
+
+function createQueue(configs) {
+  const {
+    repo,
+    token = process.env.GITHUB_TOKEN,
+    apiConcurrency = 64,
+    gitConcurrency = 32,
+    git = 'git',
+    follow = true,
+    onerror,
+  } = configs;
   checkRepo(repo);
-  const errorCallback = typeof onerror === 'function' ? onerror : () => {};
-  const fileStat = await fs.lstat(filePath);
-  const { stdout } = await exec(`${git} log ${follow ? '--follow' : '--no-follow'} --pretty='%H %aE' ${filePath}`, {
-    cwd: fileStat.isDirectory() ? filePath : path.dirname(filePath),
-  });
-  const authors = new Set();
+  const errorCallback = getErrorCallback(onerror);
   const promiseForEmail = new Map();
+  const apiRequestQueue = async.queue(
+    async ({ email, sha }) => {
+      const response = await axios.get(`https://api.github.com/repos/${repo}/commits/${sha}`, {
+        headers: {
+          Accept: 'application/vnd.github.v3+json',
+          ...(typeof token === 'string' &amp;&amp; { Authorization: `token ${token}` }),
+        },
+      })
+      // .then((res) => { console.log(email); return res; })
+        .catch((error) => errorCallback(sha, email, error));
+      if (!response) return null;
+      const login = response.data?.author?.login;
+      if (typeof login !== 'string') errorCallback(sha, email, '.author.login not found in the API response');
+      return login;
+    },
+    apiConcurrency,
+  );
+  const setApiPromiseQueue = async.queue(async ({ email, sha }) => {
+    if (!promiseForEmail.has(email)) {
+      promiseForEmail.set(email, apiRequestQueue.push({ email, sha }));
+    }
+    return promiseForEmail.get(email);
+  });
+  const gitQueue = async.queue(async (filePath) => {
+    const absPath = path.resolve(filePath);
+    const cwd = (await fs.lstat(absPath)).isDirectory() ? absPath : path.dirname(absPath);
+    const { stdout } = await exec(`${git} log ${follow ? '--follow' : '--no-follow'} --pretty='%H %aE' ${absPath}`, {
+      cwd,
+    });
+    return stdout;
+  }, gitConcurrency);
+  return {
+    gitQueue,
+    setApiPromiseQueue,
+  };
+}
+
+async function getAuthorsWithQueue({
+  configs, filePath, setApiPromiseQueue, gitQueue,
+}) {
+  const { cache = new Map() } = configs;
+  const stdout = await gitQueue.push(filePath);
+  const authors = new Set();
   await Promise.all(stdout.split('\n').map(async (line) => {
     const parts = line.split(' ');
     if (parts.length !== 2) return;
@@ -148,67 +172,69 @@ async function getAuthors({
       authors.add(cache.get(email));
       return;
     }
-    if (!promiseForEmail.has(email)) {
-      promiseForEmail.set(email, axios.get(`https://api.github.com/repos/${repo}/commits/${sha}`, {
-        headers: {
-          Accept: 'application/vnd.github.v3+json',
-          ...(typeof token === 'string' &amp;&amp; { Authorization: `token ${token}` }),
-        },
-      }).catch((error) => errorCallback(sha, email, error)));
-    }
-    const response = await promiseForEmail.get(email);
-    if (!response) return;
-    const login = response.data?.author?.login;
+    const login = await (await setApiPromiseQueue.push({ email, sha }));
     if (typeof login === 'string') {
       cache.set(email, login);
       authors.add(login);
-    } else errorCallback(sha, email, '.author.login not found in the API response');
+    }
   }));
-  return Array.from(authors);
+  return Array.from(authors).sort();
 }
 
 /**
- * Get the cache prepared for the files in the given paths and their subdirectories.
+ * @callback OnErrorCallback
+ * @param {string} [sha] - The sha of the commit which caused the error.
+ * @param {string} [email] - The email of the author to the commit which caused the error.
+ * @param {any} [error] - The error.
+ */
+
+/**
+ * Get the GitHub usernames of the authors to the given paths.
  * @param {Object} configs
  * @param {string} configs.repo - The GitHub repository, in the "owner/name" format.
- * @param {(string[])=} [configs.paths=[]] - The paths containing the files for which you want to
- * get the cache.
+ * @param {string|string[]} [configs.paths=[]] - The paths containing the files for which you
+ * want to get the authors.
+* @param {Map&lt;string, string>=} [configs.cache=new Map()] - The cache. The emails of the authors of
+ * [filePath] will be added in the cache.
  * @param {string|null=} [configs.token=process.env.GITHUB_TOKEN] - A GitHub Personal Access Token,
  * or null if you don't want to use tokens.
  * @param {boolean=} [configs.follow=true] - Whether to use the "--follow" option of "git log" or
  * not. i.e. Continue listing the history of a file beyond renames.
  * WARNING: In order to make this option work, you need to list ALL files in [paths], not only the
  * directories containing the files.
+ * @param {number=} [configs.apiConcurrency=64] - Maximum number of API requests at the same time.
+ * @param {number=} [configs.gitConcurrency=32] - Maximum number of Git processes at the same time.
  * @param {OnErrorCallback=} [configs.onerror=console.error(...)]
  * The callback function when error happens.
  * @param {string=} [configs.git='git'] - The command (path to the binary file) for Git.
- * @returns {Promise&lt;Map&lt;string, string>>} The cache prepared for the given paths.
+ * @returns {Promise&lt;string[][]>} An array of the authors to each file.
  * @async
- * @date 2021-02-13
+ * @date 2021-02-14
  */
-async function cacheFor({
-  repo,
-  paths = [],
-  token = process.env.GITHUB_TOKEN,
-  follow = true,
-  // eslint-disable-next-line no-console
-  onerror = (sha, email, error) => console.error(`Failed to get the author of ${sha} with the email &lt;${email}>: ${error}`),
-  git = 'git',
-}) {
-  checkRepo(repo);
-  assert(Array.isArray(paths));
-  const cache = new Map();
-  await Promise.all(paths.map((filePath) => getAuthors({
-    repo, filePath, token, cache, follow, onerror, git,
+async function getAuthors(configs) {
+  const paths = [].concat(configs.paths);
+  const queues = createQueue(configs);
+  return Promise.all(paths.map((filePath) => getAuthorsWithQueue({
+    configs,
+    filePath,
+    ...queues,
   })));
-  return cache;
+}
+
+/**
+ * Get an empty cache
+ * @returns {Map&lt;string, string>} An empty cache
+ * @date 2021-02-14
+ */
+function newCache() {
+  return new Map();
 }
 
 module.exports = {
   readCache,
   writeCache,
   getAuthors,
-  cacheFor,
+  newCache,
 };
 </code></pre>
         </article>
@@ -224,7 +250,7 @@ module.exports = {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sat Feb 13 2021 22:53:19 GMT+0800 (中国标准时间) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sun Feb 14 2021 05:13:35 GMT+0800 (中国标准时间) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

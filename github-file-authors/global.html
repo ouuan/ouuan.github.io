@@ -27,7 +27,7 @@
 
 <nav >
     
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#cacheFor">cacheFor</a></li><li><a href="global.html#getAuthors">getAuthors</a></li><li><a href="global.html#readCache">readCache</a></li><li><a href="global.html#writeCache">writeCache</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#getAuthors">getAuthors</a></li><li><a href="global.html#newCache">newCache</a></li><li><a href="global.html#readCache">readCache</a></li><li><a href="global.html#writeCache">writeCache</a></li></ul>
 </nav>
 
 <div id="main">
@@ -124,7 +124,7 @@
 
     
 
-    <h4 class="name" id="cacheFor"><span class="type-signature">(async) </span>cacheFor<span class="signature">(configs)</span><span class="type-signature"> &rarr; {Promise.&lt;Map.&lt;string, string>>}</span></h4>
+    <h4 class="name" id="getAuthors"><span class="type-signature">(async) </span>getAuthors<span class="signature">(configs)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Array.&lt;string>>>}</span></h4>
 
     
 
@@ -136,7 +136,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line145">line 145</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line170">line 170</a>
     </li></ul></dd>
     
 
@@ -176,7 +176,7 @@
 
 
 <div class="description usertext">
-    Get the cache prepared for the files in the given paths and their subdirectories.
+    Get the GitHub usernames of the authors to the given paths.
 </div>
 
 
@@ -301,6 +301,9 @@
             <td class="type">
             
                 
+<span class="param-type">string</span>
+|
+
 <span class="param-type">Array.&lt;string></span>
 
 
@@ -327,8 +330,48 @@
                 </td>
             
 
-            <td class="description last">The paths containing the files for which you want to
-get the cache.</td>
+            <td class="description last">The paths containing the files for which you
+want to get the authors.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cache</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Map.&lt;string, string></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>new Map()</code>
+                
+                </td>
+            
+
+            <td class="description last">The cache. The emails of the authors of
+[filePath] will be added in the cache.</td>
         </tr>
 
     
@@ -420,6 +463,84 @@ directories containing the files.</td>
 
         <tr>
             
+                <td class="name"><code>apiConcurrency</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>64</code>
+                
+                </td>
+            
+
+            <td class="description last">Maximum number of API requests at the same time.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>gitConcurrency</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>32</code>
+                
+                </td>
+            
+
+            <td class="description last">Maximum number of Git processes at the same time.</td>
+        </tr>
+
+    
+
+        <tr>
+            
                 <td class="name"><code>onerror</code></td>
             
 
@@ -524,7 +645,7 @@ directories containing the files.</td>
 
         
 <div class="param-desc">
-    The cache prepared for the given paths.
+    An array of the authors to each file.
 </div>
 
 
@@ -535,7 +656,7 @@ directories containing the files.</td>
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;Map.&lt;string, string>></span>
+<span class="param-type">Promise.&lt;Array.&lt;Array.&lt;string>>></span>
 
 
     </dd>
@@ -550,7 +671,7 @@ directories containing the files.</td>
 
     
 
-    <h4 class="name" id="getAuthors"><span class="type-signature">(async) </span>getAuthors<span class="signature">(configs)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;string>>}</span></h4>
+    <h4 class="name" id="newCache"><span class="type-signature"></span>newCache<span class="signature">()</span><span class="type-signature"> &rarr; {Map.&lt;string, string>}</span></h4>
 
     
 
@@ -562,7 +683,7 @@ directories containing the files.</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line81">line 81</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line185">line 185</a>
     </li></ul></dd>
     
 
@@ -602,7 +723,7 @@ directories containing the files.</td>
 
 
 <div class="description usertext">
-    Get the authors of a file in a GitHub repository.
+    Get an empty cache
 </div>
 
 
@@ -613,357 +734,6 @@ directories containing the files.</td>
 
 
 
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>configs</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>repo</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">The GitHub repository, in the "owner/name" format.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>filePath</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                </td>
-            
-
-            <td class="description last">The path to the file which you want to know its authors.
-It's a normal file path (either absolute or relative to pwd), NOT relative to the repository.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>token</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-|
-
-<span class="param-type">null</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>process.env.GITHUB_TOKEN</code>
-                
-                </td>
-            
-
-            <td class="description last">A GitHub Personal Access Token,
-or null if you don't want to use tokens.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>cache</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Map.&lt;string, string></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>new Map()</code>
-                
-                </td>
-            
-
-            <td class="description last">The cache. The emails of the authors of
-${filePath} will be added in the cache.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>follow</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>true</code>
-                
-                </td>
-            
-
-            <td class="description last">Whether to use the "--follow" option of "git log" or
-not. i.e. Continue listing the history of a file beyond renames.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>onerror</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#OnErrorCallback">OnErrorCallback</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>console.error(...)</code>
-                
-                </td>
-            
-
-            <td class="description last">The callback function when error happens.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>git</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-                <td class="default">
-                
-                    <code>'git'</code>
-                
-                </td>
-            
-
-            <td class="description last">The command (path to the binary file) for Git.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
 
 
 
@@ -984,7 +754,7 @@ not. i.e. Continue listing the history of a file beyond renames.</td>
 
         
 <div class="param-desc">
-    The authors of the file.
+    An empty cache
 </div>
 
 
@@ -995,7 +765,7 @@ not. i.e. Continue listing the history of a file beyond renames.</td>
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;Array.&lt;string>></span>
+<span class="param-type">Map.&lt;string, string></span>
 
 
     </dd>
@@ -1022,7 +792,7 @@ not. i.e. Continue listing the history of a file beyond renames.</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line32">line 32</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line33">line 33</a>
     </li></ul></dd>
     
 
@@ -1180,7 +950,7 @@ not. i.e. Continue listing the history of a file beyond renames.</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line45">line 45</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line46">line 46</a>
     </li></ul></dd>
     
 
@@ -1345,7 +1115,7 @@ not. i.e. Continue listing the history of a file beyond renames.</td>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line55">line 55</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line140">line 140</a>
     </li></ul></dd>
     
 
@@ -1556,7 +1326,7 @@ not. i.e. Continue listing the history of a file beyond renames.</td>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sat Feb 13 2021 22:53:19 GMT+0800 (中国标准时间) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sun Feb 14 2021 05:13:35 GMT+0800 (中国标准时间) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
