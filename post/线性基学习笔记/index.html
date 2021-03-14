@@ -37,7 +37,7 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<link href="/sass/main.min.3a394cace48c46ca9a5dc61fc056a34550323a9ae01cab94db3dd0af0f48c56e.css" rel="stylesheet">
+<link href="/sass/main.min.e01fc0cf3e685b31ccde9ebdb15a9b3c65cb223b475f5377e1bbf0db1aad80b0.css" rel="stylesheet">
 
 
 
@@ -104,12 +104,21 @@
         <li class="mobile-menu-item">搜索</li>
       </a>
   </ul>
+
+  
+
+
 </nav>
+
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
   <a href="/" class="logo">ouuan的博客</a>
 </div>
+
+
+
+
 
 <nav class="site-navbar">
   <ul id="menu" class="menu">
@@ -132,6 +141,7 @@
       </li>
   </ul>
 </nav>
+
     </header>
 
     <main id="main" class="main">
@@ -413,12 +423,19 @@ int main()
         。
       </p>
     </div>
-    <script src="https://utteranc.es/client.js"
-            repo="ouuan/blog-comments"
-            issue-term="title"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
+    <script>
+      let theme = "github-light";
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        theme = "github-dark";
+      }
+      const utterances = document.createElement('script');
+      utterances.setAttribute("src", "https://utteranc.es/client.js");
+      utterances.setAttribute("repo", "ouuan/blog-comments");
+      utterances.setAttribute("issue-term", "title");
+      utterances.setAttribute("theme", theme);
+      utterances.setAttribute("crossorigin", "anonymous");
+      utterances.setAttribute("async", true);
+      document.getElementsByClassName("comments")[0].appendChild(utterances);
     </script>
     <noscript>请启用 JavaScript 来查看评论。</a></noscript>
   </div>
