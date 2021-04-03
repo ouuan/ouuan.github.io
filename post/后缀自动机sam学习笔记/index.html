@@ -216,6 +216,11 @@
 </nav>
   </div>
 </div>
+  <div class="post-outdated">
+    <div class="hint">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2020-02-10T16:02:40" title="February 10, 2020">February 10, 2020</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
     <div class="post-content">
       <p>后缀自动机是一种处理字符串问题的有力工具（废话），它的码量不比后缀数组大（实际代码难度不比后缀数组小，但也不难），处理问题时的思维难度往往比后缀数组小，复杂度更优秀。若字符集大小为 $|\Sigma|$，则：构建时间复杂度 $O(n|\Sigma|)$，转移时间复杂度 $O(1)$，空间复杂度 $O(n|\Sigma|)$ 或 构建时间复杂度 $O(n\log|\Sigma|)$，转移时间复杂度 $O(\log|\Sigma|)$，空间复杂度 $O(n)$。</p>
 <h1 id="确定有限状态自动机dfa">确定有限状态自动机（DFA）</h1>
@@ -566,6 +571,13 @@ void insert(int x)
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "en".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
 
 
 

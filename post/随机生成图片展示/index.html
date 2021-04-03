@@ -158,6 +158,11 @@
 
     
 
+  <div class="post-outdated">
+    <div class="hint">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2020-02-12T21:27:04" title="February 12, 2020">February 12, 2020</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
     <div class="post-content">
       <p><img src="/post_img/%E9%9A%8F%E6%9C%BA%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%E5%B1%95%E7%A4%BA/width=512&amp;height=512&amp;blocksize=75&amp;qwq=2&amp;minred=100&amp;maxred=255&amp;mingreen=100&amp;maxgreen=255&amp;minblue=200&amp;maxblue=255&amp;minalpha=0&amp;maxalpha=255.png" alt="width=512&height=512&blocksize=75&qwq=2&minred=100&maxred=255&mingreen=100&maxgreen=255&minblue=200&maxblue=255&minalpha=0&maxalpha=255"></p>
 <p><a href="/randpic/generator/">传送门</a></p>
@@ -314,6 +319,13 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "en".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
 
 
 
