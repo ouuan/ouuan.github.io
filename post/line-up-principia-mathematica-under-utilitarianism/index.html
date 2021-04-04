@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>筷子 - ouuan的博客</title>
+  <title>功利主义下排队问题的数学原理 - ouuan的博客</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="ouuan" /><meta name="description" content="筷子，每二十余双由橡皮筋绑成一捆，放在“深不见底”——如果不踮起脚看的话——的箱子里，摆在食堂的窗口边；手上端着饭的学生们，排成一条长队向放着筷子的箱子走去，然后把手伸进箱内，再从一捆筷子中抽出两根。
+<meta name="author" content="ouuan" /><meta name="description" content="本文以功利主义为指导思想，通过适当的数学建模，对一些排队过程中经常遇到的问题进行了探讨。
 " /><meta name="keywords" content="ouuan, blog, OI" />
 
 
@@ -27,7 +27,7 @@
 <meta name="generator" content="Hugo 0.80.0 with theme even" />
 
 
-<link rel="canonical" href="https://ouuan.github.io/post/chopsticks/" />
+<link rel="canonical" href="https://ouuan.github.io/post/line-up-principia-mathematica-under-utilitarianism/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,24 +40,24 @@
 
 
 
-<meta property="og:title" content="筷子" />
-<meta property="og:description" content="筷子，每二十余双由橡皮筋绑成一捆，放在“深不见底”——如果不踮起脚看的话——的箱子里，摆在食堂的窗口边；手上端着饭的学生们，排成一条长队向放着筷子的箱子走去，然后把手伸进箱内，再从一捆筷子中抽出两根。" />
+<meta property="og:title" content="功利主义下排队问题的数学原理" />
+<meta property="og:description" content="本文以功利主义为指导思想，通过适当的数学建模，对一些排队过程中经常遇到的问题进行了探讨。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ouuan.github.io/post/chopsticks/" />
-<meta property="article:published_time" content="2021-01-23T12:42:12+08:00" />
-<meta property="article:modified_time" content="2021-01-23T13:26:27+08:00" />
-<meta itemprop="name" content="筷子">
-<meta itemprop="description" content="筷子，每二十余双由橡皮筋绑成一捆，放在“深不见底”——如果不踮起脚看的话——的箱子里，摆在食堂的窗口边；手上端着饭的学生们，排成一条长队向放着筷子的箱子走去，然后把手伸进箱内，再从一捆筷子中抽出两根。">
-<meta itemprop="datePublished" content="2021-01-23T12:42:12+08:00" />
-<meta itemprop="dateModified" content="2021-01-23T13:26:27+08:00" />
-<meta itemprop="wordCount" content="540">
+<meta property="og:url" content="https://ouuan.github.io/post/line-up-principia-mathematica-under-utilitarianism/" />
+<meta property="article:published_time" content="2021-04-04T00:44:54+08:00" />
+<meta property="article:modified_time" content="2021-04-04T18:23:40+08:00" />
+<meta itemprop="name" content="功利主义下排队问题的数学原理">
+<meta itemprop="description" content="本文以功利主义为指导思想，通过适当的数学建模，对一些排队过程中经常遇到的问题进行了探讨。">
+<meta itemprop="datePublished" content="2021-04-04T00:44:54+08:00" />
+<meta itemprop="dateModified" content="2021-04-04T18:23:40+08:00" />
+<meta itemprop="wordCount" content="1509">
 
 
 
 <meta itemprop="keywords" content="食堂," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="筷子"/>
-<meta name="twitter:description" content="筷子，每二十余双由橡皮筋绑成一捆，放在“深不见底”——如果不踮起脚看的话——的箱子里，摆在食堂的窗口边；手上端着饭的学生们，排成一条长队向放着筷子的箱子走去，然后把手伸进箱内，再从一捆筷子中抽出两根。"/>
+<meta name="twitter:title" content="功利主义下排队问题的数学原理"/>
+<meta name="twitter:description" content="本文以功利主义为指导思想，通过适当的数学建模，对一些排队过程中经常遇到的问题进行了探讨。"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -146,10 +146,10 @@
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">筷子</h1>
+      <h1 class="post-title">功利主义下排队问题的数学原理</h1>
 
       <div class="post-meta">
-        <span class="post-time" title="2021-01-23 12:42:12 &#43;0800 &#43;0800"> 2021-01-23 </span>
+        <span class="post-time" title="2021-04-04 00:44:54 &#43;0800 &#43;0800"> 2021-04-04 </span>
         <div class="post-category">
             <a href="/categories/%E9%9A%8F%E7%AC%94/"> 随笔 </a>
             </div>
@@ -158,18 +158,69 @@
     </header>
 
     
-
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#排队问题">排队问题</a></li>
+        <li><a href="#总等待时间的一些计算方式">总等待时间的一些计算方式</a>
+          <ul>
+            <li><a href="#整体角度">整体角度</a></li>
+            <li><a href="#个体进入队伍产生的影响">个体进入队伍产生的影响</a></li>
+          </ul>
+        </li>
+        <li><a href="#几例实际生活中的排队问题">几例实际生活中的排队问题</a>
+          <ul>
+            <li><a href="#先进先出">先进先出</a></li>
+            <li><a href="#离队首还远的话允许他人横穿">离队首还远的话，允许他人横穿</a></li>
+            <li><a href="#千钧一发之际--队伍是空的而你身后有人">千钧一发之际 —— 队伍是空的，而你身后有人</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
     <div class="post-content">
-      <p>筷子，每二十余双由橡皮筋绑成一捆，放在“深不见底”——如果不踮起脚看的话——的箱子里，摆在食堂的窗口边；手上端着饭的学生们，排成一条长队向放着筷子的箱子走去，然后把手伸进箱内，再从一捆筷子中抽出两根。</p>
-<p>“拿筷子的速度有些慢”——应该有很多人发现了这一点。他们看起来在等待的过程中都或多或少地有一些焦躁，而且，“帮我拿一双”这样的话语也不鲜见。</p>
-<p>“我们能够更快地拿到筷子”——不知道有多少人会认同这一点。毕竟，总不能插队，这样的话，轮到你时抽出一双筷子，就是最优方案，任何多余的动作都只是浪费时间。或者，用博弈论的话说，这达成了一个纳什均衡。或许人们都是这么想的，所以筷子从来都是这样拿的，今天也是一样——</p>
-<p>真的从来都是如此吗？也不尽然：</p>
+      <p>本文以功利主义为指导思想，通过适当的数学建模，对一些排队过程中经常遇到的问题进行了探讨。</p>
+<h2 id="排队问题">排队问题</h2>
+<p>顾名思义，排队问题就是研究排队的过程。对于一些大家在生活中就能遇到，解释起来比较麻烦、反而难以理解的概念，就不在这里加以定义，以免引起读者不适。</p>
+<p><strong>等待时间</strong>：每个人自进入队伍到退出队伍的这段时间（的长度）。</p>
+<p><strong>等待代价</strong>：等待时间越久，等待代价越高；等待时间越久，单位时间所需代价就越高。换言之，代价是关于时间的单调递增的凹函数。并且，我们假定它“凹”的程度不大，所以等待时间可以作为等待代价的近似。</p>
+<p><strong>排队段</strong>：一段极长的时间，在这段时间中队伍一直非空。换言之，就是从第一个人开始排队（ta 前面没有人）直到最后一个人排完队（ta 后面没有人）的这段时间。</p>
+<p><strong>操作用时</strong>：一个人在退出队伍后进行某些操作（例如，从饭盒中拿出一碗饭）所用的时间，这个操作导致了后面一个人需要等待这个刚出队的人操作完成才能出队。为了简化问题，我们一般认为每个人的操作用时是相同的。</p>
+<p>在下面的问题中，你的目标是最小化排队过程中所有人的等待代价之和。</p>
+<h2 id="总等待时间的一些计算方式">总等待时间的一些计算方式</h2>
+<h3 id="整体角度">整体角度</h3>
+<p>不难看出，总等待时间是队伍中人数关于时间的积分。</p>
+<h3 id="个体进入队伍产生的影响">个体进入队伍产生的影响</h3>
+<p>当一个人进入队伍时，队伍总等待时间的增量是其自己的等待时间加上同一排队段中在其之后出队的人数与其操作用时的乘积。换言之，你拿一碗饭的用时使排在你后面的每个人都等了这么久。</p>
+<h2 id="几例实际生活中的排队问题">几例实际生活中的排队问题</h2>
+<h3 id="先进先出">先进先出</h3>
+<p>先来后到，天经地义，有道理可言吗？其实，由于代价是凹函数，先进先出是最优的选择，证明如下：</p>
+<p>你现在在队伍的最后，我们考虑你与你前面一个人互换出队顺序是否更优。</p>
+<p>记在你入队之前你前面的人已经等待了 $a$ 秒，在你入队时你们两个前面所有人出队并完成操作还需 $b$ 秒，每人操作需要 $c$ 秒，代价函数为 $f(x)$。</p>
+<p>不换的话，代价为：$f(a + b) + f(b + c)$</p>
+<p>换的话，代价为：$f(a + b + c) + f(b)$</p>
+<p>$\because f(x)$ 是单调递增的凹函数</p>
+<p>$\therefore f(a + b + c) - f(a + b) &gt; f(b + c) - f(b)$</p>
+<p>$\therefore$ 不换更优</p>
+<p>若不是先进先出，可以等价为如上所述的若干次相邻两人交换，由于每次交换都更劣，总体也更劣。</p>
+<h3 id="离队首还远的话允许他人横穿">离队首还远的话，允许他人横穿</h3>
+<p>其实这并不是一个严格的“排队”问题，因为这里引入了新情景 —— 有非排队者要横穿队伍。我不是在说出于道德你应该“舍己为人” —— 我是在说，如果你离队首还远，允许他人横穿，有百利而无一害。因为，还没排到你，你往前走并不会减少你的等待时间，却会增加要借过的那个人的等待时间。</p>
+<p>但是，如果你已经接近队首了，让他人横穿可能增大你的操作用时，而这样做的代价是恐怖的：你后面的所有人都要承担这一代价！因此，若马上就要排到你了，还是尽量不要让其它事情耽搁，而应尽力减少你的操作用时。</p>
+<h3 id="千钧一发之际--队伍是空的而你身后有人">千钧一发之际 —— 队伍是空的，而你身后有人</h3>
+<p>我们来想象一下：队伍是空的，你身后有一大波人 —— 你成功地成为了这一餐第一个拿到饭的人！此时，你有两个选择：</p>
 <ol>
-<li>并不是每天的筷子都放在同一个地方。一周中有那么几天拿筷子比较慢，大家也都习惯了；</li>
-<li>有那么一天，有这样一个人，他走到箱子前时，一把抓起了三四捆筷子，将它们甩在台上，然后解开了束缚着它们的橡皮筋。</li>
+<li>正常速度走，你手还没碰到饭，后面一个人已经排在你身后了；</li>
+<li>快步向前，当你成功拿到饭后，队伍空出来了 0.01 秒，你身后的人成了一个新的排队段里第一个拿到饭的人。</li>
 </ol>
-<p>今天，那个人也在队伍中随人群一起向筷子走去。有了上次的经验，他想再干一次。可是，这已经不需要了——就在他的正前方五米处，有人干了同样的事。</p>
-<p>“希望是本无所谓有，无所谓无的”，但在那一瞬间，希望填满了他的胸膛——这一抓，一甩，远比食堂墙壁上的那些标语更加鼓舞人心。</p>
+<p>在第二个选择中，你仅仅只是早了不到 5 秒拿到饭，但世界却发生了天翻地覆的变化 —— 一整个排队段的所有人都不需要等待你的操作用时！</p>
+<p>让这一念之差所造成的后果显得更加糟糕的，或许是这样一个事实：这不仅是一个突变点，还是一个极劣点。因为，只要在同一个排队段内，来的越晚，你的操作用时所影响到的人就越少，所以如果你是一个冗长的排队段的队首，就意味着你选择了最糟糕的一个位置，而更好的选择应该是在教室里写几分钟作业再来（当然，前提是你有高效利用碎片化时间的能力），最佳的选择则是在不影响他人的情况下第一个拿到饭，即上面所说的第一种选择。</p>
     </div>
 
     <div class="post-copyright">
@@ -180,9 +231,9 @@
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        <span title="2021-01-23 13:26:27 &#43;0800 &#43;0800">2021-01-23</span>
-        <a href="https://github.com/ouuan/hugo-blog/commit/887bfc06d4fa3fd3f937a78886ffe9d1bd6cc832" title="feat: add chopsticks" target="_blank">(887bfc0)</a>
-        ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/chopsticks.md" target="_blank">更新历史</a>
+        <span title="2021-04-04 18:23:40 &#43;0800 &#43;0800">2021-04-04</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/b84936df42424ecc3b46a88db17fd5dba01191ed" title="feat: add line-up-principia-mathematica-under-utilitarianism" target="_blank">(b84936d)</a>
+        ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/line-up-principia-mathematica-under-utilitarianism.md" target="_blank">更新历史</a>
     </span>
   </p>
   
@@ -207,13 +258,9 @@
           <a href="/tags/%E9%A3%9F%E5%A0%82/">食堂</a>
           </div>
       <nav class="post-nav">
-        <a class="prev" href="/post/line-up-principia-mathematica-under-utilitarianism/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">功利主义下排队问题的数学原理</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/conditional-probability-in-heredity-calculation/">
-            <span class="next-text nav-default">遗传病概率计算中的条件概率问题</span>
+        
+        <a class="next" href="/post/chopsticks/">
+            <span class="next-text nav-default">筷子</span>
             <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
@@ -231,9 +278,9 @@
       <img src="/img/spinner.svg">
       <p class="post-content">
         评论正在加载中...如果评论较长时间无法加载，你可以
-        <a href='https://github.com/ouuan/blog-comments/issues?q=is%3Aissue+is%3Aopen+"%e7%ad%b7%e5%ad%90 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2"' target="_blank">搜索对应的 issue</a>
+        <a href='https://github.com/ouuan/blog-comments/issues?q=is%3Aissue+is%3Aopen+"%e5%8a%9f%e5%88%a9%e4%b8%bb%e4%b9%89%e4%b8%8b%e6%8e%92%e9%98%9f%e9%97%ae%e9%a2%98%e7%9a%84%e6%95%b0%e5%ad%a6%e5%8e%9f%e7%90%86 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2"' target="_blank">搜索对应的 issue</a>
         或者
-        <a href="https://github.com/ouuan/blog-comments/issues/new?title=%e7%ad%b7%e5%ad%90 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2" target="_blank">新建一个 issue</a>
+        <a href="https://github.com/ouuan/blog-comments/issues/new?title=%e5%8a%9f%e5%88%a9%e4%b8%bb%e4%b9%89%e4%b8%8b%e6%8e%92%e9%98%9f%e9%97%ae%e9%a2%98%e7%9a%84%e6%95%b0%e5%ad%a6%e5%8e%9f%e7%90%86 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2" target="_blank">新建一个 issue</a>
         。
       </p>
     </div>
