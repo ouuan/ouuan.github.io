@@ -145,9 +145,8 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           
-<script src="https://cdn.bootcss.com/fuse.js/3.4.5/fuse.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/mark.js/8.11.1/mark.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6/dist/fuse.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mark.js@8/dist/mark.min.js"></script>
 <script id="search-result-template" type="text/x-js-template">
   <div id="summary-${key}">
     <article class="post">
@@ -172,15 +171,18 @@
   </div>
 </script>
 <script src="https://ouuan.github.io/js/search.js"></script>
-<div>
-  <input id="search-content" onchange   = "executeSearch();"
-                             onkeypress = "executeSearch();"
-                             onpaste    = "executeSearch();"
-                             oninput    = "executeSearch();"/>
-  <i class="iconfont icon-search" onclick="executeSearch();"></i>
+<div class="content-wrapper">
+  <div id="content" class="content">
+    <section id="search-input">
+      <input id="search-content" type="search" oninput="executeSearch()"/>
+      <i class="iconfont icon-search" onclick="executeSearch()"></i>
+    </section>
+    <br/>
+    <section id="search-results">
+      <p>请在上方输入关键词进行搜索</p>
+    </section>
+  </div>
 </div>
-<br/>
-<div id="search-results">请在上方输入关键词进行搜索</div>
 
 
         </div>
