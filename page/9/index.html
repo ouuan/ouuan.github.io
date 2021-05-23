@@ -141,9 +141,51 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/bzoj4003-jloi2015-%E5%9F%8E%E6%B1%A0%E6%94%BB%E5%8D%A0%E5%B7%A6%E5%81%8F%E6%A0%91/">BZOJ4003 [JLOI2015]城池攻占（左偏树）</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/2019yali%E7%9C%81%E9%80%89%E9%9B%86%E8%AE%AD%E5%9E%AB%E5%BA%95%E8%AE%B0/">2019YALI省选集训垫底记</a></h1>
     <div class="post-meta">
-      <span class="post-time" title="2019-03-12 16:14:15 &#43;0800 &#43;0800"> 2019-03-12 </span>
+      <span class="post-time" title="2019-03-17 19:36:39 &#43;0800 &#43;0800"> 2019-03-17 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%B8%B8%E8%AE%B0/"> 游记 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>时隔半年又来到了YALI。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/2019yali%E7%9C%81%E9%80%89%E9%9B%86%E8%AE%AD%E5%9E%AB%E5%BA%95%E8%AE%B0/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/%E5%8D%81%E4%BA%8C%E7%9C%81%E8%81%94%E8%80%832019-%E6%B8%B8%E8%AE%B0-%E9%A2%98%E8%A7%A3/">十二省联考2019 游记 &amp; 题解</a></h1>
+    <div class="post-meta">
+      <span class="post-time" title="2019-04-08 15:39:51 &#43;0800 &#43;0800"> 2019-04-08 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%B8%B8%E8%AE%B0/"> 游记 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>口中喊着「僕勝つから。ぜったい、勝て来るから。」的你，真的付出了桐山般的努力吗？</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/%E5%8D%81%E4%BA%8C%E7%9C%81%E8%81%94%E8%80%832019-%E6%B8%B8%E8%AE%B0-%E9%A2%98%E8%A7%A3/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/noi2010-%E8%88%AA%E7%A9%BA%E7%AE%A1%E5%88%B6%E5%BB%BA%E5%8F%8D%E5%9B%BE%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">[NOI2010]航空管制（建反图，拓扑排序，优先队列）</a></h1>
+    <div class="post-meta">
+      <span class="post-time" title="2019-04-19 13:00:29 &#43;0800 &#43;0800"> 2019-04-19 </span>
       <div class="post-category">
           <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
           </div>
@@ -152,23 +194,24 @@
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="题目链接">题目链接</h1>
-<p><a href="https://www.luogu.org/problemnew/show/P3261" target="_blank">洛谷</a></p>
-<p><a href="https://darkbzoj.tk/problem/4003" target="_blank">darkbzoj</a></p>
-<h1 id="题意简述">题意简述</h1>
-<p>给你一棵树，每个节点有 $h$ 值，一个勇士来到一个节点时如果他的战斗力大于等于 $h$ 就能占领城池并前往这个节点的父亲（除非已经到了根节点），否则阵亡；攻占一个节点后，勇士的战斗力会加/减/乘一个正整数（根据节点而定）；每个勇士有初始战斗力和想占领的第一个节点。问，每个节点各有多少个勇士阵亡，每个勇士各占领了几个节点。</p>
+      <h2 id="题目链接">题目链接</h2>
+<p><a href="https://www.luogu.org/problemnew/show/P1954" target="_blank">洛谷</a></p>
+<h2 id="题意简述">题意简述</h2>
+<p>给你一个 DAG，每个点有个值 $k_i$。</p>
+<p>第一问：求一个拓扑排序，使每个点出现的位置不超过 $k_i$。</p>
+<p>第二问：在满足第一问的拓扑排序中，求每个点分别的最早出现位置。</p>
     </div>
     <div class="read-more">
-      <a href="/post/bzoj4003-jloi2015-%E5%9F%8E%E6%B1%A0%E6%94%BB%E5%8D%A0%E5%B7%A6%E5%81%8F%E6%A0%91/" class="read-more-link">阅读更多</a>
+      <a href="/post/noi2010-%E8%88%AA%E7%A9%BA%E7%AE%A1%E5%88%B6%E5%BB%BA%E5%8F%8D%E5%9B%BE%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cf235c-cyclical-questsam/">CF235C Cyclical Quest（SAM）</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/bzoj2434-noi2011-%E9%98%BF%E7%8B%B8%E7%9A%84%E6%89%93%E5%AD%97%E6%9C%BAac%E8%87%AA%E5%8A%A8%E6%9C%BA%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/">BZOJ2434 [NOI2011]阿狸的打字机（AC自动机，树状数组）</a></h1>
     <div class="post-meta">
-      <span class="post-time" title="2019-02-27 13:23:19 &#43;0800 &#43;0800"> 2019-02-27 </span>
+      <span class="post-time" title="2019-04-29 21:36:58 &#43;0800 &#43;0800"> 2019-04-29 </span>
       <div class="post-category">
           <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
           </div>
@@ -177,46 +220,30 @@
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="题目链接">题目链接</h1>
-<p><a href="https://www.luogu.org/problemnew/show/CF235C" target="_blank">洛谷</a></p>
-<p><a href="https://codeforces.com/problemset/problem/235/C" target="_blank">CF problemset</a></p>
-<p><a href="https://codeforces.com/contest/235/problem/C" target="_blank">CF contest</a></p>
-<h1 id="题意简述">题意简述</h1>
-<p>给你一个字符串 $s$ 和 $n$ 个字符串 $x_{1..n}$，对每个 $x_i$，求有多少个 $s$ 的子串可以由 $x_i$ 旋转得到。</p>
-<p>旋转一个字符串就是把它的一个前缀移到后面，如 <code>abcd</code> 可以旋转得到的字符串有 <code>abcd</code>，<code>bcda</code>，<code>cdab</code>，<code>dabc</code>。</p>
+      <h2 id="题目链接">题目链接</h2>
+<p><a href="https://www.luogu.org/problemnew/show/P2414" target="_blank">洛谷</a></p>
+<p><a href="https://darkbzoj.tk/problem/2434" target="_blank">darkbzoj</a></p>
+<h2 id="题意简述">题意简述</h2>
+<p>初始一个空串，三种操作：</p>
+<ol>
+<li>添加一个字符。</li>
+<li>删除一个字符。</li>
+<li>打印当前字符串、</li>
+</ol>
+<p>多组询问，每次问第 $x$ 个打印的字符串在第 $y$ 个打印的字符串中出现了几次。</p>
+<p>操作数和询问数都不超过 $10^5$。</p>
     </div>
     <div class="read-more">
-      <a href="/post/cf235c-cyclical-questsam/" class="read-more-link">阅读更多</a>
+      <a href="/post/bzoj2434-noi2011-%E9%98%BF%E7%8B%B8%E7%9A%84%E6%89%93%E5%AD%97%E6%9C%BAac%E8%87%AA%E5%8A%A8%E6%9C%BA%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BAsam%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">后缀自动机（SAM）学习笔记</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/cf494b-obsessive-string-kmp-%E8%AE%A1%E6%95%B0dp/">CF494B Obsessive String (KMP,计数dp)</a></h1>
     <div class="post-meta">
-      <span class="post-time" title="2019-02-22 12:31:37 &#43;0800 &#43;0800"> 2019-02-22 </span>
-      <div class="post-category">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/"> 知识点 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>后缀自动机是一种处理字符串问题的有力工具（废话），它的码量不比后缀数组大（实际代码难度不比后缀数组小，但也不难），处理问题时的思维难度往往比后缀数组小，复杂度更优秀。若字符集大小为 $|\Sigma|$，则：构建时间复杂度 $O(n|\Sigma|)$，转移时间复杂度 $O(1)$，空间复杂度 $O(n|\Sigma|)$ 或 构建时间复杂度 $O(n\log|\Sigma|)$，转移时间复杂度 $O(\log|\Sigma|)$，空间复杂度 $O(n)$。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BAsam%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/p3804-%E6%A8%A1%E6%9D%BF%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/">P3804 【模板】后缀自动机（SAM/后缀数组）</a></h1>
-    <div class="post-meta">
-      <span class="post-time" title="2019-02-21 15:47:52 &#43;0800 &#43;0800"> 2019-02-21 </span>
+      <span class="post-time" title="2019-05-05 13:16:44 &#43;0800 &#43;0800"> 2019-05-05 </span>
       <div class="post-category">
           <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
           </div>
@@ -225,22 +252,25 @@
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="题目链接">题目链接</h1>
-<p><a href="https://www.luogu.org/problemnew/show/P3804" target="_blank">洛谷</a></p>
-<h1 id="题意简述">题意简述</h1>
-<p>求 <strong>出现次数不为 $1$ 的子串的 出现次数 $\times$ 长度</strong> 的最大值。</p>
+      <h2 id="题目链接">题目链接</h2>
+<p><a href="https://www.luogu.org/problemnew/show/CF494B" target="_blank">洛谷</a></p>
+<p><a href="https://codeforces.com/contest/494/problem/B" target="_blank">CF contest</a></p>
+<p><a href="http://codeforces.com/problemset/problem/494/B" target="_blank">CF problemset</a></p>
+<h2 id="题意简述">题意简述</h2>
+<p>给你两个字符串 $S$ 和 $T$，你需要在 $S$ 中取若干个（至少一个）不相交的子串，使得每个子串都包含 $T$，求方案数模 $10^9+7$。</p>
+<p>字符串长度小于等于 $10^5$。</p>
     </div>
     <div class="read-more">
-      <a href="/post/p3804-%E6%A8%A1%E6%9D%BF%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/" class="read-more-link">阅读更多</a>
+      <a href="/post/cf494b-obsessive-string-kmp-%E8%AE%A1%E6%95%B0dp/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/bzoj4516-sdoi2016-%E7%94%9F%E6%88%90%E9%AD%94%E5%92%92sam/">BZOJ4516 [SDOI2016]生成魔咒（SAM）</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/cf432d-prefixes-and-suffixeskmp/">CF432D Prefixes and Suffixes（KMP）</a></h1>
     <div class="post-meta">
-      <span class="post-time" title="2019-02-21 14:10:35 &#43;0800 &#43;0800"> 2019-02-21 </span>
+      <span class="post-time" title="2019-05-10 21:56:54 &#43;0800 &#43;0800"> 2019-05-10 </span>
       <div class="post-category">
           <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
           </div>
@@ -249,45 +279,24 @@
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="题目链接">题目链接</h1>
-<p><a href="https://www.luogu.org/problemnew/show/P4070" target="_blank">洛谷</a></p>
-<p><a href="https://darkbzoj.tk/problem/4516" target="_blank">dark bzoj</a></p>
-<h1 id="题意简述">题意简述</h1>
-<p>给你一个字符串（字符集大小 $10^9$，长度 $10^5$），求每个前缀的本质不同子串数。</p>
+      <h2 id="题目链接">题目链接</h2>
+<p><a href="https://www.luogu.org/problemnew/show/CF432D" target="_blank">洛谷</a></p>
+<p><a href="https://codeforces.com/contest/432/problem/D" target="_blank">CF</a></p>
+<h2 id="题意简述">题意简述</h2>
+<p>给你一个字符串，分别求出每个长度的既是其前缀又是其后缀的串出现的次数。</p>
+<p>字符串长度小于等于 $10^5$。</p>
     </div>
     <div class="read-more">
-      <a href="/post/bzoj4516-sdoi2016-%E7%94%9F%E6%88%90%E9%AD%94%E5%92%92sam/" class="read-more-link">阅读更多</a>
+      <a href="/post/cf432d-prefixes-and-suffixeskmp/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">后缀数组学习笔记</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/cf17e-palisectionmanacher/">CF17E Palisection（manacher）</a></h1>
     <div class="post-meta">
-      <span class="post-time" title="2019-02-17 13:53:54 &#43;0800 &#43;0800"> 2019-02-17 </span>
-      <div class="post-category">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/"> 知识点 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>后缀数组是一种处理字符串问题的有力工具（废话），本文的主要特点是一步步地由最朴素的后缀数组构建方法逐步优化，而非直接给出最终优化后的代码。</p>
-<p>希望这篇文章能让更多的人看懂后缀数组的代码，学会后缀数组。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/bzoj4566-haoi2016-%E6%89%BE%E7%9B%B8%E5%90%8C%E5%AD%97%E7%AC%A6%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/">BZOJ4566 [HAOI2016]找相同字符（后缀数组）</a></h1>
-    <div class="post-meta">
-      <span class="post-time" title="2019-02-14 11:22:18 &#43;0800 &#43;0800"> 2019-02-14 </span>
+      <span class="post-time" title="2019-05-10 22:06:18 &#43;0800 &#43;0800"> 2019-05-10 </span>
       <div class="post-category">
           <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
           </div>
@@ -296,23 +305,67 @@
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="题目链接">题目链接</h1>
-<p><a href="https://www.luogu.org/problemnew/show/P3181" target="_blank">洛谷</a></p>
-<p><a href="https://darkbzoj.tk/problem/4566" target="_blank">dark bzoj</a></p>
-<h1 id="题意简述">题意简述</h1>
-<p>给你两个字符串，从中各取一个子串使这两个子串相同，求方案数。</p>
+      <h2 id="题目链接">题目链接</h2>
+<p><a href="https://www.luogu.org/problemnew/show/CF17E" target="_blank">洛谷</a></p>
+<p><a href="https://codeforces.com/contest/17/problem/E" target="_blank">CF</a></p>
+<h2 id="题意简述">题意简述</h2>
+<p>给你一个字符串，求有多少对相交的回文子串。（包含算作相交，<del>自交不算</del>）</p>
+<p>字符串长度小于等于 $2\times 10^6$。</p>
     </div>
     <div class="read-more">
-      <a href="/post/bzoj4566-haoi2016-%E6%89%BE%E7%9B%B8%E5%90%8C%E5%AD%97%E7%AC%A6%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/" class="read-more-link">阅读更多</a>
+      <a href="/post/cf17e-palisectionmanacher/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/p2852-usaco06dec-milk-patterns%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/">P2852 [USACO06DEC]Milk Patterns（后缀数组）</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/300iq%E5%A5%94%E5%8C%97%E5%9D%A1/">300iq奔北坡</a></h1>
     <div class="post-meta">
-      <span class="post-time" title="2019-02-14 11:21:26 &#43;0800 &#43;0800"> 2019-02-14 </span>
+      <span class="post-time" title="2019-05-12 21:45:13 &#43;0800 &#43;0800"> 2019-05-12 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%B8%B8%E8%AE%B0/"> 游记 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>由于实在想不到这次是什么记了，所以就叫 300iq 奔北坡好了。</p>
+<p>实际上是一篇 CTS &amp; APIO &amp; THUSC 2019 游记。</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/300iq%E5%A5%94%E5%8C%97%E5%9D%A1/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/%E4%BD%BF%E7%94%A8-testlib-h-%E5%86%99-lemon-spj/">使用 testlib.h 写 lemon SPJ</a></h1>
+    <div class="post-meta">
+      <span class="post-time" title="2019-05-22 13:59:32 &#43;0800 &#43;0800"> 2019-05-22 </span>
+      <div class="post-category">
+          <a href="/categories/%E6%8A%80%E6%9C%AF/"> 技术 </a>
+          </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>不用 testlib.h 是不可能写好 checker 的（逃</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/%E4%BD%BF%E7%94%A8-testlib-h-%E5%86%99-lemon-spj/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/bzoj2460-bjwc2011-%E5%85%83%E7%B4%A0%E7%BA%BF%E6%80%A7%E5%9F%BA%E8%B4%AA%E5%BF%83/">BZOJ2460 [BJWC2011]元素（线性基，贪心）</a></h1>
+    <div class="post-meta">
+      <span class="post-time" title="2019-06-14 22:00:27 &#43;0800 &#43;0800"> 2019-06-14 </span>
       <div class="post-category">
           <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
           </div>
@@ -321,62 +374,15 @@
   
   <div class="post-content">
     <div class="post-summary">
-      <h1 id="题目链接">题目链接</h1>
-<p><a href="https://www.luogu.org/problemnew/show/P2852" target="_blank">洛谷</a></p>
-<h1 id="题意简述">题意简述</h1>
-<p>给你一个字符串，求最长的出现了至少 $k$ 次的子串的长度。</p>
+      <h2 id="题目链接">题目链接</h2>
+<p><a href="https://www.luogu.org/problemnew/show/P4570" target="_blank">洛谷</a></p>
+<p><a href="http://darkbzoj.tk/problem/2460" target="_blank">darkbzoj</a></p>
+<h2 id="题意简述">题意简述</h2>
+<p>给你 $n$ 个带权值的数（数和权值是两个东西），求一个权值最大的异或线性无关子集，即取这个子集的任意一个非空子集，异或和都不为零。</p>
+<p>原题 $n\le1000$，实际上可以轻松 $n\le10^5$。数 $10^{18}$，权值 $10^4$。</p>
     </div>
     <div class="read-more">
-      <a href="/post/p2852-usaco06dec-milk-patterns%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/p2870-usaco07dec-best-cow-line-gold%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/">P2870 [USACO07DEC]Best Cow Line, Gold（后缀数组）</a></h1>
-    <div class="post-meta">
-      <span class="post-time" title="2019-02-14 11:20:59 &#43;0800 &#43;0800"> 2019-02-14 </span>
-      <div class="post-category">
-          <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <h1 id="题目链接">题目链接</h1>
-<p><a href="https://www.luogu.org/problemnew/show/P2870" target="_blank">洛谷</a></p>
-<h1 id="题意简述">题意简述</h1>
-<p>给你一个字符串，每次从首或尾取一个字符组成字符串，问所有能够组成的字符串中字典序最小的一个。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/p2870-usaco07dec-best-cow-line-gold%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/bzoj1856-scoi2010-%E7%94%9F%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/">BZOJ1856 [SCOI2010]生成字符串（组合数学）</a></h1>
-    <div class="post-meta">
-      <span class="post-time" title="2019-02-12 14:56:42 &#43;0800 &#43;0800"> 2019-02-12 </span>
-      <div class="post-category">
-          <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
-          </div>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <h1 id="题目链接">题目链接</h1>
-<p><a href="https://www.luogu.org/problemnew/show/P1641" target="_blank">洛谷</a></p>
-<p><a href="https://darkbzoj.tk/problem/1856" target="_blank">darkbzoj</a></p>
-<h1 id="题意简述">题意简述</h1>
-<p>$n$ 个入栈操作，$m$ 个出栈操作，问合法操作序列数。</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/bzoj1856-scoi2010-%E7%94%9F%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" class="read-more-link">阅读更多</a>
+      <a href="/post/bzoj2460-bjwc2011-%E5%85%83%E7%B4%A0%E7%BA%BF%E6%80%A7%E5%9F%BA%E8%B4%AA%E5%BF%83/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
