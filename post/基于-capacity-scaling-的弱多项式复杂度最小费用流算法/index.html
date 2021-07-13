@@ -195,6 +195,11 @@
 </nav>
   </div>
 </div>
+  <div class="post-outdated">
+    <div class="hint">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2020-07-15T18:56:29" title="July 15, 2020">July 15, 2020</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
     <div class="post-content">
       <p>大多数人所使用的费用流算法，即每次求出残量网络中 $s$ 到 $t$ 关于费用的最短路进行增广（将 Dinic 最大流算法中的 BFS 改为 SPFA），是伪多项式复杂度的，最坏情况下复杂度为 $O(nmf)$，其中 $f$ 为最大流。已知有一种在点数为 $n$，边数为 $O(n^2)$，值域为 $O(2^{n/2})$ 时将其用时卡成关于 $n$ 的指数级复杂度的构造方法。</p>
 <p>本文将介绍一种复杂度为进行 $O(m\log U)$ 次（$U$ 表示边的最大容量）无负权边单源最短路（使用 <code>priority_queue</code> 实现 Dijkstra 算法，总复杂度即为 $O(m^2\log U\log m)$）的弱多项式复杂度算法。</p>
