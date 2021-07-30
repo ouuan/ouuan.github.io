@@ -49,13 +49,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ouuan.github.io/post/parallel-binary-search/" />
 <meta property="article:published_time" content="2020-02-14T14:50:32+08:00" />
-<meta property="article:modified_time" content="2020-04-17T22:16:50+08:00" />
+<meta property="article:modified_time" content="2021-07-30T22:34:57+08:00" />
 <meta itemprop="name" content="整体二分学习笔记">
 <meta itemprop="description" content="整体二分是一种离线算法，可以将一个修改同时作用于多个询问，从而减少不必要的开销，将二分答案从单次询问扩展到多次询问。
 在一些题目中，相比与其它解法，整体二分可以避免复杂的数据结构，降低代码难度与空间复杂度。">
 <meta itemprop="datePublished" content="2020-02-14T14:50:32+08:00" />
-<meta itemprop="dateModified" content="2020-04-17T22:16:50+08:00" />
-<meta itemprop="wordCount" content="3512">
+<meta itemprop="dateModified" content="2021-07-30T22:34:57+08:00" />
+<meta itemprop="wordCount" content="3526">
 
 
 
@@ -199,11 +199,6 @@
 </nav>
   </div>
 </div>
-  <div class="post-outdated">
-    <div class="hint">
-      <p>【注意】最后更新于 <span class="timeago" datetime="2020-04-17T22:16:50" title="April 17, 2020">April 17, 2020</span>，文中内容可能已过时，请谨慎使用。</p>
-    </div>
-  </div>
     <div class="post-content">
       <p>整体二分是一种离线算法，可以将一个修改同时作用于多个询问，从而减少不必要的开销，将二分答案从单次询问扩展到多次询问。</p>
 <p>在一些题目中，相比与其它解法，整体二分可以避免复杂的数据结构，降低代码难度与空间复杂度。</p>
@@ -343,7 +338,7 @@ $$</p>
 <p>通过整体二分，我们可以将问题转化成：单点加、区间求和，所有单点加都在区间求和之前，允许离线，要求复杂度与当前操作数相关而非与总操作数 $n$, $m$ 相关。</p>
 <p>一个容易想到的做法是使用树状数组来维护，使用时间戳清空。</p>
 <details class="admonition note"><summary class="admonition-title">怎样使用时间戳清空数组？</summary>
-<p>维护一个时间戳 <code>tim</code> 以及一个数组 <code>vis</code>，清空时 <code>++tim</code>，访问数组的下标 <code>i</code> 前检查 <code>vis[i]</code> 是否等于 <code>tim</code>，若否就将 <code>vis[i]</code> 设为 <code>tim</code> 并清空 <code>vis[i]</code> 。</p>
+<p>维护一个时间戳 <code>tim</code> 以及一个数组 <code>vis</code>，清空时 <code>++tim</code>，访问数组的下标 <code>i</code> 前检查 <code>vis[i]</code> 是否等于 <code>tim</code>，若否就将 <code>vis[i]</code> 设为 <code>tim</code> 并将需清空的数组的下标 <code>i</code> 处设为初始值。</p>
 </details>
 <p>其实，这里还有一个额外的性质：所有修改均在询问前。这样的话，就可以通过计算前缀和来求解。但先计算前缀和再查询复杂度会和 $n$ 相关，先离散化再计算前缀和复杂度会多一个 log。其实还有一种处理方法：如果修改和询问的位置有序，可以在扫一遍的过程中维护前缀和并查询。如果每次都排序的话复杂度会多一个 log，但我们可以只在主函数中进行一遍排序，在整体二分的过程中保持相对顺序不变，这样的话总复杂度就是 $O((n+m)\log n)$（如果值域大可以离散化）。</p>
 <details class="admonition note"><summary class="admonition-title">参考代码</summary>
@@ -636,8 +631,8 @@ int main()
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-        <span title="2020-04-17 22:16:50 &#43;0800 &#43;0800">2020-04-17</span>
-        <a href="https://github.com/ouuan/hugo-blog/commit/1be64efc5cfa1be4188bf60d6b709e4c23456a65" title="feat(parallel binary search): add 「HNOI2016」网络" target="_blank">(1be64ef)</a>
+        <span title="2021-07-30 22:34:57 &#43;0800 &#43;0800">2021-07-30</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/c5b0e3b15b8a9b1475c2207b87973767b87ea1e4" title="fix(parallel-binary-search): fix typo" target="_blank">(c5b0e3b)</a>
         ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/parallel-binary-search.md" target="_blank">更新历史</a>
     </span>
   </p>
