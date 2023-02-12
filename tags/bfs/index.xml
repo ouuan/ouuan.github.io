@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>BFS on ouuan的博客</title><link>https://ouuan.github.io/tags/bfs/</link><description>Recent content in BFS on ouuan的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 16 Sep 2019 08:58:32 +0800</lastBuildDate><atom:link href="https://ouuan.github.io/tags/bfs/index.xml" rel="self" type="application/rss+xml"/><item><title>CF1209F Koala and Notebook（BFS，最短路）</title><link>https://ouuan.github.io/post/cf1209f-koala-and-notebookbfs%E6%9C%80%E7%9F%AD%E8%B7%AF/</link><pubDate>Mon, 16 Sep 2019 08:58:32 +0800</pubDate><guid>https://ouuan.github.io/post/cf1209f-koala-and-notebookbfs%E6%9C%80%E7%9F%AD%E8%B7%AF/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="http://codeforces.com/contest/1209/problem/F">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一张 $n$ 个点 $m$ 条边的无向连通图，一条路径的权值是路径上的边的编号（十进制）顺次连接而成的数字。求 $1$ 到每个点的最短路，&lt;strong>输出&lt;/strong> 对 $10^9+7$ 取模。&lt;/p>
+&lt;p>$2\le n\le10^5$, $n-1\le m\le10^5$。&lt;/p></description></item></channel></rss>

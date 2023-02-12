@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>CF484E Sign on Fence - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="题目链接
+题目描述
+给你一个数列 $a_{1..n}$，进行 $m$ 次询问，每次询问给出一个区间 $[l, r]$ 及参数 $w$，询问 $\max_{i = l}^{r-w&#43;1}\{\min_{j=i}^{i&#43;w-1}\{a_j\}\}$。
+数列长度和询问次数 $10^5$。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/cf484e/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.3004a145db73ba341ebe1a3790ea2c0166b56dc0378485b385563682aa10c6b2.css" rel="stylesheet">
+
+
+
+
+
+<meta property="og:title" content="CF484E Sign on Fence" />
+<meta property="og:description" content="题目链接
+
+  题目描述
+给你一个数列 $a_{1..n}$，进行 $m$ 次询问，每次询问给出一个区间 $[l, r]$ 及参数 $w$，询问 $\max_{i = l}^{r-w&#43;1}\{\min_{j=i}^{i&#43;w-1}\{a_j\}\}$。
+数列长度和询问次数 $10^5$。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/cf484e/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-04-20T23:05:37+08:00" />
+<meta property="article:modified_time" content="2020-04-21T00:01:30+08:00" />
+
+<meta itemprop="name" content="CF484E Sign on Fence">
+<meta itemprop="description" content="题目链接
+
+  题目描述
+给你一个数列 $a_{1..n}$，进行 $m$ 次询问，每次询问给出一个区间 $[l, r]$ 及参数 $w$，询问 $\max_{i = l}^{r-w&#43;1}\{\min_{j=i}^{i&#43;w-1}\{a_j\}\}$。
+数列长度和询问次数 $10^5$。
+"><meta itemprop="datePublished" content="2020-04-20T23:05:37+08:00" />
+<meta itemprop="dateModified" content="2020-04-21T00:01:30+08:00" />
+<meta itemprop="wordCount" content="1923">
+<meta itemprop="keywords" content="线段树,整体二分,主席树,数据结构," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CF484E Sign on Fence"/>
+<meta name="twitter:description" content="题目链接
+
+  题目描述
+给你一个数列 $a_{1..n}$，进行 $m$ 次询问，每次询问给出一个区间 $[l, r]$ 及参数 $w$，询问 $\max_{i = l}^{r-w&#43;1}\{\min_{j=i}^{i&#43;w-1}\{a_j\}\}$。
+数列长度和询问次数 $10^5$。
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/ranking/">
+        <li class="mobile-menu-item">排行</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/ranking/">排行</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">CF484E Sign on Fence</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2020-04-20 23:05:37 &#43;0800 &#43;0800"> 2020-04-20 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#简要做法">简要做法</a>
+          <ul>
+            <li><a href="#onmlog2n-做法">O((n+m)log^2n) 做法</a></li>
+            <li><a href="#onmlognlogm-做法">O((n+m)(logn+logm)) 做法</a></li>
+          </ul>
+        </li>
+        <li><a href="#参考代码">参考代码</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+  <div class="post-outdated">
+    <div class="warn">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2020-04-21T00:01:30" title="April 21, 2020">April 21, 2020</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
+    <div class="post-content">
+      <p><a href="https://codeforces.com/contest/484/problem/E">题目链接</a></p>
+<div class="admonition question">
+  <p class="admonition-title">题目描述</p>
+<p>给你一个数列 $a_{1..n}$，进行 $m$ 次询问，每次询问给出一个区间 $[l, r]$ 及参数 $w$，询问 $\max_{i = l}^{r-w+1}\{\min_{j=i}^{i+w-1}\{a_j\}\}$。</p>
+<p>数列长度和询问次数 $10^5$。</p>
+</div>
+<h2 id="简要做法">简要做法</h2>
+<h3 id="onmlog2n-做法">O((n+m)log^2n) 做法</h3>
+<p>二分答案，记当前二分的值为 $x$，定义 $b_i=\begin{cases}1&amp;a_i\ge x\\-n&amp;a_i&lt;x\end{cases}$，那么答案不小于 $x$ 当且仅当 $b_{l..r}$ 的最大子段和不小于 $w$。</p>
+<p>最大子段和可以用线段树维护，记录每个区间的最大子段和，最大前缀，最大后缀，以及总和即可。</p>
+<p>然后用主席树或 <a href="/post/parallel-binary-search/">整体二分</a> 就能在 $O((n+m)\log^2n)$ 的时间复杂度内解决这道题。</p>
+<p>（其实我自己没写主席树做法，听说别人都写的主席树，口胡了一下，感觉应该和整体二分做法差不多..）</p>
+<h3 id="onmlognlogm-做法">O((n+m)(logn+logm)) 做法</h3>
+<p>首先用单调栈求出每个点作为最小值最远能向左延伸到 $p_i$，向右延伸到 $q_i$。</p>
+<p>那么，我们将每个 $[p_i, q_i]$ 看作一条权值为 $a_i$ 的线段，每次询问就是求与 $[l, r]$ 的交不小于 $w$ 的线段里最大的权值。</p>
+<p>$[p_i, q_i]$ 和 $[l, r]$ 相交有两种情况：</p>
+<ol>
+<li>
+<p>$p_i&lt;l$<br>
+此时若 $[p_i, q_i]$ 和 $[l, r]$ 的交不小于 $w$，则 $[l, l+w-1]$ 必然是一个合法的交。而在这种情况下，$\min_{j=l}^{l+w-1}\{a_j\}$ 必然不小于 $a_i$（因为 $a_i$ 是 $[p_i, q_i]$ 内的最小值，而 $[p_i, q_i]$ 包含 $[l, l+w-1]$），所以只需考虑 $[l, l+w-1]$ 便不劣于这种情况下的任一线段。</p>
+</li>
+<li>
+<p>$p_i\ge l$<br>
+这种情况下，$[p_i, q_i]$ 和 $[l, r]$ 的交不小于 $w$ 等价于 $l\le p_i\le r-w+1$ 且 $q_i-p_i+1\ge w$。只要对线段和询问分别按长度和 $w$ 从大到小排序，双指针枚举就可以满足 $q_i-p_i+1\ge w$，而 $\max_{l\le p_i\le r-w+1}a_i$ 可以用线段树维护（枚举到线段时在 $p_i$ 处对 $a_i$ 取 max，枚举到询问时在 $[l, r-w+1]$ 这个区间上求 max）。</p>
+</li>
+</ol>
+<p>然后把这两种情况的答案取 max，就做完了。</p>
+<h2 id="参考代码">参考代码</h2>
+<p>代码中的线段树用了 <a href="https://github.com/ouuan/CPTH">板子</a>。整体二分这份代码还用了 <a href="https://github.com/ouuan/CF-template">CF 板子</a>。</p>
+<details class="admonition note"><summary class="admonition-title">整体二分 O((n&#43;m)log^2n)</summary>
+<pre><code class="language-cpp">
+																																																	#ifndef OUUAN
+																																																	#pragma GCC optimize(&quot;Ofast,no-stack-protector,unroll-loops,fast-math&quot;)
+																																																	#endif
+																																																	#include&lt;bits/stdc++.h&gt;
+template&lt;typename valueType,typename modType&gt;struct SegmentTreeNode{public:std::size_t id;long long left,right;valueType val;modType mod;};template&lt;typename valueType,typename modType,bool elementModificationOnly=false&gt;class SegmentTree{public:SegmentTree()=default;SegmentTree(const std::vector&lt;valueType&gt;&amp;_initValue,std::function&lt;valueType(const valueType&amp;,const valueType&amp;)&gt;_merge,std::function&lt;void(SegmentTreeNode&lt;valueType,modType&gt;&amp;,const modType&amp;)&gt;_update,long long _startPoint=1,const valueType&amp;_valueZero=valueType(),const modType&amp;_modZero=modType()){init(_initValue,_merge,_update,_startPoint,_valueZero,_modZero);}void init(const std::vector&lt;valueType&gt;&amp;_initValue,std::function&lt;valueType(const valueType&amp;,const valueType&amp;)&gt;_merge,std::function&lt;void(SegmentTreeNode&lt;valueType,modType&gt;&amp;,const modType&amp;)&gt;_update,long long _startPoint=1,const valueType&amp;_valueZero=valueType(),const modType&amp;_modZero=modType()){assert(_startPoint&gt;=LLONG_MIN/2);assert(_startPoint&lt;=LLONG_MAX/2-(long long)_initValue.size());leftRange=_startPoint;rightRange=_startPoint+_initValue.size();m_init(_initValue,_merge,_update,_valueZero,_modZero);}void modify(long long l,long long r,const modType&amp;mod){assert(!elementModificationOnly);modify(1,leftRange,rightRange,l,r,mod);}void modify(long long p,const modType&amp;mod){assert(p&lt;LLONG_MAX);modify(1,leftRange,rightRange,p,p+1,mod);}valueType query(long long l,long long r){return query(1,leftRange,rightRange,l,r);}valueType query(long long p){return query(p,p+1);}private:void pushup(std::size_t cur){nodes[cur].val=merge(nodes[cur&lt;&lt;1].val,nodes[cur&lt;&lt;1|1].val);}void pushdown(std::size_t cur){update(nodes[cur&lt;&lt;1],nodes[cur].mod);update(nodes[cur&lt;&lt;1|1],nodes[cur].mod);nodes[cur].mod=modZero;}void build(std::size_t cur,long long l,long long r,const std::vector&lt;valueType&gt;&amp;initValue){nodes[cur].id=cur;nodes[cur].left=l;nodes[cur].right=r;nodes[cur].mod=modZero;if(l==r-1)nodes[cur].val=initValue[l-leftRange];else{build(cur&lt;&lt;1,l,(l+r)&gt;&gt;1,initValue);build(cur&lt;&lt;1|1,(l+r)&gt;&gt;1,r,initValue);pushup(cur);}}void m_init(const std::vector&lt;valueType&gt;&amp;_initValue,std::function&lt;valueType(const valueType&amp;,const valueType&amp;)&gt;_merge,std::function&lt;void(SegmentTreeNode&lt;valueType,modType&gt;&amp;,const modType&amp;)&gt;_update,const valueType&amp;_valueZero,const modType&amp;_modZero){merge=_merge;update=_update;valueZero=_valueZero;modZero=_modZero;nodes.resize((rightRange-leftRange)&lt;&lt;2);build(1,leftRange,rightRange,_initValue);}void modify(std::size_t cur,long long l,long long r,long long L,long long R,const modType&amp;mod){if(l&gt;=R||r&lt;=L)return;if(L&lt;=l&amp;&amp;r&lt;=R)update(nodes[cur],mod);else{if(!elementModificationOnly)pushdown(cur);modify(cur&lt;&lt;1,l,(l+r)&gt;&gt;1,L,R,mod);modify(cur&lt;&lt;1|1,(l+r)&gt;&gt;1,r,L,R,mod);pushup(cur);}}valueType query(std::size_t cur,long long l,long long r,long long L,long long R){if(l&gt;=R||r&lt;=L)return valueZero;if(L&lt;=l&amp;&amp;r&lt;=R)return nodes[cur].val;if(!elementModificationOnly)pushdown(cur);return merge(query(cur&lt;&lt;1,l,(l+r)&gt;&gt;1,L,R),query(cur&lt;&lt;1|1,(l+r)&gt;&gt;1,r,L,R));}std::function&lt;valueType(const valueType&amp;,const valueType&amp;)&gt;merge;std::function&lt;void(SegmentTreeNode&lt;valueType,modType&gt;&amp;,const modType&amp;)&gt;update;std::vector&lt;SegmentTreeNode&lt;valueType,modType&gt;&gt;nodes;long long leftRange=0,rightRange=0;valueType valueZero;modType modZero;};
+// #define int ll
+// #define FAST_IOSTREAM 1
+																																																	#define For(i,l,r)for(int i=(l),i##end=(r);i&lt;=i##end;++i)
+																																																	#define FOR(i,r,l)for(int i=(r),i##end=(l);i&gt;=i##end;--i)
+																																																	#define SON(i,u)for(int i=head[u];i;i=nxt[i])
+																																																	#define BE(x)(x).begin(),(x).end()
+																																																	#define fi first
+																																																	#define se second
+																																																	#define pb push_back
+																																																	#define eb emplace_back
+																																																	#define pq priority_queue
+																																																	#define min minOfDifferentTypes
+																																																	#define max maxOfDifferentTypes
+																																																	#define y1 why_is_there_a_function_called_y1
+																																																	using namespace std;typedef long long ll;typedef pair&lt;int,int&gt;pii;typedef vector&lt;int&gt;vi;typedef vector&lt;vi&gt; vvi;typedef vvi v2i;typedef vector&lt;vvi&gt;v3i;typedef vector&lt;v3i&gt;v4i;typedef vector&lt;bool&gt;vb;typedef vector&lt;vb&gt;vvb;typedef vvb v2b;typedef vector&lt;vvb&gt;v3b;typedef vector&lt;v3b&gt;v4b;typedef vector&lt;pii&gt;vpii;typedef vector&lt;vpii&gt;vvpii;typedef vvpii v2pii;typedef vector&lt;vvpii&gt;v3pii;typedef vector&lt;v3pii&gt;v4pii;typedef long double ld;typedef vector&lt;ld&gt;vd;typedef vector&lt;vd&gt;vvd;typedef vvd v2d;typedef vector&lt;v2d&gt;v3d;typedef vector&lt;v3d&gt;v4d;const ld inf=1e121;const ld eps=1e-10;mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());int randint(int l,int r){int out=rng()%(r-l+1)+l;return out&gt;=l?out:out+r-l+1;}template&lt;typename A,typename B&gt;string to_string(pair&lt;A,B&gt;p);template&lt;typename A,typename B,typename C&gt;string to_string(tuple&lt;A,B,C&gt;p);template&lt;typename A,typename B,typename C,typename D&gt;string to_string(tuple&lt;A,B,C,D&gt;p);string to_string(const string&amp;s){return '&quot;'+s+'&quot;';}string to_string(const char*s){return to_string((string)s);}string to_string(bool b){return(b?&quot;true&quot;:&quot;false&quot;);}string to_string(vector&lt;bool&gt;v){bool first=true;string res=&quot;{&quot;;for(int i=0;i&lt;static_cast&lt;int&gt;(v.size());i++){if(!first){res+=&quot;,&quot;;}first=false;res+=to_string(v[i]);}res+=&quot;}&quot;;return res;}template&lt;size_t N&gt;string to_string(bitset&lt;N&gt;v){string res=&quot;&quot;;for(size_t i=0;i&lt;N;i++){res+=static_cast&lt;char&gt;('0'+v[i]);}return res;}template&lt;typename A&gt;string to_string(A v){bool first=true;string res=&quot;{&quot;;for(const auto&amp;x:v){if(!first){res+=&quot;,&quot;;}first=false;res+=to_string(x);}res+=&quot;}&quot;;return res;}template&lt;typename A,typename B&gt;string to_string(pair&lt;A,B&gt;p){return &quot;(&quot;+to_string(p.first)+&quot;,&quot;+to_string(p.second)+&quot;)&quot;;}template&lt;typename A,typename B,typename C&gt;string to_string(tuple&lt;A,B,C&gt;p){return &quot;(&quot;+to_string(get&lt;0&gt;(p))+&quot;,&quot;+to_string(get&lt;1&gt;(p))+&quot;,&quot;+to_string(get&lt;2&gt;(p))+&quot;)&quot;;}template&lt;typename A,typename B,typename C,typename D&gt;string to_string(tuple&lt;A,B,C,D&gt;p){return &quot;(&quot;+to_string(get&lt;0&gt;(p))+&quot;,&quot;+to_string(get&lt;1&gt;(p))+&quot;,&quot;+to_string(get&lt;2&gt;(p))+&quot;,&quot;+to_string(get&lt;3&gt;(p))+&quot;)&quot;;}template&lt;typename A,typename B,typename C,typename D,typename E&gt;string to_string(tuple&lt;A,B,C,D,E&gt;p){return &quot;(&quot;+to_string(get&lt;0&gt;(p))+&quot;,&quot;+to_string(get&lt;1&gt;(p))+&quot;,&quot;+to_string(get&lt;2&gt;(p))+&quot;,&quot;+to_string(get&lt;3&gt;(p))+&quot;,&quot;+to_string(get&lt;4&gt;(p))+&quot;)&quot;;}void debug_out(){cerr&lt;&lt;endl;}template&lt;typename Head,typename...Tail&gt;void debug_out(Head H,Tail...T){cerr&lt;&lt;&quot; &quot;&lt;&lt;to_string(H);debug_out(T...);}template&lt;typename T&gt;struct is_pair{static const bool value=false;};template&lt;typename T,typename U&gt;struct is_pair&lt;std::pair&lt;T,U&gt;&gt;{static const bool value=true;};
+																																																	#ifdef OUUAN
+																																																	#define debug(...)cerr&lt;&lt;&quot;[&quot;&lt;&lt;#__VA_ARGS__&lt;&lt;&quot;]:&quot;,debug_out(__VA_ARGS__)
+																																																	#else
+																																																	#define debug(...)42
+																																																	#endif
+																																																	#ifdef int
+																																																	const int INF=0x3f3f3f3f3f3f3f3fll;
+																																																	#else
+																																																	const int INF=0x3f3f3f3f;
+																																																	#endif
+																																																	#ifdef FAST_IOSTREAM
+																																																	#define br cout&lt;&lt;'\n'
+																																																	#define sp cout&lt;&lt;' '
+																																																	#define fl cout.flush()
+																																																	ll read(){ll x;cin&gt;&gt;x;return x;}template&lt;typename T&gt;void read(T&amp;x){cin&gt;&gt;x;}template&lt;typename T&gt;void write(const T&amp;x){cout&lt;&lt;x;}
+																																																	#else
+																																																	#define br putchar('\n')
+																																																	#define sp putchar(' ')
+																																																	#define fl fflush(stdout)
+																																																	template&lt;typename T&gt;typename enable_if&lt;!is_integral&lt;T&gt;::value&amp;&amp;!is_pair&lt;T&gt;::value,void&gt;::type read(T&amp;x){cin&gt;&gt;x;}ll read(){char c;ll out=0,f=1;for(c=getchar();!isdigit(c)&amp;&amp;c!='-';c=getchar());if(c=='-'){f=-1;c=getchar();}for(;isdigit(c);c=getchar())out=(out&lt;&lt;3)+(out&lt;&lt;1)+c-'0';return out*f;}template&lt;typename T&gt;typename enable_if&lt;is_integral&lt;T&gt;::value,T&gt;::type read(T&amp;x){char c;T f=1;x=0;for(c=getchar();!isdigit(c)&amp;&amp;c!='-';c=getchar());if(c=='-'){f=-1;c=getchar();}for(;isdigit(c);c=getchar())x=(x&lt;&lt;3)+(x&lt;&lt;1)+c-'0';return x*=f;}char read(char&amp;x){for(x=getchar();isspace(x);x=getchar());return x;}double read(double&amp;x){scanf(&quot;%lf&quot;,&amp;x);return x;}ld read(ld&amp;x){scanf(&quot;%Lf&quot;,&amp;x);return x;}template&lt;typename T&gt;typename enable_if&lt;!is_integral&lt;T&gt;::value&amp;&amp;!is_pair&lt;T&gt;::value,void&gt;::type write(const T&amp;x){cout&lt;&lt;x;}template&lt;typename T&gt;typename enable_if&lt;is_integral&lt;T&gt;::value,void&gt;::type write(const T&amp;x){if(x&lt;0){putchar('-');write(-x);return;}if(x&gt;9)write(x/10);putchar(x%10+'0');}void write(const char&amp;x){putchar(x);}void write(const double&amp;x){printf(&quot;%.10lf&quot;,x);}void write(const ld&amp;x){printf(&quot;%.10Lf&quot;,x);}
+																																																	#endif
+																																																	template&lt;typename T&gt;typename enable_if&lt;is_pair&lt;T&gt;::value,void&gt;::type read(T&amp;x){read(x.fi);read(x.se);}template&lt;typename T&gt;typename enable_if&lt;is_pair&lt;T&gt;::value,void&gt;::type write(const T&amp;x){write(x.fi);sp;write(x.se);}template&lt;typename T,typename...Args&gt;void read(T&amp;x,Args&amp;...args){read(x);read(args...);}template&lt;typename OutputIt,typename=typename enable_if&lt;is_same&lt;output_iterator_tag,typename iterator_traits&lt;OutputIt&gt;::iterator_category&gt;::value||(is_base_of&lt;forward_iterator_tag,typename iterator_traits&lt;OutputIt&gt;::iterator_category&gt;::value&amp;&amp;!is_const&lt;OutputIt&gt;::value)&gt;::type&gt;void read(OutputIt __first,OutputIt __last){for(;__first!=__last;++__first)read(*__first);}template&lt;typename InputIt,typename=typename enable_if&lt;is_base_of&lt;input_iterator_tag,typename iterator_traits&lt;InputIt&gt;::iterator_category&gt;::value&gt;::type&gt;void wts(InputIt __first,InputIt __last){bool isFirst=true;for(;__first!=__last;++__first){if(isFirst)isFirst=false;else sp;write(*__first);}br;}template&lt;typename InputIt,typename=typename enable_if&lt;is_base_of&lt;input_iterator_tag,typename iterator_traits&lt;InputIt&gt;::iterator_category&gt;::value&gt;::type&gt;void wtb(InputIt __first,InputIt __last){for(;__first!=__last;++__first){write(*__first);br;}}template&lt;typename T&gt;void wts(const T&amp;x){write(x);sp;}template&lt;typename T&gt;void wtb(const T&amp;x){write(x);br;}template&lt;typename T&gt;void wte(const T&amp;x){write(x);exit(0);}template&lt;typename T,typename...Args&gt;void wts(const T&amp;x,Args...args){wts(x);wts(args...);}template&lt;typename T,typename...Args&gt;void wtb(const T&amp;x,Args...args){wts(x);wtb(args...);}template&lt;typename T,typename...Args&gt;void wte(const T&amp;x,Args...args){wts(x);wte(args...);}template&lt;typename T1,typename T2&gt;inline bool up(T1&amp;x,const T2&amp;y){return x&lt;y?x=y,1:0;}template&lt;typename T1,typename T2&gt;inline bool dn(T1&amp;x,const T2&amp;y){return y&lt;x?x=y,1:0;}template&lt;typename T1,typename T2,typename T3&gt;inline bool inRange(const T1&amp;x,const T2&amp;l,const T3&amp;r){return!(x&lt;l)&amp;&amp;!(r&lt;x);}template&lt;typename T1,typename T2&gt;inline auto minOfDifferentTypes(const T1&amp;x,const T2&amp;y)-&gt;decltype(x&lt;y?x:y){return x&lt;y?x:y;}template&lt;typename T1,typename T2&gt;inline auto maxOfDifferentTypes(const T1&amp;x,const T2&amp;y)-&gt;decltype(x&lt;y?y:x){return x&lt;y?y:x;}template&lt;typename T1,typename T2,typename T3&gt;inline T1&amp;madd(T1&amp;x,const T2&amp;y,const T3&amp;modulo){return x=(ll)(x+y+modulo)%modulo;}template&lt;typename T1,typename T2,typename T3&gt;inline T1&amp;mmul(T1&amp;x,const T2&amp;y,const T3&amp;modulo){return x=(ll)x*y%modulo;}inline int modadd(int x,int y,int modulo){return(x+=y)&gt;=modulo?x-modulo:x;}inline int isinf(int x){return x&lt;INF?x:-1;}inline void yesno(bool x){wtb(x?&quot;Yes&quot;:&quot;No&quot;);}
+/* ------------------------------------------------------------------------------------------------------------------- */
+
+struct Modify
+{
+	int p, x;
+};
+
+struct Query
+{
+	int l, r, w, id;
+};
+
+struct Val
+{
+	int ans, pre, suf, sum;
+};
+
+signed main()
+{
+#ifdef FAST_IOSTREAM
+	ios_base::sync_with_stdio(false);
+	cin.tie(0);
+	cout.tie(0);
+#endif
+	
+	int n = read();
+	
+	vector&lt;Modify&gt; modify;
+	vi lsh;
+	
+	For (i, 1, n)
+	{
+		int x = read();
+		lsh.pb(x);
+		modify.pb({i, x});
+	}
+	
+	sort(BE(lsh));
+	lsh.resize(unique(BE(lsh)) - lsh.begin());
+	
+	for (auto &amp;m : modify) m.x = lower_bound(BE(lsh), m.x) - lsh.begin();
+	
+	int k = read();
+	
+	vector&lt;Query&gt; query;
+	
+	For (i, 0, k - 1)
+	{
+		int l = read();
+		int r = read();
+		int w = read();
+		query.pb({l, r, w, i});
+	}
+	
+	SegmentTree&lt;Val, int, true&gt; seg
+	(
+		vector&lt;Val&gt;(n, {0, 0, 0, -n}),
+		[n](const Val &amp;x, const Val &amp;y)
+		{
+			Val res;
+			res.ans = max(x.suf + y.pre, max(x.ans, y.ans));
+			res.pre = max(x.pre, x.sum + y.pre);
+			res.suf = max(y.suf, x.suf + y.sum);
+			res.sum = max(x.sum + y.sum, -n);
+			return res;
+		},
+		[](SegmentTreeNode&lt;Val, int&gt; &amp;node, int x)
+		{
+			if (x == INF) return;
+			node.val.ans = node.val.pre = node.val.suf = max(0, x);
+			node.val.sum = x;
+		},
+		1,
+		{0, 0, 0, 0},
+		INF
+	);
+	
+	vi ans(k);
+	
+	function&lt;void(vector&lt;Modify&gt; &amp;, vector&lt;Query&gt; &amp;, int, int)&gt; solve = [&amp;](vector&lt;Modify&gt; &amp;ms, vector&lt;Query&gt; &amp;qs, int l, int r)
+	{
+		if (qs.empty()) return;
+		if (l == r - 1)
+		{
+			for (auto q : qs)
+			{
+				ans[q.id] = lsh[l];
+			}
+			return;
+		}
+		vector&lt;Modify&gt; lm, rm;
+		int mid = (l + r) &gt;&gt; 1;
+		for (auto m : ms)
+		{
+			if (m.x &gt;= mid)
+			{
+				seg.modify(m.p, 1);
+				rm.push_back(m);
+			}
+			else lm.push_back(m);
+		}
+		vector&lt;Query&gt; lq, rq;
+		for (auto q : qs)
+		{
+			if (seg.query(q.l, q.r + 1).ans &gt;= q.w) rq.push_back(q);
+			else lq.push_back(q);
+		}
+		vector&lt;Modify&gt;().swap(ms);
+		vector&lt;Query&gt;().swap(qs);
+		solve(lm, lq, l, mid);
+		for (auto m : rm) seg.modify(m.p, -n);
+		solve(rm, rq, mid, r);
+	};
+	
+	solve(modify, query, 0, lsh.size());
+	
+	for (auto x : ans) wtb(x);
+	
+	return 0;
+}
+</code></pre>
+</details>
+<details class="admonition note"><summary class="admonition-title">O((n&#43;m)(logn&#43;logm))</summary>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+
+template&lt;typename valueType,typename modType&gt;struct SegmentTreeNode{public:std::size_t id;long long left,right;valueType val;modType mod;};template&lt;typename valueType,typename modType,bool elementModificationOnly=false&gt;class SegmentTree{public:SegmentTree()=default;SegmentTree(const std::vector&lt;valueType&gt;&amp;_initValue,std::function&lt;valueType(const valueType&amp;,const valueType&amp;)&gt;_merge,std::function&lt;void(SegmentTreeNode&lt;valueType,modType&gt;&amp;,const modType&amp;)&gt;_update,long long _startPoint=1,const valueType&amp;_valueZero=valueType(),const modType&amp;_modZero=modType()){init(_initValue,_merge,_update,_startPoint,_valueZero,_modZero);}void init(const std::vector&lt;valueType&gt;&amp;_initValue,std::function&lt;valueType(const valueType&amp;,const valueType&amp;)&gt;_merge,std::function&lt;void(SegmentTreeNode&lt;valueType,modType&gt;&amp;,const modType&amp;)&gt;_update,long long _startPoint=1,const valueType&amp;_valueZero=valueType(),const modType&amp;_modZero=modType()){assert(_startPoint&gt;=LLONG_MIN/2);assert(_startPoint&lt;=LLONG_MAX/2-(long long)_initValue.size());leftRange=_startPoint;rightRange=_startPoint+_initValue.size();m_init(_initValue,_merge,_update,_valueZero,_modZero);}void modify(long long l,long long r,const modType&amp;mod){assert(!elementModificationOnly);modify(1,leftRange,rightRange,l,r,mod);}void modify(long long p,const modType&amp;mod){assert(p&lt;LLONG_MAX);modify(1,leftRange,rightRange,p,p+1,mod);}valueType query(long long l,long long r){return query(1,leftRange,rightRange,l,r);}valueType query(long long p){return query(p,p+1);}private:void pushup(std::size_t cur){nodes[cur].val=merge(nodes[cur&lt;&lt;1].val,nodes[cur&lt;&lt;1|1].val);}void pushdown(std::size_t cur){update(nodes[cur&lt;&lt;1],nodes[cur].mod);update(nodes[cur&lt;&lt;1|1],nodes[cur].mod);nodes[cur].mod=modZero;}void build(std::size_t cur,long long l,long long r,const std::vector&lt;valueType&gt;&amp;initValue){nodes[cur].id=cur;nodes[cur].left=l;nodes[cur].right=r;nodes[cur].mod=modZero;if(l==r-1)nodes[cur].val=initValue[l-leftRange];else{build(cur&lt;&lt;1,l,(l+r)&gt;&gt;1,initValue);build(cur&lt;&lt;1|1,(l+r)&gt;&gt;1,r,initValue);pushup(cur);}}void m_init(const std::vector&lt;valueType&gt;&amp;_initValue,std::function&lt;valueType(const valueType&amp;,const valueType&amp;)&gt;_merge,std::function&lt;void(SegmentTreeNode&lt;valueType,modType&gt;&amp;,const modType&amp;)&gt;_update,const valueType&amp;_valueZero,const modType&amp;_modZero){merge=_merge;update=_update;valueZero=_valueZero;modZero=_modZero;nodes.resize((rightRange-leftRange)&lt;&lt;2);build(1,leftRange,rightRange,_initValue);}void modify(std::size_t cur,long long l,long long r,long long L,long long R,const modType&amp;mod){if(l&gt;=R||r&lt;=L)return;if(L&lt;=l&amp;&amp;r&lt;=R)update(nodes[cur],mod);else{if(!elementModificationOnly)pushdown(cur);modify(cur&lt;&lt;1,l,(l+r)&gt;&gt;1,L,R,mod);modify(cur&lt;&lt;1|1,(l+r)&gt;&gt;1,r,L,R,mod);pushup(cur);}}valueType query(std::size_t cur,long long l,long long r,long long L,long long R){if(l&gt;=R||r&lt;=L)return valueZero;if(L&lt;=l&amp;&amp;r&lt;=R)return nodes[cur].val;if(!elementModificationOnly)pushdown(cur);return merge(query(cur&lt;&lt;1,l,(l+r)&gt;&gt;1,L,R),query(cur&lt;&lt;1|1,(l+r)&gt;&gt;1,r,L,R));}std::function&lt;valueType(const valueType&amp;,const valueType&amp;)&gt;merge;std::function&lt;void(SegmentTreeNode&lt;valueType,modType&gt;&amp;,const modType&amp;)&gt;update;std::vector&lt;SegmentTreeNode&lt;valueType,modType&gt;&gt;nodes;long long leftRange=0,rightRange=0;valueType valueZero;modType modZero;};
+
+using namespace std;
+
+int read()
+{
+	int out = 0;
+	char c;
+	while (!isdigit(c = getchar()));
+	for (; isdigit(c); c = getchar()) out = out * 10 + c - '0';
+	return out;
+}
+
+typedef vector&lt;int&gt; vi;
+
+const int INF = 1e9;
+
+struct Query
+{
+	int l, r, w, id;
+	bool operator&lt;(const Query &amp;b) const
+	{
+		return w &gt; b.w;
+	}
+};
+
+int main()
+{
+	int n = read();
+	
+	vi a(n);
+	
+	for (int i = 0; i &lt; n; ++i) a[i] = read();
+	
+	vi p(n), len(n);
+	stack&lt;int&gt; stk;
+	
+	for (int i = 0; i &lt; n; ++i)
+	{
+		while (stk.size() &amp;&amp; a[stk.top()] &gt;= a[i]) stk.pop();
+		if (stk.empty()) p[i] = 0;
+		else p[i] = stk.top() + 1;
+		stk.push(i);
+	}
+	
+	stack&lt;int&gt;().swap(stk);
+	
+	for (int i = n - 1; i &gt;= 0; --i)
+	{
+		while (stk.size() &amp;&amp; a[stk.top()] &gt;= a[i]) stk.pop();
+		int r;
+		if (stk.empty()) r = n - 1;
+		else r = stk.top() - 1;
+		len[i] = r - p[i] + 1;
+		stk.push(i);
+	}
+	
+	vi id(n);
+	for (int i = 0; i &lt; n; ++i) id[i] = i;
+	sort(id.begin(), id.end(), [&amp;](int x, int y) { return len[x] &gt; len[y]; });
+	
+	SegmentTree&lt;int, bool, true&gt; mn
+	(
+		a,
+		[](int x, int y) { return min(x, y); },
+		[](SegmentTreeNode&lt;int, bool&gt; &amp;, bool) {},
+		1,
+		INF
+	);
+	
+	int m = read();
+	
+	vi ans(m);
+	vector&lt;Query&gt; query;
+	
+	for (int i = 0; i &lt; m; ++i)
+	{
+		int l = read();
+		int r = read();
+		int w = read();
+		query.push_back({l, r, w, i});
+		ans[i] = mn.query(l, l + w);
+	}
+	
+	sort(query.begin(), query.end());
+	
+	SegmentTree&lt;int, int, true&gt; mx
+	(
+		vi(n),
+		[](int x, int y) { return max(x, y); },
+		[](SegmentTreeNode&lt;int, int&gt; &amp;node, int x)
+		{
+			node.val = max(node.val, x);
+			node.mod = max(node.mod, x);
+		}
+	);
+	
+	auto it = id.begin();
+	
+	for (auto t : query)
+	{
+		while (it != id.end() &amp;&amp; len[*it] &gt;= t.w)
+		{
+			mx.modify(p[*it] + 1, a[*it]);
+			++it;
+		}
+		ans[t.id] = max(ans[t.id], mx.query(t.l, t.r - t.w + 2));
+	}
+	
+	for (auto x : ans) printf(&quot;%d\n&quot;, x);
+	
+	return 0;
+}
+</code></pre>
+</details>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        <span title="2020-04-21 00:01:30 &#43;0800 &#43;0800">2020-04-21</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/28eb4117dc21d90edba6fafb7b6c5622c7c40d19" title="feat: add CF484E" target="_blank">(28eb411)</a>
+        ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/CF484E.md" target="_blank">更新历史</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/wechat-donate.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/alipay-donate.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/">线段树</a>
+          <a href="/tags/%E6%95%B4%E4%BD%93%E4%BA%8C%E5%88%86/">整体二分</a>
+          <a href="/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/">主席树</a>
+          <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/tree-dp-with-modification/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">带修改的树上 DP 问题（动态 DP）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/sdoi2017-%E6%A0%91%E7%82%B9%E6%B6%82%E8%89%B2/">
+            <span class="next-text nav-default">「SDOI2017」树点涂色</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+  <div class="comments">
+    <div class="loading post">
+      <img src="/img/spinner.svg">
+      <p class="post-content">
+        评论正在加载中...如果评论较长时间无法加载，你可以
+        <a href='https://github.com/ouuan/blog-comments/issues?q=is%3Aissue+is%3Aopen+"CF484E%20Sign%20on%20Fence - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2"' target="_blank">搜索对应的 issue</a>
+        或者
+        <a href="https://github.com/ouuan/blog-comments/issues/new?title=CF484E%20Sign%20on%20Fence - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2" target="_blank">新建一个 issue</a>
+        。
+      </p>
+    </div>
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/blog-comments"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>请启用 JavaScript 来查看评论。</a></noscript>
+  </div>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:ouuansteve@gmail.com" class="iconfont icon-email" title="email" target="_blank"></a>
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+      <a href="https://twitter.com/ouuan" class="iconfont icon-twitter" title="twitter" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ouuan/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2022
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span> 
+    <span class="author">ouuan</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/highlight.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/styles/tomorrow.min.css" rel="stylesheet"/>
+  <script>hljs.configure({tabReplace: '    '});</script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/slideout/1.0.1/slideout.min.js" crossorigin="anonymous"></script>
+
+
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.locales.min.js" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.85ad50502df0a718821e6776a9cb854d4a8abf64981e94053598daba712a9022.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" crossorigin="anonymous"></script>
+
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

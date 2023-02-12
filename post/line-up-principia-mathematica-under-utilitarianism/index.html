@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>功利主义下排队问题的数学原理 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="本文以功利主义为指导思想，通过适当的数学建模，对一些排队过程中经常遇到的问题进行了探讨。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/line-up-principia-mathematica-under-utilitarianism/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.3004a145db73ba341ebe1a3790ea2c0166b56dc0378485b385563682aa10c6b2.css" rel="stylesheet">
+
+
+
+
+
+<meta property="og:title" content="功利主义下排队问题的数学原理" />
+<meta property="og:description" content="本文以功利主义为指导思想，通过适当的数学建模，对一些排队过程中经常遇到的问题进行了探讨。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/line-up-principia-mathematica-under-utilitarianism/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-04-04T00:44:54+08:00" />
+<meta property="article:modified_time" content="2021-04-24T22:45:59+08:00" />
+
+<meta itemprop="name" content="功利主义下排队问题的数学原理">
+<meta itemprop="description" content="本文以功利主义为指导思想，通过适当的数学建模，对一些排队过程中经常遇到的问题进行了探讨。"><meta itemprop="datePublished" content="2021-04-04T00:44:54+08:00" />
+<meta itemprop="dateModified" content="2021-04-24T22:45:59+08:00" />
+<meta itemprop="wordCount" content="1509">
+<meta itemprop="keywords" content="食堂," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="功利主义下排队问题的数学原理"/>
+<meta name="twitter:description" content="本文以功利主义为指导思想，通过适当的数学建模，对一些排队过程中经常遇到的问题进行了探讨。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/ranking/">
+        <li class="mobile-menu-item">排行</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/ranking/">排行</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">功利主义下排队问题的数学原理</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2021-04-04 00:44:54 &#43;0800 &#43;0800"> 2021-04-04 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%9A%8F%E7%AC%94/"> 随笔 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#排队问题">排队问题</a></li>
+        <li><a href="#总等待时间的一些计算方式">总等待时间的一些计算方式</a>
+          <ul>
+            <li><a href="#整体角度">整体角度</a></li>
+            <li><a href="#个体进入队伍产生的影响">个体进入队伍产生的影响</a></li>
+          </ul>
+        </li>
+        <li><a href="#几例实际生活中的排队问题">几例实际生活中的排队问题</a>
+          <ul>
+            <li><a href="#先进先出">先进先出</a></li>
+            <li><a href="#离队首还远的话允许他人横穿">离队首还远的话，允许他人横穿</a></li>
+            <li><a href="#千钧一发之际--队伍是空的而你身后有人">千钧一发之际 —— 队伍是空的，而你身后有人</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+  <div class="post-outdated">
+    <div class="hint">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2021-04-24T22:45:59" title="April 24, 2021">April 24, 2021</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
+    <div class="post-content">
+      <p>本文以功利主义为指导思想，通过适当的数学建模，对一些排队过程中经常遇到的问题进行了探讨。</p>
+<h2 id="排队问题">排队问题</h2>
+<p>顾名思义，排队问题就是研究排队的过程。对于一些大家在生活中就能遇到，解释起来比较麻烦、反而难以理解的概念，就不在这里加以定义，以免引起读者不适。</p>
+<p><strong>等待时间</strong>：每个人自进入队伍到退出队伍的这段时间（的长度）。</p>
+<p><strong>等待代价</strong>：等待时间越久，等待代价越高；等待时间越久，单位时间所需代价就越高。换言之，代价是关于时间的单调递增的凹函数。并且，我们假定它“凹”的程度不大，所以等待时间可以作为等待代价的近似。</p>
+<p><strong>排队段</strong>：一段极长的时间，在这段时间中队伍一直非空。换言之，就是从第一个人开始排队（ta 前面没有人）直到最后一个人排完队（ta 后面没有人）的这段时间。</p>
+<p><strong>操作用时</strong>：一个人在退出队伍后进行某些操作（例如，从饭盒中拿出一碗饭）所用的时间，这个操作导致了后面一个人需要等待这个刚出队的人操作完成才能出队。为了简化问题，我们一般认为每个人的操作用时是相同的。</p>
+<p>在下面的问题中，你的目标是最小化排队过程中所有人的等待代价之和。</p>
+<h2 id="总等待时间的一些计算方式">总等待时间的一些计算方式</h2>
+<h3 id="整体角度">整体角度</h3>
+<p>不难看出，总等待时间是队伍中人数关于时间的积分。</p>
+<h3 id="个体进入队伍产生的影响">个体进入队伍产生的影响</h3>
+<p>当一个人进入队伍时，队伍总等待时间的增量是其自己的等待时间加上同一排队段中在其之后出队的人数与其操作用时的乘积。换言之，你拿一碗饭的用时使排在你后面的每个人都等了这么久。</p>
+<h2 id="几例实际生活中的排队问题">几例实际生活中的排队问题</h2>
+<h3 id="先进先出">先进先出</h3>
+<p>先来后到，天经地义，有道理可言吗？其实，由于代价是凹函数，先进先出是最优的选择，证明如下：</p>
+<p>你现在在队伍的最后，我们考虑你与你前面一个人互换出队顺序是否更优。</p>
+<p>记在你入队之前你前面的人已经等待了 $a$ 秒，在你入队时你们两个前面所有人出队并完成操作还需 $b$ 秒，每人操作需要 $c$ 秒，代价函数为 $f(x)$。</p>
+<p>不换的话，代价为：$f(a + b) + f(b + c)$</p>
+<p>换的话，代价为：$f(a + b + c) + f(b)$</p>
+<p>$\because f(x)$ 是单调递增的凹函数</p>
+<p>$\therefore f(a + b + c) - f(a + b) &gt; f(b + c) - f(b)$</p>
+<p>$\therefore$ 不换更优</p>
+<p>若不是先进先出，可以等价为如上所述的若干次相邻两人交换，由于每次交换都更劣，总体也更劣。</p>
+<h3 id="离队首还远的话允许他人横穿">离队首还远的话，允许他人横穿</h3>
+<p>其实这并不是一个严格的“排队”问题，因为这里引入了新情景 —— 有非排队者要横穿队伍。我不是在说出于道德你应该“舍己为人” —— 我是在说，如果你离队首还远，允许他人横穿，有百利而无一害。因为，还没排到你，你往前走并不会减少你的等待时间，却会增加要借过的那个人的等待时间。</p>
+<p>但是，如果你已经接近队首了，让他人横穿可能增大你的操作用时，而这样做的代价是恐怖的：你后面的所有人都要承担这一代价！因此，若马上就要排到你了，还是尽量不要让其它事情耽搁，而应尽力减少你的操作用时。</p>
+<h3 id="千钧一发之际--队伍是空的而你身后有人">千钧一发之际 —— 队伍是空的，而你身后有人</h3>
+<p>我们来想象一下：队伍是空的，你身后有一大波人 —— 你成功地成为了这一餐第一个拿到饭的人！此时，你有两个选择：</p>
+<ol>
+<li>正常速度走，你手还没碰到饭，后面一个人已经排在你身后了；</li>
+<li>快步向前，当你成功拿到饭后，队伍空出来了 0.01 秒，你身后的人成了一个新的排队段里第一个拿到饭的人。</li>
+</ol>
+<p>在第二个选择中，你仅仅只是早了不到 5 秒拿到饭，但世界却发生了天翻地覆的变化 —— 一整个排队段的所有人都不需要等待你的操作用时！</p>
+<p>让这一念之差所造成的后果显得更加糟糕的，或许是这样一个事实：这不仅是一个突变点，还是一个极劣点。因为，只要在同一个排队段内，来的越晚，你的操作用时所影响到的人就越少，所以如果你是一个冗长的排队段的队首，就意味着你选择了最糟糕的一个位置，而更好的选择应该是在教室里写几分钟作业再来（当然，前提是你有高效利用碎片化时间的能力），最佳的选择则是在不影响他人的情况下第一个拿到饭，即上面所说的第二种选择。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        <span title="2021-04-24 22:45:59 &#43;0800 &#43;0800">2021-04-24</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/5636825ed1f33cda763d9a546a24fb92e9d85812" title="fix(line-up-principia-mathematica-under-utilitarianism): typo" target="_blank">(5636825)</a>
+        ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/line-up-principia-mathematica-under-utilitarianism.md" target="_blank">更新历史</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/wechat-donate.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/alipay-donate.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E9%A3%9F%E5%A0%82/">食堂</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/2021-7-2-thu-half-day-bus-trip/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">2021.7.2 THU 大巴半日游</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/chopsticks/">
+            <span class="next-text nav-default">筷子</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+  <div class="comments">
+    <div class="loading post">
+      <img src="/img/spinner.svg">
+      <p class="post-content">
+        评论正在加载中...如果评论较长时间无法加载，你可以
+        <a href='https://github.com/ouuan/blog-comments/issues?q=is%3Aissue+is%3Aopen+"%e5%8a%9f%e5%88%a9%e4%b8%bb%e4%b9%89%e4%b8%8b%e6%8e%92%e9%98%9f%e9%97%ae%e9%a2%98%e7%9a%84%e6%95%b0%e5%ad%a6%e5%8e%9f%e7%90%86 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2"' target="_blank">搜索对应的 issue</a>
+        或者
+        <a href="https://github.com/ouuan/blog-comments/issues/new?title=%e5%8a%9f%e5%88%a9%e4%b8%bb%e4%b9%89%e4%b8%8b%e6%8e%92%e9%98%9f%e9%97%ae%e9%a2%98%e7%9a%84%e6%95%b0%e5%ad%a6%e5%8e%9f%e7%90%86 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2" target="_blank">新建一个 issue</a>
+        。
+      </p>
+    </div>
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/blog-comments"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>请启用 JavaScript 来查看评论。</a></noscript>
+  </div>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:ouuansteve@gmail.com" class="iconfont icon-email" title="email" target="_blank"></a>
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+      <a href="https://twitter.com/ouuan" class="iconfont icon-twitter" title="twitter" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ouuan/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2022
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span> 
+    <span class="author">ouuan</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/highlight.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/styles/tomorrow.min.css" rel="stylesheet"/>
+  <script>hljs.configure({tabReplace: '    '});</script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/slideout/1.0.1/slideout.min.js" crossorigin="anonymous"></script>
+
+
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.locales.min.js" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.85ad50502df0a718821e6776a9cb854d4a8abf64981e94053598daba712a9022.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" crossorigin="anonymous"></script>
+
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

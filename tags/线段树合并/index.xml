@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>线段树合并 on ouuan的博客</title><link>https://ouuan.github.io/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/</link><description>Recent content in 线段树合并 on ouuan的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 07 Jan 2020 18:33:42 +0800</lastBuildDate><atom:link href="https://ouuan.github.io/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/index.xml" rel="self" type="application/rss+xml"/><item><title>「NOI2018」你的名字（SAM，线段树合并）</title><link>https://ouuan.github.io/post/noi2018%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97sam%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/</link><pubDate>Tue, 07 Jan 2020 18:33:42 +0800</pubDate><guid>https://ouuan.github.io/post/noi2018%E4%BD%A0%E7%9A%84%E5%90%8D%E5%AD%97sam%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://uoj.ac/problem/395">UOJ&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://loj.ac/problem/2720">LOJ&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.luogu.com.cn/problem/P4770">洛谷&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一个字符串 $S$，有 $q$ 次询问，每次给你询问串 $T$ 以及左右端点 $l$, $r$，询问 $T$ 有多少个 &lt;strong>本质不同&lt;/strong> 的子串 &lt;strong>不是&lt;/strong> $S[l..r]$ 的子串。&lt;/p>
+&lt;p>$|S|\le 5\cdot 10^5$, $\sum|T|\le 10^6$, $q\le 10^5$ 。&lt;/p></description></item></channel></rss>

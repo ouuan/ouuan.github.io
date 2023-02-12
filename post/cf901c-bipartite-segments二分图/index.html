@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>CF901C Bipartite Segments（二分图） - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="题目链接 CF
+题意简述 定义一个“偶环”为边数为偶数的回路（回路又被称作“边简单环”，即不经过重复边且首尾点相同的途径）。
+给你一张不含“偶环”的无向图。称一个区间是“好的”，当且仅当编号在这个区间中的点的导出子图是一张二分图。
+多组询问，每次询问一个给定区间有多少个子区间是“好的”。
+点数、边数、询问数均不超过 $3\cdot 10^5$ 。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/cf901c-bipartite-segments%E4%BA%8C%E5%88%86%E5%9B%BE/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.3004a145db73ba341ebe1a3790ea2c0166b56dc0378485b385563682aa10c6b2.css" rel="stylesheet">
+
+
+
+
+
+<meta property="og:title" content="CF901C Bipartite Segments（二分图）" />
+<meta property="og:description" content="题目链接
+CF
+题意简述
+定义一个“偶环”为边数为偶数的回路（回路又被称作“边简单环”，即不经过重复边且首尾点相同的途径）。
+给你一张不含“偶环”的无向图。称一个区间是“好的”，当且仅当编号在这个区间中的点的导出子图是一张二分图。
+多组询问，每次询问一个给定区间有多少个子区间是“好的”。
+点数、边数、询问数均不超过 $3\cdot 10^5$ 。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/cf901c-bipartite-segments%E4%BA%8C%E5%88%86%E5%9B%BE/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-11-29T20:54:11+08:00" />
+<meta property="article:modified_time" content="2021-09-22T08:21:32+08:00" />
+
+<meta itemprop="name" content="CF901C Bipartite Segments（二分图）">
+<meta itemprop="description" content="题目链接
+CF
+题意简述
+定义一个“偶环”为边数为偶数的回路（回路又被称作“边简单环”，即不经过重复边且首尾点相同的途径）。
+给你一张不含“偶环”的无向图。称一个区间是“好的”，当且仅当编号在这个区间中的点的导出子图是一张二分图。
+多组询问，每次询问一个给定区间有多少个子区间是“好的”。
+点数、边数、询问数均不超过 $3\cdot 10^5$ 。"><meta itemprop="datePublished" content="2019-11-29T20:54:11+08:00" />
+<meta itemprop="dateModified" content="2021-09-22T08:21:32+08:00" />
+<meta itemprop="wordCount" content="1267">
+<meta itemprop="keywords" content="二分图," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CF901C Bipartite Segments（二分图）"/>
+<meta name="twitter:description" content="题目链接
+CF
+题意简述
+定义一个“偶环”为边数为偶数的回路（回路又被称作“边简单环”，即不经过重复边且首尾点相同的途径）。
+给你一张不含“偶环”的无向图。称一个区间是“好的”，当且仅当编号在这个区间中的点的导出子图是一张二分图。
+多组询问，每次询问一个给定区间有多少个子区间是“好的”。
+点数、边数、询问数均不超过 $3\cdot 10^5$ 。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/ranking/">
+        <li class="mobile-menu-item">排行</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/ranking/">排行</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">CF901C Bipartite Segments（二分图）</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2019-11-29 20:54:11 &#43;0800 &#43;0800"> 2019-11-29 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#题目链接">题目链接</a></li>
+        <li><a href="#题意简述">题意简述</a></li>
+        <li><a href="#简要做法">简要做法</a></li>
+        <li><a href="#参考代码">参考代码</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+  <div class="post-outdated">
+    <div class="hint">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2021-09-22T08:21:32" title="September 22, 2021">September 22, 2021</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
+    <div class="post-content">
+      <h2 id="题目链接">题目链接</h2>
+<p><a href="https://codeforces.com/contest/901/problem/D">CF</a></p>
+<h2 id="题意简述">题意简述</h2>
+<p>定义一个“偶环”为边数为偶数的回路（回路又被称作“边简单环”，即不经过重复边且首尾点相同的途径）。</p>
+<p>给你一张不含“偶环”的无向图。称一个区间是“好的”，当且仅当编号在这个区间中的点的导出子图是一张二分图。</p>
+<p>多组询问，每次询问一个给定区间有多少个子区间是“好的”。</p>
+<p>点数、边数、询问数均不超过 $3\cdot 10^5$ 。</p>
+<h2 id="简要做法">简要做法</h2>
+<p>由于图中没有偶环，容易想到一个子图是二分图等价于没有环（因为二分图等价于没有奇环）。</p>
+<p>但“没有偶环”的用处远不止此：没有偶环还意味着每个点最多处于一个环内（否则取两个包含同一个点的奇环，把重复的边去掉，就可以得到一个偶环）。</p>
+<p>那么，找出图中的每个环的最小节点编号和最大节点编号，以最小值和最大值作为左右端点，就可以得到若干条线段。而一个区间合法就等价于其不包含这些线段中的任意一条。</p>
+<p>现在问题已经转化成了：给你 $k$ 条线段 $\{[c_i, d_i]\}_{i=1}^k$，$q$ 次询问，第 $i$ 次询问给你一个区间 $[l_i, r_i]$，求 $[l_i, r_i]$ 有多少个子区间不包含这 $k$ 条线段中的任意一条。</p>
+<p>首先，可以观察到，若有一条线段被另一条线段完全包含，包含它的这条线段就可以被无视了。</p>
+<p>去除掉上述无用线段后，剩下的线段两两互不包含，那么将它们按左端点排序，会满足：$\forall 1\le i&lt; k, c_i&lt; c_{i+1}, d_i&lt; d_{i+1}$ （不取等号是因为 $1\sim n$ 中的每个数在 $c_{1..n}$ 和 $d_{1..n}$ 中最多只出现一次，而这是因为在原题意中每个点最多处于一个环内）。</p>
+<p>如果不管 $r_i$ 的限制，对于每个左端点求答案，画个图手玩一下可以发现，以 $p$ 为左端点时，合法区间的右端点最多到 $\min\left(\{d_j-1|c_j\ge p\}\cup\{n\}\right)$ ，即 $p$ “右边”的第一条线段的右端点减一（不存在则为 $n$）。每个左端点无视右端点限制的合法区间数可以求个前缀和，而 $p$ “右边”的第一条线段可以二分求得，也可以线性预处理后 $O(1)$ 求得。那么，我们就会做 $r_i=n$ 的情况了。</p>
+<p>然后考虑如何处理 $r_i$ 的限制。对称地（指这个式子和上面那个式子几乎是对称的），令 $t=\max\left(\{c_j|d_j\le r_i\}\cup\{0\}\right)$，即 $r_i$ “左边”的第一条线段的左端点（不存在则为 $0$），那么对于不小于 $t$ 的左端点，$r_i$ 这个限制是无用的，而对于大于 $t$ 的左端点，右端点最多可以取到 $r_i$ 。 $t$ 同样可以二分求得或者线性预处理后 $O(1)$ 求得，将左端点分成 $[l_i, t]$ 和 $[t+1, r_i]$ 两部分，前半部分用前缀和计算，后半部分即为 $[t+1, r_i]$ 的子区间数，然后就做完了。实现时注意特判 $t&lt; l_i$ 的情况。</p>
+<h2 id="参考代码">参考代码</h2>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+ 
+using namespace std;
+ 
+typedef long long ll;
+typedef pair&lt;int, int&gt; pii;
+ 
+vector&lt;int&gt; pa, dfn, rt, uncut;
+vector&lt;vector&lt;int&gt; &gt; g;
+int n, m, q, dfntot;
+vector&lt;ll&gt; pre;
+vector&lt;pii&gt; s;
+ 
+void dfs(int u)
+{
+	dfn[u] = ++dfntot;
+	for (auto v : g[u])
+	{
+		if (v == pa[u]) continue;
+		if (!dfn[v])
+		{
+			pa[v] = u;
+			dfs(v);
+		}
+		else if (dfn[v] &lt; dfn[u])
+		{
+			int mn = u, mx = u, x = u;
+			while (x != v)
+			{
+				x = pa[x];
+				mn = min(mn, x);
+				mx = max(mx, x);
+			}
+			rt[mn] = mx;
+		}
+	}
+}
+ 
+int main()
+{
+	scanf(&quot;%d%d&quot;, &amp;n, &amp;m);
+	
+	g.resize(n + 1);
+	pa.resize(n + 1, 0);
+	pre.resize(n + 1, 0);
+	dfn.resize(n + 1, 0);
+	uncut.resize(n + 1, 0);
+	rt.resize(n + 1, n + 1);
+	
+	for (int i = 1; i &lt;= m; ++i)
+	{
+		int u, v;
+		scanf(&quot;%d%d&quot;, &amp;u, &amp;v);
+		g[u].push_back(v);
+		g[v].push_back(u);
+	}
+	
+	for (int i = 1; i &lt;= n; ++i) if (!dfn[i]) dfs(i);
+	
+	int mn = n;
+	for (int i = n; i &gt;= 1; --i)
+	{
+		mn = min(mn, rt[i]);
+		if (rt[i] &lt;= mn) s.push_back(pii(i, rt[i]));
+	}
+	
+	reverse(s.begin(), s.end());
+	s.push_back(pii(n + 1, n + 1));
+	
+	int p = 0, ban = s[0].second;
+	for (int i = 1; i &lt;= n; ++i)
+	{
+		if (i &gt; s[p].first) ban = s[++p].second;
+		pre[i] = pre[i - 1] + ban - i;
+		uncut[i] = uncut[i - 1] + (i == s[uncut[i - 1]].second);
+	}
+	
+	scanf(&quot;%d&quot;, &amp;q);
+	
+	while (q--)
+	{
+		int l, r;
+		scanf(&quot;%d%d&quot;, &amp;l, &amp;r);
+		int k = uncut[r];
+		if (k == 0 || s[k - 1].first &lt; l) printf(&quot;%I64d\n&quot;, (ll) (r - l + 1) * (r - l + 2) / 2);
+		else printf(&quot;%I64d\n&quot;, pre[s[k - 1].first] - pre[l - 1] + (ll) (r - s[k - 1].first) * (r - s[k - 1].first + 1) / 2);
+	}
+	
+	return 0;
+}
+</code></pre>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        <span title="2021-09-22 08:21:32 &#43;0800 &#43;0800">2021-09-22</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/6d8f030ac7b16cb7a45bfbc74c66aaed1c99ee4a" title="fix: bigcup-&gt;cup" target="_blank">(6d8f030)</a>
+        ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/CF901C-Bipartite-Segments%ef%bc%88%e4%ba%8c%e5%88%86%e5%9b%be%ef%bc%89.md" target="_blank">更新历史</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/wechat-donate.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/alipay-donate.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E4%BA%8C%E5%88%86%E5%9B%BE/">二分图</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cf455d-serega-and-fun%E5%88%86%E5%9D%97-%E5%B9%B3%E8%A1%A1%E6%A0%91/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">CF455D Serega and Fun（分块 / 平衡树）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/cf1260f-colored-tree%E7%82%B9%E5%88%86%E6%B2%BB%E5%B7%AE%E5%88%86%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/">
+            <span class="next-text nav-default">CF1260F Colored Tree（点分治，差分，基数排序）</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+  <div class="comments">
+    <div class="loading post">
+      <img src="/img/spinner.svg">
+      <p class="post-content">
+        评论正在加载中...如果评论较长时间无法加载，你可以
+        <a href='https://github.com/ouuan/blog-comments/issues?q=is%3Aissue+is%3Aopen+"CF901C%20Bipartite%20Segments%ef%bc%88%e4%ba%8c%e5%88%86%e5%9b%be%ef%bc%89 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2"' target="_blank">搜索对应的 issue</a>
+        或者
+        <a href="https://github.com/ouuan/blog-comments/issues/new?title=CF901C%20Bipartite%20Segments%ef%bc%88%e4%ba%8c%e5%88%86%e5%9b%be%ef%bc%89 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2" target="_blank">新建一个 issue</a>
+        。
+      </p>
+    </div>
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/blog-comments"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>请启用 JavaScript 来查看评论。</a></noscript>
+  </div>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:ouuansteve@gmail.com" class="iconfont icon-email" title="email" target="_blank"></a>
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+      <a href="https://twitter.com/ouuan" class="iconfont icon-twitter" title="twitter" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ouuan/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2022
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span> 
+    <span class="author">ouuan</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/highlight.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/styles/tomorrow.min.css" rel="stylesheet"/>
+  <script>hljs.configure({tabReplace: '    '});</script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/slideout/1.0.1/slideout.min.js" crossorigin="anonymous"></script>
+
+
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.locales.min.js" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.85ad50502df0a718821e6776a9cb854d4a8abf64981e94053598daba712a9022.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" crossorigin="anonymous"></script>
+
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

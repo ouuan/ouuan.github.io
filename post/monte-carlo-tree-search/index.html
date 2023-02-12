@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>蒙特卡洛树搜索（MCTS）学习笔记 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="蒙特卡洛树搜索（英语：Monte Carlo tree search；简称：MCTS）是一种用于某些决策过程的启发式搜索算法，最引人注目的是在游戏中的使用。一个主要例子是电脑围棋程序，它也用于其他棋盘游戏、即时电子游戏以及不确定性游戏。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/monte-carlo-tree-search/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.3004a145db73ba341ebe1a3790ea2c0166b56dc0378485b385563682aa10c6b2.css" rel="stylesheet">
+
+
+
+
+
+<meta property="og:title" content="蒙特卡洛树搜索（MCTS）学习笔记" />
+<meta property="og:description" content="蒙特卡洛树搜索（英语：Monte Carlo tree search；简称：MCTS）是一种用于某些决策过程的启发式搜索算法，最引人注目的是在游戏中的使用。一个主要例子是电脑围棋程序，它也用于其他棋盘游戏、即时电子游戏以及不确定性游戏。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/monte-carlo-tree-search/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-08-18T09:58:33+08:00" />
+<meta property="article:modified_time" content="2021-08-18T23:08:19+08:00" />
+
+<meta itemprop="name" content="蒙特卡洛树搜索（MCTS）学习笔记">
+<meta itemprop="description" content="蒙特卡洛树搜索（英语：Monte Carlo tree search；简称：MCTS）是一种用于某些决策过程的启发式搜索算法，最引人注目的是在游戏中的使用。一个主要例子是电脑围棋程序，它也用于其他棋盘游戏、即时电子游戏以及不确定性游戏。"><meta itemprop="datePublished" content="2021-08-18T09:58:33+08:00" />
+<meta itemprop="dateModified" content="2021-08-18T23:08:19+08:00" />
+<meta itemprop="wordCount" content="1909">
+<meta itemprop="keywords" content="博弈论,Botzone," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="蒙特卡洛树搜索（MCTS）学习笔记"/>
+<meta name="twitter:description" content="蒙特卡洛树搜索（英语：Monte Carlo tree search；简称：MCTS）是一种用于某些决策过程的启发式搜索算法，最引人注目的是在游戏中的使用。一个主要例子是电脑围棋程序，它也用于其他棋盘游戏、即时电子游戏以及不确定性游戏。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/ranking/">
+        <li class="mobile-menu-item">排行</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/ranking/">排行</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">蒙特卡洛树搜索（MCTS）学习笔记</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2021-08-18 09:58:33 &#43;0800 &#43;0800"> 2021-08-18 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/"> 知识点 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#蒙特卡洛树搜索">蒙特卡洛树搜索</a>
+          <ul>
+            <li><a href="#蒙特卡洛树">蒙特卡洛树</a></li>
+            <li><a href="#蒙特卡洛树搜索的大致流程">蒙特卡洛树搜索的大致流程</a></li>
+            <li><a href="#向下搜索时的节点选择">向下搜索时的节点选择</a></li>
+            <li><a href="#对平局的处理">对平局的处理</a></li>
+          </ul>
+        </li>
+        <li><a href="#具体应用时的优化方式">具体应用时的优化方式</a>
+          <ul>
+            <li><a href="#使用启发式估价函数">使用启发式估价函数</a></li>
+            <li><a href="#限制搜索的深度以及每个节点的度数">限制搜索的深度以及每个节点的度数</a></li>
+            <li><a href="#在不同落子顺序的相同局面之间共享搜索结果">在不同落子顺序的相同局面之间共享搜索结果</a></li>
+            <li><a href="#多线程计算">多线程计算</a></li>
+            <li><a href="#使用深度学习对未访问节点进行模拟">使用深度学习对未访问节点进行模拟</a></li>
+          </ul>
+        </li>
+        <li><a href="#蒙特卡洛树搜索的优缺点">蒙特卡洛树搜索的优缺点</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+  <div class="post-outdated">
+    <div class="hint">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2021-08-18T23:08:19" title="August 18, 2021">August 18, 2021</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
+    <div class="post-content">
+      <p>蒙特卡洛树搜索（英语：Monte Carlo tree search；简称：MCTS）是一种用于某些决策过程的启发式搜索算法，最引人注目的是在游戏中的使用。一个主要例子是电脑围棋程序，它也用于其他棋盘游戏、即时电子游戏以及不确定性游戏。</p>
+<p>本文所述的蒙特卡洛树搜索可能不是最原始最标准的版本。</p>
+<h2 id="蒙特卡洛树搜索">蒙特卡洛树搜索</h2>
+<h3 id="蒙特卡洛树">蒙特卡洛树</h3>
+<p>和暴搜 / Min-Max 搜索类似，蒙特卡洛树也是这样一棵搜索树：每个节点代表一个游戏局面（包括每个棋子的位置、当前的先后手等信息），根节点代表当前局面（待决策的局面），叶节点代表游戏结束时的局面，每个节点的子节点代表其后继局面。</p>
+<p>除此之外，蒙特卡洛树的每个节点还会记录搜索过程中当前节点被访问到的次数和对于父节点而言的胜利次数。</p>
+<p>在实际编写程序时，当然是无法将整棵搜索树建出来的。只需建出访问过的节点所构成的这部分搜索树，并在需要访问子节点时计算出子节点有哪些即可。</p>
+<h3 id="蒙特卡洛树搜索的大致流程">蒙特卡洛树搜索的大致流程</h3>
+<p>每次搜索是从根节点起向下进行搜索，直到访问到某个叶节点为止。在向下搜索的过程中，会根据后文所述的方法选择访问哪个子节点。</p>
+<p>到了叶节点后，会向上更新这次搜索所经过的路径上的每个节点的被访问次数和胜利次数。例如，一次搜索的结果是叶节点处黑棋获胜，那么这条搜索路径上每个节点的被访问次数都加一，其中每个白先的节点的“对于父节点而言的胜利次数”加一。</p>
+<p>蒙特卡洛树搜索基于这样一个设定：每次搜索其实就是在模拟玩家的选择，搜索时某个子节点的被访问次数更多，实际游戏中选择这个子节点就更优；而搜索次数越多，对玩家最优选择的模拟就越准确。这样的话，当搜索次数足够多时，每次选择都是对于当前节点的先手玩家而言最优的，就收敛到了 Min-Max 搜索。</p>
+<p>因此，在决策时，会先进行尽量多次搜索（例如，到了时间限制就停止搜索），然后选择根节点的子节点中被访问次数最多的。</p>
+<h3 id="向下搜索时的节点选择">向下搜索时的节点选择</h3>
+<p>在理想状态下，应当选择胜率最高的子节点进行搜索。但是，只有有了足够多的搜索次数，才能较为准确地估计每个节点的胜率。于是，选择子节点时要在开发（搜索被访问次数较少的节点）与利用（选择胜率高的节点）之间进行权衡。根据前人的研究，一般会基于如下规则选择要访问的子节点：</p>
+<ol>
+<li>
+<p>如果存在没有被访问过的子节点，在这些节点中随机选择一个；</p>
+</li>
+<li>
+<p>如果所有子节点都被访问过，根据下面这个公式选择要移动到的子节点：</p>
+<p>$$
+v \text{ is a child of } u, \mathrm{UCT}(v) = \frac{w_v}{n_v}+c\sqrt{\frac{\ln n_u}{n_v}}
+$$</p>
+<p>其中，$w_v$ 表示节点 $v$ <strong>对于节点 $u$（的先手玩家）而言</strong> 的胜利次数，$n_x$ 表示节点 $x$ 被搜索的次数，而 $c$ 是一个常数，一般取 $\sqrt 2$ 左右，可以根据实际情况调参。</p>
+<p>这个公式的意义在于：前半部分是胜率，而后半部分是一个访问次数越少值越大的函数。于是，选择 UCT 最高的子节点，就可以做好开发与利用之间的平衡。</p>
+</li>
+</ol>
+<h3 id="对平局的处理">对平局的处理</h3>
+<p>当遇到平局时，有两种处理方式：1. 将双方的胜利次数各增加 0.5；2. 均匀随机地选择一个玩家获胜。</p>
+<h2 id="具体应用时的优化方式">具体应用时的优化方式</h2>
+<h3 id="使用启发式估价函数">使用启发式估价函数</h3>
+<p>在有未访问的子节点时，比起完全随机地选择，也可以根据启发式估价函数来优先选择更好的子节点。一般来说，只要根据估价函数将子节点排序，然后按顺序依次选择未访问的子节点即可。可以在排序前进行 <code>random_shuffle</code> 以在估价相同的子节点中随机选择。</p>
+<p>除此之外，也可以修改 UCT 的计算方式，使估价影响 UCT 的值。</p>
+<h3 id="限制搜索的深度以及每个节点的度数">限制搜索的深度以及每个节点的度数</h3>
+<p>虽然 MCTS 对随机采样的利用使其能够在较大的搜索空间内搜索，但如果搜索空间太大，实际上很多时候就是纯随机。此时，如果限制搜索的深度以及每个节点的度数，就能减小搜索空间，使得节点更加充分地被访问，可能能够更加准确地估计每个节点的胜率。</p>
+<p>限制深度时，可以视具体游戏而定，将达到深度的节点视作平局或者依据局面来估测获胜的玩家。</p>
+<h3 id="在不同落子顺序的相同局面之间共享搜索结果">在不同落子顺序的相同局面之间共享搜索结果</h3>
+<p>在搜索树中，每个节点代表的不仅是游戏局面，还是落子顺序。因此，对一个游戏局面的模拟可能能够应用到多个节点上。</p>
+<h3 id="多线程计算">多线程计算</h3>
+<p>由于蒙特卡洛树搜索是由多次搜索合并而成的，多线程计算非常容易。最容易实现的多线程计算方式是，构建多棵蒙特卡洛树，分别在上面搜索，最后将根节点的子节点的被访问次数合并，再进行选择。</p>
+<h3 id="使用深度学习对未访问节点进行模拟">使用深度学习对未访问节点进行模拟</h3>
+<p>你可以问问 DeepMind 的工程师这个具体怎么操作（x</p>
+<h2 id="蒙特卡洛树搜索的优缺点">蒙特卡洛树搜索的优缺点</h2>
+<p>MCTS 最主要的优点有两点：</p>
+<ol>
+<li>如果你完全不会一个游戏，只知道它的规则，也可以使用 MCTS。而 Min-Max 搜索必须有一个估价函数。当然，如果完全使用原始的基于随机选择的 MCTS，棋力不一定足够高。<del>（学会MCTS 后：我要在 Botzone 上混分！实际上：如果没有估价函数还是不太混的到分&hellip;）</del></li>
+<li>由于对随机采样的利用，可以胜任较大的搜索空间。</li>
+</ol>
+<p>但是，如果在某个局面下，大多数下法都会输，只有一步妙招能赢，由于 MCTS 的随机采样，可能会认为这个局面必输。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        <span title="2021-08-18 23:08:19 &#43;0800 &#43;0800">2021-08-18</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/076b6e2004eff5d0812366cae2156a291557a2d2" title="feat: add MCTS" target="_blank">(076b6e2)</a>
+        ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/monte-carlo-tree-search.md" target="_blank">更新历史</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/wechat-donate.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/alipay-donate.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/">博弈论</a>
+          <a href="/tags/botzone/">Botzone</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/typescript-subtype-principle-exceptions-and-operations/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">TypeScript 中子类型判定的基本原则，特例，以及相关操作</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/implication-and-forall/">
+            <span class="next-text nav-default">实质条件与全称量词</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+  <div class="comments">
+    <div class="loading post">
+      <img src="/img/spinner.svg">
+      <p class="post-content">
+        评论正在加载中...如果评论较长时间无法加载，你可以
+        <a href='https://github.com/ouuan/blog-comments/issues?q=is%3Aissue+is%3Aopen+"%e8%92%99%e7%89%b9%e5%8d%a1%e6%b4%9b%e6%a0%91%e6%90%9c%e7%b4%a2%ef%bc%88MCTS%ef%bc%89%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2"' target="_blank">搜索对应的 issue</a>
+        或者
+        <a href="https://github.com/ouuan/blog-comments/issues/new?title=%e8%92%99%e7%89%b9%e5%8d%a1%e6%b4%9b%e6%a0%91%e6%90%9c%e7%b4%a2%ef%bc%88MCTS%ef%bc%89%e5%ad%a6%e4%b9%a0%e7%ac%94%e8%ae%b0 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2" target="_blank">新建一个 issue</a>
+        。
+      </p>
+    </div>
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/blog-comments"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>请启用 JavaScript 来查看评论。</a></noscript>
+  </div>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:ouuansteve@gmail.com" class="iconfont icon-email" title="email" target="_blank"></a>
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+      <a href="https://twitter.com/ouuan" class="iconfont icon-twitter" title="twitter" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ouuan/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2022
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span> 
+    <span class="author">ouuan</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/highlight.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/styles/tomorrow.min.css" rel="stylesheet"/>
+  <script>hljs.configure({tabReplace: '    '});</script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/slideout/1.0.1/slideout.min.js" crossorigin="anonymous"></script>
+
+
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.locales.min.js" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.85ad50502df0a718821e6776a9cb854d4a8abf64981e94053598daba712a9022.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" crossorigin="anonymous"></script>
+
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

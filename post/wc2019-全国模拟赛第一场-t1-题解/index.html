@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>WC2019 全国模拟赛第一场 T1 题解 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="由于只会T1，没法写游记，只好来写题解了&amp;hellip; 题目链接 题目大意 给你一个数列，每次可以任取两个不相交的区间，取一次的贡献是这两个区间" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/wc2019-%E5%85%A8%E5%9B%BD%E6%A8%A1%E6%8B%9F%E8%B5%9B%E7%AC%AC%E4%B8%80%E5%9C%BA-t1-%E9%A2%98%E8%A7%A3/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.3004a145db73ba341ebe1a3790ea2c0166b56dc0378485b385563682aa10c6b2.css" rel="stylesheet">
+
+
+
+
+
+<meta property="og:title" content="WC2019 全国模拟赛第一场 T1 题解" />
+<meta property="og:description" content="由于只会T1，没法写游记，只好来写题解了&hellip; 题目链接 题目大意 给你一个数列，每次可以任取两个不相交的区间，取一次的贡献是这两个区间" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/wc2019-%E5%85%A8%E5%9B%BD%E6%A8%A1%E6%8B%9F%E8%B5%9B%E7%AC%AC%E4%B8%80%E5%9C%BA-t1-%E9%A2%98%E8%A7%A3/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-12-04T20:29:47+08:00" />
+<meta property="article:modified_time" content="2020-02-08T18:37:53+08:00" />
+
+<meta itemprop="name" content="WC2019 全国模拟赛第一场 T1 题解">
+<meta itemprop="description" content="由于只会T1，没法写游记，只好来写题解了&hellip; 题目链接 题目大意 给你一个数列，每次可以任取两个不相交的区间，取一次的贡献是这两个区间"><meta itemprop="datePublished" content="2018-12-04T20:29:47+08:00" />
+<meta itemprop="dateModified" content="2020-02-08T18:37:53+08:00" />
+<meta itemprop="wordCount" content="1171">
+<meta itemprop="keywords" content="noi.ac," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="WC2019 全国模拟赛第一场 T1 题解"/>
+<meta name="twitter:description" content="由于只会T1，没法写游记，只好来写题解了&hellip; 题目链接 题目大意 给你一个数列，每次可以任取两个不相交的区间，取一次的贡献是这两个区间"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/ranking/">
+        <li class="mobile-menu-item">排行</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/ranking/">排行</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">WC2019 全国模拟赛第一场 T1 题解</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2018-12-04 20:29:47 &#43;0800 &#43;0800"> 2018-12-04 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#题目大意">题目大意</a></li>
+        <li><a href="#on4-做法">$O(n^4)$ 做法</a></li>
+        <li><a href="#onlogn-做法">$O(nlogn)$ 做法</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+  <div class="post-outdated">
+    <div class="warn">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2020-02-08T18:37:53" title="February 8, 2020">February 8, 2020</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
+    <div class="post-content">
+      <p>由于只会T1，没法写游记，只好来写题解了&hellip;</p>
+<p><a href="http://noi.ac/problem/26">题目链接</a></p>
+<h2 id="题目大意">题目大意</h2>
+<p>给你一个数列，每次可以任取两个不相交的区间，取一次的贡献是这两个区间里所有数的最小值，求所有取法的贡献和，对 $10^9+7$ 取模。</p>
+<p>数列长度 $2\times 10^5$ ，值域 $1$ ~ $10^9$ 。</p>
+<!-- more -->
+<h2 id="on4-做法">$O(n^4)$ 做法</h2>
+<p>预处理区间最小值，枚举选的两个区间。</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int M=1000000007;
+
+int n,a[60][60],ans;
+
+int main()
+{
+    int i,j,k,l;
+
+    cin&gt;&gt;n;
+
+    for (i=1;i&lt;=n;++i)
+    {
+        cin&gt;&gt;a[i][i];
+    }
+
+    for (i=1;i&lt;n;++i)
+    {
+        for (j=i+1;j&lt;=n;++j)
+        {
+            a[i][j]=min(a[i][j-1],a[j][j]);
+        }
+    }
+
+    for (i=1;i&lt;n;++i)
+    {
+        for (j=i;j&lt;n;++j)
+        {
+            for (k=j+1;k&lt;=n;++k)
+            {
+                for (l=k;l&lt;=n;++l)
+                {
+                    ans=(ans+min(a[i][j],a[k][l]))%M;
+                }
+            }
+        }
+    }
+
+    cout&lt;&lt;ans;
+
+    return 0;
+}
+</code></pre>
+<h2 id="onlogn-做法">$O(nlogn)$ 做法</h2>
+<blockquote>
+<p>warning：接下来的文章里“的”字嵌套情况非常严重，文字叙述比较繁杂，看不懂十分正常，建议看懂一小部分然后自己推。</p>
+</blockquote>
+<p>考虑每个元素作为贡献的区间是哪些，为了把每个区间分给唯一的元素，规定一个区间的贡献是最小值里最靠左的（ e.g. <code>4 3 2 4 2 2</code> 的贡献是 $3$ 号元素，即最左边的 $2$ ）。所以，可以利用栈在 $O(n)$ 的时间内预处理出每个元素作为贡献的区间的左端点和右端点的范围：</p>
+<pre><code class="language-cpp">for (i=1;i&lt;=n;++i)
+{
+    while (top&amp;&amp;a[sta[top]].w&gt;a[i].w)
+    {
+        a[sta[top--]].r=i-1;
+    }
+    sta[++top]=i;
+}
+
+while (top)
+{
+    a[sta[top--]].r=n;
+}
+
+for (i=n;i&gt;=1;--i)
+{
+    while (top&amp;&amp;a[sta[top]].w&gt;=a[i].w)
+    {
+        a[sta[top--]].l=i+1;
+    }
+    sta[++top]=i;
+}
+
+while (top)
+{
+    a[sta[top--]].l=1;
+}
+</code></pre>
+<p>每个元素作为贡献的区间就是 $[x,y] (l_i\le x\le i\le y\le r_i)$，每个元素作为贡献的区间数就是 $t_i=(i-l_i+1)\times(r_i-i+1)$ 。</p>
+<p>然后，将元素按值从大到小排序，就能计算出区间数的后缀和 $suf[i]$，但一个元素的总贡献并不是 $t_i\times suf[i+1]$，因为这些区间可能与当前元素作为贡献的区间相交。</p>
+<p>注意到，要想和当前元素作为贡献的区间相交，必须 $[x,y] (l_i\le x\le y\le r_i)$ ，而这样的区间除了当前元素作为贡献的区间，贡献都排在当前元素之后（值比当前元素大或值相等但位置靠后），所以这样的区间除了当前元素作为贡献的区间，都是我们要找的与当前元素作为贡献的区间相交的贡献更靠后的区间。</p>
+<blockquote>
+<p>注：下面这段话中“相交的区间对”指（与当前元素作为贡献的区间相交的贡献更靠后的区间，当前元素作为贡献的区间）这样的一对区间；“相交的区间”指与当前元素作为贡献的区间相交的贡献更靠后的区间。</p>
+</blockquote>
+<p>接下来就要计算相交的区间有多少对。首先，相交的区间不可能跨过当前元素，否则就是当前元素作为贡献的区间；所以，相交的区间要么是 $[x,y] (l_i\le x\le y&lt;i)$ ，要么是 $[x,y] (i&lt;x\le y\le r_i)$。先计算 $[x,y] (l_i\le x\le y&lt;i)$ 与当前元素作为贡献的区间相交的对数，先考虑 $y$ 固定时，个数为 $(r_i-i+1)\times(y-l_i+1)^2$ ，其中：$y-l_i+1$ 既是相交的区间左端点的个数，也是与相交的区间相交的当前元素作为贡献的区间的左端点的个数；$r_i-i+1$ 是与相交的区间相交的当前元素作为贡献的区间的右端点的个数。所以，总数是 $(r_i-i+1)\times\sum\limits_{y=l_i}^{i-1}(y-l_i+1)^2$ ，乘号右边是自然数平方和，可以用公式计算，所以就是 $(r_i-i+1)\times\frac{(i-l_i)\times(i-l_i+1)\times(2i-2l_i+1)}6$ 。$[x,y] (i&lt;x\le y\le r_i)$ 同理，总数为 $(i-l_i+1)\times\frac{(r_i-i)\times(r_i-i+1)\times(2r_i-2i+1)}6$ 。</p>
+<p>所以，把相交的总对数减掉就可以了。</p>
+<p>参考代码：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cctype&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+int read()
+{
+    int out=0;
+    char c;
+    while (!isdigit(c=getchar()));
+    for (;isdigit(c);c=getchar())
+    {
+        out=out*10+c-'0';
+    }
+    return out;
+}
+
+const int N=200010;
+const int M=1000000007;
+const int SIX=166666668; //6模1e9+7的逆元
+
+struct Node
+{
+    long long id,w,l,r,t;
+    bool operator&lt;(const Node&amp; b) const
+    {
+        return w&lt;b.w;
+    }
+} a[N];
+
+long long n,suf[N],sta[N],top,ans;
+
+int main()
+{
+    int i;
+
+    n=read();
+
+    for (i=1;i&lt;=n;++i)
+    {
+        a[i].w=read();
+        a[i].id=i;
+    }
+
+    for (i=1;i&lt;=n;++i)
+    {
+        while (top&amp;&amp;a[sta[top]].w&gt;a[i].w)
+        {
+            a[sta[top--]].r=i-1;
+        }
+        sta[++top]=i;
+    }
+
+    while (top)
+    {
+        a[sta[top--]].r=n;
+    }
+
+    for (i=n;i&gt;=1;--i)
+    {
+        while (top&amp;&amp;a[sta[top]].w&gt;=a[i].w)
+        {
+            a[sta[top--]].l=i+1;
+        }
+        sta[++top]=i;
+    }
+
+    while (top)
+    {
+        a[sta[top--]].l=1;
+    }
+
+    for (i=1;i&lt;=n;++i)
+    {
+        a[i].t=(i-a[i].l+1)*(a[i].r-i+1)%M;
+    }
+
+    sort(a+1,a+n+1);
+
+    for (i=n;i&gt;=1;--i)
+    {
+        suf[i]=(suf[i+1]+a[i].t)%M;
+    }
+
+    for (i=1;i&lt;=n;++i)
+    {
+        ans=(ans+(a[i].w*suf[i+1]%M)*a[i].t)%M;
+        ans=(ans-(a[i].id-a[i].l)*(a[i].id-a[i].l+1)%M*(2*a[i].id-2*a[i].l+1)%M*SIX%M*(a[i].r-a[i].id+1)%M*a[i].w%M+M)%M; //重复区间在左
+        ans=(ans-(a[i].r-a[i].id)*(a[i].r-a[i].id+1)%M*(2*a[i].r-2*a[i].id+1)%M*SIX%M*(a[i].id-a[i].l+1)%M*a[i].w%M+M)%M; //重复区间在右
+    }
+
+    cout&lt;&lt;ans;
+
+    return 0;
+}
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        <span title="2020-02-08 18:37:53 &#43;0800 &#43;0800">2020-02-08</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/da8aa41962b5f5a65348e9b2f49d8519daa2fc8d" title="Add aliases" target="_blank">(da8aa41)</a>
+        ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/WC2019-%e5%85%a8%e5%9b%bd%e6%a8%a1%e6%8b%9f%e8%b5%9b%e7%ac%ac%e4%b8%80%e5%9c%ba-T1-%e9%a2%98%e8%a7%a3.md" target="_blank">更新历史</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/wechat-donate.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/alipay-donate.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/noi.ac/">noi.ac</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">hexo博客搭建指北</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/%E6%A0%91%E4%B8%8A%E8%83%8C%E5%8C%85%E7%9A%84%E4%B8%8A%E4%B8%8B%E7%95%8C%E4%BC%98%E5%8C%96/">
+            <span class="next-text nav-default">树上背包的上下界优化</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+  <div class="comments">
+    <div class="loading post">
+      <img src="/img/spinner.svg">
+      <p class="post-content">
+        评论正在加载中...如果评论较长时间无法加载，你可以
+        <a href='https://github.com/ouuan/blog-comments/issues?q=is%3Aissue+is%3Aopen+"WC2019%20%e5%85%a8%e5%9b%bd%e6%a8%a1%e6%8b%9f%e8%b5%9b%e7%ac%ac%e4%b8%80%e5%9c%ba%20T1%20%e9%a2%98%e8%a7%a3 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2"' target="_blank">搜索对应的 issue</a>
+        或者
+        <a href="https://github.com/ouuan/blog-comments/issues/new?title=WC2019%20%e5%85%a8%e5%9b%bd%e6%a8%a1%e6%8b%9f%e8%b5%9b%e7%ac%ac%e4%b8%80%e5%9c%ba%20T1%20%e9%a2%98%e8%a7%a3 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2" target="_blank">新建一个 issue</a>
+        。
+      </p>
+    </div>
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/blog-comments"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>请启用 JavaScript 来查看评论。</a></noscript>
+  </div>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:ouuansteve@gmail.com" class="iconfont icon-email" title="email" target="_blank"></a>
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+      <a href="https://twitter.com/ouuan" class="iconfont icon-twitter" title="twitter" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ouuan/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2022
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span> 
+    <span class="author">ouuan</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/highlight.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/styles/tomorrow.min.css" rel="stylesheet"/>
+  <script>hljs.configure({tabReplace: '    '});</script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/slideout/1.0.1/slideout.min.js" crossorigin="anonymous"></script>
+
+
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.locales.min.js" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.85ad50502df0a718821e6776a9cb854d4a8abf64981e94053598daba712a9022.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" crossorigin="anonymous"></script>
+
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>线性基 on ouuan的博客</title><link>https://ouuan.github.io/tags/%E7%BA%BF%E6%80%A7%E5%9F%BA/</link><description>Recent content in 线性基 on ouuan的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 16 Jun 2019 20:46:02 +0800</lastBuildDate><atom:link href="https://ouuan.github.io/tags/%E7%BA%BF%E6%80%A7%E5%9F%BA/index.xml" rel="self" type="application/rss+xml"/><item><title>BZOJ2115 [WC2011]最大XOR和路径（线性基，图论）</title><link>https://ouuan.github.io/post/bzoj2115-wc2011-%E6%9C%80%E5%A4%A7xor%E5%92%8C%E8%B7%AF%E5%BE%84%E7%BA%BF%E6%80%A7%E5%9F%BA%E5%9B%BE%E8%AE%BA/</link><pubDate>Sun, 16 Jun 2019 20:46:02 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj2115-wc2011-%E6%9C%80%E5%A4%A7xor%E5%92%8C%E8%B7%AF%E5%BE%84%E7%BA%BF%E6%80%A7%E5%9F%BA%E5%9B%BE%E8%AE%BA/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P4151">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://darkbzoj.tk/problem/2115">darkbzoj&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一张带边权的无向图，求 $1$ 到 $n$ 的边权异或和最大的路径。&lt;/p>
+&lt;p>点数 $5\times 10^4$，边数 $10^5$。&lt;/p></description></item><item><title>BZOJ2460 [BJWC2011]元素（线性基，贪心）</title><link>https://ouuan.github.io/post/bzoj2460-bjwc2011-%E5%85%83%E7%B4%A0%E7%BA%BF%E6%80%A7%E5%9F%BA%E8%B4%AA%E5%BF%83/</link><pubDate>Fri, 14 Jun 2019 22:00:27 +0800</pubDate><guid>https://ouuan.github.io/post/bzoj2460-bjwc2011-%E5%85%83%E7%B4%A0%E7%BA%BF%E6%80%A7%E5%9F%BA%E8%B4%AA%E5%BF%83/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/P4570">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="http://darkbzoj.tk/problem/2460">darkbzoj&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你 $n$ 个带权值的数（数和权值是两个东西），求一个权值最大的异或线性无关子集，即取这个子集的任意一个非空子集，异或和都不为零。&lt;/p>
+&lt;p>原题 $n\le1000$，实际上可以轻松 $n\le10^5$。数 $10^{18}$，权值 $10^4$。&lt;/p></description></item><item><title>线性基学习笔记</title><link>https://ouuan.github.io/post/%E7%BA%BF%E6%80%A7%E5%9F%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Wed, 12 Jun 2019 15:20:12 +0800</pubDate><guid>https://ouuan.github.io/post/%E7%BA%BF%E6%80%A7%E5%9F%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>&lt;p>又是在网上搜不到讲的比较清楚的博客的算法&amp;hellip;虽然没找到写的好的博客，但结合若干篇写的不算太差的博客，勉强是学会了..&lt;/p>
+&lt;p>线性基在 OI 中特指集合为若干个非负整数，运算为异或的线性基，通常用来处理一些异或相关的问题。&lt;/p></description></item></channel></rss>

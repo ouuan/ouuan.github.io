@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>二维莫队解题报告 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="我写的莫队教程 其实这是一道bzoj上的题（bzoj2639，貌似是权限题，反正我看不了），在YALI做模拟赛的时候遇到了. 然后在网上查到了几" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/%E4%BA%8C%E7%BB%B4%E8%8E%AB%E9%98%9F%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.3004a145db73ba341ebe1a3790ea2c0166b56dc0378485b385563682aa10c6b2.css" rel="stylesheet">
+
+
+
+
+
+<meta property="og:title" content="二维莫队解题报告" />
+<meta property="og:description" content="我写的莫队教程 其实这是一道bzoj上的题（bzoj2639，貌似是权限题，反正我看不了），在YALI做模拟赛的时候遇到了. 然后在网上查到了几" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/%E4%BA%8C%E7%BB%B4%E8%8E%AB%E9%98%9F%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-10-02T18:23:00+08:00" />
+<meta property="article:modified_time" content="2021-01-10T11:45:50+08:00" />
+
+<meta itemprop="name" content="二维莫队解题报告">
+<meta itemprop="description" content="我写的莫队教程 其实这是一道bzoj上的题（bzoj2639，貌似是权限题，反正我看不了），在YALI做模拟赛的时候遇到了. 然后在网上查到了几"><meta itemprop="datePublished" content="2018-10-02T18:23:00+08:00" />
+<meta itemprop="dateModified" content="2021-01-10T11:45:50+08:00" />
+<meta itemprop="wordCount" content="1134">
+<meta itemprop="keywords" content="莫队," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="二维莫队解题报告"/>
+<meta name="twitter:description" content="我写的莫队教程 其实这是一道bzoj上的题（bzoj2639，貌似是权限题，反正我看不了），在YALI做模拟赛的时候遇到了. 然后在网上查到了几"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/ranking/">
+        <li class="mobile-menu-item">排行</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/ranking/">排行</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">二维莫队解题报告</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2018-10-02 18:23:00 &#43;0800 &#43;0800"> 2018-10-02 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#题目大意">题目大意</a></li>
+        <li><a href="#做法简述">做法简述</a></li>
+        <li><a href="#答案更新">答案更新</a></li>
+        <li><a href="#分块大小">分块大小</a></li>
+        <li><a href="#初始子矩阵">初始子矩阵</a></li>
+        <li><a href="#参考代码">参考代码</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+  <div class="post-outdated">
+    <div class="hint">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2021-01-10T11:45:50" title="January 10, 2021">January 10, 2021</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
+    <div class="post-content">
+      <p><a href="/post/%E8%8E%AB%E9%98%9F%E3%80%81%E5%B8%A6%E4%BF%AE%E8%8E%AB%E9%98%9F%E3%80%81%E6%A0%91%E4%B8%8A%E8%8E%AB%E9%98%9F%E8%AF%A6%E8%A7%A3">我写的莫队教程</a></p>
+<p>其实这是一道bzoj上的题（bzoj2639，貌似是权限题，反正我看不了），在YALI做模拟赛的时候遇到了.</p>
+<p>然后在网上查到了几篇关于这道题的博客，都和我的做法略有不同&hellip;</p>
+<h2 id="题目大意">题目大意</h2>
+<p>给你一个 $r*c$ 的矩阵，每个点有一个颜色， $m$ 个询问，每次询问一个子矩阵内，每种颜色出现次数的平方和。</p>
+<p>$r,c\le 200,m\le 100000$</p>
+<!-- more -->
+<h2 id="做法简述">做法简述</h2>
+<p>首先我们要明白，莫队究竟在干什么。</p>
+<p>莫队其实就是几个指针在那跳来跳去，每跳一步都需要一定的时间，通过对询问排序使得指针跳的总次数尽量小。</p>
+<p>所以，这题中询问为 $(x_1,y_1,x_2,y_2)$ ，也就是四个指针在那跳，分别分块再排序就可以了，即：</p>
+<pre><code class="language-cpp">//为避免和cmath库中的y0y1重名，下文中代码内的x1,y1,x2,y2都用x,y,xx,yy代替
+struct Query
+{
+    int x,y,xx,yy,id;
+    bool operator&lt;(Query&amp; b)
+    {
+        return x/B==b.x/B?(y/B==b.y/B?(xx/B==b.xx/B?yy&lt;b.yy:xx&lt;b.xx):y&lt;b.y):x&lt;b.x; //B为分块大小
+    }
+} q[M];
+</code></pre>
+<h2 id="答案更新">答案更新</h2>
+<p>一般的莫队都是 $O(1)$ 更新答案的，然而这题是 $O(n)$ （用 $n$ 代表 $r,c$ ） 更新。</p>
+<p>移动指针的时候，把一排一起修改。</p>
+<p>需要注意的是，8个while的顺序如果排列不当在某些情况下会导致答案出错，所以最好是将所有add都放在del前面（实际上有多种排列顺序都可以在不进行“反操作”的情况下保证答案正确，所有add放在del前面只是其中一种），或者是对“反区间”进行“反操作”。</p>
+<p>所谓“反区间”，如：修改 $x_1$ 指针时，本应进行add操作，而此时$y_1&gt;y_2+1$，那么就要将 $(y_2,y_1)$ 这个开区间内的所有点进行del。</p>
+<p>while的排列顺序得当可以使“反区间”不可能出现。</p>
+<p>“反操作”参考代码：</p>
+<pre><code class="language-cpp">while (x&lt;q[i].x)
+{
+    for (j=y;j&lt;=yy;++j)
+    {
+        del(a[x][j]);
+    }
+    for (j=yy+1;j&lt;y;++j)
+    {
+        add(a[x][j]);
+    }
+    ++x;
+}
+while (y&lt;q[i].y)
+{
+    for (j=x;j&lt;=xx;++j)
+    {
+        del(a[j][y]);
+    }
+    for (j=xx+1;j&lt;x;++j)
+    {
+        add(a[j][y]);
+    }
+    ++y;
+}
+while (xx&gt;q[i].xx)
+{
+    for (j=y;j&lt;=yy;++j)
+    {
+        del(a[xx][j]);
+    }
+    for (j=yy+1;j&lt;y;++j)
+    {
+        add(a[xx][j]);
+    }
+    --xx;
+}
+while (yy&gt;q[i].yy)
+{
+    for (j=x;j&lt;=xx;++j)
+    {
+        del(a[j][yy]);
+    }
+    for (j=xx+1;j&lt;x;++j)
+    {
+        add(a[j][yy]);
+    }
+    --yy;
+}
+while (x&gt;q[i].x)
+{
+    --x;
+    for (j=y;j&lt;=yy;++j)
+    {
+        add(a[x][j]);
+    }
+    for (j=yy+1;j&lt;y;++j)
+    {
+        del(a[x][j]);
+    }
+}
+while (y&gt;q[i].y)
+{
+    --y;
+    for (j=x;j&lt;=xx;++j)
+    {
+        add(a[j][y]);
+    }
+    for (j=xx+1;j&lt;x;++j)
+    {
+        del(a[j][y]);
+    }
+}
+while (xx&lt;q[i].xx)
+{
+    ++xx;
+    for (j=y;j&lt;=yy;++j)
+    {
+        add(a[xx][j]);
+    }
+    for (j=yy+1;j&lt;y;++j)
+    {
+        del(a[xx][j]);
+    }
+}
+while (yy&lt;q[i].yy)
+{
+    ++yy;
+    for (j=x;j&lt;=xx;++j)
+    {
+        add(a[j][yy]);
+    }
+    for (j=xx+1;j&lt;x;++j)
+    {
+        del(a[j][yy]);
+    }
+}
+out[q[i].id]=ans;
+</code></pre>
+<h2 id="分块大小">分块大小</h2>
+<p>具体计算清楚非常复杂，这里只是估算一下.</p>
+<p>$x_1$ 指针的移动次数为 $O(mB)$，$y_2$ 指针的移动次数渐进复杂度中含有 $O\left(\frac{n^4}{B^3}\right)$，取 $mB=\frac{n^4}{B^3}$，得到 $B=nm^{-\frac{1}{4}}$</p>
+<p>总时间复杂度为 $O(mlogm+n^2m^{\frac{3}{4}})$</p>
+<p>反正这样的分块大小实测比 $\sqrt{n}$ 优秀&hellip;有兴趣的话可以严谨地算一算（如果发现我这个估算有问题可以直接在这篇博客下评论）</p>
+<h2 id="初始子矩阵">初始子矩阵</h2>
+<p>任意一个空矩阵就可以了，如 $x_1=y_1=1,x_2=y_2=0$</p>
+<h2 id="参考代码">参考代码</h2>
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+const int N=210;
+const int M=100010;
+
+void add(int x);
+void del(int x);
+
+int r,c,m,B,a[N][N],lsh[N*N],tot,cnt[N*N],ans,out[M];
+
+struct Query
+{
+    int x,y,xx,yy,id;
+    bool operator&lt;(Query&amp; b)
+    {
+        return x/B==b.x/B?(y/B==b.y/B?(xx/B==b.xx/B?yy&lt;b.yy:xx&lt;b.xx):y&lt;b.y):x&lt;b.x;
+    }
+} q[M];
+
+int main()
+{
+    int i,j,x=1,y=1,xx=0,yy=0;
+
+    cin&gt;&gt;r&gt;&gt;c&gt;&gt;m;
+
+    B=pow(r*c,0.5)/pow(m,0.25)+1.0;
+
+    for (i=1;i&lt;=r;++i)
+    {
+        for (j=1;j&lt;=c;++j)
+        {
+            cin&gt;&gt;a[i][j];
+            lsh[tot++]=a[i][j]; //这题要离散化
+        }
+    }
+
+    sort(lsh,lsh+tot);
+    tot=unique(lsh,lsh+tot)-lsh;
+
+    for (i=1;i&lt;=r;++i)
+    {
+        for (j=1;j&lt;=c;++j)
+        {
+            a[i][j]=lower_bound(lsh,lsh+tot,a[i][j])-lsh;
+        }
+    }
+
+    for (i=0;i&lt;m;++i)
+    {
+        cin&gt;&gt;q[i].x&gt;&gt;q[i].y&gt;&gt;q[i].xx&gt;&gt;q[i].yy;
+        q[i].id=i;
+    }
+
+    sort(q,q+m);
+
+    for (i=0;i&lt;m;++i)
+    {
+        while (x&gt;q[i].x)
+        {
+            --x;
+            for (j=y;j&lt;=yy;++j)
+            {
+                add(a[x][j]);
+            }
+        }
+        while (xx&lt;q[i].xx)
+        {
+            ++xx;
+            for (j=y;j&lt;=yy;++j)
+            {
+                add(a[xx][j]);
+            }
+        }
+        while (y&gt;q[i].y)
+        {
+            --y;
+            for (j=x;j&lt;=xx;++j)
+            {
+                add(a[j][y]);
+            }
+        }
+        while (yy&lt;q[i].yy)
+        {
+            ++yy;
+            for (j=x;j&lt;=xx;++j)
+            {
+                add(a[j][yy]);
+            }
+        }
+        while (x&lt;q[i].x)
+        {
+            for (j=y;j&lt;=yy;++j)
+            {
+                del(a[x][j]);
+            }
+            ++x;
+        }
+        while (xx&gt;q[i].xx)
+        {
+            for (j=y;j&lt;=yy;++j)
+            {
+                del(a[xx][j]);
+            }
+            --xx;
+        }
+        while (y&lt;q[i].y)
+        {
+            for (j=x;j&lt;=xx;++j)
+            {
+                del(a[j][y]);
+            }
+            ++y;
+        }
+        while (yy&gt;q[i].yy)
+        {
+            for (j=x;j&lt;=xx;++j)
+            {
+                del(a[j][yy]);
+            }
+            --yy;
+        }
+        out[q[i].id]=ans;
+    }
+
+    for (i=0;i&lt;m;++i)
+    {
+        cout&lt;&lt;out[i]&lt;&lt;endl;
+    }
+
+    return 0;
+}
+
+void add(int x)
+{
+    ans=ans+2*cnt[x]+1;
+    ++cnt[x];
+}
+
+void del(int x)
+{
+    ans=ans-2*cnt[x]+1;
+    --cnt[x];
+}
+</code></pre>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        <span title="2021-01-10 11:45:50 &#43;0800 &#43;0800">2021-01-10</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/74ce994137c63654e6b1b61def1dc148a79013c6" title="ci: deploy on Gitee" target="_blank">(74ce994)</a>
+        ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/%e4%ba%8c%e7%bb%b4%e8%8e%ab%e9%98%9f%e8%a7%a3%e9%a2%98%e6%8a%a5%e5%91%8a.md" target="_blank">更新历史</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/wechat-donate.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/alipay-donate.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E8%8E%AB%E9%98%9F/">莫队</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/noip2018%E6%8F%90%E9%AB%98%E7%BB%84%E6%B8%B8%E8%AE%B0/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">NOIp2018提高组游记</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/2018%E5%9B%BD%E5%BA%86yali%E9%9B%86%E8%AE%AD%E6%B8%B8%E8%AE%B0/">
+            <span class="next-text nav-default">2018国庆YALI集训游记</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+  <div class="comments">
+    <div class="loading post">
+      <img src="/img/spinner.svg">
+      <p class="post-content">
+        评论正在加载中...如果评论较长时间无法加载，你可以
+        <a href='https://github.com/ouuan/blog-comments/issues?q=is%3Aissue+is%3Aopen+"%e4%ba%8c%e7%bb%b4%e8%8e%ab%e9%98%9f%e8%a7%a3%e9%a2%98%e6%8a%a5%e5%91%8a - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2"' target="_blank">搜索对应的 issue</a>
+        或者
+        <a href="https://github.com/ouuan/blog-comments/issues/new?title=%e4%ba%8c%e7%bb%b4%e8%8e%ab%e9%98%9f%e8%a7%a3%e9%a2%98%e6%8a%a5%e5%91%8a - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2" target="_blank">新建一个 issue</a>
+        。
+      </p>
+    </div>
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/blog-comments"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>请启用 JavaScript 来查看评论。</a></noscript>
+  </div>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:ouuansteve@gmail.com" class="iconfont icon-email" title="email" target="_blank"></a>
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+      <a href="https://twitter.com/ouuan" class="iconfont icon-twitter" title="twitter" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ouuan/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2022
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span> 
+    <span class="author">ouuan</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/highlight.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/styles/tomorrow.min.css" rel="stylesheet"/>
+  <script>hljs.configure({tabReplace: '    '});</script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/slideout/1.0.1/slideout.min.js" crossorigin="anonymous"></script>
+
+
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.locales.min.js" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.85ad50502df0a718821e6776a9cb854d4a8abf64981e94053598daba712a9022.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" crossorigin="anonymous"></script>
+
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

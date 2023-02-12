@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>up and down on ouuan的博客</title><link>https://ouuan.github.io/tags/up-and-down/</link><description>Recent content in up and down on ouuan的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 10 Sep 2019 13:37:12 +0800</lastBuildDate><atom:link href="https://ouuan.github.io/tags/up-and-down/index.xml" rel="self" type="application/rss+xml"/><item><title>CF516D Drazil and Morning Exercise（up and down，并查集）</title><link>https://ouuan.github.io/post/cf516d-drazil-and-morning-exerciseup-and-down%E5%B9%B6%E6%9F%A5%E9%9B%86/</link><pubDate>Tue, 10 Sep 2019 13:37:12 +0800</pubDate><guid>https://ouuan.github.io/post/cf516d-drazil-and-morning-exerciseup-and-down%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="http://codeforces.com/contest/516/problem/D">CF&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.luogu.org/problem/CF516D">洛谷&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给定一棵 $n$ 个点带边权的树，定义 $d(u)$ 为树上离它最远的点到它的距离，$q$ 次询问，每次询问给定 $l$，求一个最大的树上连通块 $V'$ 的大小，满足 $\forall u, v\in V'$，$|d(u)-d(v)|\le l$。&lt;/p>
+&lt;p>$1\le n\le 10^5$, $1\le q\le 50$。&lt;/p></description></item><item><title>CF708C Centroids（树形dp，up and down）</title><link>https://ouuan.github.io/post/cf708c-centroids%E6%A0%91%E5%BD%A2dpup-and-down/</link><pubDate>Sun, 23 Jun 2019 21:34:21 +0800</pubDate><guid>https://ouuan.github.io/post/cf708c-centroids%E6%A0%91%E5%BD%A2dpup-and-down/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://codeforc.es/contest/708/problem/C">CF&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.luogu.org/problemnew/show/CF708C">洛谷&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一棵 $n$ 个点的树，对每个点，判断能否删去一条边再加上一条边，使得这个点成为树的重心。（树的重心：将其删去后每个联通块大小不超过 $\frac n 2$）&lt;/p>
+&lt;p>$2\le n\le 4\cdot10^5​$&lt;/p></description></item></channel></rss>

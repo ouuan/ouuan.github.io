@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>LCT on ouuan的博客</title><link>https://ouuan.github.io/tags/lct/</link><description>Recent content in LCT on ouuan的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 07 May 2020 20:58:54 +0800</lastBuildDate><atom:link href="https://ouuan.github.io/tags/lct/index.xml" rel="self" type="application/rss+xml"/><item><title>带修改的树上 DP 问题（动态 DP）</title><link>https://ouuan.github.io/post/tree-dp-with-modification/</link><pubDate>Thu, 07 May 2020 20:58:54 +0800</pubDate><guid>https://ouuan.github.io/post/tree-dp-with-modification/</guid><description>&lt;p>“动态 DP”通过树链剖分将带修改的树上 DP 问题拆分为规模更小的序列上的半群合并问题和树上 DP 问题，从而可以快速地支持修改。&lt;/p></description></item><item><title>「SDOI2017」树点涂色</title><link>https://ouuan.github.io/post/sdoi2017-%E6%A0%91%E7%82%B9%E6%B6%82%E8%89%B2/</link><pubDate>Fri, 17 Apr 2020 12:38:34 +0800</pubDate><guid>https://ouuan.github.io/post/sdoi2017-%E6%A0%91%E7%82%B9%E6%B6%82%E8%89%B2/</guid><description>&lt;p>&lt;a href="https://loj.ac/problem/2001">LOJ&lt;/a>&lt;/p>
+&lt;div class="admonition question">
+&lt;p class="admonition-title">题目描述&lt;/p>
+&lt;p>给你一棵有根树，一开始每个点都有不同的颜色。有三种操作：&lt;/p>
+&lt;ol>
+&lt;li>给定 $x$，将 $x$ 到根的路径修改为一种当前树上没有出现的颜色。&lt;/li>
+&lt;li>给定 $x$ 和 $y$，询问 $x$ 到 $y$ 的路径上不同颜色的数量。&lt;/li>
+&lt;li>给定 $x$，令一个点的权值为它到根路径上不同颜色的数量，求子树 $x$ 中的最大权值。&lt;/li>
+&lt;/ol>
+&lt;p>点数和操作数 $10^5$。&lt;/p>
+&lt;/div></description></item><item><title>「HNOI2010」城市建设（线段树分治，LCT/Kruskal）</title><link>https://ouuan.github.io/post/hnoi2010-%E5%9F%8E%E5%B8%82%E5%BB%BA%E8%AE%BE/</link><pubDate>Wed, 26 Feb 2020 23:12:33 +0800</pubDate><guid>https://ouuan.github.io/post/hnoi2010-%E5%9F%8E%E5%B8%82%E5%BB%BA%E8%AE%BE/</guid><description>&lt;p>&lt;a href="https://www.luogu.com.cn/problem/P3206">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.lydsy.com/JudgeOnline/problem.php?id=2001">BZOJ&lt;/a>&lt;/p>
+&lt;div class="admonition question">
+&lt;p class="admonition-title">题目描述&lt;/p>
+&lt;p>给你一张边带权的无向连通图，多次修改，每次修改一条边的边权，每次修改完后求最小生成树的边权之和。&lt;/p>
+&lt;p>点数 $2\cdot 10^4$, 边数和修改数 $5\cdot 10^4$，时限 3s。&lt;/p>
+&lt;/div></description></item><item><title>CF603E Pastoral Oddities（结论，LCT/分治+并查集）</title><link>https://ouuan.github.io/post/cf603e/</link><pubDate>Tue, 18 Feb 2020 11:45:02 +0800</pubDate><guid>https://ouuan.github.io/post/cf603e/</guid><description>&lt;p>&lt;a href="https://codeforces.com/contest/603/problem/E">题目链接&lt;/a>&lt;/p>
+&lt;div class="admonition question">
+&lt;p class="admonition-title">题意简述&lt;/p>
+&lt;p>给你一张边带权且边从 $1$ 到 $m$ 编号的无向图 $G$，称一张图 $H$ 是“好的”，当且仅当存在一个 $H$ 的生成子图 $F$ 使得 $F$ 中每个点的度数都是奇数。现在，你需要回答 $m$ 个问题，第 $i$ 个问题是：求最小的 $x$，使得仅保留 $G$ 中编号不超过 $i$ 且边权不超过 $x$ 的边时，得到的生成子图是“好的”，或者指出不存在这样的 $x$。&lt;/p>
+&lt;p>$2\le n\le 10^5$, $1\le m\le 3\cdot 10^5$, TL 4s。&lt;/p>
+&lt;/div></description></item></channel></rss>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>BZOJ4516 [SDOI2016]生成魔咒（SAM） - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="题目链接 洛谷
+dark bzoj
+题意简述 给你一个字符串（字符集大小 $10^9$，长度 $10^5$），求每个前缀的本质不同子串数。
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/bzoj4516-sdoi2016-%E7%94%9F%E6%88%90%E9%AD%94%E5%92%92sam/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.3004a145db73ba341ebe1a3790ea2c0166b56dc0378485b385563682aa10c6b2.css" rel="stylesheet">
+
+
+
+
+
+<meta property="og:title" content="BZOJ4516 [SDOI2016]生成魔咒（SAM）" />
+<meta property="og:description" content="题目链接
+洛谷
+dark bzoj
+题意简述
+给你一个字符串（字符集大小 $10^9$，长度 $10^5$），求每个前缀的本质不同子串数。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/bzoj4516-sdoi2016-%E7%94%9F%E6%88%90%E9%AD%94%E5%92%92sam/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-02-21T14:10:35+08:00" />
+<meta property="article:modified_time" content="2020-02-08T18:37:53+08:00" />
+
+<meta itemprop="name" content="BZOJ4516 [SDOI2016]生成魔咒（SAM）">
+<meta itemprop="description" content="题目链接
+洛谷
+dark bzoj
+题意简述
+给你一个字符串（字符集大小 $10^9$，长度 $10^5$），求每个前缀的本质不同子串数。"><meta itemprop="datePublished" content="2019-02-21T14:10:35+08:00" />
+<meta itemprop="dateModified" content="2020-02-08T18:37:53+08:00" />
+<meta itemprop="wordCount" content="437">
+<meta itemprop="keywords" content="字符串,SAM," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="BZOJ4516 [SDOI2016]生成魔咒（SAM）"/>
+<meta name="twitter:description" content="题目链接
+洛谷
+dark bzoj
+题意简述
+给你一个字符串（字符集大小 $10^9$，长度 $10^5$），求每个前缀的本质不同子串数。"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/ranking/">
+        <li class="mobile-menu-item">排行</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/ranking/">排行</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">BZOJ4516 [SDOI2016]生成魔咒（SAM）</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2019-02-21 14:10:35 &#43;0800 &#43;0800"> 2019-02-21 </span>
+        <div class="post-category">
+            <a href="/categories/%E9%A2%98%E8%A7%A3/"> 题解 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#题目链接">题目链接</a></li>
+    <li><a href="#题意简述">题意简述</a></li>
+    <li><a href="#简要做法">简要做法</a></li>
+    <li><a href="#参考代码">参考代码</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+  <div class="post-outdated">
+    <div class="warn">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2020-02-08T18:37:53" title="February 8, 2020">February 8, 2020</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
+    <div class="post-content">
+      <h1 id="题目链接">题目链接</h1>
+<p><a href="https://www.luogu.org/problemnew/show/P4070">洛谷</a></p>
+<p><a href="https://darkbzoj.tk/problem/4516">dark bzoj</a></p>
+<h1 id="题意简述">题意简述</h1>
+<p>给你一个字符串（字符集大小 $10^9$，长度 $10^5$），求每个前缀的本质不同子串数。</p>
+<h1 id="简要做法">简要做法</h1>
+<p>如果只求整个串的本质不同子串，由于每个本质不同子串可以与 SAM 上一个状态+串的长度一一对应，所以本质不同子串数就是每个状态的 $maxlen-minlen+1$，也就是 $len-parent.len$。</p>
+<p>$parent$ 不改变时，逐个加入字符并计算即可。</p>
+<p>考虑 $parent$ 改变的情况，四次 $parent$ 改变分别为 $nq-q.parent$，$-(q-q.parent)$，$q-nq$，$np-nq$。总贡献为 $nq-q.parent-q+q.parent+q-nq+np-nq=np-nq$，也是新加入的点的 $len$ 减去 $parent.len$，是一样的。</p>
+<p>由于字符集较大，用 <code>map</code> 存边。</p>
+<h1 id="参考代码">参考代码</h1>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;map&gt;
+#include &lt;cctype&gt;
+
+using namespace std;
+
+typedef long long ll;
+
+int read()
+{
+    int out=0;
+    char c;
+    while (!isdigit(c=getchar()));
+    for (;isdigit(c);c=getchar()) out=out*10+c-'0';
+    return out;
+}
+
+const int N=100010;
+
+struct Node
+{
+    int len,par;
+    map&lt;int,int&gt; ch;
+} sam[N&lt;&lt;1];
+
+void insert(int x);
+
+int n,p,tot;
+ll ans;
+
+int main()
+{
+    int i;
+
+    n=read();
+
+    sam[0].par=-1;
+
+    for (i=1;i&lt;=n;++i)
+    {
+        insert(read());
+        printf(&quot;%lld\n&quot;,ans);
+    }
+
+    return 0;
+}
+
+void insert(int x)
+{
+    int np=++tot;
+    sam[np].len=sam[p].len+1;
+    while (~p&amp;&amp;sam[p].ch.find(x)==sam[p].ch.end())
+    {
+        sam[p].ch[x]=np;
+        p=sam[p].par;
+    }
+    if (p==-1) sam[np].par=0;
+    else
+    {
+        int q=sam[p].ch[x];
+        if (sam[q].len==sam[p].len+1) sam[np].par=q;
+        else
+        {
+            int nq=++tot;
+            sam[nq].len=sam[p].len+1;
+            sam[nq].ch=sam[q].ch;
+            sam[nq].par=sam[q].par;
+            sam[q].par=sam[np].par=nq;
+            while (~p&amp;&amp;sam[p].ch[x]==q)
+            {
+                sam[p].ch[x]=nq;
+                p=sam[p].par;
+            }
+        }
+    }
+    ans+=sam[np].len-sam[sam[np].par].len;
+    p=np;
+}
+</code></pre>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        <span title="2020-02-08 18:37:53 &#43;0800 &#43;0800">2020-02-08</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/da8aa41962b5f5a65348e9b2f49d8519daa2fc8d" title="Add aliases" target="_blank">(da8aa41)</a>
+        ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/BZOJ4516-SDOI2016-%e7%94%9f%e6%88%90%e9%ad%94%e5%92%92%ef%bc%88SAM%ef%bc%89.md" target="_blank">更新历史</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/wechat-donate.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/alipay-donate.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+          <a href="/tags/sam/">SAM</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/p3804-%E6%A8%A1%E6%9D%BF%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">P3804 【模板】后缀自动机（SAM/后缀数组）</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+            <span class="next-text nav-default">后缀数组学习笔记</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+  <div class="comments">
+    <div class="loading post">
+      <img src="/img/spinner.svg">
+      <p class="post-content">
+        评论正在加载中...如果评论较长时间无法加载，你可以
+        <a href='https://github.com/ouuan/blog-comments/issues?q=is%3Aissue+is%3Aopen+"BZOJ4516%20%5bSDOI2016%5d%e7%94%9f%e6%88%90%e9%ad%94%e5%92%92%ef%bc%88SAM%ef%bc%89 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2"' target="_blank">搜索对应的 issue</a>
+        或者
+        <a href="https://github.com/ouuan/blog-comments/issues/new?title=BZOJ4516%20%5bSDOI2016%5d%e7%94%9f%e6%88%90%e9%ad%94%e5%92%92%ef%bc%88SAM%ef%bc%89 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2" target="_blank">新建一个 issue</a>
+        。
+      </p>
+    </div>
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/blog-comments"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>请启用 JavaScript 来查看评论。</a></noscript>
+  </div>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:ouuansteve@gmail.com" class="iconfont icon-email" title="email" target="_blank"></a>
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+      <a href="https://twitter.com/ouuan" class="iconfont icon-twitter" title="twitter" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ouuan/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2022
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span> 
+    <span class="author">ouuan</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/highlight.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/styles/tomorrow.min.css" rel="stylesheet"/>
+  <script>hljs.configure({tabReplace: '    '});</script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/slideout/1.0.1/slideout.min.js" crossorigin="anonymous"></script>
+
+
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.locales.min.js" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.85ad50502df0a718821e6776a9cb854d4a8abf64981e94053598daba712a9022.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" crossorigin="anonymous"></script>
+
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

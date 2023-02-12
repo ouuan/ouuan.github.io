@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>hexo博客搭建指北 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="折腾了 $3$ 天终于把博客搭建好了&amp;hellip;本文会简单介绍一下 hexo 博客的搭建，并选取一些我自己在配置博客的过程中遇到的问题，说明一下我的解决方" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.3004a145db73ba341ebe1a3790ea2c0166b56dc0378485b385563682aa10c6b2.css" rel="stylesheet">
+
+
+
+
+
+<meta property="og:title" content="hexo博客搭建指北" />
+<meta property="og:description" content="折腾了 $3$ 天终于把博客搭建好了&hellip;本文会简单介绍一下 hexo 博客的搭建，并选取一些我自己在配置博客的过程中遇到的问题，说明一下我的解决方" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-12-06T16:00:37+08:00" />
+<meta property="article:modified_time" content="2020-08-13T16:07:20+08:00" />
+
+<meta itemprop="name" content="hexo博客搭建指北">
+<meta itemprop="description" content="折腾了 $3$ 天终于把博客搭建好了&hellip;本文会简单介绍一下 hexo 博客的搭建，并选取一些我自己在配置博客的过程中遇到的问题，说明一下我的解决方"><meta itemprop="datePublished" content="2018-12-06T16:00:37+08:00" />
+<meta itemprop="dateModified" content="2020-08-13T16:07:20+08:00" />
+<meta itemprop="wordCount" content="7383">
+<meta itemprop="keywords" content="博客," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="hexo博客搭建指北"/>
+<meta name="twitter:description" content="折腾了 $3$ 天终于把博客搭建好了&hellip;本文会简单介绍一下 hexo 博客的搭建，并选取一些我自己在配置博客的过程中遇到的问题，说明一下我的解决方"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/ranking/">
+        <li class="mobile-menu-item">排行</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/ranking/">排行</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">hexo博客搭建指北</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2018-12-06 16:00:37 &#43;0800 &#43;0800"> 2018-12-06 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%8A%80%E6%9C%AF/"> 技术 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#博客的搭建">博客的搭建</a>
+      <ul>
+        <li><a href="#安装软件">安装软件</a></li>
+        <li><a href="#本地设置">本地设置</a></li>
+        <li><a href="#配置-github-仓库">配置 GitHub 仓库</a></li>
+        <li><a href="#将博客上传至-github">将博客上传至 GitHub</a></li>
+      </ul>
+    </li>
+    <li><a href="#博客的配置与美化">博客的配置与美化</a>
+      <ul>
+        <li><a href="#根目录下的-_configyml">根目录下的 <code>_config.yml</code></a></li>
+        <li><a href="#主题目录下的-_configyml">主题目录下的 <code>_config.yml</code></a>
+          <ul>
+            <li><a href="#选择-next-主题的四种之一">选择 NexT 主题的四种之一</a></li>
+            <li><a href="#改变网站图标">改变网站图标</a></li>
+            <li><a href="#页脚设置">页脚设置</a></li>
+            <li><a href="#关于标签">“关于”&amp;&ldquo;标签&rdquo;</a></li>
+            <li><a href="#站内搜索">站内搜索</a></li>
+            <li><a href="#社交网站">社交网站</a></li>
+            <li><a href="#友情链接或其它链接">友情链接（或其它链接）</a></li>
+            <li><a href="#头像">头像</a></li>
+            <li><a href="#回到顶部按钮阅读百分比">回到顶部按钮/阅读百分比</a></li>
+            <li><a href="#博客首页不显示全文">博客首页不显示全文</a></li>
+            <li><a href="#代码块复制按钮">代码块复制按钮</a></li>
+            <li><a href="#latex">$\LaTeX$</a></li>
+            <li><a href="#访客统计">访客统计</a></li>
+            <li><a href="#书签">书签</a></li>
+          </ul>
+        </li>
+        <li><a href="#其它配置">其它配置</a>
+          <ul>
+            <li><a href="#博客背景">博客背景</a></li>
+            <li><a href="#评论功能">评论功能</a></li>
+            <li><a href="#博文自定义排序httpsblogcsdnnetqq_32454537articledetails79482920-"><a href="https://blog.csdn.net/qq_32454537/article/details/79482920">博文自定义排序</a></a></li>
+            <li><a href="#折叠块httpswwwcnblogscomwoshimrfphexo-fold-blockhtml"><a href="https://www.cnblogs.com/woshimrf/p/hexo-fold-block.html">折叠块</a></a></li>
+            <li><a href="#readmemd">README.md</a></li>
+            <li><a href="#自定义404页面">自定义404页面</a></li>
+            <li><a href="#一言ヒトコト">一言（ヒトコト）</a></li>
+            <li><a href="#博文复制提醒">博文复制提醒</a></li>
+            <li><a href="#更改-css">更改 CSS</a></li>
+            <li><a href="#emoji">Emoji</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#博客的写作">博客的写作</a>
+      <ul>
+        <li><a href="#markdown-的使用">Markdown 的使用</a></li>
+        <li><a href="#撰写博客前的准备">撰写博客前的准备</a></li>
+        <li><a href="#博文的撰写">博文的撰写</a></li>
+        <li><a href="#更多博文模板">更多博文模板</a></li>
+        <li><a href="#引用本地图片">引用本地图片</a></li>
+        <li><a href="#latex-的使用">$\LaTeX$ 的使用</a>
+          <ul>
+            <li><a href="#latex-概述">$\LaTeX$ 概述</a></li>
+            <li><a href="#启用-latex">启用 $\LaTeX$</a></li>
+            <li><a href="#解决冲突">解决冲突</a></li>
+          </ul>
+        </li>
+        <li><a href="#博客的发布">博客的发布</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+  <div class="post-outdated">
+    <div class="warn">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2020-08-13T16:07:20" title="August 13, 2020">August 13, 2020</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
+    <div class="post-content">
+      <p>折腾了 $3$ 天终于把博客搭建好了&hellip;本文会简单介绍一下 hexo 博客的搭建，并选取一些我自己在配置博客的过程中遇到的问题，说明一下我的解决方案。</p>
+<p>实际上，hexo 博客的搭建并不难，难搞的是美化，我在这个过程中遇到了很多问题，不可能在这篇博客中全部陈述出来，最重要的还是勤于百度。</p>
+<!-- more -->
+<div class="admonition warning">
+  <p class="admonition-title">warning</p>
+<p>本博客已从 hexo 迁移至 hugo，详见 <a href="/post/from-hexo-to-hugo">从 hexo 到 hugo</a> 。</p>
+</div>
+<h1 id="博客的搭建">博客的搭建</h1>
+<p>先推荐两篇比较好的教程：<a href="https://www.jianshu.com/p/189fd945f38f">搭建个人博客-hexo+github详细完整步骤</a>，<a href="https://www.jianshu.com/p/863f3f2d1733">使用github+Hexo人人都能拥有一个美美的博客</a>。</p>
+<p>这部分网上讲的已经比较好了，我在这就简单说一下。</p>
+<h2 id="安装软件">安装软件</h2>
+<p>需要安装的软件有：<a href="https://git-scm.com/">git</a>，<a href="https://nodejs.org/en/">Node.js</a>。</p>
+<p>下载安装即可&hellip;</p>
+<h2 id="本地设置">本地设置</h2>
+<p>装好之后，在本地创建一个文件夹，下文中称其为“根目录”。</p>
+<blockquote>
+<p>下文中“输入命令”均指在命令行中输入命令（并回车<del>废话</del>），既可以使用 git bash，也可以使用 cmd 或 powershell 。输入命令时若无特别说明都需要 cd 到根目录下。</p>
+</blockquote>
+<p>输入命令 <code>npm install -g hexo</code> 来安装 hexo 。</p>
+<p>输入命令 <code>hexo init</code> 来初始化 hexo 。</p>
+<p>输入命令 <code>npm install </code> 来安装一些需要的包。</p>
+<p>输入命令 <code>hexo s</code>，并在浏览器打开 <code>localhost:4000</code>，在本地预览博客；如果上文步骤进行正确，应该看到一个类似于这样的页面：</p>
+<p><img src="/post_img/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/newblog.jpg" alt="newblog"></p>
+<blockquote>
+<p>注：命令可以缩写，条件是没有开头几个字母相同的其它命令。<code>hexo s</code> 实际上是 <code>hexo server</code> 的缩写；下文中 <code>hexo d</code> 是 <code>hexo deploy</code> 的缩写，<code>hexo g</code> 是 <code>hexo generate</code> 的缩写；<code>hexo clean</code> 不能缩写为 <code>hexo c</code>，因为存在命令 <code>hexo config</code> ，但是可以缩写为 <code>hexo cl</code> 。</p>
+</blockquote>
+<p>按 Ctrl+C 关闭 server 以继续操作。（若出现类似于 <code>终止批处理操作吗(Y/N)?</code> 的提示，输入 <code>y</code> 即可。）</p>
+<p>接着安装博客的主题，可以在 <a href="https://hexo.io/themes/">hexo 官网</a> 选择主题下载，本篇教程推荐使用 NexT 主题。</p>
+<p>在 <a href="https://hexo.io/themes/">hexo 官网</a> 点击<strong>图片下方蓝色的文字</strong>即可打开主题的 GitHub 主页，一般来说，一个主题的 GitHub 主页上是有用于安装的命令以及配置博客的教程的。</p>
+<p>如果没有的话（或者即使有也一样），你应该输入命令 <code>git clone 主题的Github主页地址 themes/主题名 </code> 。例如：<code>git clone https://github.com/theme-next/hexo-theme-next themes/next</code> 。</p>
+<p>当然，你也可以使用默认的 landscape 主题，从而不用额外下载主题。</p>
+<p>下载好主题后，用任何一款文本编辑器（记事本也可以），打开根目录下的 <code>_config.yml</code> ，将 <code>theme: landscape</code> 修改为 <code>theme: 你想用的主题名</code> 即可。</p>
+<h2 id="配置-github-仓库">配置 GitHub 仓库</h2>
+<p>首先你需要有一个 <a href="https://github.com/">GitHub</a> 账号。</p>
+<p>然后点击右上角你的头像，打开“Your repositories”，点击绿色的按钮“New”。</p>
+<p>在&quot;Repository name”一栏填入 <code>yourname.github.io</code> （“yourname”指你的 GitHub ID，比如我就填 <code>ouuan.github.io</code>），&ldquo;Description&quot;可以随便填也可以不填，然后点绿色的按钮“Create repository”。</p>
+<h2 id="将博客上传至-github">将博客上传至 GitHub</h2>
+<p>输入命令 <code>ssh-keygen</code> 来生成 SSH，让你输入东西你就空着，按回车（应该要按三次回车）。</p>
+<p>然后用任意的文本编辑器打开 <code>C:\Users\电脑用户名\.ssh\id_rsa.pub</code>（如果装了 vim 可以直接输入命令 <code>vim ~/.ssh/id_rsa.pub</code>），复制里面的内容。</p>
+<p>打开 GitHub，点击右上角的头像，打开“Settings”，选择左边的“SSH and GPG keys”，点绿色的按钮“New SSH key”，Title 随便填，下面的 Key 把刚才复制的东西粘贴进去，然后点绿色的按钮“Add SSH key”。过程中可能需要输入密码。</p>
+<p>输入命令 <code>ssh -T git@github.com</code> ，若出现 <code>Hi yourname! You've successfully authenticated, but GitHub does not provide shell access.</code> 表示 SSH 配置成功。</p>
+<p>输入命令 <code>npm install hexo-deployer-git --save</code> 安装 deployer 。</p>
+<p>打开根目录下的 <code>_config.yml</code> ，将最后几行改为：</p>
+<pre><code>deploy:
+  type: git
+  repository: https://github.com/yourname/yourname.github.io.git
+  branch: master
+</code></pre>
+<p>当然&quot;yourname&quot;要改成你的 GitHub ID 。</p>
+<p>依次输入命令：</p>
+<pre><code>hexo clean
+hexo g
+hexo d
+</code></pre>
+<p>这一步可能要输入密码。</p>
+<p>等几分钟，再用浏览器打开 <code>yourname.github.io</code> ，应该就可以看到你的博客了。（此时别人也可以通过这个网址看到你的博客。）</p>
+<h1 id="博客的配置与美化">博客的配置与美化</h1>
+<h2 id="根目录下的-_configyml">根目录下的 <code>_config.yml</code></h2>
+<p>这部分参考<a href="https://hexo.io/zh-cn/docs/configuration">官网教程</a>即可。</p>
+<p>建议不要像我一样 permalink 设成 <code>title/</code>&hellip;博客写多了之后，如果博客全放在根目录，就会非常自闭。（试想一下你哪天写到了 1000 篇博客，然后打开博客 repo，显示 <code>Sorry, we had to truncate this directory to 1,000 files.</code>，整个页面都是乱七八糟的博文名称）。可以设成 <code>blog/title</code> 之类的，总之不要全放根目录。</p>
+<p>可以在 <code>highlight.tab_replace</code> 设置将缩进替换为什么，默认是长度为八空格的制表符。例如：</p>
+<pre><code>highlight:
+  enable: true
+  line_number: true
+  auto_detect: false
+  tab_replace: '    '
+</code></pre>
+<h2 id="主题目录下的-_configyml">主题目录下的 <code>_config.yml</code></h2>
+<p>主题目录下的 <code>_config.yml</code> 指 <code>\themes\主题名\_config.yml</code>。</p>
+<p>这里以 NexT 主题（本文基于 NexT 6.6，其它版本可能有些区别）为例，这个主题的 <code>_config.yml</code> 非常完备，修改配置基本上只需删除/添加注释符号 <code>#</code> 以及改变 <code>true/false</code> 即可。</p>
+<h3 id="选择-next-主题的四种之一">选择 NexT 主题的四种之一</h3>
+<pre><code># Schemes
+scheme: Muse
+#scheme: Mist
+#scheme: Pisces
+#scheme: Gemini
+</code></pre>
+<p>将想用的主题前的 <code>#</code> 删掉，在 <code>scheme: Muse</code> 前加上 <code>#</code> 即可。</p>
+<p>例如：</p>
+<pre><code># Schemes
+#scheme: Muse
+#scheme: Mist
+#scheme: Pisces
+scheme: Gemini
+</code></pre>
+<p>四种主题的预览在 <code>NexT</code> 主题的<a href="https://github.com/theme-next/hexo-theme-next">官网</a>有。</p>
+<h3 id="改变网站图标">改变网站图标</h3>
+<pre><code>favicon:
+  small: /images/favicon-16x16-next.png
+  medium: /images/favicon-32x32-next.png
+  apple_touch_icon: /images/apple-touch-icon-next.png
+  safari_pinned_tab: /images/logo.svg
+</code></pre>
+<p>将你想用的图标放在 <code>\themes\next\source\images</code> 里，然后修改上面的文件名即可。</p>
+<p>例如：</p>
+<pre><code>favicon:
+  small: /images/favicon16.png
+  medium: /images/favicon32.png
+</code></pre>
+<p><img src="/post_img/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/favicon2.jpg" alt="favicon2"></p>
+<p><img src="/post_img/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/favicon.jpg" alt="favicon"></p>
+<h3 id="页脚设置">页脚设置</h3>
+<pre><code>footer:
+  # Specify the date when the site was setup.
+  # If not defined, current year will be used.
+  #since: 2015
+
+  # Icon between year and copyright info.
+  icon:
+    # Icon name in fontawesome, see: https://fontawesome.com/v4.7.0/icons
+    # `heart` is recommended with animation in red (#ff0000).
+    name: battery-full
+    # If you want to animate the icon, set it to true.
+    animated: false
+    # Change the color of icon, using Hex Code.
+    color: &quot;#808080&quot;
+
+  # If not defined, will be used `author` from Hexo main config.
+  copyright: 
+  # -------------------------------------------------------------
+  powered:
+    # Hexo link (Powered by Hexo).
+    enable: false
+    # Version info of Hexo after Hexo link (vX.X.X).
+    version: true
+
+  theme:
+    # Theme &amp; scheme info link (Theme - NexT.scheme).
+    enable: true
+    # Version info of NexT after scheme info (vX.X.X).
+    version: true
+  # -------------------------------------------------------------
+  # Beian icp information for Chinese users. In China, every legal website should have a beian icp in website footer.
+  # http://www.miitbeian.gov.cn
+  beian:
+    enable: false
+    icp:
+</code></pre>
+<p><code>icon</code>： <code>© 2019</code> 与用户名之间的图标。（图中 $1$）</p>
+<p>图标名称为 <a href="https://fontawesome.com/icons">Font Awesome</a> 上的图标名称。</p>
+<p><code>powered.enable</code>：为 <code>true</code> 则会显示“由 Hexo 强力驱动”。（图中 $2$）</p>
+<p><code>powered.version</code>：为 <code>true</code> 则会显示 Hexo 的版本。（图中 $3$）</p>
+<p><code>theme.enable</code>：为 <code>true</code> 则会显示“主题 – NexT.XX”。（图中 $4$）</p>
+<p><code>theme.version</code>：为 <code>true</code> 则会显示主题的版本。（图中 $5$）</p>
+<p><img src="/post_img/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/foot.jpg" alt="foot"></p>
+<p>注：根据 NexT 主题的 LICENSE，footer 中<strong>必须</strong>开启 <code>theme.enable</code> 选项。</p>
+<h3 id="关于标签">“关于”&amp;&ldquo;标签&rdquo;</h3>
+<pre><code>menu:
+  home: / || home
+  about: /about/ || user
+  tags: /tags/ || tags
+  #categories: /categories/ || th
+  archives: /archives/ || archive
+  #schedule: /schedule/ || calendar
+  #sitemap: /sitemap.xml || sitemap
+  #commonweal: /404/ || heartbeat
+</code></pre>
+<p>将需要的项目取消注释即可在侧边栏显示。</p>
+<p>如果需要使用“关于”页面，输入命令 <code>hexo new page &quot;about&quot;</code>。</p>
+<p>然后在 <code>\source\about\index.md</code> 中就可以编辑“关于”页面了。</p>
+<p>可以修改 <code>\source\about\index.md</code> 中的 <code>title</code> 项来显示“关于”而非“about”。</p>
+<p>如果需要使用“标签”功能，需要在博文中添加选项 <code>tags</code> ：</p>
+<p><img src="/post_img/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/tagsatblog.jpg" alt="tagsatblog"></p>
+<p>如果有多个标签，每行一个，以 <code>- </code> 开头：</p>
+<pre><code>tags:
+- 标签1
+- 标签2
+- 标签3
+</code></pre>
+<p>如果需要使用“标签”页面，输入命令 <code>hexo new page &quot;tags&quot;。</code></p>
+<p>然后向 <code>source\tags\index.md</code> 中添加一行：</p>
+<pre><code>type: &quot;tags&quot;
+</code></pre>
+<p><img src="/post_img/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/tagsindex.jpg" alt="tagsindex"></p>
+<p>“分类”与“标签”类似。</p>
+<h3 id="站内搜索">站内搜索</h3>
+<p>输入命令 <code>npm install hexo-generator-searchdb --save</code> 安装所需的库。</p>
+<p>在根目录下的 <code>_config.yml</code> 的结尾加入：</p>
+<pre><code>search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+</code></pre>
+<p>然后在 <code>\themes\next\_config.yml</code> 中，打开 <code>local_search</code>：</p>
+<pre><code>local_search:
+  enable: true
+</code></pre>
+<h3 id="社交网站">社交网站</h3>
+<pre><code># Social Links.
+# Usage: `Key: permalink || icon`
+# Key is the link label showing to end users.
+# Value before `||` delimeter is the target permalink.
+# Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
+social:
+  GitHub: https://github.com/ouuan || github
+  洛谷: https://www.luogu.org/space/show?uid=49742 || code
+  Codeforces: https://www.codeforces.com/profile/ouuan || code
+  b站: https://space.bilibili.com/11067182 || tv
+
+social_icons:
+  enable: true
+  icons_only: false
+  transition: false
+</code></pre>
+<p>在 <code>social</code> 下每行一个，格式为：<code>名称: 地址 || 图标</code>。</p>
+<p>其中，“图标”为 <a href="https://fontawesome.com/icons">Font Awesome</a> 图标名称，但有些图标是不可用的，而且图标也不全，使用的时候要尝试一下图标是否可用。</p>
+<pre><code>social_icons:
+  enable: false
+</code></pre>
+<p>这样设置可以只显示名称不显示图标。</p>
+<h3 id="友情链接或其它链接">友情链接（或其它链接）</h3>
+<pre><code># Blog rolls
+links_icon: globe
+links_title: 友情链接
+# links_layout: block
+links_layout: inline
+links:
+  Dew: https://www.cnblogs.com/ppprseter/
+  wjyyy: https://www.wjyyy.top/
+  Sooke: https://www.luogu.org/blog/Sooke/
+  huyufeifei: https://www.cnblogs.com/huyufeifei/
+  Rye_Catcher: https://rye-catcher.github.io/
+  额冻豆腐: http://www.mayflyyh.com/
+</code></pre>
+<p><code>links_icon</code>：显示在标题前的图标。</p>
+<p><code>links_title</code>：标题。</p>
+<p><code>links_layout</code>：<code>block</code> 一行一个，<code>inline</code> 一行多个。</p>
+<p><code>links</code>：要显示的链接以及名称。</p>
+<h3 id="头像">头像</h3>
+<pre><code># Sidebar Avatar
+avatar:
+  # in theme directory(source/images): /images/avatar.gif
+  # in site  directory(source/uploads): /uploads/avatar.gif
+  # You can also use other linking images.
+  url: /images/avatar.jpg
+  # If true, the avatar would be dispalyed in circle.
+  rounded: true
+  # The value of opacity should be choose from 0 to 1 to set the opacity of the avatar.
+  opacity: 1
+  # If true, the avatar would be rotated with the cursor.
+  rotated: false
+</code></pre>
+<p><code>url</code>：头像地址，留空则不显示头像。</p>
+<p><code>rounded</code>：圆/方头像。</p>
+<p><code>opacity</code>：不透明度。</p>
+<p><code>rotated</code>：随光标旋转。</p>
+<h3 id="回到顶部按钮阅读百分比">回到顶部按钮/阅读百分比</h3>
+<pre><code>  # Back to top in sidebar (only for Pisces | Gemini).
+  b2t: true
+
+  # Scroll percent label in b2t button.
+  scrollpercent: true
+</code></pre>
+<p><img src="/post_img/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/b2t.jpg" alt="b2t"></p>
+<h3 id="博客首页不显示全文">博客首页不显示全文</h3>
+<p>在博文里可以用 <code>&lt;!-- more --&gt;</code> 来标识在首页显示到哪为止。</p>
+<p>可以在 <code>\themes\next\_config.yml</code> 里设置到一定字数自动不显示全文：</p>
+<pre><code># Automatically Excerpt. Not recommend.
+# Please use &lt;!-- more --&gt; in the post to control excerpt accurately.
+auto_excerpt:
+  enable: true
+  length: 150
+
+# Read more button
+# If true, the read more button would be displayed in excerpt section
+read_more_btn: true
+</code></pre>
+<p><code>length</code>：不显示全文的字数上限。</p>
+<p><code>read_more_btn</code>：<img src="/post_img/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/readmorebt.jpg" alt="readmorebt"></p>
+<h3 id="代码块复制按钮">代码块复制按钮</h3>
+<pre><code>codeblock:
+  # Manual define the border radius in codeblock
+  # Leave it empty for the default 1
+  border_radius:
+  # Add copy button on codeblock
+  copy_button:
+    enable: true
+    # Show text copy result
+    show_result: true
+</code></pre>
+<p><code>enable</code>：启用复制按钮。</p>
+<p><code>show_result</code>：<img src="/post_img/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/copyresult.jpg" alt="copyresult"></p>
+<h3 id="latex">$\LaTeX$</h3>
+<pre><code># Math Equations Render Support
+math:
+  enable: true
+
+  # Default(true) will load mathjax/katex script on demand
+  # That is it only render those page who has 'mathjax: true' in Front Matter.
+  # If you set it to false, it will load mathjax/katex srcipt EVERY PAGE.
+  per_page: false
+
+  engine: mathjax
+  #engine: katex
+</code></pre>
+<p><code>enable</code>：启用 $\LaTeX$ 。</p>
+<p><code>per_page</code>：为 <code>true</code> 则只有博文中有 <code>mathjax: true</code> 才会启用 $\LaTeX$，否则每篇博客都会启用 $\LaTeX$ 。</p>
+<p><code>engine</code>：推荐使用 <code>mathjax</code> 。</p>
+<p>hexo 博客的 mathjax 和 Markdown 有一些冲突，将在后文专门讲解如何解决冲突。</p>
+<h3 id="访客统计">访客统计</h3>
+<pre><code>busuanzi_count:
+  enable: true
+</code></pre>
+<p><img src="/post_img/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/visitors.jpg" alt="visitors"></p>
+<p><img src="/post_img/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/views.jpg" alt="views"></p>
+<h3 id="书签">书签</h3>
+<p>书签的功能是关闭页面/手动点击书签按钮时，保存这篇博客看到的位置，下次点进这篇博客时继续从这个位置开始。</p>
+<p>安装插件：<code>git clone https://github.com/theme-next/theme-next-bookmark.git source/lib/bookmark</code></p>
+<p>更改 <code>\themes\next\_config.yml</code>：</p>
+<pre><code># Bookmark Support
+# Dependencies: https://github.com/theme-next/theme-next-bookmark
+bookmark:
+  enable: true
+  # if auto
+  #   - save the reading position when closing the page
+  #   - or clicking the bookmark-icon
+  # if manual, only save it by clicking the bookmark-icon
+  save: manual
+</code></pre>
+<h2 id="其它配置">其它配置</h2>
+<h3 id="博客背景">博客背景</h3>
+<p>打开 <code>\themes\next\source\css\_custom\custom.styl</code>，输入：</p>
+<pre><code>body {
+    background-image:url(/images/background.jpg);
+    background-size: cover;
+}
+</code></pre>
+<p>把背景图片重命名为 <code>background.jpg</code>，放入 <code>\themes\source\images</code>（当然也可以更改<code>background-image:url()</code>）。</p>
+<p><code>background-size: cover;</code> 表示宽度缩放至页面大小。</p>
+<pre><code>body {
+    background-image:url(/images/background.jpg);
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-size: cover;
+}
+</code></pre>
+<p>如果修改成这样的话背景图片就不会滚动。</p>
+<p>如果不想让博客内容挡住背景，可以设置博客内容的透明度，在 <code>\themes\next\source\css\_custom\custom.styl</code> 中加入下面的代码即可：</p>
+<pre><code>.main-inner {
+    opacity: 0.9;
+}
+</code></pre>
+<h3 id="评论功能">评论功能</h3>
+<p>由于 Gitalk 存在一些安全性的问题（OAuth App 的 client_id 和 client_secret 是可见的、访客需要授予读写自己的 repo 的权限），并且稳定性较差，推荐使用 <a href="https://utteranc.es/">utterances</a>。</p>
+<p>在 <a href="https://utteranc.es/">https://utteranc.es/</a> 中进行设置，将配置代码放到 <code>\themes\next\layout\_partials\comments.swig</code> 中即可，如：</p>
+<pre><code class="language-html">{% if page.comments %}
+
+  &lt;div class=&quot;comments&quot;&gt;
+    &lt;script src=&quot;https://utteranc.es/client.js&quot;
+        repo=&quot;ouuan/blog-comments&quot;
+        issue-term=&quot;title&quot;
+        label=&quot;utterances&quot;
+        theme=&quot;github-light&quot;
+        crossorigin=&quot;anonymous&quot;
+        async&gt;
+    &lt;/script&gt;
+  &lt;/div&gt;
+
+  {% if theme.facebook_sdk.enable and theme.facebook_comments_plugin.enable %}
+  
+  ...
+</code></pre>
+<p>其实也可以安装 hexo-next-utteranc 插件，但没必要。</p>
+<p>另外，用于存放 issue 的 repo 需要安装 <a href="https://github.com/apps/utterances">utterances app</a>。</p>
+<h3 id="博文自定义排序httpsblogcsdnnetqq_32454537articledetails79482920-"><a href="https://blog.csdn.net/qq_32454537/article/details/79482920">博文自定义排序</a></h3>
+<p>打开 <code>\node_modules\hexo-generator-index\lib\generator.js</code> 。</p>
+<p>在末尾添加如下代码：</p>
+<pre><code>  posts.data = posts.data.sort(function(a, b) {
+      if(a.top &amp;&amp; b.top) {
+          if(a.top == b.top) return b.date - a.date;
+          else return b.top - a.top;
+      }
+      else if(a.top &amp;&amp; !b.top) {
+          return -1;
+      }
+      else if(!a.top &amp;&amp; b.top) {
+          return 1;
+      }
+      else return b.date - a.date;
+  });
+</code></pre>
+<p>在博文设置中加入 <code>top: x</code> 即可，会以 top 为第一关键字，时间为第二关键字排序。若 top 为空则视作 -INF 。</p>
+<p><img src="/post_img/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/top.jpg" alt="top"></p>
+<h3 id="折叠块httpswwwcnblogscomwoshimrfphexo-fold-blockhtml"><a href="https://www.cnblogs.com/woshimrf/p/hexo-fold-block.html">折叠块</a></h3>
+<details class="admonition note"><summary class="admonition-title">怎么搞？</summary>
+<p>标题链接的<a href="https://www.cnblogs.com/woshimrf/p/hexo-fold-block.html">这篇博文</a>写的够清楚了..</p>
+<p>需要注意的是这个折叠块标题的字体被设置了..如果想和博文用同样的字体，需要删去 <code>font-family: &quot;Microsoft Yahei&quot;;</code>。</p>
+</details>
+<h3 id="readmemd">README.md</h3>
+<p>如果想在 <code>https://github.com/yourname/yourname.github.io</code> 让别人看到你的博客的简介，就需要写一个 <code>README.md</code> 放在根目录下的 <code>source</code> 文件夹内。</p>
+<p>然而，只是这样的话， <code>README.md</code> 会被渲染成 html，所以需要更改根目录下 <code>_config.yml</code> 的设置：</p>
+<pre><code>skip_render: README.md
+</code></pre>
+<h3 id="自定义404页面">自定义404页面</h3>
+<p>首先写一个 <code>\source\404.html</code> 。</p>
+<p>至于怎么写html..<del>这里地方太小写不下。</del></p>
+<p>**需要注意的是，一个真正的 404 页面应当在访问时返回 404 代码。**在 HTML 中，可以使用 <code>&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;connect-src 'self'&quot;&gt;</code> 实现。（似乎不加这个也会返回 404？不是特别清楚。）</p>
+<p>可以参考一下我的：</p>
+<pre><code class="language-html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta http-equiv=&quot;Content-type&quot; content=&quot;text/html; charset=utf-8&quot;&gt;
+        &lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;connect-src 'self'&quot;&gt;
+        &lt;title&gt;404 Error | ouuan的博客&lt;/title&gt;
+        &lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;32x32&quot; href=&quot;/favicon-32x32.png&quot;&gt;
+        &lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; sizes=&quot;16x16&quot; href=&quot;/favicon-16x16.png&quot;&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div&gt;
+            &lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;您可能访问了错误的网址&lt;/strong&gt;&lt;img src=&quot;/images/5bd4705dd844f.jpg&quot;&gt;&lt;/p&gt;
+            &lt;br&gt;&lt;br&gt;
+            &lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;您现在可以：&lt;/strong&gt;&lt;/p&gt;
+            &lt;p style=&quot;text-align: center;&quot;&gt;&lt;a href=&quot;/&quot;&gt;&lt;strong&gt;回到博客主页&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+            &lt;p style=&quot;text-align: center;&quot;&gt;&lt;a href=&quot;javascript:history.go(-1);&quot;&gt;&lt;strong&gt;返回上一页&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+            &lt;br&gt;&lt;br&gt;
+            &lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;如果您在登录 Gitalk 时遇到此问题，请尝试&lt;a href=&quot;/%E5%A5%BD%E7%94%A8%E7%9A%84%E7%BD%91%E7%AB%99/&quot;&gt;换一篇博客&lt;/a&gt;登录&lt;/strong&gt;&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>然后，如果直接这样发布，html 会被渲染，就跟一个自定义页面（<code>hexo new page</code>）一样了。</p>
+<p>所以要修改根目录下的 <code>_config.yml</code>，在 <code>skip_render:</code> 后添加 <code>404.html</code>，如果有多项用 <code>- </code> 隔开：</p>
+<pre><code>skip_render:
+ - README.md
+ - 404.html
+</code></pre>
+<p>发布完成后，访问一个错误的网址，比如 <code>你的域名/qaq</code> 就可以<a href="/404.html">查看效果</a>了。</p>
+<h3 id="一言ヒトコト">一言（ヒトコト）</h3>
+<p>大约是<a href="https://hitokoto.cn/">这个</a>。</p>
+<p>网上没找到教程，自己随便瞎研究了一波，所以方法比较丑陋，仅供参考..</p>
+<p>本来想稍微写一下自己研究的经过，想了想自己也没完全搞清楚，就来一波授人以鱼吧&hellip;</p>
+<p><code>\themes\next\layout\_macro\sidebar.swig</code>:</p>
+<pre><code class="language-html">……
+  &lt;aside id=&quot;sidebar&quot; class=&quot;sidebar&quot;&gt;
+
+    &lt;div class=&quot;sidebar-inner&quot;&gt;
+      &lt;div class=&quot;hitokoto-block&quot;&gt;
+        &lt;div class=&quot;hitokoto-inner hitokoto-comma hitokoto-left-comma&quot;&gt;“&lt;/div&gt;
+        &lt;div class=&quot;hitokoto-inner hitokoto-content&quot;&gt;&lt;b&gt;&lt;span&gt;&lt;span id=&quot;hitokoto-content&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;&lt;/div&gt;
+        &lt;div class=&quot;hitokoto-inner hitokoto-comma hitokoto-right-comma&quot;&gt;”&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div id=&quot;hitokoto-from&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;hitokoto-bottom&quot;&gt;
+        &lt;a id=&quot;hitokoto-link&quot; href=&quot;https://hitokoto.cn/&quot;&gt;Hitokoto&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+        &lt;button id=&quot;hitokoto-like&quot; title=&quot;通过给句子点赞可以增加其出现概率，由于技术原因并不能在博客中显示赞数与点赞是否成功的信息（红心表示成功发送点赞请求，但如果同 IP 重复点赞就会失败），如需查看可以点击左边的“Hitokoto”链接。&quot;&gt;&lt;i class=&quot;menu-item-icon fa fa-fw fa-heart&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div style=&quot;height: 15px&quot;&gt;&lt;/div&gt;
+
+    {% if theme.sidebar.onmobile %}
+……
+</code></pre>
+<p><code>\themes\next\layout\_scripts\commons.swig</code>:</p>
+<pre><code class="language-html">……
+&lt;script type=&quot;text/javascript&quot;&gt;
+  function hitokotoLike(x, y) {
+		$.ajax({
+		    url: &quot;https://hitokoto.cn/Like&quot;,
+		    type: &quot;GET&quot;,
+		    data: &quot;ID=&quot; + x,
+		    dataType: &quot;jsonp&quot;,
+		    success: function(data) {
+		        alert(data.message);
+		        $(y).css('color', 'red');
+		    },
+		    error: function() {
+		        console.log('Hitokoto Like Request Error.');
+		        $(y).css('color', 'red');
+		    }
+		});
+	}
+	$.get('https://v1.hitokoto.cn/?c=a', function(data) {
+		$('#hitokoto-content').css('display', '').text(data.hitokoto);
+		$('#hitokoto-from').css('display', '').text('——' + data.from);
+		$('#hitokoto-from').attr('title', '上传者: ' + data.creator);
+		$('#hitokoto-link').attr('href', 'https://hitokoto.cn/?id=' + data.id);
+		document.getElementById('hitokoto-like').onclick = function() { hitokotoLike(data.id, '#hitokoto-like'); }
+	});
+&lt;/script&gt;
+</code></pre>
+<p><code>\themes\next\source\css\_custom\custom.styl</code>:</p>
+<pre><code class="language-css">……
+.sidebar {
+	background: rgba(0, 0, 0, 0);
+}
+
+.hitokoto-block {
+    width: 200px;
+    display: table;
+    padding: 0 10px;
+}
+
+.hitokoto-inner {
+	text-align: left;
+    display: table-cell;
+}
+
+.hitokoto-comma {
+	color: #B2B7F2;
+	font-size: 24px;
+	font-weight: bold;
+	font-family: 'Times New Roman', serif;
+}
+
+.hitokoto-left-comma {
+	vertical-align: top;
+}
+
+.hitokoto-right-comma {
+	vertical-align: bottom;
+}
+
+.hitokoto-content {
+	width: 176px;
+	color: burlywood;
+	text-indent: 2em;
+    vertical-align: middle;
+	padding: 0.8em 0.2em 1em 0.2em;
+}
+
+#hitokoto-from {
+	text-align: right;
+	font-size: 0.8em;
+	color: black;
+}
+
+.hitokoto-bottom {
+	margin-top: 15px;
+	font-size: 0.8em;
+	color: black;
+}
+</code></pre>
+<p>大约就这样，省略号表示文件中本来就有的其它部分。不保证在其他人电脑上可以用。大致思路就是搞个空 div 指定一个 id，用 js 往里面塞东西。所以即使我这个“鱼”不能直接用大约也是可以稍微研究研究来用的。</p>
+<h3 id="博文复制提醒">博文复制提醒</h3>
+<p>在 <code>\themes\next\layout\_scripts\commons.swig</code> 中加入：</p>
+<pre><code class="language-cpp">&lt;script type=&quot;text/javascript&quot;&gt;
+	$('.post-body').bind('copy', function() {
+		alert('本博客内容欢迎分享（将本博客的原文地址分享到其它网站），允许部分摘录并在醒目位置附上原文链接，未经许可禁止任何形式的全文转载。');
+	});
+&lt;/script&gt;
+</code></pre>
+<h3 id="更改-css">更改 CSS</h3>
+<p>大概按照 <a href="https://yihui.name/">谢益辉博客</a> 魔改了一下。</p>
+<p><a href="https://github.com/ouuan/ouuan-hexo-next-css">CSS Files</a>。</p>
+<h3 id="emoji">Emoji</h3>
+<p>详见 <a href="https://github.com/crimx/hexo-filter-github-emojis">crimx/hexo-filter-github-emojis</a> 🤔 。</p>
+<p>安装的时候遇到了一些问题，具体来说执行 <code>npm install hexo-filter-github-emojis --save</code> 不会安装 peer dependencies，需要手动安装（从警告信息就可以看出需要安装哪些）。而在安装 <code>canvas</code> 时出现错误，<a href="https://github.com/mapbox/node-pre-gyp/issues/477#issuecomment-534221703">更新 node-pre-gyp</a> 后得到了解决。</p>
+<p>大约是为了保证用户能够看到，很多显示 emoji 的库（如 <a href="https://github.com/joypixels/emojione">emojione</a>）都是使用 cdn 加载图片，然而我还是觉得 Win 10 本身的 emoji 样式比较好看，Linux 的也不错，所以又稍微魔改了一下，改成了显示 Unicode 字符而非图片。具体来说，将 <code>\node_modules\hexo-filter-github-emojis\index.js</code> 中的 <code>renderEmoji</code> 函数中的全部内容替换成了 <code>return emojis[name].codepoints ? emojis[name].codepoints.map(c =&gt; `&amp;#x${c};`).join('') : ' ';</code> 。</p>
+<h1 id="博客的写作">博客的写作</h1>
+<h2 id="markdown-的使用">Markdown 的使用</h2>
+<p>网上有很多 Markdown 的学习资源，<del>我自己是在<a href="https://www.luogu.org/paste">洛谷剪贴板</a>学会的</del>。</p>
+<p>我以前一般都用洛谷剪贴板编辑 Markdown，但 hexo 博客需要在本地编辑 <code>.md</code> 文件，这时普通的文本编辑器就不太方便了。我推荐 <a href="https://www.typora.io/">Typora</a> 这款软件，还是挺方便的。</p>
+<h2 id="撰写博客前的准备">撰写博客前的准备</h2>
+<p>打开根目录下的 <code>_config.yml</code> ，将 <code>post_asset_folder</code>  设为 <code>true</code>。</p>
+<p>这样就可以把图片放到博客里而不用其它图床了。</p>
+<p>然后把 <code>\source\_posts\hello-world.md</code> 删除。</p>
+<h2 id="博文的撰写">博文的撰写</h2>
+<p>新建一篇博客：<code>hexo new &quot;博文标题&quot;</code>。</p>
+<p>然后等几秒钟，在 <code>\source\_posts</code> 文件夹下，就会生成 <code>博客名</code> 这个文件夹（如果你把 <code>post_asset_folder</code>  设为 <code>true</code> 了）以及 <code>博客名.md</code>。</p>
+<p>撰写博客就是编辑 <code>博客名.md</code>。</p>
+<p>这个文件的开头是博客的一些设置，可以在 <code>\scaffolds\posts.md</code> 中修改默认设置，我的默认设置是：</p>
+<pre><code>---
+title: {{ title }}
+date: {{ date }}
+tags: 
+top: 
+---
+</code></pre>
+<p>然后就可以写 Markdown 格式的文章了。（<code>top</code> 是自定义文章排序，上文中介绍过）</p>
+<p><img src="/post_img/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/post.jpg" alt="post"></p>
+<p>需要注意的是，在洛谷代码块可以不加&quot;cpp&rdquo;，但在 hexo 上，一定要加上&quot;cpp&quot;：</p>
+<p><img src="/post_img/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/cpp.jpg" alt="cpp"></p>
+<pre><code>#include &lt;iostream&gt;
+int main()
+{
+    cout&lt;&lt;&quot;hello world!&quot;
+}
+</code></pre>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+int main()
+{
+    cout&lt;&lt;&quot;hello world!&quot;
+}
+</code></pre>
+<h2 id="更多博文模板">更多博文模板</h2>
+<p>在 <code>\scaffolds</code> 文件夹中可以增加更多的模板，比如我就搞了一个 <code>\scaffolds\tutorial.md</code>，这样的话，新建一篇题解的时候输入命令 <code>hexo new tutorial &quot;博文标题&quot;</code> 就可以使用模板了。</p>
+<p><img src="/post_img/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/tutorial.png" alt="tutorial"></p>
+<h2 id="引用本地图片">引用本地图片</h2>
+<p>引用链接/网络上的图片格式与普通 Markdown 相同（<code>[链接名称](链接地址)</code> 和 <code>![图片描述](图片地址)</code>），引用本地图片需要把 <code>post_asset_folder</code>  设为 <code>true</code> ，然后把图片放在与博客同名的文件夹中，然后只用 <code>![图片描述](图片文件名)</code> 就可以引用了。</p>
+<p><img src="/post_img/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/pic1.jpg" alt="pic1"></p>
+<p><img src="/post_img/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8C%97/pic2.jpg" alt="pic2"></p>
+<p>在编辑器里显示不出图片是正常的。</p>
+<p>还有另一种方式引用图片，![refpic](/post_img/hexo博客搭建指北/refpic.jpg 这是一张用这种方式引用的图片)</p>
+<p>用这种方式引用图片的话，把鼠标放在上面会显示图片描述（上面这张图就是用这种方式引用的）。</p>
+<p>只有这种方式引用图片才能在博客首页正常显示图片，否则只能点进博客才能看到图片。</p>
+<h2 id="latex-的使用">$\LaTeX$ 的使用</h2>
+<h3 id="latex-概述">$\LaTeX$ 概述</h3>
+<p>$\LaTeX$ 主要用于编辑数学公式，十分方便，网上也有很多学习资源，比如：<a href="https://www.luogu.org/blog/IowaBattleship/latex-gong-shi-tai-quan">LaTeX数学公式大全</a>。</p>
+<p>在支持 $\LaTeX$ 的 Markdown 文档里，使用两个美元符号将 $\LaTeX$ 公式括起来，例如：</p>
+<pre><code>~~QAQ$f_i=\sum\limits_{j=1}^ia_j$f_i=\sum\limits_{j=1}^ia_j~~
+</code></pre>
+<p><del>QAQ$f_i=\sum\limits_{j=1}^ia_j$f_i=\sum\limits_{j=1}^ia_j</del></p>
+<p>也可以用一对双美元符号使公式居中显示在单行，例如：</p>
+<pre><code>$f_i=1$
+
+$$f_i=1$$
+</code></pre>
+<p>$f_i=1$</p>
+<p>$$f_i=1$$</p>
+<p>在 Typora 中使用 $\LaTeX$  需要将设置中的&quot;Markdown 扩展语法&quot;全部勾选。</p>
+<blockquote>
+<p>P.S. $\LaTeX$：<code>\LaTeX</code></p>
+</blockquote>
+<h3 id="启用-latex">启用 $\LaTeX$</h3>
+<p>在 <code>\themes\next\_config.yml</code>  中将 <code>mathjax</code> 设为 <code>true</code>，然后将 <code>per_page</code> 设为 <code>false</code> 或者在需要启用 <code>\LaTeX</code> 的博文开头加上 <code>mathjax: true</code> 。</p>
+<h3 id="解决冲突">解决冲突</h3>
+<p>由于hexo博客中即使是 <code>$$</code> 内的字符也会被当成 Markdown 渲染，类似于 <code>$f_{f_i}$</code>、<code>$a*b*c$</code>、<code>$[x,y](1&lt;x&lt;y&lt;2)$</code> 之类的，都会被错误地渲染。</p>
+<p>对于下划线，新版本的 <code>marked</code> 已经修复这一 bug（新版本的 hexo 或许已经不需要手动升级了），所以可以通过执行 <code>npm install --save marked</code> 和 <code>npm install --save hexo-renderer-marked</code> 解决。但同时，新版本的 <code>marked</code> 会将 <code>\</code> 用作转义，所以 <code>\\</code> 、 <code>\{</code> 之类的要改成 <code>\\\\</code> 、 <code>\\{</code> 。</p>
+<p>对于 <code>*</code>，建议使用 <code>$\cdot$</code> ($a\cdot b$，一般用于表示乘积) 或 <code>$\times$</code> （$n\times m$ 的矩阵，一般用于表示维度或者笛卡尔积）或 <code>$\ast$</code> （$\mathbb{N}^\ast$，一般用于上标或表示卷积） 代替。其实也可以使用 <code>$\*$</code> 来代替 <code>$\ast$</code> 。</p>
+<p>对于 <code>$[x,y](1&lt;x&lt;y&lt;2)$</code>，在它们之间加上空格，即 <code>$[x,y] (1&lt;x&lt;y&lt;2)$</code> 就好了。</p>
+<h2 id="博客的发布">博客的发布</h2>
+<p>其实前文提到过，依次输入以下三条命令即可：</p>
+<pre><code>hexo cl
+hexo g
+hexo d
+</code></pre>
+<p><code>hexo cl</code> 是可选的。加上不会有坏处..而且有时候必须加上。</p>
+<p>发布之前还可以执行 <code>hexo s</code> 并在本地使用浏览器打开 <code>localhost:4000</code> 进行预览。</p>
+<p>当然也可以使用 <code>hexo g -d</code> 命令。</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        <span title="2020-08-13 16:07:20 &#43;0800 &#43;0800">2020-08-13</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/5cdecdbe33e71ec9de83c1d27d75d31eda761acb" title="fix: fix 404 example link" target="_blank">(5cdecdb)</a>
+        ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/hexo%e5%8d%9a%e5%ae%a2%e6%90%ad%e5%bb%ba%e6%8c%87%e5%8c%97.md" target="_blank">更新历史</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/wechat-donate.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/alipay-donate.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E5%8D%9A%E5%AE%A2/">博客</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/wc2019-%E5%85%A8%E5%9B%BD%E6%A8%A1%E6%8B%9F%E8%B5%9B%E7%AC%AC%E4%BA%8C%E5%9C%BA-t1-%E9%A2%98%E8%A7%A3/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">WC2019 全国模拟赛第二场 T1 题解</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/wc2019-%E5%85%A8%E5%9B%BD%E6%A8%A1%E6%8B%9F%E8%B5%9B%E7%AC%AC%E4%B8%80%E5%9C%BA-t1-%E9%A2%98%E8%A7%A3/">
+            <span class="next-text nav-default">WC2019 全国模拟赛第一场 T1 题解</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+  <div class="comments">
+    <div class="loading post">
+      <img src="/img/spinner.svg">
+      <p class="post-content">
+        评论正在加载中...如果评论较长时间无法加载，你可以
+        <a href='https://github.com/ouuan/blog-comments/issues?q=is%3Aissue+is%3Aopen+"hexo%e5%8d%9a%e5%ae%a2%e6%90%ad%e5%bb%ba%e6%8c%87%e5%8c%97 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2"' target="_blank">搜索对应的 issue</a>
+        或者
+        <a href="https://github.com/ouuan/blog-comments/issues/new?title=hexo%e5%8d%9a%e5%ae%a2%e6%90%ad%e5%bb%ba%e6%8c%87%e5%8c%97 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2" target="_blank">新建一个 issue</a>
+        。
+      </p>
+    </div>
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/blog-comments"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>请启用 JavaScript 来查看评论。</a></noscript>
+  </div>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:ouuansteve@gmail.com" class="iconfont icon-email" title="email" target="_blank"></a>
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+      <a href="https://twitter.com/ouuan" class="iconfont icon-twitter" title="twitter" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ouuan/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2022
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span> 
+    <span class="author">ouuan</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/highlight.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/styles/tomorrow.min.css" rel="stylesheet"/>
+  <script>hljs.configure({tabReplace: '    '});</script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/slideout/1.0.1/slideout.min.js" crossorigin="anonymous"></script>
+
+
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.locales.min.js" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.85ad50502df0a718821e6776a9cb854d4a8abf64981e94053598daba712a9022.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" crossorigin="anonymous"></script>
+
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

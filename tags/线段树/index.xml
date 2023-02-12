@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>线段树 on ouuan的博客</title><link>https://ouuan.github.io/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/</link><description>Recent content in 线段树 on ouuan的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 07 May 2020 20:58:54 +0800</lastBuildDate><atom:link href="https://ouuan.github.io/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/index.xml" rel="self" type="application/rss+xml"/><item><title>带修改的树上 DP 问题（动态 DP）</title><link>https://ouuan.github.io/post/tree-dp-with-modification/</link><pubDate>Thu, 07 May 2020 20:58:54 +0800</pubDate><guid>https://ouuan.github.io/post/tree-dp-with-modification/</guid><description>&lt;p>“动态 DP”通过树链剖分将带修改的树上 DP 问题拆分为规模更小的序列上的半群合并问题和树上 DP 问题，从而可以快速地支持修改。&lt;/p></description></item><item><title>CF484E Sign on Fence</title><link>https://ouuan.github.io/post/cf484e/</link><pubDate>Mon, 20 Apr 2020 23:05:37 +0800</pubDate><guid>https://ouuan.github.io/post/cf484e/</guid><description>&lt;p>&lt;a href="https://codeforces.com/contest/484/problem/E">题目链接&lt;/a>&lt;/p>
+&lt;div class="admonition question">
+&lt;p class="admonition-title">题目描述&lt;/p>
+&lt;p>给你一个数列 $a_{1..n}$，进行 $m$ 次询问，每次询问给出一个区间 $[l, r]$ 及参数 $w$，询问 $\max_{i = l}^{r-w+1}\{\min_{j=i}^{i+w-1}\{a_j\}\}$。&lt;/p>
+&lt;p>数列长度和询问次数 $10^5$。&lt;/p>
+&lt;/div></description></item><item><title>「SDOI2017」树点涂色</title><link>https://ouuan.github.io/post/sdoi2017-%E6%A0%91%E7%82%B9%E6%B6%82%E8%89%B2/</link><pubDate>Fri, 17 Apr 2020 12:38:34 +0800</pubDate><guid>https://ouuan.github.io/post/sdoi2017-%E6%A0%91%E7%82%B9%E6%B6%82%E8%89%B2/</guid><description>&lt;p>&lt;a href="https://loj.ac/problem/2001">LOJ&lt;/a>&lt;/p>
+&lt;div class="admonition question">
+&lt;p class="admonition-title">题目描述&lt;/p>
+&lt;p>给你一棵有根树，一开始每个点都有不同的颜色。有三种操作：&lt;/p>
+&lt;ol>
+&lt;li>给定 $x$，将 $x$ 到根的路径修改为一种当前树上没有出现的颜色。&lt;/li>
+&lt;li>给定 $x$ 和 $y$，询问 $x$ 到 $y$ 的路径上不同颜色的数量。&lt;/li>
+&lt;li>给定 $x$，令一个点的权值为它到根路径上不同颜色的数量，求子树 $x$ 中的最大权值。&lt;/li>
+&lt;/ol>
+&lt;p>点数和操作数 $10^5$。&lt;/p>
+&lt;/div></description></item><item><title>gym102268D Dates（贪心，二分图匹配，线段树）</title><link>https://ouuan.github.io/post/gym102268d-dates%E8%B4%AA%E5%BF%83%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D%E7%BA%BF%E6%AE%B5%E6%A0%91/</link><pubDate>Fri, 11 Oct 2019 11:30:32 +0800</pubDate><guid>https://ouuan.github.io/post/gym102268d-dates%E8%B4%AA%E5%BF%83%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D%E7%BA%BF%E6%AE%B5%E6%A0%91/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://codeforces.com/gym/102268/problem/D">CF&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>给你一张二分图：左边 $t$ 个位置，第 $i$ 个位置上有 $a_i$ 个点；右边 $n$ 个带权的点，第 $i$ 个点与位置在 $[l_i, r_i]$ 之间的所有左边的点有连边；匹配权值为匹配中右边点的权值之和；求最大权匹配。&lt;/p>
+&lt;p>$1\le n,t\le 3\cdot 10^5$，保证 $l_i\le l_{i+1}$, $r_i\le r_{i+1}$。&lt;/p></description></item><item><title>BJOI2019 删数（贪心，线段树）</title><link>https://ouuan.github.io/post/bjoi2019-%E5%88%A0%E6%95%B0%E8%B4%AA%E5%BF%83%E7%BA%BF%E6%AE%B5%E6%A0%91/</link><pubDate>Mon, 16 Sep 2019 11:11:10 +0800</pubDate><guid>https://ouuan.github.io/post/bjoi2019-%E5%88%A0%E6%95%B0%E8%B4%AA%E5%BF%83%E7%BA%BF%E6%AE%B5%E6%A0%91/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://www.luogu.org/problem/P5324">洛谷&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://loj.ac/problem/3094">LOJ&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.lydsy.com/JudgeOnline/problem.php?id=5528">BZOJ&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>一个数列是“可删除的”，当且仅当可以通过这种操作将其清空：将数列中等于这个数列长度的数删去。&lt;/p>
+&lt;p>如，$[1, 2, 4, 4]$ 是“可删除的”，第一次操作删成 $[1, 2]$，第二次操作删成 $[1]$，第三次操作清空。&lt;/p>
+&lt;p>定义一个数列的权值为至少需要进行的单点修改数目，使得这个数列变成“可删除的”。&lt;/p>
+&lt;p>现在给你一个数列 $a_{1..n}$，以及 $m$ 次修改操作，你需要在每次修改后回答这个数列的权值。&lt;/p>
+&lt;p>修改操作有三种：&lt;/p>
+&lt;ol>
+&lt;li>单点修改。&lt;/li>
+&lt;li>全局加一。&lt;/li>
+&lt;li>全局减一。&lt;/li>
+&lt;/ol>
+&lt;p>$1\le n,m\le 150000$，数列初始值以及单点修改成的值在 $[1,n]$ 内，但全局修改可能使数列中的元素超过这个范围。&lt;/p></description></item></channel></rss>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>APIO/NOI 2020 断网记 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="为什么周围都是热点，而我却只有 2G（x
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/apio-noi-2020/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.3004a145db73ba341ebe1a3790ea2c0166b56dc0378485b385563682aa10c6b2.css" rel="stylesheet">
+
+
+
+
+
+<meta property="og:title" content="APIO/NOI 2020 断网记" />
+<meta property="og:description" content="为什么周围都是热点，而我却只有 2G（x" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/apio-noi-2020/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-08-16T11:44:09+08:00" />
+<meta property="article:modified_time" content="2020-08-22T14:35:10+08:00" />
+
+<meta itemprop="name" content="APIO/NOI 2020 断网记">
+<meta itemprop="description" content="为什么周围都是热点，而我却只有 2G（x"><meta itemprop="datePublished" content="2020-08-16T11:44:09+08:00" />
+<meta itemprop="dateModified" content="2020-08-22T14:35:10+08:00" />
+<meta itemprop="wordCount" content="4168">
+<meta itemprop="keywords" content="CCF系列赛事," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="APIO/NOI 2020 断网记"/>
+<meta name="twitter:description" content="为什么周围都是热点，而我却只有 2G（x"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/ranking/">
+        <li class="mobile-menu-item">排行</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/ranking/">排行</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">APIO/NOI 2020 断网记</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2020-08-16 11:44:09 &#43;0800 &#43;0800"> 2020-08-16 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%B8%B8%E8%AE%B0/"> 游记 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#apio">APIO</a>
+          <ul>
+            <li><a href="#day-0">Day 0</a></li>
+            <li><a href="#day-1">Day 1</a></li>
+          </ul>
+        </li>
+        <li><a href="#noi">NOI</a>
+          <ul>
+            <li><a href="#day--1">Day -1</a></li>
+            <li><a href="#day-0-1">Day 0</a></li>
+            <li><a href="#day-1-1">Day 1</a></li>
+            <li><a href="#day-2">Day 2</a></li>
+            <li><a href="#day-3">Day 3</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+  <div class="post-outdated">
+    <div class="warn">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2020-08-22T14:35:10" title="August 22, 2020">August 22, 2020</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
+    <div class="post-content">
+      <p>为什么周围都是热点，而我却只有 2G（x</p>
+<h2 id="apio">APIO</h2>
+<h3 id="day-0">Day 0</h3>
+<p>今年 APIO 是在自己学校打，而且 NOI 官网上的规则写了可以访问网络资源，只是不能用别人的代码。</p>
+<p>看到之后就问了教练，然后一开始还说要用机房电脑，后来就同意让我们带笔记本用自己的板子了。</p>
+<p>然而这个规则和 CF 之类的不一样，虽然可以用板子，但必须是自己写的..想了想我的板子里 <code>debug</code> 那些东西是从 tourist 板子里抄的，而且更重要的是，有一堆 define，又是 grader 题，感觉可能出问题，还有就是 IOI 赛制对板子需求也不是很大。所以最后就没用板子。</p>
+<p>但是自己的笔记本还是比机房电脑舒服多了。</p>
+<h3 id="day-1">Day 1</h3>
+<p>首先面临的第一个问题就是 <a href="https://github.com/cpeditor/cpeditor">CP Editor</a> 怎么测 grader 题..</p>
+<p>最后的方法是用 <code>#ifdef OUUAN</code> 把 grader 粘进代码里，其它都好说，就只有 Language Server 不太好搞，直接 include 头文件会报错。</p>
+<p>先看 T1，看了一会儿感觉不太会。</p>
+<p>然后看 T2，第一眼以为能够 swap 是要双连通，看到树的部分分才发现不对劲。然后又想了几种情况，以为自己会树了，先写了个环，然后去看 T3。</p>
+<p>T3，交互题（<del>虽然另外两题也是</del>），几乎是二叉树，询问两点距离，很自然地想到了 <a href="https://loj.ac/problem/6669">Nauuo and Binary Tree</a>，但一看数据范围发现并没有什么用。<del>能不能给一档 n≤5000 的分，我会！</del> 写了个每次暴力询问直径就跑路了。</p>
+<p>然后去看 T2，想到了一个假做法。写了 2h+，过了样例，提交 WA 了。写了个 $O(nm\log)$ 的二分答案，T 了，然后换成了并查集，过了那个 subtask。然后对拍，发现自己漏了两种情况，然后发现自己不会处理这两种情况，就去看 T1 了。</p>
+<p>发现 T1 比我第一眼看到的貌似简单一些，先写了 subtask1，然后写了个 $O(nm)$，然后看着 $\sum f(i)^2 \le 4\cdot 10^5$ 的限制一直以为复杂度里带一个 $\sum f(i)^2$，就没想到正解。然后去把 T2 的菊花图写了。</p>
+<p>最后 30min 在想 T3 的完全二叉树 subtask，写了个假做法，考试结束了。</p>
+<p>出考场后听说 $\sum f(i)^2$ 的限制是用来限制 $f(i) \le \sqrt{4\cdot 10^5}$，自己想了下就会做了。</p>
+<p>听说 T2 我考虑的那一堆情况合并起来就是 $x$ 和 $y$ 所在连通块不是一条链，自己想了下也会做了。</p>
+<p>下午去 <a href="https://github.com/cpeditor/cpeditor/pull/565">给 CP Editor 加了一些适用于 grader 题的 feature</a>。</p>
+<h2 id="noi">NOI</h2>
+<p>前篇：<a href="/post/NIO9102-%E8%90%BD%E9%9B%A8%E5%A4%A7">NIO9102 落雨大</a>。</p>
+<h3 id="day--1">Day -1</h3>
+<p>早上坐一小时高铁到了长沙。</p>
+<p>可能是因为到的比较早，一路都有摄影跟着 🌚</p>
+<p>可能也是因为到的比较早，并且签完名会被拍照，签名墙上只有大家的姓名和 ID，没有任何奇奇怪怪的话（</p>
+<p>去年 WC 的时候还能开玩笑地写下 <code>&lt;font color=&quot;gray&quot;&gt;ouuan&lt;/font&gt;</code>，今年已经没心情写这种东西了。不想写姓名，ID 也不像 vfleaking 那么炫酷，就没签。</p>
+<p>寝室虽然环境比广二好，可是：</p>
+<ol>
+<li>没有广二那个超适合坐在上面的梯子（</li>
+<li>不仅没有桌子也没有梯子，床的边上还有一圈凸出来的，空床完全没法坐边上，只能坐在用来睡的床上（有床垫，和凸出来的那一圈差不多高）。</li>
+<li>信号和广二一样差。</li>
+</ol>
+<p>最赞的一点，大概是插座不像广二那样藏在床底。（但据群友们说，有的寝室只有一个插座。我的寝室是每个床一个插座。）</p>
+<p>到寝室之后以及下午写了写游记。</p>
+<p>听说有自习室，就去了，然而很困 💤，几乎啥也没干。稍微面基了一些人，然而并没有面基到（指见到且知道对方 ID）以前没面基过的人。</p>
+<p>晚上见到了 @AprilGrimoiore 和 @ruogu，然后就开始了关于 Arch Linux 的交流，以及我教 @AprilGrimoiore 用 git。</p>
+<p>最后走的时候 @AprilGrimoiore 把胸牌落在了自习室，让我第二天给他。</p>
+<h3 id="day-0-1">Day 0</h3>
+<p>早上吃完饭先去了自习室。</p>
+<p>想把胸牌给 @AprilGrimoiore 的时候听说他发烧去医院了 /jk <del>希望胸牌没事</del>希望人没事 🙏</p>
+<p>不知道为什么，我在开阔的操场上以及开幕式的会场都没有信号 /yun</p>
+<p>开幕式先放了在 WC 看过好多次的 3M 原则宣传片，然后放了一年前就在广二看过的长沙一中宣传片。</p>
+<p>今年不用喊口号。感觉认识的人比去年少 /fad 同省都有一堆不认识的。倒也和 2020 年没有出去集训过有关。</p>
+<p>dzd 演讲依然非常精彩，得到的掌声也依然是其他人的好几倍。当场公布了新规：有剩饭会扣 1 分。</p>
+<p>今年也有花式开幕，是一个 <del>扫描线</del> 发光的电扇一样的东西，可以显示动画。</p>
+<p>开幕式结束后去自习室把 APIO 的 T2 写了。</p>
+<p>下午听说发烧了有隔离考场 /fad 把胸牌由工作人员转交给了 @AprilGrimoiore。</p>
+<p>这次的赛场和广二一样是由一个像是体育馆/报告厅一样的地方改造的。不知道再之前几届怎么样，我感觉这种赛场比机房舒服多了。</p>
+<p>今年笔试有好几道题库里没有的题，包括：（题面和答案都是印象中的大意）</p>
+<ol>
+<li>
+<p>程序在某个测试点运行时使用的内存超过了内存限制会怎么样？</p>
+<p>不能正常运行，该测试点获得 0 分。</p>
+</li>
+<li>
+<p>机试时忘记了用户名和密码，找工作人员求助，扣几分？</p>
+<p>5分</p>
+</li>
+<li>
+<p>哪些行为是禁止的？</p>
+<p>（多选，选项之一）在监考人员宣布 NOI 机试开始之前，禁止触摸键盘鼠标等外设。</p>
+</li>
+</ol>
+<p>只不过还是顺利 AC 了。</p>
+<p>看练习赛题目，发现有 C++11。王宏宣布考试时编译选项和练习赛一样时，全场掌声雷动（</p>
+<p>练习赛题目是去年的 D1T2, D1T3, D2T3，暗示 <del>今年没有简单题</del> 今年有交互。</p>
+<p>并没有写题，和 lk 还有 @rushcheyo 闲聊了一会儿就去自习室了。</p>
+<h3 id="day-1-1">Day 1</h3>
+<p>半夜醒了 1h 还流了鼻血，只不过睡得比较早所以问题不大。</p>
+<p>看到 T1 后大概几分钟就会做了。</p>
+<p>看到 T2 后大概几分钟就会 40 分了。又想了一会儿，发现除了 40 分啥都不会。</p>
+<p>看到 T3 后大概几分钟就发现区间逆序对是部分分（A），后面还有一个特殊性质（C）可做，暴力应该也没问题。</p>
+<p>然后开始写 T1，写了 1h 过了样例。测了个极限数据发现要 2s，然后把矩乘的 for 循环顺序换了一下就 1.5s 了，感觉很神奇。</p>
+<p>然后开始写 T2 40 分，写了 1h 过了样例。感觉瓶颈上没有任何可以卡常的地方，就没测极限数据。</p>
+<p>然后开始写 T3 暴力，想了两分钟 $O(n^2\log)$ 怎么做，发现自己是 sb，直接二维前缀和就可以 $O(n^2+nm)$。然后想了下另外一档特殊性质（B），感觉好像不太可做。写了 2h，三档分都过了样例。A 的样例不是极限数据，但只跑了 0.3s，感觉应该没问题。C 测了下极限数据，感觉没问题。C 没有合适的样例，就手造了组数据，发现暴力 T 了，然后发现暴力不小心写成了 $O(n^2m)$，赶紧改过来。</p>
+<p>这个时候只剩 0.5h 了，感觉没啥可做的了，就去写 T1 对拍。然后对拍挂了好多次，每次都发现数据不合法。最后不到 10min 的时候在看起来好像合法的数据上拍出来了，但是没时间了，非常自闭地考试结束了。</p>
+<p>今年可以多人同时上厕所。要不是这样的话不知道要排多久的队。</p>
+<p>看成绩，矩阵乘向量的 <code>i</code> 和 <code>j</code> 写反了，192 -&gt; 112。（仔细分析后意识到，本质上是，我根据边建出来的那个矩阵适用于横向量乘矩阵，而我矩阵乘向量的时候写的是矩阵乘竖向量。由于题目求的是一个环，这样写可以通过 $k=0$ 的数据。）（其实只要写矩阵乘向量的时候想着“$A_{u, v}$ 表示从 $u$ 到 $v$ 的边”就不会有事，但我当时愣是去套普通的矩阵乘法，结果就写反了。）</p>
+<p>听讲题，T1 没啥意外自己写的就是标算，T2 听说正解和容斥几乎无关之后就没仔细听了，T3 很神仙，听完只记得用梯度下降法造数据卡莫队。</p>
+<p>看到成绩分布时，发现就算没挂分也很不会太靠前，有种输得心服口服的感觉。毕竟也没抱太大的进队的希望，但如果是因为挂分而退役还是挺难受的。这么想很蠢吧，知道自己排名不前反而放下心来。</p>
+<h3 id="day-2">Day 2</h3>
+<p>虽然 T2 这个题面很长，对话的形式读起来还是很舒服的，非常巧妙地把形式化定义和易于理解的说明结合在了一起。（另外 X1, X2 和 X3 是 OI Diary 的角色，之前我只看过 <a href="https://loj.ac/article/1307">「萌新的随想文坑」OI Diary Beta</a>，还不知道 X1 和 X3，后来才知道。）</p>
+<p>依次读完三题，发现一题都不会，暴力也不太会。</p>
+<p>不如来写贪心吧！于是写了个 T1 的贪心：每次把最小和最大的合并。发现没过样例。换成了每次把最小的和最小的可以合并的合并，发现过了大多数样例，只有几个没过。之前看到数据范围时我就有注意到 $m\ge n-1$ 有很多分，再一看，我没过的都是 $m=n-2$ 的。于是大胆猜想这个东西在 $m\ge n-1$ 时是对的。写了个暴力简单拍了一下，发现 $m\ge n-1$ 确实拍不出来。手玩了一些拍出来的 $m=n-2$，又想了几个贪心，全假了。这个时候已经 2h 多了，把几个贪心和暴力拼在一起就没管了。</p>
+<p>然后再去看了下 T2，突然感觉自己会做，写了之后没过样例，再仔细一看，只有叶子能长东西，我看成了每个点都能长东西..然后尝试着写了下特殊性质 4，发现并没有合适的样例（也可能是一个样例里有若干组满足特殊性质 4 的，反正我看开头不满足就没看了&hellip;），于是手捏了一个样例过掉了。并不会写暴力，于是很难受，只能当它是对的（</p>
+<p>然后再看 T3，暴力完全没思路，只好看特殊性质。大力猜想一波性质 A 可以去掉割边跑最短路，过了大样例，然后把判割边去掉，发现也过了大样例&hellip;但我也不会暴力，只能当它是对的（</p>
+<p>再看 T3 的性质 B，一开始想了个 DP，写完之后才发现完全不对..再仔细想了一下，发现看起来貌似是没有隔 2 边的间隔把整条链分成了若干段，每一段貌似选一条隔 2 边就行，又貌似必须在交接处选 /yun 不是很懂，但有大样例，于是写了一下，发现答案很接近每一段的最小值之和，然后又加加减减凑了一会儿，最后在 12:57 的时候把样例凑出来了。</p>
+<p>看成绩 &amp; 复评咕了。等的时候又想了下 T3 的性质 B，发现 $n=3$ 就能 hack 掉我。然后再仔细回想了一下：我最后凑出来的答案是每一段的最小值加上 $n-1$ 减去段数，在调试过程中，我有试过最后一段是不是不计入答案，发现把最后一段去掉后答案几乎没有影响；当时我也没有多想，因为已经 12:50+ 了，当时我离答案还差好几万，都没注意到个位数的差别；在调试过程中，我有输出过一个值，这个值我见过它有两次相差了 $3$；而在 12:57 时，我把输出凑到了比答案小 2，然后我就直接加了 2。综上考虑，再在几个小的例子上测了一下，我几乎确信了把加二改成加上最后一段的最小值再减一是正解。在边权范围是 $1$ 到 $10^9$ 的情况下，样例中竟然有边权为 $3$ 的边，还恰好位于最后一段 /yun</p>
+<p>16:40 左右终于不咕了，$45+40+25=110$。T1 没有意外（然而貌似好多人都意外获得了很多分），T2 莫名过了 15 和 16 两个没有特殊性质的点，T3 的性质 B 过了一个点。把 T3 按上一段说的改过来，果然过了性质 B。</p>
+<p>听讲题，发现 T1 很可做。</p>
+<p>T3：《丢失密码条，<code>puts(&quot;-1&quot;)</code> 就好了》。听说性质 A 直接判最短路是否合法就行 /fad 只不过判是否合法貌似也不比把割边找出来简单多少（</p>
+<p>听说 C++11 是为了 T2 的 <code>unordered_set</code> 开的。（多谢出题人）（不会明年就没了吧）</p>
+<p>出榜了，在银牌线到队线减 100（意思就是没挂分也进不了队）之间。</p>
+<h3 id="day-3">Day 3</h3>
+<p>听论文答辩，感觉 zrf 非常稳，jmr 有点悬。然而不知道是不是分差比较大，排名也是 3 和 5，并没有像去年那样影响到最终的结果。</p>
+<p>闭幕式就如往年那样进行，只是我不会再看第二次余姚中学的宣传片，无法明年再会了。</p>
+<p>我双色 NOI 的第二色，是<font color="silver">银白色</font>的。</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        <span title="2020-08-22 14:35:10 &#43;0800 &#43;0800">2020-08-22</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/8620207df7f9d10e5e28f4b7acfab2788dd9780a" title="fix(apio-noi-2020): fix X1, X2 and X3" target="_blank">(8620207)</a>
+        ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/apio-noi-2020.md" target="_blank">更新历史</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/wechat-donate.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/alipay-donate.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/ccf%E7%B3%BB%E5%88%97%E8%B5%9B%E4%BA%8B/">CCF系列赛事</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/afteroi/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">～AFTER OI～</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/csacademy-expected-tree-degrees/">
+            <span class="next-text nav-default">CS Academy Round #10 - Expected Tree Degrees</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+  <div class="comments">
+    <div class="loading post">
+      <img src="/img/spinner.svg">
+      <p class="post-content">
+        评论正在加载中...如果评论较长时间无法加载，你可以
+        <a href='https://github.com/ouuan/blog-comments/issues?q=is%3Aissue+is%3Aopen+"APIO%2fNOI%202020%20%e6%96%ad%e7%bd%91%e8%ae%b0 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2"' target="_blank">搜索对应的 issue</a>
+        或者
+        <a href="https://github.com/ouuan/blog-comments/issues/new?title=APIO%2fNOI%202020%20%e6%96%ad%e7%bd%91%e8%ae%b0 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2" target="_blank">新建一个 issue</a>
+        。
+      </p>
+    </div>
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/blog-comments"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>请启用 JavaScript 来查看评论。</a></noscript>
+  </div>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:ouuansteve@gmail.com" class="iconfont icon-email" title="email" target="_blank"></a>
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+      <a href="https://twitter.com/ouuan" class="iconfont icon-twitter" title="twitter" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ouuan/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2022
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span> 
+    <span class="author">ouuan</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/highlight.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/styles/tomorrow.min.css" rel="stylesheet"/>
+  <script>hljs.configure({tabReplace: '    '});</script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/slideout/1.0.1/slideout.min.js" crossorigin="anonymous"></script>
+
+
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.locales.min.js" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.85ad50502df0a718821e6776a9cb854d4a8abf64981e94053598daba712a9022.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" crossorigin="anonymous"></script>
+
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

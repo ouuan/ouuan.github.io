@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>浏览器 on ouuan的博客</title><link>https://ouuan.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/</link><description>Recent content in 浏览器 on ouuan的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 09 Jul 2020 13:00:46 +0800</lastBuildDate><atom:link href="https://ouuan.github.io/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>Firefox 的 Tree Style Tab 和 Duplicate Tabs Closer 插件</title><link>https://ouuan.github.io/post/firefox-tree-style-tab-and-duplicate-tabs-closer/</link><pubDate>Thu, 09 Jul 2020 13:00:46 +0800</pubDate><guid>https://ouuan.github.io/post/firefox-tree-style-tab-and-duplicate-tabs-closer/</guid><description>&lt;p>你在使用浏览器时是否有这样的烦恼？&lt;/p>
+&lt;ul>
+&lt;li>到底开多少个标签页？
+&lt;ol>
+&lt;li>开很多浏览器标签页 ⇒ 找不到标签页在哪，切换麻烦。&lt;/li>
+&lt;li>开很少浏览器标签页 ⇒ 需要频繁地打开、关闭标签页。&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>标签页之间层次混乱，不同类别的标签页混在一起。&lt;/li>
+&lt;li>从不同的地方点链接打开同一个网址，关了一个忘记关另一个。&lt;/li>
+&lt;li>……&lt;/li>
+&lt;/ul>
+&lt;p>使用 Firefox 的 Tree Style Tab 和 Duplicate Tabs Closer 插件，就可以解决上述烦恼。&lt;/p></description></item></channel></rss>

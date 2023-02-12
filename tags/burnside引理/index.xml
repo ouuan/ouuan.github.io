@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Burnside引理 on ouuan的博客</title><link>https://ouuan.github.io/tags/burnside%E5%BC%95%E7%90%86/</link><description>Recent content in Burnside引理 on ouuan的博客</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 05 Sep 2019 10:45:59 +0800</lastBuildDate><atom:link href="https://ouuan.github.io/tags/burnside%E5%BC%95%E7%90%86/index.xml" rel="self" type="application/rss+xml"/><item><title>LOJ6519 魔力环（Burnside引理，容斥原理）</title><link>https://ouuan.github.io/post/loj6519-%E9%AD%94%E5%8A%9B%E7%8E%AFburnside%E5%BC%95%E7%90%86%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/</link><pubDate>Thu, 05 Sep 2019 10:45:59 +0800</pubDate><guid>https://ouuan.github.io/post/loj6519-%E9%AD%94%E5%8A%9B%E7%8E%AFburnside%E5%BC%95%E7%90%86%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/</guid><description>&lt;h2 id="题目链接">题目链接&lt;/h2>
+&lt;p>&lt;a href="https://loj.ac/problem/6519">LOJ&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://www.luogu.org/problem/P4916">洛谷&lt;/a>&lt;/p>
+&lt;h2 id="题意简述">题意简述&lt;/h2>
+&lt;p>你需要给 $n$ 颗珠子的项链染 $m$ 颗黑色，$n-m$ 颗白色，不能有连续的一串黑色珠子长度超过 $k$，求旋转同构下本质不同的染色方案数。&lt;/p>
+&lt;p>$1\le m,k\le n\le10^5$&lt;/p></description></item></channel></rss>

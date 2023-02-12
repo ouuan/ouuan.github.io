@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>浅谈邻项交换排序的应用以及需要注意的问题 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="浅谈邻项交换排序的应用以及需要注意的问题.pdf 邻项交换排序是一种常见的贪心算法，通过比较两个相邻元素交换前后的优劣对整个序列进行排序，从而" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/%E6%B5%85%E8%B0%88%E9%82%BB%E9%A1%B9%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F%E7%9A%84%E5%BA%94%E7%94%A8%E4%BB%A5%E5%8F%8A%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.3004a145db73ba341ebe1a3790ea2c0166b56dc0378485b385563682aa10c6b2.css" rel="stylesheet">
+
+
+
+
+
+<meta property="og:title" content="浅谈邻项交换排序的应用以及需要注意的问题" />
+<meta property="og:description" content="浅谈邻项交换排序的应用以及需要注意的问题.pdf 邻项交换排序是一种常见的贪心算法，通过比较两个相邻元素交换前后的优劣对整个序列进行排序，从而" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/%E6%B5%85%E8%B0%88%E9%82%BB%E9%A1%B9%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F%E7%9A%84%E5%BA%94%E7%94%A8%E4%BB%A5%E5%8F%8A%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-11-18T08:05:50+08:00" />
+<meta property="article:modified_time" content="2020-08-13T15:56:54+08:00" />
+
+<meta itemprop="name" content="浅谈邻项交换排序的应用以及需要注意的问题">
+<meta itemprop="description" content="浅谈邻项交换排序的应用以及需要注意的问题.pdf 邻项交换排序是一种常见的贪心算法，通过比较两个相邻元素交换前后的优劣对整个序列进行排序，从而"><meta itemprop="datePublished" content="2018-11-18T08:05:50+08:00" />
+<meta itemprop="dateModified" content="2020-08-13T15:56:54+08:00" />
+<meta itemprop="wordCount" content="4452">
+<meta itemprop="keywords" content="贪心,序理论," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="浅谈邻项交换排序的应用以及需要注意的问题"/>
+<meta name="twitter:description" content="浅谈邻项交换排序的应用以及需要注意的问题.pdf 邻项交换排序是一种常见的贪心算法，通过比较两个相邻元素交换前后的优劣对整个序列进行排序，从而"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/ranking/">
+        <li class="mobile-menu-item">排行</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/ranking/">排行</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">浅谈邻项交换排序的应用以及需要注意的问题</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2018-11-18 08:05:50 &#43;0800 &#43;0800"> 2018-11-18 </span>
+        <div class="post-category">
+            <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/"> 知识点 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#算法简介">算法简介</a>
+      <ul>
+        <li><a href="#例题引入">例题引入</a>
+          <ul>
+            <li><a href="#题目来源">题目来源</a></li>
+            <li><a href="#题目描述">题目描述</a></li>
+            <li><a href="#输入格式">输入格式</a></li>
+            <li><a href="#输出格式">输出格式</a></li>
+            <li><a href="#数据范围">数据范围</a></li>
+          </ul>
+        </li>
+        <li><a href="#使用邻项交换排序解决问题">使用邻项交换排序解决问题</a></li>
+      </ul>
+    </li>
+    <li><a href="#使用邻项交换排序需要注意的问题">使用邻项交换排序需要注意的问题</a>
+      <ul>
+        <li><a href="#另一道例题">另一道例题</a>
+          <ul>
+            <li><a href="#题目来源-1">题目来源</a></li>
+            <li><a href="#题目描述-1">题目描述</a></li>
+            <li><a href="#输入格式-1">输入格式</a></li>
+            <li><a href="#输出格式-1">输出格式</a></li>
+            <li><a href="#数据范围-1">数据范围</a></li>
+          </ul>
+        </li>
+        <li><a href="#尝试用邻项交换排序解决问题">尝试用邻项交换排序解决问题</a></li>
+        <li><a href="#hack数据">hack数据</a></li>
+        <li><a href="#严格弱序">严格弱序</a>
+          <ul>
+            <li><a href="#严格弱序简介">严格弱序简介</a></li>
+            <li><a href="#满足传递性的证明">满足传递性的证明</a></li>
+            <li><a href="#不具有不可比性的传递性的证明">不具有不可比性的传递性的证明</a></li>
+            <li><a href="#为何会错">为何会错</a></li>
+          </ul>
+        </li>
+        <li><a href="#正确解法">正确解法</a>
+          <ul>
+            <li><a href="#更加完善的贪心解法">更加完善的贪心解法</a></li>
+            <li><a href="#一个解法是否正确的判断方式">一个解法是否正确的判断方式</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+  <div class="post-outdated">
+    <div class="warn">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2020-08-13T15:56:54" title="August 13, 2020">August 13, 2020</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
+    <div class="post-content">
+      <p><a href="/post_doc/%E6%B5%85%E8%B0%88%E9%82%BB%E9%A1%B9%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F%E7%9A%84%E5%BA%94%E7%94%A8%E4%BB%A5%E5%8F%8A%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98.pdf">浅谈邻项交换排序的应用以及需要注意的问题.pdf</a></p>
+<blockquote>
+<p>邻项交换排序是一种常见的贪心算法，通过比较两个相邻元素交换前后的优劣对整个序列进行排序，从而使得这个序列成为题目所求的最优解。然而，邻项交换排序的应用有一些需要注意的地方，稍有不慎便会成为一个错误的算法。</p>
+</blockquote>
+<!-- more -->
+<h1 id="算法简介">算法简介</h1>
+<h2 id="例题引入">例题引入</h2>
+<h3 id="题目来源">题目来源</h3>
+<p><a href="https://www.luogu.org/problemnew/show/P1080">NOIP2012提高组D1T2 国王游戏</a></p>
+<h3 id="题目描述">题目描述</h3>
+<p>恰逢 $H$ 国国庆，国王邀请 $n$ 位大臣来玩一个有奖游戏。首先，他让每个大臣在左、右手上面分别写下一个整数，国王自己也在左、右手上各写一个整数。然后，让这 $n $位大臣排成一排，国王站在队伍的最前面。排好队后，所有的大臣都会获得国王奖赏的若干金币，每位大臣获得的金币数分别是：排在该大臣前面的所有人的左手上的数的乘积除以他自己右手上的数，然后向下取整得到的结果。</p>
+<p>国王不希望某一个大臣获得特别多的奖赏，所以他想请你帮他重新安排一下队伍的顺序，使得获得奖赏最多的大臣，所获奖赏尽可能的少。注意，国王的位置始终在队伍的最前面。</p>
+<h3 id="输入格式">输入格式</h3>
+<p>第一行包含一个整数 $n$ ，表示大臣的人数。</p>
+<p>第二行包含两个整数 $a$ 和 $b$ ，之间用一个空格隔开，分别表示国王左手和右手上的整数。</p>
+<p>接下来 $n$ 行，每行包含两个整数 $a$ 和 $b$ ，之间用一个空格隔开，分别表示每个大臣左手和右手上的整数。</p>
+<h3 id="输出格式">输出格式</h3>
+<p>一个整数，表示重新排列后的队伍中获奖赏最多的大臣所获得的金币数。</p>
+<h3 id="数据范围">数据范围</h3>
+<p>对于 $20%$ 的数据，有 $1\le n\le 10,0&lt;a,b&lt;8$；</p>
+<p>对于 $40%$ 的数据，有 $1\le n\le 20,0&lt;a,b&lt;8$；</p>
+<p>对于 $60%$ 的数据，有 $1\le n\le 100$；</p>
+<p>对于 $60%$ 的数据，保证答案不超过 $10^9$；</p>
+<p>对于 $100%$ 的数据，有 $1\le n\le 1000,0&lt;a,b&lt;10000$ 。</p>
+<h2 id="使用邻项交换排序解决问题">使用邻项交换排序解决问题</h2>
+<p>选取相邻的两个大臣 $i$ 和 $j$ （$j$ 此时在 $i$ 后一个），分别用 $a_i,b_i,a_j,b_j$ 表示这两位大臣左手上和右手上的数字，设这两位大臣前面的所有大臣左手上的数乘积为 $k$ 。</p>
+<p>此时，若调整这两名大臣的顺序，对前面和后面的大臣都不会造成影响，因此我们只要使得这两位大臣中获得较多奖赏的那位获得的奖赏尽量少即可。</p>
+<p>当 $i$ 在前 $j$ 在后时，这个值为 $\max(\frac k{b_i},\frac {k a_i}{b_j})$ 。</p>
+<p>当 $j$ 在前 $i$ 在后时，这个值为 $\max(\frac k{b_j},\frac {k a_j}{b_i})$ 。</p>
+<p>因此，若 $\max(\frac k{b_i},\frac {k a_i}{b_j})&gt;\max(\frac k{b_j},\frac {k a_j}{b_i})$ ，就需要交换 $i$ 和 $j$ 。</p>
+<p>实际上，由于 $\frac {k a_i}{b_j}\ge\frac k{b_j},\frac {k a_j}{b_i}\ge\frac k{b_i}$ ，只需比较 $\frac {k a_i}{b_j}$ 和 $\frac {k a_j}{b_i}$ ，也就只需比较 $\frac {a_i}{b_j}$ 和 $\frac {a_j}{b_i}$ ，即：若 $a_i b_i&gt;a_j b_j$，就要交换 $i$ 和 $j$ 。</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N=1010;
+
+struct Node
+{
+    int a,b;
+    bool operator&lt;(Node&amp; y)
+    {
+        return a*b&lt;y.a*y.b;
+    }
+} dc[N];
+
+long long n,ans,k;
+
+int main()
+{
+    cin&gt;&gt;n;
+    for (int i=0;i&lt;=n;++i)
+    {
+        cin&gt;&gt;dc[i].a&gt;&gt;dc[i].b;
+    }
+    sort(dc+1,dc+n+1);
+    k=dc[0].a;
+    for (int i=1;i&lt;=n;++i)
+    {
+        ans=max(ans,k/dc[i].b);
+        k*=dc[i].a;
+    }
+    cout&lt;&lt;ans;
+    return 0;
+}
+</code></pre>
+<p>使用以上代码即可得到60分，而AC此题需要使用高精度乘除法，不在本文讨论范围内。</p>
+<h1 id="使用邻项交换排序需要注意的问题">使用邻项交换排序需要注意的问题</h1>
+<h2 id="另一道例题">另一道例题</h2>
+<h3 id="题目来源-1">题目来源</h3>
+<p><a href="https://www.luogu.org/problemnew/show/P2123">洛谷P2123 皇后游戏</a></p>
+<h3 id="题目描述-1">题目描述</h3>
+<p>皇后有 $n$ 位大臣，每位大臣的左右手上面分别写上了一个正整数。恰逢国庆节来临，皇后决定为 $n$ 位大臣颁发奖金，其中第 $i$ 位大臣所获得的奖金数目为第 $i－1$ 位大臣所获得奖金数目与前 $i$ 位大臣左手上的数的和的较大值再加上第 $i$ 位大臣右手上的数。</p>
+<p>形式化地讲：我们设第 $i$ 位大臣左手上的正整数为 $a_i$ ，右手上的正整数为 $b_i$ ，</p>
+<p>则第 $i$ 位大臣获得的奖金数目为 $c_i$ 可以表达为：</p>
+<p>$$c_i=\begin{cases}a_1+b_1 &amp; i=1\\\max(c_{i-1},\sum\limits_{j=1}^ia_j)+b_i &amp; 2\le i\le n\end{cases}$$</p>
+<p>当然，吝啬的皇后并不希望太多的奖金被发给大臣，所以她想请你来重新安排一下队伍的顺序，使得获得奖金最多的大臣，所获奖金数目尽可能的少。</p>
+<p>注意：重新安排队伍并不意味着一定要打乱顺序，我们允许不改变任何一位大臣的位置。</p>
+<h3 id="输入格式-1">输入格式</h3>
+<p>第一行包含一个正整数 $T$ ，表示测试数据的组数。</p>
+<p>接下来 $T$ 个部分，每个部分的第一行包含一个正整数 $n$ ，表示大臣的数目。</p>
+<p>每个部分接下来 $n$ 行中，每行两个正整数，分别为 $a_i$ 和 $b_i$ ，含义如上文所述。</p>
+<h3 id="输出格式-1">输出格式</h3>
+<p>共 $T$ 行，每行包含一个整数，表示获得奖金最多的大臣所获得的奖金数目。</p>
+<h3 id="数据范围-1">数据范围</h3>
+<p>对于全部测试数据满足：$T\le10,1\le n\le20000,1\le a_i,b_i\le10^9$ 。</p>
+<h2 id="尝试用邻项交换排序解决问题">尝试用邻项交换排序解决问题</h2>
+<p>还是选取相邻的两个大臣 $i$ 和 $j$ （$j$ 此时在 $i$ 后一个），交换 $i$ 和 $j$ 对前面的大臣无影响，对后面的大臣的影响在于排在后面的那个大臣获得的奖金，需要使之尽量小。</p>
+<p>设这两个大臣前面的所有大臣左手上的数之和为 $\rm sum$ ，这两个大臣的再往前一个大臣得到的奖金是 $\rm pre$ 。</p>
+<p>当 $i$ 在前 $j$ 在后时，这个值为 $\max(\max(\mathrm{pre},\mathrm{sum}+a_i)+b_i,\mathrm{sum}+a_i+a_j)+b_j$ 。</p>
+<p>当 $j$ 在前 $i$ 在后时，这个值为 $\max(\max(\mathrm{pre},\mathrm{sum}+a_j)+b_j,\mathrm{sum}+a_j+a_i)+b_i$ 。</p>
+<p>由于 $\max(x,y)+z=\max(x+z,y+z)$ ，需要比较的就是 $\max(\mathrm{pre}+b_i+b_j,\mathrm{sum}+a_i+b_i+b_j,\mathrm{sum}+a_i+a_j+b_j)$ 和 $\max(\mathrm{pre}+b_j+b_i,\mathrm{sum}+a_j+b_j+b_i,\mathrm{sum}+a_j+a_i+b_i)$ ，其中 $\mathrm{pre}+b_i+b_j=\mathrm{pre}+b_j+b_i$ ，需要比较的就是 $\max(\mathrm{sum}+a_i+b_i+b_j,\mathrm{sum}+a_i+a_j+b_j)$ 和 $\max(\mathrm{sum}+a_j+b_j+b_i,\mathrm{sum}+a_j+a_i+b_i)$ ，再用 $\mathrm{sum}+a_i+b_i+a_j+b_j$ 减去两边并变号，即：当 $\min(a_i,b_j)&gt;\min(a_j,b_i)$ 时，需要交换 $i$ 和 $j$。</p>
+<p>于是，可以写出以下代码，并在洛谷上AC此题：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N=20010;
+
+struct Node
+{
+    int a,b;
+    bool operator&lt;(Node&amp; y)
+    {
+        return min(a,y.b)&lt;min(b,y.a);
+    }
+} dc[N];
+
+long long ans,sum,t,n;
+
+int main()
+{
+    cin&gt;&gt;t;
+    while (t--)
+    {
+        cin&gt;&gt;n;
+        for (int i=1;i&lt;=n;++i)
+        {
+            cin&gt;&gt;dc[i].a&gt;&gt;dc[i].b;
+        }
+        sort(dc+1,dc+n+1);
+        ans=sum=0;
+        for (int i=1;i&lt;=n;++i)
+        {
+            sum+=dc[i].a;
+            ans=max(ans,sum)+dc[i].b;
+        }
+        cout&lt;&lt;ans&lt;&lt;endl;
+    }
+    return 0;
+}
+</code></pre>
+<h2 id="hack数据">hack数据</h2>
+<p>事实上，上面的做法是错误的，无法通过下面这组数据：</p>
+<pre><code>2
+4
+1 1
+1 1
+3 5
+2 7
+4
+1 1
+3 5
+1 1
+2 7
+</code></pre>
+<p>这两组数据只有大臣给出的顺序不同，但上面的代码输出为：</p>
+<pre><code>16
+17
+</code></pre>
+<p>输出中间结果，可以发现，排列后的最终结果分别为：</p>
+<pre><code>1 1
+1 1
+2 7
+3 5
+</code></pre>
+<p>和</p>
+<pre><code>1 1
+3 5
+1 1
+2 7
+</code></pre>
+<p>这两种排列方式都满足 $\forall i\in [1,n),\min(a_i,b_{i+1})\le\min(a_{i+1},b_i)$，但第二种方式并不是最优解。具体原因将在下文分析。</p>
+<h2 id="严格弱序">严格弱序</h2>
+<h3 id="严格弱序简介">严格弱序简介</h3>
+<p>要知道为什么这种做法是错误的，首先需要了解严格弱序（strict weak ordering）。</p>
+<p>对于一个比较运算符（用“$&lt;$”表示此运算符，用“$\not&lt;$”表示不满足此运算符），若满足以下四个条件，则称其是满足严格弱序的：</p>
+<ol>
+<li>$x\not&lt;x$ （非自反性）</li>
+<li>若 $x&lt;y$，则 $y\not&lt;x$ （非对称性）</li>
+<li>若 $x&lt;y,y&lt;z$，则 $x&lt;z$ （传递性）</li>
+<li>若 $x\not&lt;y,y\not&lt;x,y\not&lt;z,z\not&lt;y$，则 $x\not&lt;z,z\not&lt;x$ （不可比性的传递性）</li>
+</ol>
+<p>而 C++ 标准库要求用于排序的运算符必须满足严格弱序：</p>
+<ol>
+<li>
+<p>It has to be antisymmetric.</p>
+<p>This means that for operator $&lt;$: If $x &lt; y$ is true, then $y &lt; x$ is false.</p>
+<p>This means that for a predicate op(): If op(x,y) is true, then op(y,x) is false.</p>
+</li>
+<li>
+<p>It has to be transitive.</p>
+<p>This means that for operator $&lt;$: If $x &lt; y$ is true and $y &lt; z$ is true, then $x &lt; z$ is true.</p>
+<p>This means that for a predicate op(): If op(x,y) is true and op(y,z) is true, then op(x,z)</p>
+<p>is true.</p>
+</li>
+<li>
+<p>It has to be irreflexive.</p>
+<p>This means that for operator $&lt;$: $x &lt; x$ is always false.</p>
+<p>This means that for a predicate op(): op(x,x) is always false.</p>
+</li>
+<li>
+<p>It has to have transitivity of equivalence, which means roughly: If a is equivalent to b and b is</p>
+<p>equivalent to c, then a is equivalent to c.</p>
+<p>This means that for operator $&lt;$: If $!(a&lt;b) \&amp;\&amp; !(b&lt;a)$ is true and $!(b&lt;c) \&amp;\&amp; !(c&lt;b)$ is true</p>
+<p>then $!(a&lt;c) \&amp;\&amp; !(c&lt;a)$ is true.</p>
+<p>This means that for a predicate op(): If op(a,b), op(b,a), op(b,c), and op(c,b) all yield</p>
+<p>false, then op(a,c) and op(c,a) yield false.</p>
+</li>
+</ol>
+<p>上述做法的判断条件满足传递性，但不满足不可比性的传递性。</p>
+<h3 id="满足传递性的证明">满足传递性的证明</h3>
+<p>命题：$\forall \begin{cases}\min(a_i,b_j)&lt;\min(a_j,b_i)\\\min(a_j,b_k)&lt;\min(a_k,b_j)\end{cases}$，有 $\min(a_i,b_k)&lt;\min(a_k,b_i)$。</p>
+<p>将上式拆解成逻辑式，即证：</p>
+<p>$\forall \begin{cases}(a_i&lt;a_j\lor b_j&lt;a_j)\land(a_i&lt;b_i\lor b_j&lt;b_i) \\(a_j&lt;a_k\lor b_k&lt;a_k)\land(a_j&lt;b_j\lor b_k&lt;b_j)\end{cases}$，有 $(a_i&lt;a_k\lor b_k&lt;a_k)\land(a_i&lt;b_i\lor b_k&lt;b_i)$。</p>
+<p>假设原命题不成立，即 $\exists\begin{cases}(a_i&lt;a_j\lor b_j&lt;a_j)\land(a_i&lt;b_i\lor b_j&lt;b_i)&amp;(1) \\(a_j&lt;a_k\lor b_k&lt;a_k)\land(a_j&lt;b_j\lor b_k&lt;b_j)&amp;(2) \\(a_i\ge a_k\land b_k\ge a_k)\lor(a_i\ge b_i\land b_k\ge b_i)&amp;(3)\end{cases}$</p>
+<p>分别讨论 $(3)$ 式成立的两种情况：</p>
+<p>若 $a_i\ge a_k\land b_k\ge a_k$，由 $(2)$ 式得 $a_j&lt;a_k$，进而推出 $a_j&lt;a_i$，再由 $(1)$ 式得 $b_j&lt;a_j$，再由 $(2)$ 式得到 $b_k&lt;b_j$，所以 $b_k&lt;b_j&lt;a_j&lt;a_k$，与 $b_k\ge a_k$ 矛盾，不成立。</p>
+<p>若 $a_i\ge b_i\land b_k\ge b_i$，与上面类似，由 $(1)$ 式得 $b_j&lt;b_i$，进而推出 $b_j&lt;b_k$，再由 $(2)$ 式得到 $a_j&lt;b_j$，再由 $(1)$ 式得到 $a_i&lt;a_j$，所以 $a_i&lt;a_j&lt;b_j&lt;b_i$，与 $a_i\ge b_i$ 矛盾，不成立。</p>
+<p>综上所述，假设不成立。</p>
+<p>所以，$P_{i,j}=\min(a_i,b_j)&lt;\min(a_j,b_i)$ 具有传递性。</p>
+<h3 id="不具有不可比性的传递性的证明">不具有不可比性的传递性的证明</h3>
+<p>命题：$\forall \begin{cases}\min(a_i,b_j)=\min(a_j,b_i)\\\min(a_j,b_k)=\min(a_k,b_j)\end{cases}$，有 $\min(a_i,b_k)=\min(a_k,b_i)$。</p>
+<p>很明显，当 $a_j=b_j$ 且都很小时存在反例，如：</p>
+<p>$$\begin{array}{c|c|c}&amp;a&amp;b\\i&amp;3&amp;5\\j&amp;1&amp;1\\k&amp;2&amp;7\end{array}$$</p>
+<p>$\begin{cases}\min(3,1)=\min(1,5)\\\min(1,7)=\min(2,1)\end{cases}$，但 $\min(3,7)\ne \min(2,5)$。</p>
+<p>这样的反例还有很多，所以，$P_{i,j}=\min(a_i,b_j)&lt;\min(a_j,b_i)$ 不具有不可比性的传递性。</p>
+<h3 id="为何会错">为何会错</h3>
+<p>简单地说，$P_{i,j}=\min(a_i,b_j)&lt;\min(a_j,b_i)$ 不满足严格弱序，不能作为 <code>std::sort</code> 的比较函数。</p>
+<p>究其原因，“不具有不可比性的传递性”意味着：将序列中若干个不可比的相邻元素对（在这种比较方式下即 $\min(a_i,b_{i+1})=\min(a_{i+1},b_i)$ 的 $i$ 和 $i+1$）互换后，可能会出现前面的元素“大于”后面的元素（在这种比较方式下即出现 $\min(a_i,b_{i+1})&gt;\min(a_{i+1},b_i)$），从而使得原先的排列方式不是最优的。</p>
+<h2 id="正确解法">正确解法</h2>
+<h3 id="更加完善的贪心解法">更加完善的贪心解法</h3>
+<p>比较相邻两项时，若 $\min(a_i,b_j)=\min(a_j,b_i)$ ，从全局来看，由于 $a$ 的前缀和对答案有一定的影响，把 $a$ 更小的放前面是更优的。从而可以得到这样一个解法：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+const int N=20010;
+
+struct Node
+{
+    int a,b;
+    bool operator&lt;(Node&amp; y)
+    {
+        return min(a,y.b)==min(b,y.a)?a&lt;y.a:min(a,y.b)&lt;min(b,y.a);
+    }
+} dc[N];
+
+long long ans,sum,t,n;
+
+int main()
+{
+    cin&gt;&gt;t;
+    while (t--)
+    {
+        cin&gt;&gt;n;
+        for (int i=1;i&lt;=n;++i)
+        {
+            cin&gt;&gt;dc[i].a&gt;&gt;dc[i].b;
+        }
+        sort(dc+1,dc+n+1);
+        ans=sum=0;
+        for (int i=1;i&lt;=n;++i)
+        {
+            sum+=dc[i].a;
+            ans=max(ans,sum)+dc[i].b;
+        }
+        cout&lt;&lt;ans&lt;&lt;endl;
+    }
+    return 0;
+}
+</code></pre>
+<p>这个解法的正确性将在下文证明。</p>
+<h3 id="一个解法是否正确的判断方式">一个解法是否正确的判断方式</h3>
+<p>由上文的讨论可以得知，一个排序方式 $P_{i,j}$ 要是正解，需要满足两个条件：</p>
+<ol>
+<li>
+<p>满足严格弱序。</p>
+</li>
+<li>
+<p>$\forall P_{i,j}=true$，$\min(a_i,b_j)\le\min(a_j,b_i)$ 。</p>
+</li>
+</ol>
+<p>即，可以作为比较函数，且排序完成后任意交换相邻元素均不会使答案更优。</p>
+<p>从而可以写出下面的正解判断器：</p>
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+bool cmp(int i,int j);
+
+int a[10],b[10];
+
+int main()
+{
+    for (a[0]=1;a[0]&lt;=6;++a[0])
+    {
+        for (b[0]=1;b[0]&lt;=6;++b[0])
+        {
+            if (cmp(0,0))
+            {
+                printf(&quot;No irreflexivity:%d %d\n&quot;,a[0],b[0]);
+            }
+            for (a[1]=1;a[1]&lt;=6;++a[1])
+            {
+                for (b[1]=1;b[1]&lt;=6;++b[1])
+                {
+                    if (cmp(0,1)&amp;&amp;min(a[0],b[1])&gt;min(a[1],b[0]))
+                    {
+                        printf(&quot;Not the best:%d %d %d %d\n&quot;,a[0],b[0],a[1],b[1]);
+                    }
+                    for (a[2]=1;a[2]&lt;=6;++a[2])
+                    {
+                        for (b[2]=1;b[2]&lt;=6;++b[2])
+                        {
+                            if (cmp(0,1)&amp;&amp;cmp(1,2)&amp;&amp;!cmp(0,2))
+                            {
+                                printf(&quot;No transitivity:%d %d %d %d %d %d\n&quot;,a[0],b[0],a[1],b[1],a[2],b[2]);
+                            }
+                            if (!cmp(0,1)&amp;&amp;!cmp(1,0)&amp;&amp;!cmp(1,2)&amp;&amp;!cmp(2,1)&amp;&amp;(cmp(0,2)||cmp(2,0)))
+                            {
+                                printf(&quot;No transitivity of incomparability:%d %d %d %d %d %d\n&quot;,a[0],b[0],a[1],b[1],a[2],b[2]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+bool cmp(int i,int j)
+{
+    return min(a[i],b[j])==min(a[j],b[i])?a[i]&lt;a[j]:min(a[i],b[j])&lt;min(a[j],b[i]);
+}
+</code></pre>
+<p>运行程序，没有任何输出，说明上文所述的排序方式是一个正解。</p>
+<p>用其它排序方式替换 <code>cmp</code>，若没有任何输出即可作为本题的正确排序方式。</p>
+<p>下面是几种排序方式的例子：</p>
+<pre><code class="language-cpp">bool cmp(int i,int j)
+{
+    return min(a[i],b[j])==min(a[j],b[i])?b[i]&gt;b[j]:min(a[i],b[j])&lt;min(a[j],b[i]);
+}
+</code></pre>
+<p>输出为空，是正解。</p>
+<pre><code class="language-cpp">bool cmp(int i,int j)
+{
+    return min(a[i],b[j])&lt;min(a[j],b[i]);
+}
+</code></pre>
+<p>共输出1694行，前10行如下：</p>
+<pre><code>No transitivity of incomparability:1 2 1 1 2 1
+No transitivity of incomparability:1 2 1 1 2 2
+No transitivity of incomparability:1 2 1 1 2 3
+No transitivity of incomparability:1 2 1 1 2 4
+No transitivity of incomparability:1 2 1 1 2 5
+No transitivity of incomparability:1 2 1 1 2 6
+No transitivity of incomparability:1 2 1 1 3 1
+No transitivity of incomparability:1 2 1 1 3 2
+No transitivity of incomparability:1 2 1 1 3 3
+No transitivity of incomparability:1 2 1 1 3 4
+</code></pre>
+<pre><code class="language-cpp">bool cmp(int i,int j)
+{
+	return min(a[i],b[j])==min(a[j],b[i])?a[i]&gt;a[j]:min(a[i],b[j])&lt;min(a[j],b[i]);
+}
+</code></pre>
+<p>共输出280行，前10行如下：</p>
+<pre><code>No transitivity:1 2 2 1 1 1
+No transitivity:1 2 2 2 1 1
+No transitivity:1 2 2 3 1 1
+No transitivity:1 2 2 4 1 1
+No transitivity:1 2 2 5 1 1
+No transitivity:1 2 2 6 1 1
+No transitivity:1 2 3 1 1 1
+No transitivity:1 2 3 2 1 1
+No transitivity:1 2 3 3 1 1
+No transitivity:1 2 3 4 1 1
+</code></pre>
+<pre><code class="language-cpp">bool cmp(int i,int j)
+{
+    return min(a[i],b[j])&lt;=min(a[j],b[i]);
+}
+</code></pre>
+<p>共输出883行，前10行如下：</p>
+<pre><code>No irreflexivity:1 1
+No irreflexivity:1 2
+No irreflexivity:1 3
+No irreflexivity:1 4
+No irreflexivity:1 5
+No irreflexivity:1 6
+No irreflexivity:2 1
+No transitivity:2 1 1 1 1 2
+No transitivity:2 1 1 1 1 3
+No transitivity:2 1 1 1 1 4
+</code></pre>
+<h1 id="总结">总结</h1>
+<p>在可以通过比较相邻两项得出交换或不交换一定不会更差时，可以通过邻项交换排序的方式来得到最优解。</p>
+<p>邻项交换排序的比较函数需要满足严格弱序，并且排序完成后任意交换相邻元素都不会更优。</p>
+<p>使用这种算法时，一定要注意以上两点，才能得到真正正确的算法。</p>
+<hr>
+<p>最后再把我去雅礼集训的时候水题选讲的 slide 放上来好了..（还附赠一道由乃题）</p>
+<p><a href="/post_doc/%E6%B0%B4%E9%A2%98%E9%80%89%E8%AE%B2_ouuan.pdf">水题选讲_ouuan.pdf</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        <span title="2020-08-13 15:56:54 &#43;0800 &#43;0800">2020-08-13</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/b4d8c0a947b5205a150418f3a7d2ec1773da73c2" title="fix: fix post_doc links" target="_blank">(b4d8c0a)</a>
+        ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/%e6%b5%85%e8%b0%88%e9%82%bb%e9%a1%b9%e4%ba%a4%e6%8d%a2%e6%8e%92%e5%ba%8f%e7%9a%84%e5%ba%94%e7%94%a8%e4%bb%a5%e5%8f%8a%e9%9c%80%e8%a6%81%e6%b3%a8%e6%84%8f%e7%9a%84%e9%97%ae%e9%a2%98.md" target="_blank">更新历史</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/wechat-donate.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/alipay-donate.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a>
+          <a href="/tags/%E5%BA%8F%E7%90%86%E8%AE%BA/">序理论</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/%E6%A0%91%E4%B8%8A%E8%83%8C%E5%8C%85%E7%9A%84%E4%B8%8A%E4%B8%8B%E7%95%8C%E4%BC%98%E5%8C%96/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">树上背包的上下界优化</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/noip2018%E6%8F%90%E9%AB%98%E7%BB%84%E6%B8%B8%E8%AE%B0/">
+            <span class="next-text nav-default">NOIp2018提高组游记</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+  <div class="comments">
+    <div class="loading post">
+      <img src="/img/spinner.svg">
+      <p class="post-content">
+        评论正在加载中...如果评论较长时间无法加载，你可以
+        <a href='https://github.com/ouuan/blog-comments/issues?q=is%3Aissue+is%3Aopen+"%e6%b5%85%e8%b0%88%e9%82%bb%e9%a1%b9%e4%ba%a4%e6%8d%a2%e6%8e%92%e5%ba%8f%e7%9a%84%e5%ba%94%e7%94%a8%e4%bb%a5%e5%8f%8a%e9%9c%80%e8%a6%81%e6%b3%a8%e6%84%8f%e7%9a%84%e9%97%ae%e9%a2%98 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2"' target="_blank">搜索对应的 issue</a>
+        或者
+        <a href="https://github.com/ouuan/blog-comments/issues/new?title=%e6%b5%85%e8%b0%88%e9%82%bb%e9%a1%b9%e4%ba%a4%e6%8d%a2%e6%8e%92%e5%ba%8f%e7%9a%84%e5%ba%94%e7%94%a8%e4%bb%a5%e5%8f%8a%e9%9c%80%e8%a6%81%e6%b3%a8%e6%84%8f%e7%9a%84%e9%97%ae%e9%a2%98 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2" target="_blank">新建一个 issue</a>
+        。
+      </p>
+    </div>
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/blog-comments"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>请启用 JavaScript 来查看评论。</a></noscript>
+  </div>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:ouuansteve@gmail.com" class="iconfont icon-email" title="email" target="_blank"></a>
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+      <a href="https://twitter.com/ouuan" class="iconfont icon-twitter" title="twitter" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ouuan/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2022
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span> 
+    <span class="author">ouuan</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/highlight.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/styles/tomorrow.min.css" rel="stylesheet"/>
+  <script>hljs.configure({tabReplace: '    '});</script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/slideout/1.0.1/slideout.min.js" crossorigin="anonymous"></script>
+
+
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.locales.min.js" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.85ad50502df0a718821e6776a9cb854d4a8abf64981e94053598daba712a9022.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" crossorigin="anonymous"></script>
+
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>

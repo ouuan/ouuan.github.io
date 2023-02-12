@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>遗传病概率计算中的条件概率问题 - ouuan的博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ouuan" /><meta name="description" content="考试中的一道遗传图谱计算题为何会引发整整一周的争论？
+为何办公室中只有数学老师认为题目有问题？
+为何数学老师觉得参考答案错了却算不出正确答案？
+后发生的事能“影响”先发生的事的概率吗？
+遗传图谱计算中的“概率”意义究竟是什么？
+如果高考有这样的题，我们在考场上应该怎么做？考完了应该骂出题人吗？
+" /><meta name="keywords" content="ouuan, blog, OI" />
+
+
+<meta name="baidu-site-verification" content="zW0oque8IK" />
+<meta name="google-site-verification" content="HAIwoMdm1A6XQ6Fp6KwAO7gpL5UKk5TOzvs9DuacYFI" />
+
+
+<meta name="generator" content="Hugo 0.92.2 with theme even" />
+
+
+<link rel="canonical" href="https://ouuan.github.io/post/conditional-probability-in-heredity-calculation/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.3004a145db73ba341ebe1a3790ea2c0166b56dc0378485b385563682aa10c6b2.css" rel="stylesheet">
+
+
+
+
+
+<meta property="og:title" content="遗传病概率计算中的条件概率问题" />
+<meta property="og:description" content="考试中的一道遗传图谱计算题为何会引发整整一周的争论？
+为何办公室中只有数学老师认为题目有问题？
+为何数学老师觉得参考答案错了却算不出正确答案？
+后发生的事能“影响”先发生的事的概率吗？
+遗传图谱计算中的“概率”意义究竟是什么？
+如果高考有这样的题，我们在考场上应该怎么做？考完了应该骂出题人吗？" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ouuan.github.io/post/conditional-probability-in-heredity-calculation/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-01-10T09:28:16+08:00" />
+<meta property="article:modified_time" content="2021-01-10T11:08:00+08:00" />
+
+<meta itemprop="name" content="遗传病概率计算中的条件概率问题">
+<meta itemprop="description" content="考试中的一道遗传图谱计算题为何会引发整整一周的争论？
+为何办公室中只有数学老师认为题目有问题？
+为何数学老师觉得参考答案错了却算不出正确答案？
+后发生的事能“影响”先发生的事的概率吗？
+遗传图谱计算中的“概率”意义究竟是什么？
+如果高考有这样的题，我们在考场上应该怎么做？考完了应该骂出题人吗？"><meta itemprop="datePublished" content="2021-01-10T09:28:16+08:00" />
+<meta itemprop="dateModified" content="2021-01-10T11:08:00+08:00" />
+<meta itemprop="wordCount" content="1934">
+<meta itemprop="keywords" content="概率期望,生物," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="遗传病概率计算中的条件概率问题"/>
+<meta name="twitter:description" content="考试中的一道遗传图谱计算题为何会引发整整一周的争论？
+为何办公室中只有数学老师认为题目有问题？
+为何数学老师觉得参考答案错了却算不出正确答案？
+后发生的事能“影响”先发生的事的概率吗？
+遗传图谱计算中的“概率”意义究竟是什么？
+如果高考有这样的题，我们在考场上应该怎么做？考完了应该骂出题人吗？"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ouuan的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">主页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">关于</li>
+      </a><a href="/ranking/">
+        <li class="mobile-menu-item">排行</li>
+      </a><a href="/search/">
+        <li class="mobile-menu-item">搜索</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ouuan的博客</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">主页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">关于</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/ranking/">排行</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/search/">搜索</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">遗传病概率计算中的条件概率问题</h1>
+
+      <div class="post-meta">
+        <span class="post-time" title="2021-01-10 09:28:16 &#43;0800 &#43;0800"> 2021-01-10 </span>
+        <div class="post-category">
+            <a href="/categories/%E6%96%87%E5%8C%96%E8%AF%BE/"> 文化课 </a>
+            </div>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次阅读 </span>
+      </div>
+    </header>
+
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#题目">题目</a></li>
+        <li><a href="#一个解法">一个解法</a></li>
+        <li><a href="#一些争论">一些争论</a>
+          <ul>
+            <li><a href="#后代不会影响亲本">后代不会影响亲本</a></li>
+            <li><a href="#个体的基因型是特定的">个体的基因型是特定的</a></li>
+            <li><a href="#结论">结论</a></li>
+          </ul>
+        </li>
+        <li><a href="#高考题">高考题</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+  <div class="post-outdated">
+    <div class="hint">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2021-01-10T11:08:00" title="January 10, 2021">January 10, 2021</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
+    <div class="post-content">
+      <p>考试中的一道遗传图谱计算题为何会引发整整一周的争论？</p>
+<p>为何办公室中只有数学老师认为题目有问题？</p>
+<p>为何数学老师觉得参考答案错了却算不出正确答案？</p>
+<p>后发生的事能“影响”先发生的事的概率吗？</p>
+<p>遗传图谱计算中的“概率”意义究竟是什么？</p>
+<p>如果高考有这样的题，我们在考场上应该怎么做？考完了应该骂出题人吗？</p>
+<h2 id="题目">题目</h2>
+<p>由于我没有把卷子带回家，就没有放这次考试中的题，而是在网上找了一道类似的题：</p>
+<div class="admonition question">
+  <p class="admonition-title">题目描述</p>
+<p>下面是某家族单基因遗传病系谱图，基因用 $\rm A$、$\rm a$ 表示。请据图回答：$\rm{II}_2$ 的基因型概率是多少？</p>
+<img src="/post_img/conditional-probability-in-heredity-calculation/problem.jpg" alt="problem">
+</div>
+<h2 id="一个解法">一个解法</h2>
+<p>我的解法和 <a href="http://blog.sina.com.cn/s/blog_4e03f57501007y1g.html">陈宝明.遗传概率的一个认识误区.生物学通报.2007(02)</a> 大体相同，我就不再赘述了。</p>
+<p>描述这个解法的其它文章还有很多，但很多不方便从知网上下载 🌚️。我下载到了两篇：</p>
+<ul>
+<li><a href="/post_doc/%E7%B3%BB%E8%B0%B1%E5%88%86%E6%9E%90%E4%B8%AD%E6%A6%82%E7%8E%87%E9%97%AE%E9%A2%98%E7%9A%84%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E6%9E%90%E4%B8%80%E4%BE%8B.pdf">何风华.系谱分析中概率问题的贝叶斯分析一例.生物学通报.2007(10)</a></li>
+<li><a href="/post_doc/%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%90%86%E8%AE%BA%E5%9C%A8%E9%81%97%E4%BC%A0%E6%A6%82%E7%8E%87%E8%AE%A1%E7%AE%97%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8.pdf">龚军辉.贝叶斯理论在遗传概率计算中的应用.中学生物教学.2017(19)</a></li>
+</ul>
+<p>这些文章中也有提及常见的那种错误解法，即一路顺推不管已知的后代对前面未知基因型的影响。</p>
+<h2 id="一些争论">一些争论</h2>
+<p>因为大家都是学过条件概率的高中生，我本以为我简单解释一下大家就都能理解，但事实却并非如此。（于是我才会想来写这篇博客。）</p>
+<h3 id="后代不会影响亲本">后代不会影响亲本</h3>
+<p>“后代不会影响亲本”是一个很多人都这么认为但根本站不住脚的观点。除非你认为，在上面的例题中，即使 $\rm{III}_1$ 是患病的，$\rm{II}_2$ 的基因型依然有可能是 $\rm{AA}$。</p>
+<p>“推断”其实就是一种特殊的“影响概率”，只不过是把概率影响成了一个 01 分布。</p>
+<p>如果你承认“$\rm{III}_1$ 患病”可以推出“$\rm{II}_2$ 的基因型是 $\rm{Aa}$”，而不承认“$\rm{III}_1$ 不患病”影响“$\rm{II}_2$ 的基因型是 $\rm{Aa}$”的概率，那就相当于：告诉你一个骰子的点数是奇数，你承认它的点数不是 6；告诉你它的点数是偶数，你却依然认为它的点数是 6 的概率是 $\frac{1}{6}$。</p>
+<p>另外就是，虽然持这种观点的人（在我们班上，以及网上，还有参考答案中）很多，但可能是由于我不知道这种文章的标题应该长啥样，我并没有搜到支持这种观点的文章。</p>
+<h3 id="个体的基因型是特定的">个体的基因型是特定的</h3>
+<p>这位丁志芳直接写了三篇文章从不同的角度批判了这种计算方式：</p>
+<ul>
+<li><a href="https://wenku.baidu.com/view/a4b58e690a4c2e3f5727a5e9856a561253d32158.html">贝叶斯定理在遗传病概率计算中的误用</a></li>
+<li><a href="https://wenku.baidu.com/view/7c96e7257f21af45b307e87101f69e314232fa4e.html">贝叶斯定理应用于遗传概率计算的逻辑学审思</a></li>
+<li><a href="https://wenku.baidu.com/view/c5b1c560e3bd960590c69ec3d5bbfd0a7956d5fa.html">贝叶斯定律应用于遗传概率计算的哲学考量</a></li>
+</ul>
+<p>乍一看觉得很吓人，但这三篇文章说来说去都是一回事（<del>其实我并没有细看，就扫了一眼看了下总结</del>），并不是觉得后代不会影响亲本，而是认为“个体的基因型是特定的”：<a href="https://wenku.baidu.com/view/a6547def1fb91a37f111f18583d049649b660ec8.html">论基因型的特定性</a>。</p>
+<p>这个观点是有一些道理的。在讨论之前，我们首先要明白，我们所说的“概率”究竟是什么，否则就是在不同的论点上针锋相对了。</p>
+<p>在丁志芳看来，遗传图谱描述的是一个真实存在的家族，其中每个人的基因型都是特定的，而“概率”只适用于未出生的孩子，不适用于已存在的个体。丁志芳的矛头指向的不只是本文讨论的这种有较大争议的题目，而是一切把已存在的个体卷入概率计算的题目。丁志芳认为，这种情况下，不应该说概率是“多少”，而是应该说概率是“多少或多少”，即对已存在个体的每种情况分别讨论。</p>
+<p>在这种观点下，“概率”其实就是豌豆杂交实验中的“性状比”。这样的话，我们的确不能把已存在个体的多种可能的基因型放在一起计算：一个亲本有 $\frac{1}{2}$ 的概率是 $\rm{AA}$，有 $\frac{1}{2}$ 的概率是 $\rm{Aa}$，另一个亲本是 $\rm{aa}$，但他们的后代并不会是 $\frac{1}{4}$ 患病，而是有 $\frac{1}{2}$ 的概率全不患病，有 $\frac{1}{2}$ 的概率有一半患病。听说有同学认为“这是在不犯错误的情况下的把握而不能等同于概率”，或许他对“概率”的理解也大致如此。</p>
+<p>但是，正如每次投骰子时投出的点数都是特定的而我们依然可以讨论骰子投到某个点数的概率，我们在不知道已存在个体的基因型时，也可以计算其概率。或者说，我们可以把“概率”视作“后代性状比例”的期望值。</p>
+<p>总之，这个争论的重点在于“概率”究竟是什么，是个比较哲学的问题 🌚️。但是如果你支持这个观点，那一切把已存在的个体卷入概率计算的题目你都不用做了。</p>
+<h3 id="结论">结论</h3>
+<p>认为“知道后代对亲本完全没有影响”，即在本文开头给出的题目中认为“无论后代如何，$\rm{II}_2$ 的基因型都是 $\frac{1}{3}\rm{AA}$, $\frac{2}{3}\rm{Aa}$”，这肯定是不正确的。</p>
+<p>如果你愿意的话，你还可以支持 <a href="#%E4%B8%AA%E4%BD%93%E7%9A%84%E5%9F%BA%E5%9B%A0%E5%9E%8B%E6%98%AF%E7%89%B9%E5%AE%9A%E7%9A%84">丁志芳的观点</a>：凡是把已存在的个体卷入概率计算的都是错的，这道题只要答案是单个数字就是错的。</p>
+<h2 id="高考题">高考题</h2>
+<blockquote>
+<p>这种题高考不会有吧。</p>
+</blockquote>
+<p>虽然不知道以后的高考会不会有，但以前的高考真的有，而且答案还是错的 🌚️</p>
+<p><a href="https://zhuanlan.zhihu.com/p/73029260">心月狐 - 2011年海南生物遗传概率问题</a></p>
+<p>如果以后高考真的还有这种题，只能祝大家好运了。（<del>如果答案是错的记得骂出题人</del>）</p>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ouuan</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        <span title="2021-01-10 11:08:00 &#43;0800 &#43;0800">2021-01-10</span>
+        <a href="https://github.com/ouuan/hugo-blog/commit/b586ca4a8f6e6b9686052f59a248c935cfe8d6cd" title="feat: add 遗传病概率计算中的条件概率问题" target="_blank">(b586ca4)</a>
+        ，<a href="https://github.com/ouuan/hugo-blog/commits/master/content/post/conditional-probability-in-heredity-calculation.md" target="_blank">更新历史</a>
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank">CC BY-SA 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/wechat-donate.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/alipay-donate.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/%E6%A6%82%E7%8E%87%E6%9C%9F%E6%9C%9B/">概率期望</a>
+          <a href="/tags/%E7%94%9F%E7%89%A9/">生物</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/chopsticks/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">筷子</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/sentences/">
+            <span class="next-text nav-default">随笔合集</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+  <div class="comments">
+    <div class="loading post">
+      <img src="/img/spinner.svg">
+      <p class="post-content">
+        评论正在加载中...如果评论较长时间无法加载，你可以
+        <a href='https://github.com/ouuan/blog-comments/issues?q=is%3Aissue+is%3Aopen+"%e9%81%97%e4%bc%a0%e7%97%85%e6%a6%82%e7%8e%87%e8%ae%a1%e7%ae%97%e4%b8%ad%e7%9a%84%e6%9d%a1%e4%bb%b6%e6%a6%82%e7%8e%87%e9%97%ae%e9%a2%98 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2"' target="_blank">搜索对应的 issue</a>
+        或者
+        <a href="https://github.com/ouuan/blog-comments/issues/new?title=%e9%81%97%e4%bc%a0%e7%97%85%e6%a6%82%e7%8e%87%e8%ae%a1%e7%ae%97%e4%b8%ad%e7%9a%84%e6%9d%a1%e4%bb%b6%e6%a6%82%e7%8e%87%e9%97%ae%e9%a2%98 - ouuan%e7%9a%84%e5%8d%9a%e5%ae%a2" target="_blank">新建一个 issue</a>
+        。
+      </p>
+    </div>
+    <script src="https://utteranc.es/client.js"
+            repo="ouuan/blog-comments"
+            issue-term="title"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>请启用 JavaScript 来查看评论。</a></noscript>
+  </div>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:ouuansteve@gmail.com" class="iconfont icon-email" title="email" target="_blank"></a>
+      <a href="https://github.com/ouuan" class="iconfont icon-github" title="github" target="_blank"></a>
+      <a href="https://space.bilibili.com/11067182" class="iconfont icon-bilibili" title="bilibili" target="_blank"></a>
+      <a href="https://twitter.com/ouuan" class="iconfont icon-twitter" title="twitter" target="_blank"></a>
+  <a href="https://ouuan.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io" target="_blank">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ouuan/hugo-theme-even" target="_blank">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> 本站总访问量 <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 次 </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> 本站总访客数 <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> 人 </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2018 - 
+    2022
+    <span class="heart">
+      <a class="iconfont icon-github" title="source code" href="https://github.com/ouuan/hugo-blog" target="_blank"></a>
+    </span> 
+    <span class="author">ouuan</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/highlight.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.7.3/styles/tomorrow.min.css" rel="stylesheet"/>
+  <script>hljs.configure({tabReplace: '    '});</script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/slideout/1.0.1/slideout.min.js" crossorigin="anonymous"></script>
+
+
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/timeago.js/3.0.2/timeago.locales.min.js" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.85ad50502df0a718821e6776a9cb854d4a8abf64981e94053598daba712a9022.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.bootcdn.net/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" crossorigin="anonymous"></script>
+
+
+
+<script id="baidu_push">
+  (function(){
+    if (window.location.hostname === 'localhost') return;
+    var bp = document.createElement('script'); bp.async = true;
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
