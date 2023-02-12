@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=2019.9.22" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico?v=6.6.0">
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="后缀数组是一种处理字符串问题的有力工具（废话），本文的主要特点是一步步地由最朴素的后缀数组构建方法逐步优化，而非直接给出最终优化后的代码。 希望这篇文章能让更多的人看懂后缀数组的代码，学会后缀数组。">
+<meta name="keywords" content="字符串,后缀数组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="后缀数组学习笔记">
+<meta property="og:url" content="https://ouuan.github.io/后缀数组学习笔记/index.html">
+<meta property="og:site_name" content="ouuan的博客">
+<meta property="og:description" content="后缀数组是一种处理字符串问题的有力工具（废话），本文的主要特点是一步步地由最朴素的后缀数组构建方法逐步优化，而非直接给出最终优化后的代码。 希望这篇文章能让更多的人看懂后缀数组的代码，学会后缀数组。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ouuan.github.io/后缀数组学习笔记/sark.png">
+<meta property="og:image" content="https://ouuan.github.io/后缀数组学习笔记/bz.png">
+<meta property="og:image" content="https://ouuan.github.io/后缀数组学习笔记/TLE.png">
+<meta property="og:updated_time" content="2019-12-04T18:40:06.316Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="后缀数组学习笔记">
+<meta name="twitter:description" content="后缀数组是一种处理字符串问题的有力工具（废话），本文的主要特点是一步步地由最朴素的后缀数组构建方法逐步优化，而非直接给出最终优化后的代码。 希望这篇文章能让更多的人看懂后缀数组的代码，学会后缀数组。">
+<meta name="twitter:image" content="https://ouuan.github.io/后缀数组学习笔记/sark.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ouuan的博客" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://ouuan.github.io/后缀数组学习笔记/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>后缀数组学习笔记 | ouuan的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ouuan的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Codes change the world.</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-其它">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/others" rel="section"><i class="menu-item-icon fa fa-fw fa-wrench"></i> <br>其它</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ouuan.github.io/后缀数组学习笔记/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ouuan">
+      <meta itemprop="description" content="ouuan的博客">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ouuan的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">后缀数组学习笔记
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-17 13:53:54" itemprop="dateCreated datePublished" datetime="2019-02-17T13:53:54+08:00">2019-02-17</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-12-05 02:40:06" itemprop="dateModified" datetime="2019-12-05T02:40:06+08:00">2019-12-05</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>后缀数组是一种处理字符串问题的有力工具（废话），本文的主要特点是一步步地由最朴素的后缀数组构建方法逐步优化，而非直接给出最终优化后的代码。</p>
+<p>希望这篇文章能让更多的人看懂后缀数组的代码，学会后缀数组。</p>
+<a id="more"></a>
+<p>本文已于 <a href="https://github.com/OI-wiki/OI-wiki/pull/1730" target="_blank" rel="noopener">pr #1730</a> 优化并合并至 <a href="https://oi-wiki.org/string/sa/" target="_blank" rel="noopener">OI Wiki</a>，推荐在 <a href="https://oi-wiki.org/string/sa/" target="_blank" rel="noopener">OI Wiki</a> 上阅读。</p>
+<h1 id="模板题链接"><a href="#模板题链接" class="headerlink" title="模板题链接"></a>模板题链接</h1><p><a href="https://www.luogu.org/problemnew/show/P3809" target="_blank" rel="noopener">洛谷</a>（只用求 $sa$）</p>
+<p><a href="https://loj.ac/problem/111" target="_blank" rel="noopener">LOJ</a>（只用求 $sa$）</p>
+<p><a href="http://uoj.ac/problem/35" target="_blank" rel="noopener">UOJ</a>（求 $sa$ 和 $height$）</p>
+<p><a href="https://duck.ac/problem/1006" target="_blank" rel="noopener">评测鸭</a>（求 $sa$ 和 $height$）</p>
+<h1 id="两（can）篇（kao）论（zi）文（liao）"><a href="#两（can）篇（kao）论（zi）文（liao）" class="headerlink" title="两（can）篇（kao）论（zi）文（liao）"></a>两（can）篇（kao）论（zi）文（liao）</h1><p>[1]：<a href="https://wenku.baidu.com/view/0dc03d2b1611cc7931b765ce0508763230127479.html" target="_blank" rel="noopener">[2004]后缀数组 by.徐智磊</a></p>
+<p>[2]：<a href="https://wenku.baidu.com/view/5b886b1ea76e58fafab00374.html" target="_blank" rel="noopener">[2009]后缀数组——处理字符串的有力工具 by.罗穗骞</a></p>
+<p>这两篇论文还是写的很好的，大家可以看看。</p>
+<p>下文中如果有引用这两篇论文中的内容，将以上标形式标出（$^{[1]}$ $^{[2]}$）。</p>
+<h1 id="关于字符串"><a href="#关于字符串" class="headerlink" title="关于字符串.."></a>关于字符串..</h1><p>说到字符串算法，就得先提一些定（fei）义（hua），知道的就可以不看了..</p>
+<h2 id="字符集-1"><a href="#字符集-1" class="headerlink" title="字符集$^{[1]}$"></a>字符集$^{[1]}$</h2><p>一个字符集 $Σ$ 是一个建立了全序关系的集合，也就是说，$Σ$ 中的任意两个不同的元素 $α$ 和 $β$ 都可以比较大小，要么 $α&lt;β$，要么 $β&lt;α$（也就是$α&gt;β$）。字符集 $Σ$ 中的元素称为字符。</p>
+<h2 id="字符串-1"><a href="#字符串-1" class="headerlink" title="字符串$^{[1]}$"></a>字符串$^{[1]}$</h2><p>一个字符串 $S$ 是将 $n$ 个字符顺次排列形成的数组，$n$ 称为 $S$ 的长度，表示为 $len(S)$。$S$ 的第 $i$ 个字符表示为 $S[i]$。</p>
+<h2 id="子串-1"><a href="#子串-1" class="headerlink" title="子串$^{[1]}$"></a>子串$^{[1]}$</h2><p>字符串 $S$ 的子串 $S[i..j]，i≤j$，表示 $S$ 串中从 $i$ 到 $j$ 这一段，也就是顺次排列 $S[i],S[i+1],\ldots,S[j]$ 形成的字符串。</p>
+<h2 id="后缀"><a href="#后缀" class="headerlink" title="后缀"></a>后缀</h2><p>后缀是指从某个位置 $i$ 开始到整个串末尾结束的一个特殊子串。字符串 $S$ 的从 $i$ 开头的后缀表示为 $Suffix(S,i)$，也就是 $Suffix(S,i)=S[i..len(S)]$。$^{[1]}$</p>
+<p>下文中以 “后缀 $i$” 代指字符串从 $i$ 开头的后缀。$i$ 称作这个后缀的编号。</p>
+<h2 id="字典序"><a href="#字典序" class="headerlink" title="字典序"></a>字典序</h2><p>以第 $i$ 个字符作为第 $i$ 关键字进行大小比较，空字符小于字符集内任何字符（即：$a&lt;aa$）。</p>
+<h1 id="后缀数组是什么？"><a href="#后缀数组是什么？" class="headerlink" title="后缀数组是什么？"></a>后缀数组是什么？</h1><p>后缀数组主要是两个数组：$sa$ 和 $rk$。</p>
+<p>其中，$sa[i]$ 表示将所有后缀排序后第 $i$ 小的后缀的编号。$rk[i]$ 表示后缀 $i$ 的排名。</p>
+<p>这两个数组满足性质：$sa[rk[i]]=rk[sa[i]]=i$。</p>
+<p>后缀数组示例：$^{[2]}$</p>
+<img src="/后缀数组学习笔记/sark.png">
+<h1 id="后缀数组怎么求？"><a href="#后缀数组怎么求？" class="headerlink" title="后缀数组怎么求？"></a>后缀数组怎么求？</h1><h2 id="O-n-2-log-n-做法"><a href="#O-n-2-log-n-做法" class="headerlink" title="$O(n^2\log n)$ 做法"></a>$O(n^2\log n)$ 做法</h2><p>我相信这个做法大家还是能自己想到的..用string+sort就可以了。由于比较两个字符串是 $O(n)$ 的，所以排序是 $O(n^2\log n)$ 的。</p>
+<h2 id="O-n-log-2n-做法"><a href="#O-n-log-2n-做法" class="headerlink" title="$O(n\log^2n)$ 做法"></a>$O(n\log^2n)$ 做法</h2><p>这个做法要用到倍增的思想。</p>
+<p>先对每个长度为 $1$ 的子串（即每个字符）进行排序。</p>
+<p>假设我们已经知道了长度为 $w$ 的子串的排名 $rk_w[1..n]$（即，$rk_w[i]$ 表示 $s[i..\min(i+w-1,n)]$ 在 $\{s[x..\min(x+w-1,n)]\ |\ x\in\mathbb{N}\bigcap[1,n]\}$ 中的排名），那么，以 $rk_w[i]$ 为第一关键字， $rk_w[i+w]$ 为第二关键字（若 $i+w&gt;n$ 则令 $rk_w[i+w]$ 为 $-INF$）进行排序，就可以求出 $rk_{2w}[1..n]$。</p>
+<p>倍增排序示意图：$^{[2]}$</p>
+<img src="/后缀数组学习笔记/bz.png">
+<p>如果用 <code>sort</code> 进行排序，复杂度就是 $O(n\log^2n)$ 的。</p>
+<div><div class="fold_hider"><div class="close hider_title">参考代码</div></div><div class="fold">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1000010</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> s[N];</span><br><span class="line"><span class="keyword">int</span> n,w,sa[N],rk[N&lt;&lt;<span class="number">1</span>],oldrk[N]; <span class="comment">//为了防止访问rk[i+w]导致数组越界，开两倍数组。当然也可以在访问前判断是否越界，但直接开两倍数组方便一些。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,p;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>,s+<span class="number">1</span>);</span><br><span class="line">    n=<span class="built_in">strlen</span>(s+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) rk[i]=s[i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (w=<span class="number">1</span>;w&lt;n;++w)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) sa[i]=i;</span><br><span class="line">        sort(sa+<span class="number">1</span>,sa+n+<span class="number">1</span>,[](<span class="keyword">int</span> x,<span class="keyword">int</span> y)&#123;<span class="keyword">return</span> rk[x]==rk[y]?rk[x+w]&lt;rk[y+w]:rk[x]&lt;rk[y];&#125;); <span class="comment">//这里用到了lambda表达式</span></span><br><span class="line">        <span class="built_in">memcpy</span>(oldrk,rk,<span class="keyword">sizeof</span>(oldrk)); <span class="comment">//由于计算rk的时候原来的rk会被覆盖，要先复制一份</span></span><br><span class="line">        <span class="keyword">for</span> (p=<span class="number">0</span>,i=<span class="number">1</span>;i&lt;=n;++i) rk[sa[i]]=oldrk[sa[i]]==oldrk[sa[i<span class="number">-1</span>]]&amp;&amp;oldrk[sa[i]+w]==oldrk[sa[i<span class="number">-1</span>]+w]?p:++p; <span class="comment">//若两个子串相同，它们对应的rk也需要相同，所以要去重</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) <span class="built_in">printf</span>(<span class="string">"%d "</span>,sa[i]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+<h2 id="O-n-log-n-做法"><a href="#O-n-log-n-做法" class="headerlink" title="$O(n\log n)$ 做法"></a>$O(n\log n)$ 做法</h2><p>在刚刚的 $O(n\log^2n)$ 做法中，一次排序是 $O(n\log n)$ 的，如果能 $O(n)$ 排序，就能 $O(n\log n)$ 计算后缀数组了。</p>
+<h3 id="计数排序"><a href="#计数排序" class="headerlink" title="计数排序"></a>计数排序</h3><p>计数排序的核心思想还是比较好理解的，可以先看代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对a这个数组进行排序，结果存到数组b中（b[i]表示第i名的编号），cnt是一个辅助数组，m是a的值域</span></span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) ++cnt[a[i]];</span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=m;++i) cnt[i]+=cnt[i<span class="number">-1</span>];</span><br><span class="line"><span class="keyword">for</span> (i=n;i&gt;=<span class="number">1</span>;--i) b[cnt[a[i]]--]=i;</span><br></pre></td></tr></table></figure>
+<p>其实就是先数一数小于等于 $a[i]$ 的数有多少个，然后从后往前看每个数的名次。感性理解/手玩一下就能明白这个排序算法了。</p>
+<p>这个算法有两个特点：</p>
+<ol>
+<li>它是 $O(n+m)$ 的（$m$ 为待排序数据的值域范围）。</li>
+<li>它是一个稳定排序，即，相等的数会按原位置（下标）进行排序。</li>
+</ol>
+<h3 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h3><p>值得一提的是很多人经常把计数排序和基数排序搞混..</p>
+<p>基数排序是一个基于稳定排序的多关键字排序算法，复杂度为关键字个数乘上稳定排序的复杂度。而这个稳定排序通常用计数排序实现。</p>
+<p>它的思想是，如果有 $k$ 个关键字，先以第 $k$ 关键字进行一次稳定排序，然后再以第 $k-1$ 关键字进行一次稳定排序，……，最后以第一关键字进行一次稳定排序。可以看出，这样做就完成了以这 $k$ 个关键字的排序。</p>
+<p>具体实现大约是这样的：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//key[i][j]表示第j个数的第i关键字，b[i]依然表示第i名的编号，m是key的值域，cnt和id都是辅助数组</span></span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) id[i]=i;</span><br><span class="line"><span class="keyword">for</span> (i=k;i&gt;=<span class="number">1</span>;--i)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">memset</span>(cnt,<span class="number">0</span>,<span class="keyword">sizeof</span>(cnt));</span><br><span class="line">    <span class="keyword">for</span> (j=<span class="number">1</span>;j&lt;=n;++j) id[j]=b[j];</span><br><span class="line">    <span class="keyword">for</span> (j=<span class="number">1</span>;j&lt;=n;++j) ++cnt[key[i][id[j]]];</span><br><span class="line">    <span class="keyword">for</span> (j=<span class="number">1</span>;j&lt;=m;++j) cnt[j]+=cnt[j<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">for</span> (j=n;j&gt;=<span class="number">1</span>;--j) b[cnt[key[i][id[j]]]--]=id[j];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="将基数排序运用于求后缀数组"><a href="#将基数排序运用于求后缀数组" class="headerlink" title="将基数排序运用于求后缀数组"></a>将基数排序运用于求后缀数组</h3><p>如果你学会了基数排序，也会 $O(n\log^2n)$ 求后缀数组，那你应该可以自己写出一个 $O(n\log n)$ 求后缀数组的程序了。</p>
+<div><div class="fold_hider"><div class="close hider_title">参考代码</div></div><div class="fold">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1000010</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> s[N];</span><br><span class="line"><span class="keyword">int</span> n,sa[N],rk[N&lt;&lt;<span class="number">1</span>],oldrk[N&lt;&lt;<span class="number">1</span>],id[N],cnt[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,m,p,w;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>,s+<span class="number">1</span>);</span><br><span class="line">    n=<span class="built_in">strlen</span>(s+<span class="number">1</span>);</span><br><span class="line">    m=max(n,<span class="number">300</span>);</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) ++cnt[rk[i]=s[i]];</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=m;++i) cnt[i]+=cnt[i<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">for</span> (i=n;i&gt;=<span class="number">1</span>;--i) sa[cnt[rk[i]]--]=i;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (w=<span class="number">1</span>;w&lt;n;w&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(cnt,<span class="number">0</span>,<span class="keyword">sizeof</span>(cnt));</span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) id[i]=sa[i];</span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) ++cnt[rk[id[i]+w]];</span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=m;++i) cnt[i]+=cnt[i<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">for</span> (i=n;i&gt;=<span class="number">1</span>;--i) sa[cnt[rk[id[i]+w]]--]=id[i];</span><br><span class="line">        <span class="built_in">memset</span>(cnt,<span class="number">0</span>,<span class="keyword">sizeof</span>(cnt));</span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) id[i]=sa[i];</span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) ++cnt[rk[id[i]]];</span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=m;++i) cnt[i]+=cnt[i<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">for</span> (i=n;i&gt;=<span class="number">1</span>;--i) sa[cnt[rk[id[i]]]--]=id[i];</span><br><span class="line">        <span class="built_in">memcpy</span>(oldrk,rk,<span class="keyword">sizeof</span>(oldrk));</span><br><span class="line">        <span class="keyword">for</span> (p=<span class="number">0</span>,i=<span class="number">1</span>;i&lt;=n;++i) rk[sa[i]]=oldrk[sa[i]]==oldrk[sa[i<span class="number">-1</span>]]&amp;&amp;oldrk[sa[i]+w]==oldrk[sa[i<span class="number">-1</span>]+w]?p:++p;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) <span class="built_in">printf</span>(<span class="string">"%d "</span>,sa[i]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+<h3 id="一些常数优化"><a href="#一些常数优化" class="headerlink" title="一些常数优化"></a>一些常数优化</h3><p>如果你把上面那份代码交到洛谷上..</p>
+<img src="/后缀数组学习笔记/TLE.png">
+<p>怎么会这样呢？是这题卡常吗？</p>
+<p>一翻其他人的代码，最慢点也不过 $1s$..</p>
+<p>这是因为，上面那份代码的常数的确很大..</p>
+<h4 id="第二关键字无需计数排序"><a href="#第二关键字无需计数排序" class="headerlink" title="第二关键字无需计数排序"></a>第二关键字无需计数排序</h4><p>实际上，像这样就可以了：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (p=<span class="number">0</span>,i=n;i&gt;n-w;--i) id[++p]=i;</span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) <span class="keyword">if</span> (sa[i]&gt;w) id[++p]=sa[i]-w;</span><br></pre></td></tr></table></figure>
+<p>意会一下，先把 $s[i+w..i+2w-1]$ 为空串的位置放前面，再把剩下的按排好的顺序放进去。</p>
+<h4 id="优化计数排序的值域"><a href="#优化计数排序的值域" class="headerlink" title="优化计数排序的值域"></a>优化计数排序的值域</h4><p>每次对 $rk$ 进行去重之后，我们都计算了一个 $p$，这个 $p$ 即是 $k$ 的值域，将值域改成它即可。</p>
+<h4 id="将-rk-id-i-存下来，减少不连续内存访问"><a href="#将-rk-id-i-存下来，减少不连续内存访问" class="headerlink" title="将 $rk[id[i]]$ 存下来，减少不连续内存访问"></a>将 $rk[id[i]]$ 存下来，减少不连续内存访问</h4><p>这个优化在数据范围较大时效果非常明显。</p>
+<h4 id="用函数cmp来计算是否重复"><a href="#用函数cmp来计算是否重复" class="headerlink" title="用函数cmp来计算是否重复"></a>用函数cmp来计算是否重复</h4><p>同样是减少不连续内存访问，在数据范围较大时效果比较明显。</p>
+<p>把 <code>oldrk[sa[i]]==oldrk[sa[i-1]]&amp;&amp;oldrk[sa[i]+w]==oldrk[sa[i-1]+w]</code> 替换成 <code>cmp(sa[i],sa[i-1],w)</code>，<code>bool cmp(int x,int y,int w){ return id[x]==id[y]&amp;&amp;id[x+w]==id[y+w]; }</code>。</p>
+<div><div class="fold_hider"><div class="close hider_title">参考代码</div></div><div class="fold">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1000010</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> s[N];</span><br><span class="line"><span class="keyword">int</span> n,sa[N],rk[N],oldrk[N&lt;&lt;<span class="number">1</span>],id[N],px[N],cnt[N]; <span class="comment">//px[i]=rk[id[i]]（用于排序的数组所以叫px）</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> w)</span></span>&#123; <span class="keyword">return</span> oldrk[x]==oldrk[y]&amp;&amp;oldrk[x+w]==oldrk[y+w]; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,m=<span class="number">300</span>,p,w;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>,s+<span class="number">1</span>);</span><br><span class="line">    n=<span class="built_in">strlen</span>(s+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) ++cnt[rk[i]=s[i]];</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=m;++i) cnt[i]+=cnt[i<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">for</span> (i=n;i&gt;=<span class="number">1</span>;--i) sa[cnt[rk[i]]--]=i;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (w=<span class="number">1</span>;w&lt;n;w&lt;&lt;=<span class="number">1</span>,m=p) <span class="comment">//m=p就是优化计数排序值域</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (p=<span class="number">0</span>,i=n;i&gt;n-w;--i) id[++p]=i;</span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) <span class="keyword">if</span> (sa[i]&gt;w) id[++p]=sa[i]-w;</span><br><span class="line">        <span class="built_in">memset</span>(cnt,<span class="number">0</span>,<span class="keyword">sizeof</span>(cnt));</span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) ++cnt[px[i]=rk[id[i]]];</span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=m;++i) cnt[i]+=cnt[i<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">for</span> (i=n;i&gt;=<span class="number">1</span>;--i) sa[cnt[px[i]]--]=id[i];</span><br><span class="line">        <span class="built_in">memcpy</span>(oldrk,rk,<span class="keyword">sizeof</span>(rk));</span><br><span class="line">        <span class="keyword">for</span> (p=<span class="number">0</span>,i=<span class="number">1</span>;i&lt;=n;++i) rk[sa[i]]=cmp(sa[i],sa[i<span class="number">-1</span>],w)?p:++p;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) <span class="built_in">printf</span>(<span class="string">"%d "</span>,sa[i]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样优化之后应该不开O2都能过。</p>
+
+</div></div>
+<h2 id="O-n-做法"><a href="#O-n-做法" class="headerlink" title="$O(n)$ 做法"></a>$O(n)$ 做法</h2><p><del>名字叫DC3，我不会</del></p>
+<p>可以参考<a href="https://wenku.baidu.com/view/5b886b1ea76e58fafab00374.html" target="_blank" rel="noopener">[2009]后缀数组——处理字符串的有力工具 by.罗穗骞</a>，里面有介绍这个算法。</p>
+<p>一般情况下用倍增法做足常数优化是不会被卡的..</p>
+<p>还有个叫“诱导排序”的东西，也是 $O(n)$ 的，听说又好写（相对于 DC3）又快。</p>
+<h1 id="后缀数组无需-height-数组的应用"><a href="#后缀数组无需-height-数组的应用" class="headerlink" title="后缀数组无需 $height$ 数组的应用"></a>后缀数组无需 $height$ 数组的应用</h1><p>如果用不到 $height$ 数组，一般就是利用 $rk$ 数组对字符串进行排序，有时需要对原串进行一定的加工使需要排序的字符串变成后缀，或者是只需对后缀进行排序便能对需要排序的字符串进行排序。</p>
+<h2 id="JSOI2007-字符加密"><a href="#JSOI2007-字符加密" class="headerlink" title="[JSOI2007]字符加密"></a>[JSOI2007]字符加密</h2><p><a href="https://www.luogu.org/problemnew/show/P4051" target="_blank" rel="noopener">洛谷</a></p>
+<p><a href="https://darkbzoj.tk/problem/1031" target="_blank" rel="noopener">dark bzoj</a></p>
+<h2 id="USACO07DEC-Best-Cow-Line-Gold"><a href="#USACO07DEC-Best-Cow-Line-Gold" class="headerlink" title="[USACO07DEC]Best Cow Line, Gold"></a>[USACO07DEC]Best Cow Line, Gold</h2><p><a href="https://www.luogu.org/problemnew/show/P2870" target="_blank" rel="noopener">洛谷</a></p>
+<p><a href="https://ouuan.github.io/P2870-USACO07DEC-Best-Cow-Line-Gold%EF%BC%88%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%EF%BC%89/">我的题解</a></p>
+<h1 id="height-数组"><a href="#height-数组" class="headerlink" title="$height$ 数组"></a>$height$ 数组</h1><p>后缀数组的题目往往是要用到 $height$ 数组的。</p>
+<h2 id="lcp（最长公共前缀）"><a href="#lcp（最长公共前缀）" class="headerlink" title="lcp（最长公共前缀）"></a>lcp（最长公共前缀）</h2><p>两个字符串 $S$ 和 $T$ 的 $lcp$ 就是最大的 $x$ 使得 $S_i=T_i\ (\forall\ 1\le i\le x)$ 。</p>
+<p>下文中以 $lcp(i,j)$ 表示后缀 $i$ 和后缀 $j$ 的最长公共前缀（的长度）。</p>
+<h2 id="height-数组的定义"><a href="#height-数组的定义" class="headerlink" title="$height$ 数组的定义"></a>$height$ 数组的定义</h2><p>$height[i]=lcp(sa[i],sa[i-1])$，即第 $i$ 名的后缀与它前一名的后缀的最长公共前缀。</p>
+<h2 id="O-n-求-height-数组需要的一个引理"><a href="#O-n-求-height-数组需要的一个引理" class="headerlink" title="$O(n)$ 求 $height$ 数组需要的一个引理"></a>$O(n)$ 求 $height$ 数组需要的一个引理</h2><p>$height[rk[i]]\ge height[rk[i-1]]-1$</p>
+<p>证明的话..<del>感性理解</del></p>
+<p>当 $height[rk[i-1]]\le1$ 时，上式显然成立（右边小于等于 $0$ ）。</p>
+<p>当 $height[rk[i-1]]&gt;1$ 时：</p>
+<p>设后缀 $i-1$ 为 $aAD$（$A$ 是一个长度为 $height[rk[i-1]]-1$ 的字符串），那么后缀 $i$ 就是 $AD$。设后缀 $sa[rk[i-1]-1]$ 为 $aAB$ ，那么 $lcp(i-1,sa[rk[i-1]-1])=aA$。由于后缀 $sa[rk[i-1]-1]+1$ 是 $AB$，一定排在后缀 $i$ 的前面，所以后缀 $sa[rk[i]-1]$ 一定含有前缀 $A$，所以 $lcp(i,sa[rk[i]-1])$ 至少是 $height[rk[i-1]]-1$。</p>
+<p>简单来说：</p>
+<p>$i-1$：$aAD$</p>
+<p>$i$：$AD$</p>
+<p>$sa[rk[i-1]-1]$：$aAB$</p>
+<p>$sa[rk[i-1]-1]+1$：$AB$</p>
+<p>$sa[rk[i]-1]$：$A[B/C]$</p>
+<p>$lcp(i,sa[rk[i]-1])$：$AX$（$X$ 可能为空）</p>
+<h2 id="O-n-求-height-数组的代码实现"><a href="#O-n-求-height-数组的代码实现" class="headerlink" title="$O(n)$ 求 $height$ 数组的代码实现"></a>$O(n)$ 求 $height$ 数组的代码实现</h2><p>利用上面这个引理暴力求即可：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i=<span class="number">1</span>,k=<span class="number">0</span>;i&lt;=n;++i)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (k) --k;</span><br><span class="line">    <span class="keyword">while</span> (s[i+k]==s[sa[rk[i]<span class="number">-1</span>]+k]) ++k;</span><br><span class="line">    ht[rk[i]]=k; <span class="comment">//height太长了缩写为ht</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><del>利用摊还分析/势能分析可以发现是O(n)的</del>，$k$ 不会超过 $n$，最多减 $n$ 次，所以最多加 $2n$ 次。</p>
+<h2 id="应用-height-数组需要的一个性质"><a href="#应用-height-数组需要的一个性质" class="headerlink" title="应用 $height$ 数组需要的一个性质"></a>应用 $height$ 数组需要的一个性质</h2><p>$lcp(sa[i],sa[j])=\min\{height[i+1..j]\}$</p>
+<p>感性理解：如果 $height$ 一直大于某个数，前这么多位就一直没变过；反之，由于后缀已经排好序了，不可能变了之后变回来。</p>
+<p>严格证明可以参考<a href="https://wenku.baidu.com/view/0dc03d2b1611cc7931b765ce0508763230127479.html" target="_blank" rel="noopener">[2004]后缀数组 by.徐智磊</a>。</p>
+<h2 id="height-数组的应用"><a href="#height-数组的应用" class="headerlink" title="$height$ 数组的应用"></a>$height$ 数组的应用</h2><p>$height$ 数组往往用来解决关于字符串公共部分的题目，通常需要和RMQ/单调栈等算法相结合。</p>
+<h3 id="USACO06DEC-Milk-Patterns"><a href="#USACO06DEC-Milk-Patterns" class="headerlink" title="[USACO06DEC]Milk Patterns"></a>[USACO06DEC]Milk Patterns</h3><p><a href="https://www.luogu.org/problemnew/show/P2852" target="_blank" rel="noopener">洛谷</a></p>
+<p><a href="https://ouuan.github.io/P2852-USACO06DEC-Milk-Patterns%EF%BC%88%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%EF%BC%89/">我的题解</a></p>
+<h3 id="AHOI2013-差异"><a href="#AHOI2013-差异" class="headerlink" title="[AHOI2013]差异"></a>[AHOI2013]差异</h3><p><a href="https://www.luogu.org/problemnew/show/P3181" target="_blank" rel="noopener">洛谷</a></p>
+<p><a href="https://darkbzoj.tk/problem/3238" target="_blank" rel="noopener">dark bzoj</a></p>
+<h3 id="HAOI2016-找相同字符"><a href="#HAOI2016-找相同字符" class="headerlink" title="[HAOI2016]找相同字符"></a>[HAOI2016]找相同字符</h3><p><a href="https://www.luogu.org/problemnew/show/P3181" target="_blank" rel="noopener">洛谷</a></p>
+<p><a href="https://darkbzoj.tk/problem/4566" target="_blank" rel="noopener">dark bzoj</a></p>
+<p><a href="https://ouuan.github.io/BZOJ4566-HAOI2016-%E6%89%BE%E7%9B%B8%E5%90%8C%E5%AD%97%E7%AC%A6%EF%BC%88%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%EF%BC%89/">我的题解</a></p>
+<h3 id="NOI2015-品酒大会"><a href="#NOI2015-品酒大会" class="headerlink" title="[NOI2015]品酒大会"></a>[NOI2015]品酒大会</h3><p><a href="https://www.luogu.org/problemnew/show/P2178" target="_blank" rel="noopener">洛谷</a></p>
+<p><a href="https://darkbzoj.tk/problem/3238" target="_blank" rel="noopener">dark bzoj</a></p>
+<h3 id="SP8222-NSUBSTR-Substrings"><a href="#SP8222-NSUBSTR-Substrings" class="headerlink" title="SP8222 NSUBSTR - Substrings"></a>SP8222 NSUBSTR - Substrings</h3><p><a href="https://www.luogu.org/problemnew/show/SP8222" target="_blank" rel="noopener">洛谷</a></p>
+<p><a href="https://www.spoj.com/problems/NSUBSTR/" target="_blank" rel="noopener">SPOJ</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/字符串/" rel="tag"><i class="fa fa-tag"></i> 字符串</a>
+          
+            <a href="/tags/后缀数组/" rel="tag"><i class="fa fa-tag"></i> 后缀数组</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/BZOJ4566-HAOI2016-找相同字符（后缀数组）/" rel="next" title="BZOJ4566 [HAOI2016]找相同字符（后缀数组）">
+                <i class="fa fa-chevron-left"></i> BZOJ4566 [HAOI2016]找相同字符（后缀数组）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/BZOJ4516-SDOI2016-生成魔咒（SAM）/" rel="prev" title="BZOJ4516 [SDOI2016]生成魔咒（SAM）">
+                BZOJ4516 [SDOI2016]生成魔咒（SAM） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  <div class="comments">
+    <script src="https://utteranc.es/client.js" repo="ouuan/hexo-blog-utterances" issue-term="title" label="utterances" theme="github-light" crossorigin="anonymous" async>
+    </script>
+  </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+
+    <div class="sidebar-inner">
+      <div class="hitokoto-block">
+        <div class="hitokoto-inner hitokoto-comma hitokoto-left-comma">“</div>
+        <div class="hitokoto-inner hitokoto-content"><b><span><span id="hitokoto-content"></span></span></b></div>
+        <div class="hitokoto-inner hitokoto-comma hitokoto-right-comma">”</div>
+      </div>
+      <div id="hitokoto-from"></div>
+      <div class="hitokoto-bottom">
+        <a id="hitokoto-link" href="https://hitokoto.cn/">Hitokoto</a>&nbsp;&nbsp;&nbsp;
+        <button id="hitokoto-like" title="通过给句子点赞可以增加其出现概率，由于技术原因并不能在博客中显示赞数与点赞是否成功的信息（红心表示成功发送点赞请求，但如果同 IP 重复点赞就会失败），如需查看可以点击左边的“Hitokoto”链接。"><i class="menu-item-icon fa fa-fw fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div style="height: 15px"></div>
+
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="ouuan">
+            
+              <p class="site-author-name" itemprop="name">ouuan</p>
+              <p class="site-description motion-element" itemprop="description">ouuan的博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">90</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">84</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/ouuan" title="GitHub &rarr; https://github.com/ouuan" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.luogu.org/space/show?uid=49742" title="洛谷 &rarr; https://www.luogu.org/space/show?uid=49742" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>洛谷</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.codeforces.com/profile/ouuan" title="Codeforces &rarr; https://www.codeforces.com/profile/ouuan" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>Codeforces</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://space.bilibili.com/11067182" title="b站 &rarr; https://space.bilibili.com/11067182" rel="noopener" target="_blank"><i class="fa fa-fw fa-tv"></i>b站</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://EternalAlexander.github.io/" title="https://EternalAlexander.github.io/" rel="noopener" target="_blank">EternalAlexander</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ustze.cn/" title="http://www.ustze.cn/" rel="noopener" target="_blank">ustze</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.xht37.com/" title="https://www.xht37.com/" rel="noopener" target="_blank">xht37</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/PinkRabbit/" title="https://www.cnblogs.com/PinkRabbit/" rel="noopener" target="_blank">PinkRabbit</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://qaq-am.com/" title="https://qaq-am.com/" rel="noopener" target="_blank">lk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.luogu.com.cn/blog/Sooke/" title="https://www.luogu.com.cn/blog/Sooke/" rel="noopener" target="_blank">Sooke</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/LJC00118/" title="https://www.cnblogs.com/LJC00118/" rel="noopener" target="_blank">wxw</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://memset0.cn/" title="https://memset0.cn/" rel="noopener" target="_blank">memset0</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://aprilgrimoire.tk/" title="http://aprilgrimoire.tk/" rel="noopener" target="_blank">AprilGrimoire</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zbww.cf/" title="https://zbww.cf/" rel="noopener" target="_blank">zbw</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#模板题链接"><span class="nav-number">1.</span> <span class="nav-text">模板题链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#两（can）篇（kao）论（zi）文（liao）"><span class="nav-number">2.</span> <span class="nav-text">两（can）篇（kao）论（zi）文（liao）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于字符串"><span class="nav-number">3.</span> <span class="nav-text">关于字符串..</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符集-1"><span class="nav-number">3.1.</span> <span class="nav-text">字符集$^{[1]}$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串-1"><span class="nav-number">3.2.</span> <span class="nav-text">字符串$^{[1]}$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子串-1"><span class="nav-number">3.3.</span> <span class="nav-text">子串$^{[1]}$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后缀"><span class="nav-number">3.4.</span> <span class="nav-text">后缀</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字典序"><span class="nav-number">3.5.</span> <span class="nav-text">字典序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后缀数组是什么？"><span class="nav-number">4.</span> <span class="nav-text">后缀数组是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后缀数组怎么求？"><span class="nav-number">5.</span> <span class="nav-text">后缀数组怎么求？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#O-n-2-log-n-做法"><span class="nav-number">5.1.</span> <span class="nav-text">$O(n^2\log n)$ 做法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O-n-log-2n-做法"><span class="nav-number">5.2.</span> <span class="nav-text">$O(n\log^2n)$ 做法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O-n-log-n-做法"><span class="nav-number">5.3.</span> <span class="nav-text">$O(n\log n)$ 做法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计数排序"><span class="nav-number">5.3.1.</span> <span class="nav-text">计数排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基数排序"><span class="nav-number">5.3.2.</span> <span class="nav-text">基数排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将基数排序运用于求后缀数组"><span class="nav-number">5.3.3.</span> <span class="nav-text">将基数排序运用于求后缀数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些常数优化"><span class="nav-number">5.3.4.</span> <span class="nav-text">一些常数优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第二关键字无需计数排序"><span class="nav-number">5.3.4.1.</span> <span class="nav-text">第二关键字无需计数排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化计数排序的值域"><span class="nav-number">5.3.4.2.</span> <span class="nav-text">优化计数排序的值域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将-rk-id-i-存下来，减少不连续内存访问"><span class="nav-number">5.3.4.3.</span> <span class="nav-text">将 $rk[id[i]]$ 存下来，减少不连续内存访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用函数cmp来计算是否重复"><span class="nav-number">5.3.4.4.</span> <span class="nav-text">用函数cmp来计算是否重复</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O-n-做法"><span class="nav-number">5.4.</span> <span class="nav-text">$O(n)$ 做法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后缀数组无需-height-数组的应用"><span class="nav-number">6.</span> <span class="nav-text">后缀数组无需 $height$ 数组的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSOI2007-字符加密"><span class="nav-number">6.1.</span> <span class="nav-text">[JSOI2007]字符加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#USACO07DEC-Best-Cow-Line-Gold"><span class="nav-number">6.2.</span> <span class="nav-text">[USACO07DEC]Best Cow Line, Gold</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#height-数组"><span class="nav-number">7.</span> <span class="nav-text">$height$ 数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#lcp（最长公共前缀）"><span class="nav-number">7.1.</span> <span class="nav-text">lcp（最长公共前缀）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#height-数组的定义"><span class="nav-number">7.2.</span> <span class="nav-text">$height$ 数组的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O-n-求-height-数组需要的一个引理"><span class="nav-number">7.3.</span> <span class="nav-text">$O(n)$ 求 $height$ 数组需要的一个引理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#O-n-求-height-数组的代码实现"><span class="nav-number">7.4.</span> <span class="nav-text">$O(n)$ 求 $height$ 数组的代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用-height-数组需要的一个性质"><span class="nav-number">7.5.</span> <span class="nav-text">应用 $height$ 数组需要的一个性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#height-数组的应用"><span class="nav-number">7.6.</span> <span class="nav-text">$height$ 数组的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#USACO06DEC-Milk-Patterns"><span class="nav-number">7.6.1.</span> <span class="nav-text">[USACO06DEC]Milk Patterns</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AHOI2013-差异"><span class="nav-number">7.6.2.</span> <span class="nav-text">[AHOI2013]差异</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HAOI2016-找相同字符"><span class="nav-number">7.6.3.</span> <span class="nav-text">[HAOI2016]找相同字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NOI2015-品酒大会"><span class="nav-number">7.6.4.</span> <span class="nav-text">[NOI2015]品酒大会</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SP8222-NSUBSTR-Substrings"><span class="nav-number">7.6.5.</span> <span class="nav-text">SP8222 NSUBSTR - Substrings</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-battery-full"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ouuan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+<script type="text/javascript">
+	function hitokotoLike(x, y) {
+		$.ajax({
+		    url: "https://hitokoto.cn/Like",
+		    type: "GET",
+		    data: "ID=" + x,
+		    dataType: "jsonp",
+		    success: function(data) {
+		        alert(data.message);
+		        $(y).css('color', 'red');
+		    },
+		    error: function() {
+		        console.log('Hitokoto Like Request Error.');
+		        $(y).css('color', 'red');
+		    }
+		});
+	}
+	$.get('https://v1.hitokoto.cn/?c=a', function(data) {
+		$('#hitokoto-content').css('display', '').text(data.hitokoto);
+		$('#hitokoto-from').css('display', '').text('——' + data.from);
+		$('#hitokoto-from').attr('title', '上传者: ' + data.creator);
+		$('#hitokoto-link').attr('href', 'https://hitokoto.cn/?id=' + data.id);
+		document.getElementById('hitokoto-like').onclick = function() { hitokotoLike(data.id, '#hitokoto-like'); }
+	});
+	$('.post-body').bind('copy', function() {
+		alert('本博客内容欢迎分享（将本博客的原文地址分享到其它网站），允许部分摘录并在醒目位置附上原文链接，未经许可禁止任何形式的全文转载。');
+	});
+</script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+  
+
+  
+  
+
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/pdfobject@2.1.1/pdfobject.min.js"></script>
+    <script type="text/javascript">
+    var options = {
+      pdfOpenParams: {
+        navpanes: 0,
+        toolbar: 0,
+        statusbar: 0,
+        pagemode: "thumbs",
+        view: "FitV"
+      },
+      PDFJS_URL: "/lib/pdf/web/viewer.html",
+      height: "500px"
+    };
+    $("#main a").each(function() {
+      var href = $(this).attr("href");
+      if (!href) return;
+      if (href.endsWith(".pdf") || href.endsWith(".pdf/")) {
+        var id = "pdf" + Math.floor(Math.random() * 10000);
+        $(this).after("<div id='" + id + "'></div>").remove();
+        PDFObject.embed(href, "#" + id, options);
+      }
+    });
+    </script>
+    <style>
+    .pdfobject-container {
+      position: relative;
+      overflow: auto;
+      width: 100%;
+      height: 500px;
+    }
+    </style>
+  
+
+
+</body>
+</html>

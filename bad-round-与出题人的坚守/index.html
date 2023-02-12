@@ -1,0 +1,1916 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=2019.9.22" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico?v=6.6.0">
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="等你等了五千年，只为这一刹那的回眸一笑。  这句话作为台前幕后的标准开头应该是没问题的。 只不过果然还是写不出 vfk 的水平啊…写的比较散乱。而且是前后断断续续地写的，有的写于赛前，有的写于赛后，所以会有行文不连贯的地方，可能也会有后来忘记修正的地方。">
+<meta name="keywords" content="Codeforces">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bad round 与出题人的坚守">
+<meta property="og:url" content="https://ouuan.github.io/bad-round-与出题人的坚守/index.html">
+<meta property="og:site_name" content="ouuan的博客">
+<meta property="og:description" content="等你等了五千年，只为这一刹那的回眸一笑。  这句话作为台前幕后的标准开头应该是没问题的。 只不过果然还是写不出 vfk 的水平啊…写的比较散乱。而且是前后断断续续地写的，有的写于赛前，有的写于赛后，所以会有行文不连贯的地方，可能也会有后来忘记修正的地方。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ouuan.github.io/bad-round-与出题人的坚守/sh2d2w.png">
+<meta property="og:image" content="https://ouuan.github.io/bad-round-与出题人的坚守/pm.png">
+<meta property="og:image" content="https://ouuan.github.io/bad-round-与出题人的坚守/poster.jpg">
+<meta property="og:image" content="https://ouuan.github.io/bad-round-与出题人的坚守/bxlb.png">
+<meta property="og:image" content="https://ouuan.github.io/bad-round-与出题人的坚守/rules.jpg">
+<meta property="og:updated_time" content="2019-12-04T18:59:59.110Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="bad round 与出题人的坚守">
+<meta name="twitter:description" content="等你等了五千年，只为这一刹那的回眸一笑。  这句话作为台前幕后的标准开头应该是没问题的。 只不过果然还是写不出 vfk 的水平啊…写的比较散乱。而且是前后断断续续地写的，有的写于赛前，有的写于赛后，所以会有行文不连贯的地方，可能也会有后来忘记修正的地方。">
+<meta name="twitter:image" content="https://ouuan.github.io/bad-round-与出题人的坚守/sh2d2w.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ouuan的博客" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://ouuan.github.io/bad-round-与出题人的坚守/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>bad round 与出题人的坚守 | ouuan的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ouuan的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Codes change the world.</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-其它">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/others" rel="section"><i class="menu-item-icon fa fa-fw fa-wrench"></i> <br>其它</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ouuan.github.io/bad-round-与出题人的坚守/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ouuan">
+      <meta itemprop="description" content="ouuan的博客">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ouuan的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">bad round 与出题人的坚守
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-09 12:56:10" itemprop="dateCreated datePublished" datetime="2019-06-09T12:56:10+08:00">2019-06-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-12-05 02:59:59" itemprop="dateModified" datetime="2019-12-05T02:59:59+08:00">2019-12-05</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/出题/" itemprop="url" rel="index"><span itemprop="name">出题</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>等你等了五千年，只为这一刹那的回眸一笑。</p>
+</blockquote>
+<p>这句话作为台前幕后的标准开头应该是没问题的。</p>
+<p>只不过果然还是写不出 vfk 的水平啊…写的比较散乱。而且是前后断断续续地写的，有的写于赛前，有的写于赛后，所以会有行文不连贯的地方，可能也会有后来忘记修正的地方。</p>
+<a id="more"></a>
+<h2 id="前奏"><a href="#前奏" class="headerlink" title="前奏"></a>前奏</h2><p>（借用一下 vfk 的标题 qaq）</p>
+<p>一切源于一篇博客。</p>
+<p>大约是<a href="https://blog.csdn.net/VFleaKing/article/details/90521383" target="_blank" rel="noopener">这篇</a>和<a href="https://blog.csdn.net/VFleaKing/article/details/90522020" target="_blank" rel="noopener">这篇</a>。</p>
+<p>看到这篇博客的时候，是去年（2018）十二月，手里正有刚刚想到的一个 idea，也就是 1C —— Pictures。</p>
+<p>当时我自己搞了个<a href="https://ouuan.github.io/randpic/people/">简单的随机图片</a>，然后脑海里就冒出了这个 idea，虽然刚想出来的时候并不会做..</p>
+<p>然后就拿着去找 Sooke 了..</p>
+<p>我：您有兴趣看一眼我出的一道题吗？</p>
+<p>Sooke：我会 $2^n​$。</p>
+<p>Sooke：想出洛谷公开赛？</p>
+<p>我：不。</p>
+<p>Sooke：想出 cf？</p>
+<p>我：嗯。</p>
+<img src="/bad-round-与出题人的坚守/sh2d2w.png">
+<p>翻翻消息记录发现当时自己太天真了…（2 months 都算少的）</p>
+<p>然后我在不会做的情况下第二天写了个英文题面..</p>
+<p>然后 Sooke 给我扔了套他出给 PJ 组的题，让我从里面挑给 Div.2，然后我挑了 2B —— Chess。一开始 Sooke 还想把它放在 2A..</p>
+<p>ylh 想了道不错的 1A，然而后来因为树太多就换掉了..</p>
+<p>然后 PinkRabbit 加入了团队，把 Pictures 切掉了（其实花了 2h…只不过比赛和出题还是不一样的，应该有不少人 A？）。</p>
+<p>之后莫名想到了 2A 的 idea，只不过题面一开始不是 upvote / downvote，是幼儿园里老师给小朋友发两种类型的糖果..后来感觉出 cf 用 upvote / downvote 挺合适的。</p>
+<p>“我们这场要有交互题！” 我在群里喊出这句话，然后没过几天我就在洗澡的时候想到了 <del>1D —— Binary Tree。一开始我还加了个它是堆的限制，过了几个月才想到可以 BFS…树剖的做法是 Sooke 想到的，之前我差点想用我的 nsqrtn 做 std。</del>这道题是这样的，有一棵以 $1$ 为根的二叉树，你可以询问两点间距离，在 $n\log n$ 次询问内求每个点的父亲。</p>
+<p>然后 ylh 想了个 1B，结果最后也没有被采用 qaq</p>
+<p>这样六道题就齐了，然而果然还是不想出 div.2 only 鸭…到处找人要题没要到（包括后来出了<del>两</del>一题的 lk..），结果 lk 跟我说 lxl 可以出题。然后就有了 <del>1F</del>1E。lxl 说要自己写题面，然而一直咕了几个月都没写..</p>
+<p>然后..当时我们的想法是出五题场，把 pictures / binary tree 放 div.1，差点都提交 proposal 了，然而我还是觉得 1B 得换..</p>
+<p>然后，我去了雅礼集训，和 lk 面基了，<del>就有了 1E —— GCD。一开始 GCD 是没有根号不带 log 做法的，可 lxl 问了 ccz，就有了。</del></p>
+<p>然后 Sooke 出了一道 dl 的博弈论，我不太喜欢，然而一开始还是让它过了..最后还是给换了 qaq</p>
+<p>后来 lk 出了 2C（一开始手牌和牌堆的牌不一定相等，我不会做，就改成了相等..），Sooke 拿出了 2D，这场就有了。</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>一开始我们还想抢 round 555 的（受 vfk 250 的影响 qaq）..</p>
+<p>给 300iq 发了个私信，问什么时候能审，能不能抢 555。然后..</p>
+<img src="/bad-round-与出题人的坚守/pm.png">
+<p>一开始还以为可以的，结果发现第一条才是真的，第二条是假的..（注意 cf 私信顺序从下往上）</p>
+<p>我们之前出题的时候就几乎把 <a href="https://polygon.codeforces.com/" target="_blank" rel="noopener">Polygon</a> 上要干的事干完了，然而，Aleph0（round 551 出题人）发来了一份 cf 出题须知（不知道是不是 vfk 博客里提到那个长篇英语阅读..），然后发现一堆东西要改..只不过一两天也就改完了。最大的问题是数据要么纯手造要么用 generator，即不能用数据生成器生成出来放 Polygon 上..我自己造的数据还好，lxl 的数据 generator 的参数已经弄丢了，<del>而且lxl 又特别咕</del>。</p>
+<p>听说 300iq 有 qq，所以就试着加了一下 300iq，拉进了群里。</p>
+<p>然后是 300iq 开始审（gu）题（gu），题目比较顺利地全过审了，（然而断断续续的等了好几天），binary tree 获得了 “Great problem!” 的评价。得知必须放 Java 过，然而不需要让 Java 在一半时限内通过（尤指 GCD 这题，不然卡不掉带 log 做法了…），还是比较可以接受的..</p>
+<p>300iq 好像有验不完的题和无尽的 coordinating，所以经常失踪..<del>contribution 只排第七举报了。</del></p>
+<p>决定比赛时间真是件难事..从一开始的 round 555 抢不到，到 5.18 是 APIO &amp; 俄罗斯最后一轮国家队选拔（这俩是一个东西..），再到 5.21 ~ 5.26 得放弃 whk / sc 选手，然后 6.8 和 Google Code Jam 冲突，6 月一堆 whk 考试，7 月不仅太晚还有 ISIJ，NOI……无论选什么时间都会放弃一部分人，<font color="white">就像某部门决定调整某些政策一样。</font></p>
+<p>最后还是端午节拯救世界..大家好像都比较同意 6.7。</p>
+<p>从北京回来的高铁上，突然看到 Sooke 在群里“A big hug to 300iq!”</p>
+<p>诶诶诶，上 contests 了！</p>
+<p>诶诶诶，之前开玩笑说的 0x233 真来了！</p>
+<p>于是想搞个什么宣传一下。</p>
+<p>想了想感觉雀不错，就 p 了张图：</p>
+<img src="/bad-round-与出题人的坚守/poster.jpg">
+<p>结果最后还是插进来一场 Div.2 … 0x233 没了…</p>
+<p>lxl 自己说要写题面，咕了两个多月，终于：</p>
+<img src="/bad-round-与出题人的坚守/bxlb.png">
+<p>然后 xht37 和神仙 rushcheyo 都来验题了。听说所有题都被 rushcheyo 秒了..</p>
+<h2 id="风怒"><a href="#风怒" class="headerlink" title="风怒"></a>风怒</h2><p>Round #0x233 开始了。</p>
+<p>Sooke：这个 <a href="https://codeforces.com/problemset/problem/1174/F" target="_blank" rel="noopener">F</a> 也是树上问距离诶。</p>
+<p>我：好像和 WC2018 即时战略有点像？</p>
+<p>再一看..<del>非常冷静地</del>在群里宣布，我们的 1D binary tree 没了。</p>
+<p>UPD：Binary Tree 已上传至 <a href="https://guoj.icu/problem/1210" target="_blank" rel="noopener">GuOJ</a> 和 <a href="https://loj.ac/problem/6669" target="_blank" rel="noopener">LOJ</a>。</p>
+<p>二叉树被替换为了操作二，剩下的部分和我们题的做法完全一样——树剖。</p>
+<p>感觉挺难受的..赛前四天撞题谁顶得住啊。而且我自己挺喜欢这题的，感觉做法非常巧妙。而且我们的题不给出树的形态，有的做法只能过那道题，不能过我们这题。</p>
+<p>只不过 Sooke 之前就提过 Portals 这道题，于是就想换成 Portals。</p>
+<p>一波未平，一波又起。</p>
+<p>cy：这个 GCD 好像和一场中国比赛有点像。</p>
+<p>然后扔上来一篇题解，求的东西不一样，但做法大同小异。</p>
+<p>ok，风怒撞题。</p>
+<p>然后群里就各种方案了..</p>
+<p>cy 扔上来了四道题..</p>
+<p>lk：我去找 _rqy 要一道计数！</p>
+<p>lxl：第十一分块！</p>
+<p>于此同时，我们发现 Portals 原来想的做法是假的，给 300iq 也没能切掉..</p>
+<p>当时有点想出五题场，或者强行把 GCD 出出来，毕竟不完全一样。</p>
+<p>只不过好消息还是传来了，Sooke 想到了 Portals 的正解，Bug（<del>其实我现在想换这题名字了，还是 modadd 好听</del>）的分块做法和线段树做法也相继有了。</p>
+<p>然后，经过讨论，我们<del>不知道为什么</del>觉得换题之后码量比原来减少了，结果就决定把时间改成 2h。</p>
+<p>lk 坚持认为 portals 是一道非常难的题。cy 给 portals 的评分比 1EF 都高。最后还是放在了 1D。<del>然后赛后被喷 PJ 题放 1D。</del>最后每题 AC 人数还是单调下降的，<del>说明题目顺序安排的没有任何问题。</del>关于 cards 和 circle，我们是认为对于 div.2 选手 circle 更难，而 div.1 选手顺切无所谓，所以就这样放了。而且 circle 更简单也可能是对于中国选手。<del>而且我们这场每个偶数题都比前一题好写。</del></p>
+<p>因为 cy 把 lxl 题切了，modadd 做了比较久，而且 lxl 和 300iq 都认为 modadd 更难，而且我看了题解之后会做 lxl 题不会 modadd，所以就把 modadd 放在了 F。</p>
+<p>于是比赛的题目得到了最终的确定，也就是大家看到的这几题。</p>
+<p>然后就是紧张的造题了。</p>
+<p>写 modadd 题面里的伪代码时，去网上搜了半天，终于搞出来了一份特别丑的..然后想起来 3 LGM 那场 Chinese Round 的 G 有伪代码，就去找象要，结果没要到..自己研究了半天文档还是不会，就去找 zzq 要，然后顺利要到了。</p>
+<p>由于自己本来就菜，又被长期的睡眠不足 + 极度紧张的造题给降智，我看了半天 cy 写的 modadd 题解都不会做..然后我要在不会做的情况下造数据..就胡乱造了一点。只不过这题就算纯随机应该也够强。</p>
+<p>本来 lxl 题的数据也是个大问题，我自己是个链菊花随机完全二叉树出题人，lxl 又是只鸽子..幸好 300iq 帮忙造了一点数据，把 Spaly（单旋）也卡掉了。</p>
+<p>大约在比赛前 2h，基本上所有东西都造完了。然后，KAN 突然在赛前 1h 出现，<del>删掉了一堆题面里的逗号</del>，提了一堆题面的 Issues..然后就不停修锅，差点都忘记发 scoring distribution 了。</p>
+<p>赛前 5min 的时候终于把 KAN 提的所有 Issues fix 了..</p>
+<p>为了连贯性先讲了下造题的事。</p>
+<p>然后是上帝视角..其实其它权限都没怎么用，只不过 ban 掉了 xht37 参加比赛（</p>
+<p><del>只不过有的选项看着很爽</del>，比如，一开始 problems 是空的你可以 add problems（最后是 300iq 还是谁加的，那时我还在修锅），还有喜闻乐见的 Is it rated? 选项，rated 范围，能否查看排行榜，什么时候开始封榜，能不能 vp。</p>
+<p>赛前在造锅和修锅之余，也会盯着 registrants 看。然后就看到 JOHNKRAM 报了，司报了，xyx 报了，myy 报了，ACRush 报了，_rqy 报了，txc 报了，Radewoosh 报了，<del>800iq 报了</del>，dmy 报了，kcz 报了，yyb 报了，ljh 报了，wqy 报了，yww 报了……群里大约就是上文去掉逗号，加上换行符和感叹号。</p>
+<p>最后倒计时的时候真的就像 vfk 那篇博客一样。</p>
+<p>还有 5 秒。</p>
+<p>题面有锅吗？</p>
+<p>还有 4 秒。</p>
+<p>数据有锅吗？</p>
+<p>还有 3 秒。</p>
+<p>题面或者数据有锅吗？</p>
+<p>还有 2 秒。</p>
+<p>题面和数据有锅吗？</p>
+<p>还有 1 秒。</p>
+<p>有锅也修不了了，<del>contribution 见鬼去吧！</del></p>
+<p>…..</p>
+<p>没办法，赛前 5min 还在修锅的我就是这么想的..只不过最后除了 circle 的样例解释没什么锅。</p>
+<h2 id="比赛"><a href="#比赛" class="headerlink" title="比赛"></a>比赛</h2><p>比赛就这么开始了。cf 并没有卡诶。</p>
+<p>Div.1 怎么卡住了..</p>
+<p>完了，史上最难 1A 实锤了..</p>
+<p>6min 的时候终于有人过了 1A，div.2 那边已经成片过 A 了。</p>
+<p>然后第二个 div.1 AC 是 B..完了，要被喷 swap(A, B) 了。</p>
+<p>25min 的时候有人过 1D 了。赛前我就奶过 portals 一血会比 pictures 早，lk 还不信。</p>
+<p>然后我们就看着司登顶之后一点点地往下掉..</p>
+<p>赛时真的可以看 system test 的结果，只不过评测优先度比较低。在 problems 界面还可以看到每题已经测了几个人的 st，其中有多少个过了。成功让 Sooke 学到了再强的 pt 也会有人 fst 这个道理。</p>
+<p>当然我们还得回答参赛者的提问。</p>
+<blockquote>
+<p>what mean is the draw the top card from the pile?</p>
+<p>意思是 可以在最顶上的一张画画？</p>
+</blockquote>
+<p>海星，是不是可以画数字上去。</p>
+<blockquote>
+<p>In Test 1</p>
+<p>why is the output:</p>
+<p>2</p>
+<p>1 1</p>
+<p>2 1</p>
+<p>is wrong?</p>
+<p>I think it is legitimate.</p>
+</blockquote>
+<p>一看评测记录，他第一行输出的 1，悲惨的故事。</p>
+<p>问的最多的是 pictures 权值减到负怎么办..于是让 300iq 发了个 announcement。</p>
+<p>还有一位坚称 cards 样例 3 答案是 16 的老哥，好像是在手上把牌排好序了。</p>
+<blockquote>
+<p>Hi! I am a Chinese! Could you explain why there is a “19****17” in the sample 3?</p>
+</blockquote>
+<p>回答分为 text，yes，no 和 no comments，正好可以回答他。</p>
+<blockquote>
+<p>problem D in the example the edges for bad permutation are drawn incorrectly</p>
+</blockquote>
+<p>嗯，额，诶？？woc 真的画错了..打开本地造 notes 的 pptx，发现是对的..这个锅 Sooke 背了。</p>
+<p>赶紧让 300iq 发了个 announcement，然后去修锅。</p>
+<p>修好了之后让 300iq 发个 fixed，结果一直没发..</p>
+<p>然后看到司在猛肝 1F..然后听群友们说，他写的是 1 log 正解，被卡常了..woc，那不是得去谢罪，卡分块把 treap 卡掉了..但我们不能做什么，只能为他默哀。后来才听说司写的 $\log^2$..</p>
+<p>300iq：check it out，<a href="https://codeforces.com/contest/1172/submission/55260499" target="_blank" rel="noopener">https://codeforces.com/contest/1172/submission/55260499</a> 。</p>
+<p>然后之后半个小时几乎都在尝试卡他..然而根本卡不掉..赛后私信问他，也没太看懂他的做法，只不过他说他相信这个做法是对的..</p>
+<p>然后在迷迷糊糊的看榜，回答问题，尝试卡人中，2h 就这么过去了。</p>
+<p>dmy 被我们送上黑红了，然而好多神仙被狙了..</p>
+<p>1F 的英文题解还没好..contribution 要没了。</p>
+<p>果然比赛结束 announcement 的 up 就开始往下掉，只不过没掉很多。</p>
+<p>有位神仙 hack 了 cards，而且是 hack 了过了 st 的..之后我才发现，我之前没意识到不打空白牌可能步数比求那个 max 还大，他的 test 就是针对这个卡的，如果你发现能直接 1~n 就输出答案就过了，如果把两者取 min 就挂了。</p>
+<p>然后开始弄中文题解。hexo 博客折叠块总是漏掉百分号，漏掉引号，搞了半个多小时才搞好..</p>
+<p>搞了一整天，整个人都非常晕，然而这时我要尝试去写自己还不完全会的 1F 的英文题解..写到一半还是放弃了，就去发 editorial，先把 1F 空着了。</p>
+<p>之后 300iq 同意帮忙写题解，就去睡觉了。</p>
+<p>自我感觉 good problems, bad round。如果能不强求在原定的端午节把比赛出出来，或许能办的更好。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>出这场 cf，究竟是为了什么。</p>
+<p>肯定不是为了钱。虽然 cf 会发工资，但要是为了钱，我肯定不会去出 cf，要耗费的时间精力太多了。</p>
+<p>真的不推荐其他人在退役之前去出 cf，不然的话，可能出着出着就退役了。</p>
+<p>把这么多本可以用来刷题的时间用来出 cf，后悔吗？</p>
+<p>其实，也是一份宝贵的经历吧。与其说后悔，不如说害怕自己的努力不被人认可，如果数百小时的努力换来的是他人的批评甚至 unrated，可能就真的不只是后悔了。</p>
+<p>出这场 cf，我得到了什么呢？</p>
+<p>以往的团队合作中，我要么是作为参与者而非组织者，要么其他成员都只是默默完成自己的任务。而且所谓的“团队合作”多半是学校里所谓的“研究性学习”。要统一各方面的意见，的确是一件难事。一开始面对“fst 是 cf 灵魂”的 Sooke（看来他负责的 cards 挺有灵魂的…），然后是“我一眼就切了”和“我想不到啊”的 lk，“来道大分块啊” 的 lxl，还有自说自话，不对自己说的话里提到的概念加以定义或解释，让人根本看不懂的 cy。协调各方的意见可能是一件需要学习的事情吧。</p>
+<p>然后的话，也是影响比较大的，我对题目和出题人的要求提升了很多。回首自己之前在洛谷的两场公开赛，第一场漏洞满篇，<del>满屏毒瘤</del>，第二场也有不少的问题。出了 cf 之后，不仅是自己出题变得更加规范了，对自己做的题要求也更严了。国内很多题目质量堪忧，因为题目的外在（题面、题解、数据范围、输入输出格式）而非 idea 本身过于毒瘤而不想做题的事也会发生，抱怨其他题目、比赛成了家常便饭。但回首想来，我也是从一个毒瘤大模拟、无意义 dp 出题人成长起来的。</p>
+<p>我讨厌不用心的出题人，讨厌不严谨甚至误导人的博客，因为，我认为出题给别人做、写博客给别人看是应当对别人负责的。如果没有精力、不想负责的话，出题给自己做，博客保存在本地就好了，发出来干什么？即使是能力不够，也得有认真负责的态度才行。如果没有，别人骂你，只当骂醒好了。如果骂不醒，那着实该骂。</p>
+<blockquote>
+<p>一道好题应该被仔细推敲过。好题应该有很强的数据，好题应该有清晰的题面，好题的标程应该优美题解应该详尽。</p>
+<p>一道好题不应该是两道题拼在一起，一道好题会有自己的idea —— 而它应该不加过多包装地突出这个idea。</p>
+<p>一道好题应该新颖。真正的好题，应该是能让人脑洞出新的好题的好题。</p>
+<p>一道好题应该具有它的选拔性质，具有足够的区分度。应该至少4档部分分，让新手可以拿到分，让高手能够展示自己的实力。</p>
+<p>—— vfk《<a href="http://vfleaking.blog.uoj.ac/blog/909" target="_blank" rel="noopener">UOJ精神之源流</a>》</p>
+</blockquote>
+<p>当我指出其他人题目里的种种不足，当我抛开他人博客中不严谨的话语而豁然开朗大叫原文之漏洞满篇时，有没有想过他人付出的心血呢？当然有，只是我认为尊重不是基于付出，而是基于负责的态度，基于真正做了什么的。就好比你追一个女孩子，辛辛苦苦付出了那么多，如果不提升自己，如果不付出真心，别人凭什么喜欢你？</p>
+<p>说到底，对写给别人的东西负责，是我自己的一种坚守，我自己并不是总能做到，也不是生来就能做到。但我会努力去做，无论在怎样的大环境下，我想尽我所能创造一片小小的净土。</p>
+<blockquote>
+<p>我们所可以自慰的，想来想去，也还是所谓对于将来的希望。希望是附丽于存在的，有存在，便有希望，有希望，便是光明。如果历史家的话不是诳话，则世界上的事物可还没有因为黑暗而长存的先例。黑暗只能附丽于渐就灭亡的事物，一灭亡，黑暗也就一同灭亡了，它不永久。然而将来是永远要有的，并且总要光明起来;只要不做黑暗的附着物，为光明而灭亡，则我们一定有悠久的将来，而且一定是光明的将来。</p>
+<p>—— 鲁迅《记谈话》（十二省联考 2019 hope 题解）</p>
+</blockquote>
+<p>说回这场 cf，我按照 cf 出题规范去出题，一遍遍地检查，直接原因当然是 cf 是如此要求的。但我这么去做，绝不只是为了过审，而是为了上千名参赛者，我认为我有理由以认真负责的态度，准备一场好的 cf，呈现给大家 —— 当然也包括正在读着这篇博客的你。</p>
+<p>现在我也能够体会到 vfk 当时写《UOJ精神之源流》时的心情了。执著的坚守与残酷现实的矛盾，出题人与参赛者的隔阂，心中交杂的歉意与不甘……无论这场 cf 是否让你满意，我想，我做到了我应该做的，仍然走在自己一直坚持的那条路上。</p>
+<p>尽管发生了一些意外，或许这场 cf 并不让你满意，但我认为，I did my best.</p>
+<p>附：<a href="https://docs.google.com/document/d/e/2PACX-1vRhazTXxSdj7JEIC7dp-nOWcUFiY8bXi9lLju-k6vVMKf4IiBmweJoOAMI-ZEZxatXF08I9wMOQpMqC/pub" target="_blank" rel="noopener">cf 出题须知</a></p>
+<img src="/bad-round-与出题人的坚守/rules.jpg">
+<h2 id="after-后记"><a href="#after-后记" class="headerlink" title="after 后记"></a>after 后记</h2><p>CF 的工资大约咕了一个月。</p>
+<p>付款方式千万不要选 PayPal。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Codeforces/" rel="tag"><i class="fa fa-tag"></i> Codeforces</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Codeforces-Round-564-中文题解/" rel="next" title="Codeforces Round #564 中文题解">
+                <i class="fa fa-chevron-left"></i> Codeforces Round #564 中文题解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/线性基学习笔记/" rel="prev" title="线性基学习笔记">
+                线性基学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  <div class="comments">
+    <script src="https://utteranc.es/client.js" repo="ouuan/hexo-blog-utterances" issue-term="title" label="utterances" theme="github-light" crossorigin="anonymous" async>
+    </script>
+  </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+
+    <div class="sidebar-inner">
+      <div class="hitokoto-block">
+        <div class="hitokoto-inner hitokoto-comma hitokoto-left-comma">“</div>
+        <div class="hitokoto-inner hitokoto-content"><b><span><span id="hitokoto-content"></span></span></b></div>
+        <div class="hitokoto-inner hitokoto-comma hitokoto-right-comma">”</div>
+      </div>
+      <div id="hitokoto-from"></div>
+      <div class="hitokoto-bottom">
+        <a id="hitokoto-link" href="https://hitokoto.cn/">Hitokoto</a>&nbsp;&nbsp;&nbsp;
+        <button id="hitokoto-like" title="通过给句子点赞可以增加其出现概率，由于技术原因并不能在博客中显示赞数与点赞是否成功的信息（红心表示成功发送点赞请求，但如果同 IP 重复点赞就会失败），如需查看可以点击左边的“Hitokoto”链接。"><i class="menu-item-icon fa fa-fw fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div style="height: 15px"></div>
+
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="ouuan">
+            
+              <p class="site-author-name" itemprop="name">ouuan</p>
+              <p class="site-description motion-element" itemprop="description">ouuan的博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">90</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">84</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/ouuan" title="GitHub &rarr; https://github.com/ouuan" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.luogu.org/space/show?uid=49742" title="洛谷 &rarr; https://www.luogu.org/space/show?uid=49742" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>洛谷</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.codeforces.com/profile/ouuan" title="Codeforces &rarr; https://www.codeforces.com/profile/ouuan" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>Codeforces</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://space.bilibili.com/11067182" title="b站 &rarr; https://space.bilibili.com/11067182" rel="noopener" target="_blank"><i class="fa fa-fw fa-tv"></i>b站</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://EternalAlexander.github.io/" title="https://EternalAlexander.github.io/" rel="noopener" target="_blank">EternalAlexander</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ustze.cn/" title="http://www.ustze.cn/" rel="noopener" target="_blank">ustze</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.xht37.com/" title="https://www.xht37.com/" rel="noopener" target="_blank">xht37</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/PinkRabbit/" title="https://www.cnblogs.com/PinkRabbit/" rel="noopener" target="_blank">PinkRabbit</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://qaq-am.com/" title="https://qaq-am.com/" rel="noopener" target="_blank">lk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.luogu.com.cn/blog/Sooke/" title="https://www.luogu.com.cn/blog/Sooke/" rel="noopener" target="_blank">Sooke</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/LJC00118/" title="https://www.cnblogs.com/LJC00118/" rel="noopener" target="_blank">wxw</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://memset0.cn/" title="https://memset0.cn/" rel="noopener" target="_blank">memset0</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://aprilgrimoire.tk/" title="http://aprilgrimoire.tk/" rel="noopener" target="_blank">AprilGrimoire</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zbww.cf/" title="https://zbww.cf/" rel="noopener" target="_blank">zbw</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前奏"><span class="nav-number">1.</span> <span class="nav-text">前奏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备"><span class="nav-number">2.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#风怒"><span class="nav-number">3.</span> <span class="nav-text">风怒</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比赛"><span class="nav-number">4.</span> <span class="nav-text">比赛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">5.</span> <span class="nav-text">后记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#after-后记"><span class="nav-number">6.</span> <span class="nav-text">after 后记</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-battery-full"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ouuan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+<script type="text/javascript">
+	function hitokotoLike(x, y) {
+		$.ajax({
+		    url: "https://hitokoto.cn/Like",
+		    type: "GET",
+		    data: "ID=" + x,
+		    dataType: "jsonp",
+		    success: function(data) {
+		        alert(data.message);
+		        $(y).css('color', 'red');
+		    },
+		    error: function() {
+		        console.log('Hitokoto Like Request Error.');
+		        $(y).css('color', 'red');
+		    }
+		});
+	}
+	$.get('https://v1.hitokoto.cn/?c=a', function(data) {
+		$('#hitokoto-content').css('display', '').text(data.hitokoto);
+		$('#hitokoto-from').css('display', '').text('——' + data.from);
+		$('#hitokoto-from').attr('title', '上传者: ' + data.creator);
+		$('#hitokoto-link').attr('href', 'https://hitokoto.cn/?id=' + data.id);
+		document.getElementById('hitokoto-like').onclick = function() { hitokotoLike(data.id, '#hitokoto-like'); }
+	});
+	$('.post-body').bind('copy', function() {
+		alert('本博客内容欢迎分享（将本博客的原文地址分享到其它网站），允许部分摘录并在醒目位置附上原文链接，未经许可禁止任何形式的全文转载。');
+	});
+</script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+  
+
+  
+  
+
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/pdfobject@2.1.1/pdfobject.min.js"></script>
+    <script type="text/javascript">
+    var options = {
+      pdfOpenParams: {
+        navpanes: 0,
+        toolbar: 0,
+        statusbar: 0,
+        pagemode: "thumbs",
+        view: "FitV"
+      },
+      PDFJS_URL: "/lib/pdf/web/viewer.html",
+      height: "500px"
+    };
+    $("#main a").each(function() {
+      var href = $(this).attr("href");
+      if (!href) return;
+      if (href.endsWith(".pdf") || href.endsWith(".pdf/")) {
+        var id = "pdf" + Math.floor(Math.random() * 10000);
+        $(this).after("<div id='" + id + "'></div>").remove();
+        PDFObject.embed(href, "#" + id, options);
+      }
+    });
+    </script>
+    <style>
+    .pdfobject-container {
+      position: relative;
+      overflow: auto;
+      width: 100%;
+      height: 500px;
+    }
+    </style>
+  
+
+
+</body>
+</html>

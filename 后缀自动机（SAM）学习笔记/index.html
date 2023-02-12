@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=2019.9.22" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico?v=6.6.0">
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="后缀自动机是一种处理字符串问题的有力工具（废话），它的码量不比后缀数组大（实际代码难度不比后缀数组小，但也不难），处理问题时的思维难度往往比后缀数组小，复杂度更优秀。若字符集大小为 $|\Sigma|$，则：构建时间复杂度 $O(n|\Sigma|)$，转移时间复杂度 $O(1)$，空间复杂度 $O(n|\Sigma|)$ 或 构建时间复杂度 $O(n\log|\Sigma|)$，转移时间复杂度">
+<meta name="keywords" content="字符串,SAM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="后缀自动机（SAM）学习笔记">
+<meta property="og:url" content="https://ouuan.github.io/后缀自动机（SAM）学习笔记/index.html">
+<meta property="og:site_name" content="ouuan的博客">
+<meta property="og:description" content="后缀自动机是一种处理字符串问题的有力工具（废话），它的码量不比后缀数组大（实际代码难度不比后缀数组小，但也不难），处理问题时的思维难度往往比后缀数组小，复杂度更优秀。若字符集大小为 $|\Sigma|$，则：构建时间复杂度 $O(n|\Sigma|)$，转移时间复杂度 $O(1)$，空间复杂度 $O(n|\Sigma|)$ 或 构建时间复杂度 $O(n\log|\Sigma|)$，转移时间复杂度">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ouuan.github.io/后缀自动机（SAM）学习笔记/dfa.png">
+<meta property="og:image" content="https://ouuan.github.io/后缀自动机（SAM）学习笔记/triesam.png">
+<meta property="og:image" content="https://ouuan.github.io/后缀自动机（SAM）学习笔记/minsam.png">
+<meta property="og:image" content="https://ouuan.github.io/后缀自动机（SAM）学习笔记/parent.png">
+<meta property="og:updated_time" content="2019-12-04T18:39:53.794Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="后缀自动机（SAM）学习笔记">
+<meta name="twitter:description" content="后缀自动机是一种处理字符串问题的有力工具（废话），它的码量不比后缀数组大（实际代码难度不比后缀数组小，但也不难），处理问题时的思维难度往往比后缀数组小，复杂度更优秀。若字符集大小为 $|\Sigma|$，则：构建时间复杂度 $O(n|\Sigma|)$，转移时间复杂度 $O(1)$，空间复杂度 $O(n|\Sigma|)$ 或 构建时间复杂度 $O(n\log|\Sigma|)$，转移时间复杂度">
+<meta name="twitter:image" content="https://ouuan.github.io/后缀自动机（SAM）学习笔记/dfa.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ouuan的博客" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://ouuan.github.io/后缀自动机（SAM）学习笔记/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>后缀自动机（SAM）学习笔记 | ouuan的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ouuan的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Codes change the world.</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-其它">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/others" rel="section"><i class="menu-item-icon fa fa-fw fa-wrench"></i> <br>其它</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ouuan.github.io/后缀自动机（SAM）学习笔记/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ouuan">
+      <meta itemprop="description" content="ouuan的博客">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ouuan的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">后缀自动机（SAM）学习笔记
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-22 12:31:37" itemprop="dateCreated datePublished" datetime="2019-02-22T12:31:37+08:00">2019-02-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-12-05 02:39:53" itemprop="dateModified" datetime="2019-12-05T02:39:53+08:00">2019-12-05</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>后缀自动机是一种处理字符串问题的有力工具（废话），它的码量不比后缀数组大（实际代码难度不比后缀数组小，但也不难），处理问题时的思维难度往往比后缀数组小，复杂度更优秀。若字符集大小为 $|\Sigma|$，则：构建时间复杂度 $O(n|\Sigma|)$，转移时间复杂度 $O(1)$，空间复杂度 $O(n|\Sigma|)$ 或 构建时间复杂度 $O(n\log|\Sigma|)$，转移时间复杂度 $O(\log|\Sigma|)$，空间复杂度 $O(n)$。</p>
+<a id="more"></a>
+<p><del>这篇文章会按我的理解详细地介绍一下 SAM，是否比其它教程更好懂我就不做评论了（毕竟所有人都认为自己的教程最好懂），只不过我会尽量保证教程的严谨性和正确性，同时尽量简洁（简洁地表达所有内容，而不是有选择地删去内容）。</del>这篇写的比较口胡随意..拉低了我写的教程的平均水平..只不过还是比市面上某些博客要强一些的（吧）。</p>
+<p><del>这篇文章最大的特点..大约是讲了一些关于将自动机的状态数压缩至最少的方法。</del>（然而后来发现百度百科就有。）</p>
+<h1 id="确定有限状态自动机（DFA）"><a href="#确定有限状态自动机（DFA）" class="headerlink" title="确定有限状态自动机（DFA）"></a>确定有限状态自动机（DFA）</h1><p>一个 <strong>确定有限状态自动机（DFA）</strong> 由以下五部分构成：</p>
+<ol>
+<li><strong>字符集</strong>（$\Sigma$），该自动机只能输入这些字符。</li>
+<li><strong>状态集合</strong>（$Q$）。如果把一个DFA看成一张有向图，那么 DFA 中的状态就相当于图上的顶点。</li>
+<li><strong>起始状态</strong>（$start$），$start\in Q$，是一个特殊的状态。起始状态一般用 $s$ 表示，为了避免混淆，本文中使用 $start$。</li>
+<li><strong>接受状态集合</strong>（$F$），$F\subseteq Q$，是一堆特殊的状态。</li>
+<li><strong>转移函数</strong>（$\delta$），$\delta$ 是一个接受两个参数返回一个值的函数，其中第一个参数和返回值都是一个状态，第二个参数是字符集中的一个字符。如果把一个DFA看成一张有向图，那么 DFA 中的转移函数就相当于顶点间的边，而每条边上都有一个字符。</li>
+</ol>
+<p>DFA 的作用就是识别字符串，一个自动机 $A$，若它能识别（接受）字符串 $S$，那么 $A(S)=True$，否则 $A(S)=False$。</p>
+<p>当一个DFA读入一个字符串时，从初始状态起按照转移函数一个一个字符地转移。如果读入完一个字符串的所有字符后位于一个接受状态，那么我们称这个 DFA <strong>接受</strong> 这个字符串，反之我们称这个 DFA <strong>不接受</strong> 这个字符串。</p>
+<p>如果一个状态 $v$ 没有字符 $c$ 的转移，那么我们令 $\delta(v,c)=null$，而 $null$ 只能转移到 $null$，且 $null$ 不属于接受状态集合。无法转移到任何一个接受状态的状态都可以视作 $null$，或者说，$null$ 代指所有无法转移到任何一个接受状态的状态。</p>
+<p>我们扩展定义转移函数 $\delta$，令其第二个参数可以接收一个字符串：$\delta(v,s)=\delta(\delta(v,s[1]),s[2..|s|])$，这个扩展后的转移函数就可以表示从一个状态起接收一个字符串后转移到的状态。那么，$A(s)=[\delta(start,s)\in F]$。</p>
+<p>如，一个接受且仅接受字符串 “a”, “ab”, “aac” 的 DFA：</p>
+<img src="/后缀自动机（SAM）学习笔记/dfa.png">
+<h1 id="后缀自动机（SAM）"><a href="#后缀自动机（SAM）" class="headerlink" title="后缀自动机（SAM）"></a>后缀自动机（SAM）</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>一个字符串的 <strong>后缀自动机（SAM）</strong> 就是一个 <strong>接受且仅接受</strong> 这个字符串的 <strong>所有后缀</strong> 的 DFA。</p>
+<p>下文中以 $SAM_s$ 代指字符串 $s$ 的后缀自动机，$\delta_s$ 代指 $SAM_s$ 的转移函数。若不带下标则表示字符串为母串 $s$（需要构建 SAM 的那个字符串）。</p>
+<p>根据定义，一个字符串 $t$ 是一个字符串 $s$ 的后缀，当且仅当 $SAM_s(t)=True$。</p>
+<h2 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h2><p>一个字符串 $t$ 是一个字符串 $s$ 的子串，当且仅当 $\delta_s(start_s,t)\neq null$。</p>
+<p>因为，若 $t$ 是 $s$ 的子串，则在 $t$ 之后添加字符可能成为 $s$ 的一个后缀，反之不可能。</p>
+<h2 id="一个朴素的SAM"><a href="#一个朴素的SAM" class="headerlink" title="一个朴素的SAM"></a>一个朴素的SAM</h2><p>若我们将一个字符串的所有后缀插入到一个字典树（Trie 树）中，并将每次插入的终止节点标记为接受状态，就可以得到一个状态数为 $O(n^2)$ 的SAM。</p>
+<p>如，串 “abaaabaa” 的一个 <strong>朴素SAM</strong>：</p>
+<img src="/后缀自动机（SAM）学习笔记/triesam.png">
+<h1 id="最简SAM"><a href="#最简SAM" class="headerlink" title="最简SAM"></a>最简SAM</h1><p>上文中的“朴素SAM”状态数是 $O(n^2)$ 的，而 <strong>最简SAM</strong> 的状态数和转移数（点数和边数）都是 $O(n)$ 的。</p>
+<h2 id="right-集合"><a href="#right-集合" class="headerlink" title="$right$ 集合"></a>$right$ 集合</h2><p>对于一个字符串 $t$，若它在 $s$ 中出现的位置集合为：$\{[l_1,r_1),[l_2,r_2),\cdots,[l_n,r_n)\}$（下标从 $0$ 开始），那么定义 $right(t)$ 为 $\{r_1,r_2,\cdots,r_n\}$。</p>
+<p>如，又是串 “abaaabaa”，那么 $right(a)=\{1,3,4,5,7,8\}$，$right(aa)=\{4,5,8\}$，$right(aab)=\{6\}$。</p>
+<p>在有的教程中，也称其为 $endpos$ 集合。</p>
+<h2 id="right-集合等价类"><a href="#right-集合等价类" class="headerlink" title="$right$ 集合等价类"></a>$right$ 集合等价类</h2><h3 id="right-集合等价类的定义"><a href="#right-集合等价类的定义" class="headerlink" title="$right$ 集合等价类的定义"></a>$right$ 集合等价类的定义</h3><p>$right$ 集合相等的字符串组成一个 <strong>$right$ 集合等价类</strong>。</p>
+<p>如，双是串 “abaaabaa”，那么 $right$ 集合为 $\{4,8\}$ 的字符串有 $\{abaa,baa\}$，这两个字符串组成一个 $right$ 集合等价类。</p>
+<h3 id="right-集合等价类与最简SAM"><a href="#right-集合等价类与最简SAM" class="headerlink" title="$right$ 集合等价类与最简SAM"></a>$right$ 集合等价类与最简SAM</h3><p>我们定义 $reg(v)$ 表示 <strong>从状态 $v$ 开始能识别的字符串的集合</strong>。即：$t\in reg(v)$ 当且仅当 $\delta(v,t)\in F$（$F$ 为接受状态集合）。</p>
+<p>如果在 $t$ 的后面补上一个字符串 $s[r_i..n]$（$r_i\in right(t)$，$n$ 表示 $s$ 的长度），就得到了 $s$ 的一个后缀。所以，若 $right(t_1)=right(t_2)$，那么 $reg(SAM(t_1))=reg(SAM(t_2))=\{s[r_i..n]|r_i\in right(t_1)\}$。</p>
+<p>对于每个状态 $v$，我们只关心 $reg(v)$，所以可以用SAM上的每一个状态去表示一个 $right$ 集合等价类，转移函数也相应地更改为对应的等价类（令 $f(v)$ 表示原状态 $v$ 对应的字符串的 $right$ 集合等价类在最简SAM中对应的状态，那么原来的转移函数 $\delta(u,c)=v$ 更改为 $\delta’(f(u),c)=f(v)$。可以证明，若 $right(u_1)=right(u_2)$，那么 $right(\delta(u_1,c))=right(\delta(u_2,c))$，因为 $right(\delta(u,c))=\{r_i|r_i\in right(u),s[r_i]=c\}$）。</p>
+<p>这样的SAM是状态数最少的，因为状态的 $reg$ 两两不同。这样的SAM若要和朴素SAM区分，可以叫做 <strong>最简SAM</strong>。但一般不加说明的SAM都指最简SAM。</p>
+<p>这样的SAM，从起始状态到某个状态可能有多条路径，每条路径都对应一个字符串，那么我们称这个状态 <strong>对应</strong> 着这些字符串。</p>
+<p>如，叒是串 “abaaabaa​” 的最简SAM：</p>
+<img src="/后缀自动机（SAM）学习笔记/minsam.png">
+<h3 id="right-集合等价类的性质"><a href="#right-集合等价类的性质" class="headerlink" title="$right$ 集合等价类的性质"></a>$right$ 集合等价类的性质</h3><p>对于每个状态 $v$，定义 $max(v)$ 和 $min(v)$ 分别表示 <strong>这个状态对应的 最长 和 最短 的字符串</strong>。</p>
+<p>那么，<strong>$v$ 对应的任意一个字符串都是 $max(v)$ 的后缀，且不是 $min(v)$ 的真后缀。并且，$v$ 包含了所有这样的字符串。</strong></p>
+<p>第一点（$v$ 中的任意一个字符串都是 $max(v)$ 的后缀）可以由 $right$ 集合的定义得到。</p>
+<p>第二点（且不是 $min(v)$ 的真后缀）可以由 $min(v)$ 的定义得到。</p>
+<p>第三点（$v$ 包含了所有这样的字符串）可以由一个引理证明：<strong>对于一个字符串 $t$ ，它的 $right$ 集合是它的任意一个后缀的 $right$ 集合的子集。</strong>这个引理很好证明，进而可以证明这条性质。</p>
+<p>如，叕是串 “abaaabaa”，$right$ 集合为 $\{6\}$ 的串有 $\{aab,aaab,baaab,abaaab\}$，若这个 $right$ 集合等价类对应状态 $v$，那么 $max(v)=abaaab$，$min(v)=aab$。</p>
+<p>这条性质说明 “aaab” 和 “baaab” 都属于这个 $right$ 集合等价类，且 “ab” 和 “b” 不属于这个 $right$ 集合等价类。</p>
+<p>证明第三点所用的引理说明，$right(aaab)\subseteq right(aab)\subseteq right(ab)\subseteq right(b)$，也就是 $\{6\}\subseteq\{6\}\subseteq\{2,6\}\subseteq\{2,6\}$ 。</p>
+<h2 id="parent"><a href="#parent" class="headerlink" title="$parent$"></a>$parent$</h2><h3 id="parent-的定义"><a href="#parent-的定义" class="headerlink" title="$parent$ 的定义"></a>$parent$ 的定义</h3><p>$parent$ 有两种等价的定义（你也可以把其一视作定义，另一个视作性质）：</p>
+<h4 id="定义一"><a href="#定义一" class="headerlink" title="定义一"></a>定义一</h4><p>对于每个状态 $v$（除了起始状态），找到最长的一个字符串 $t$ 所对应的状态，使得 $right(v)\subsetneq right(t)$（注意是真子集；如果不存在这样的字符串就找起始状态），这样的状态就是 $parent(v)$。</p>
+<h4 id="定义二"><a href="#定义二" class="headerlink" title="定义二"></a>定义二</h4><p>对于每个状态 $v$（除了起始状态），$min(v)[1..n-1]$ 对应的状态（$n$ 表示 $min(v)$ 的长度，假定空串对应起始状态）就是 $parent(v)$。</p>
+<p>有的教程中把 $parent$ 叫做后缀连接 $link$。</p>
+<h3 id="parent-的性质"><a href="#parent-的性质" class="headerlink" title="$parent$ 的性质"></a>$parent$ 的性质</h3><p>$len(min(v))=len(max(parent(v)))+1$，这个可以由定义二说明。</p>
+<h3 id="parent-树"><a href="#parent-树" class="headerlink" title="$parent$ 树"></a>$parent$ 树</h3><p>$parent$ 连接可以构成一棵树。</p>
+<p>由定义一，由 $right$ 集合要么包含要么不相交可以说明。$parent$ 树可以看成 $right$ 集合的包含关系所构成的树。</p>
+<p>由定义一或定义二，由除起始状态外的状态都有且仅有一条出边并且 $parent$ 连接无环（$right$ 集合大小递增/对应字符串长度递减）可以说明。</p>
+<p>如，醊是串 “abaaabaa”，它的 $parent$ 树：（用 $max(v)$ 代表每个状态）</p>
+<img src="/后缀自动机（SAM）学习笔记/parent.png">
+<p>SAM上的接受状态就是包含 $r_i=n$（字符串长度）的一些 $right$ 集合等价类，也就是 $parent$ 树上 $\{n\}$ 对应的状态及其祖先。因此，可以通过 $parent$ 树确定SAM的接受状态集合。</p>
+<h2 id="最简SAM状态数为线性的证明"><a href="#最简SAM状态数为线性的证明" class="headerlink" title="最简SAM状态数为线性的证明"></a>最简SAM状态数为线性的证明</h2><p>每次把 $right$ 集合分成 $k$ 部分需要 $k$ 条边，最坏情况下每次都只分成两部分，总共要分成至多 $n$ 部分，所以状态数不会超过 $2n-1$（分 $n-1$ 次最多 $2n-2$ 条边，也就是 $2n-1$ 个点）。</p>
+<h2 id="最简SAM转移数为线性的证明"><a href="#最简SAM转移数为线性的证明" class="headerlink" title="最简SAM转移数为线性的证明"></a>最简SAM转移数为线性的证明</h2><p>考虑SAM的任意一个生成树，那么SAM上的边就会被分成树边和非树边。</p>
+<p>树边最多只有 $2n-2$ 条。</p>
+<p>对于字符串的每个后缀，将其输入到SAM中都会经过一条终点为接受状态的路径，若经过了一条非树边，则称该后缀对应它经过的 <strong>第一条</strong> 非树边。</p>
+<p>对于每条非树边 $(u,v)$，一定存在一条从起始状态到 $u$ 的不经过任何非树边的路径（因为树上两点间必定有路径），也一定存在一条从 $v$ 到任意一个接受状态的路径（否则 $v=null$），所以，至少有一个后缀对应着这条非树边。</p>
+<p>因此，非树边数量不会超过后缀数量。总的边数就是 $O(n)$ 的。</p>
+<h2 id="最简SAM的线性构造"><a href="#最简SAM的线性构造" class="headerlink" title="最简SAM的线性构造"></a>最简SAM的线性构造</h2><p>SAM的线性构造可以在均摊 $O(1)$ 的时间复杂度内向SAM增加一个字符（从 $SAM_{s[0..i-1]}$ 变成 $SAM_{s[0..i]}$）。</p>
+<p>向SAM增加一个字符，就是在所有接受状态后增加一个字符。所以，我们需要考虑上一次插入时的最后一个状态（$last$）以及它在 $parent$ 树上的祖先（也就是所有接受状态）。</p>
+<p>加入一个字符 $x$ 时，我们先创建一个新状态 $np$，这个状态刚插入时代表 $right$ 集合 $\{i\}$（$i$ 表示这是插入的第 $i$ 个字符）。</p>
+<p>一个引理：<strong>若一个状态有字符 $c$ 的转移，则它在 $parent$ 树上的祖先都有。</strong></p>
+<p>引理的证明：$right(\delta(v,c))=\{r_i|r_i\in right(v),s[r_i]=c\}$，而 $right(v)\subsetneq right(parent(v))$。</p>
+<p>因此，找到 $last$ 最深的有出边 $x$ 的祖先 $p$ 后，在其之上的祖先都有出边 $x$。</p>
+<p>对于在其之下的状态，直接向 $np$ 连边即可。</p>
+<p>接下来要分三种情况讨论：</p>
+<p>若不存在 $p$（起始状态都没有出边 $x$），则将 $parent(np)$ 设为初始状态。</p>
+<p>否则，令 $len(v)$ 表示 $max(v)$ 的长度，$q$ 表示 $\delta(p,x)$。</p>
+<p>若 $len(q)=len(p)+1$，将 $parent(np)$ 设为 $q$ 即可。</p>
+<p>否则，新建状态 $nq$，$len(nq)$ 设为（实际上不是人为设定，它本来就是）$len(p)+1$，将 $q$ 的转移函数复制到 $nq$，然后将 $parent(nq)$ 设为 $parent(q)$，再将 $parent(q)$ 和 $parent(np)$ 都设为 $nq$，最后把 $p$ 及 $p$ 的祖先中所有出边 $x$ 连到 $q$ 的都改为连到 $nq$。实际上，枚举祖先时只要遇到出边 $x$ 不连到 $q$ 的就可以停止枚举了。</p>
+<p>至于为什么这样做..恕我表达能力有限，还请参考<a href="https://max.book118.com/html/2017/0523/108664184.shtm" target="_blank" rel="noopener">陈立杰WC课件</a>第 $35$ 页。</p>
+<p>构建过程的复杂度证明可以参考 <a href="https://oi-wiki.org/string/sam/#_7" target="_blank" rel="noopener">OI-Wiki</a>。</p>
+<h2 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1000010</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> len,par,ch[<span class="number">26</span>];</span><br><span class="line">&#125; sam[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> s[N];</span><br><span class="line"><span class="keyword">int</span> p,tot;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>,s);</span><br><span class="line"></span><br><span class="line">    sam[<span class="number">0</span>].par=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>;s[i];++i) insert(s[i]-<span class="string">'0'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> np=++tot;</span><br><span class="line">    sam[np].len=sam[p].len+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (~p&amp;&amp;!sam[p].ch[x])</span><br><span class="line">    &#123;</span><br><span class="line">        sam[p].ch[x]=np;</span><br><span class="line">        p=sam[p].par;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (p==<span class="number">-1</span>) sam[np].par=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> q=sam[p].ch[x];</span><br><span class="line">        <span class="keyword">if</span> (sam[q].len==sam[p].len+<span class="number">1</span>) sam[np].par=q;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> nq=++tot;</span><br><span class="line">            sam[nq].len=sam[p].len+<span class="number">1</span>;</span><br><span class="line">            <span class="built_in">memcpy</span>(sam[nq].ch,sam[q].ch,<span class="keyword">sizeof</span>(sam[q].ch));</span><br><span class="line">            sam[nq].par=sam[q].par;</span><br><span class="line">            sam[q].par=sam[np].par=nq;</span><br><span class="line">            <span class="keyword">while</span> (~p&amp;&amp;sam[p].ch[x]==q)</span><br><span class="line">            &#123;</span><br><span class="line">                sam[p].ch[x]=nq;</span><br><span class="line">                p=sam[p].par;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    p=np;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="SAM的一些应用"><a href="#SAM的一些应用" class="headerlink" title="SAM的一些应用"></a>SAM的一些应用</h1><p>一些应用我还没有写过..写过之后可能会补（gu）上（gu）来（gu）。可以参考<a href="https://oi-wiki.org/string/sam/#_13" target="_blank" rel="noopener">OI wiki</a>。</p>
+<h2 id="判断子串-后缀"><a href="#判断子串-后缀" class="headerlink" title="判断子串/后缀"></a>判断子串/后缀</h2><p>根据SAM的定义和性质，建出文本串的SAM，将模式串分别输入SAM，若转移到 $null$ 则不是子串，否则是；若转移到接受状态则是后缀，否则不是。</p>
+<h2 id="读入字符串时删除首字符"><a href="#读入字符串时删除首字符" class="headerlink" title="读入字符串时删除首字符"></a>读入字符串时删除首字符</h2><p>记录一下已读入的字符串长度，若小于等于当前状态的 $parent.len$，就转移到 $parent$。</p>
+<p>例题：<a href="http://codeforces.com/problemset/problem/235/C" target="_blank" rel="noopener">CF235C Cyclical Quest</a></p>
+<h2 id="子串出现次数"><a href="#子串出现次数" class="headerlink" title="子串出现次数"></a>子串出现次数</h2><p>一个子串出现次数就是其对应 $right$ 集合的元素个数。</p>
+<p>在创建 $np$ 时，将其 $cnt$ 赋为 $1$，建好SAM后，每个状态的出现次数就是 $parent$ 子树内的 $cnt$ 之和。</p>
+<p>例题：<a href="https://www.luogu.org/problemnew/show/P3804" target="_blank" rel="noopener">【模板】后缀自动机</a></p>
+<h2 id="子串第一次出现位置"><a href="#子串第一次出现位置" class="headerlink" title="子串第一次出现位置"></a>子串第一次出现位置</h2><p>和子串出现次数差不多，创建 $np$ 时，将 $firstpos(np)$ 设为 $len(np)-1$，复制 $nq$ 时，将 $firstpos(nq)$ 设为 $firstpos(q)$，最后对子树内取 $min$。</p>
+<h2 id="本质不同子串数"><a href="#本质不同子串数" class="headerlink" title="本质不同子串数"></a>本质不同子串数</h2><p>每个状态表示 $maxlen-minlen+1$ 个字符串，而 $minlen=len(parent)+1$，所以一个状态表示的字符串数量就是 $len-parent.len$。求和即可。</p>
+<p>例题：<a href="https://www.luogu.org/problemnew/show/P4070" target="_blank" rel="noopener">[SDOI2016]生成魔咒</a></p>
+<h2 id="第-k-大子串"><a href="#第-k-大子串" class="headerlink" title="第 $k$ 大子串"></a>第 $k$ 大子串</h2><p>预处理每个状态可以转移到多少个不同的子串，然后就可以做了。</p>
+<p>例题：</p>
+<p><a href="https://www.luogu.org/problemnew/show/SP7258" target="_blank" rel="noopener">SP7258 SUBLEX</a></p>
+<p><a href="https://www.luogu.org/problemnew/show/P3975" target="_blank" rel="noopener">[TJOI2015]弦论</a></p>
+<h2 id="两串的最长公共子串"><a href="#两串的最长公共子串" class="headerlink" title="两串的最长公共子串"></a>两串的最长公共子串</h2><p>对其中一个串建SAM，从起始状态开始，读入另一个字符串，若有转移则转移，将已匹配长度 $+1$，否则跳到 $parent$（这里和 $kmp$ 有点像），并将已匹配长度修改为 $len(parent)$。过程中最大的已匹配长度就是答案。</p>
+<p>例题：<a href="https://www.luogu.org/problemnew/show/SP1811" target="_blank" rel="noopener">SP1811 LCS</a></p>
+<h2 id="多串的最长公共子串"><a href="#多串的最长公共子串" class="headerlink" title="多串的最长公共子串"></a>多串的最长公共子串</h2><p>还是对其中一个串建SAM，以同样的方式依次读入每个字符串，只不过对每个状态要保存当前字符串的最大匹配长度，所有字符串在某个状态的最大匹配长度的最小值就是这一堆字符串在这个状态能匹配的最大长度。如果能在一个状态匹配，一定能在 $parent$ 处匹配，所以要对子树取 $max$，但也不要忘了对 $len$ 取 $min$。</p>
+<p>例题：</p>
+<p><a href="https://www.luogu.org/problemnew/show/SP1812" target="_blank" rel="noopener">SP1812 LCS2</a></p>
+<p><a href="https://www.luogu.org/problemnew/show/P2463" target="_blank" rel="noopener">[SDOI2008]Sandy的卡片</a></p>
+<h1 id="任意DFA的压缩"><a href="#任意DFA的压缩" class="headerlink" title="任意DFA的压缩"></a>任意DFA的压缩</h1><p>（UPD: 如果真的想学习这部分的内容，建议看百度百科或者查阅相关资料。）</p>
+<p>这部分估计没人感兴趣..OI里没用，也不是证明SAM最小性必需的（最小性的证明我在前文中已经简略说明了：状态的 $reg$ 两两不同）。只不过或许会对理解SAM本质以及发明它的人怎么想到的有些帮助…</p>
+<p>或许这种方式在很多年前就已经被人提出了..总之这部分内容完全是我自己yy的，我也懒得去查有没有人发明过。</p>
+<p>这部分内容不保证正确性，如果有误欢迎指正。如果有人愿意提供严谨证明（怎么可能有人啊..只不过我这里都懒得严谨证明了，随便口头地说了一下）一定非常感谢。</p>
+<h2 id="“DFA的压缩”的定义"><a href="#“DFA的压缩”的定义" class="headerlink" title="“DFA的压缩”的定义"></a>“DFA的压缩”的定义</h2><p>一个可用于压缩DFA的映射 $f:Q_A\rightarrow Q_B$ 需要满足以下几个条件：</p>
+<ol>
+<li>$\forall v\ne start_A,f(v)\ne f(start_A)$</li>
+<li>$\forall u\in F,v\notin F,f(u)\ne f(v)$</li>
+<li>$\forall f(u)=f(v),c\in\Sigma,f(\delta_A(u,c))=f(\delta_A(v,c))$</li>
+</ol>
+<p>如：在SAM中，把所有 $right$ 集合相同的状态映射到同一状态就是一个符合条件的映射。</p>
+<p>定义DFA $A$ 在映射 $f$ 下的压缩为 $B$，其中：</p>
+<ol>
+<li>$\Sigma_B=\Sigma_A$</li>
+<li>$Q_B=f(Q_A)$</li>
+<li>$start_B=f(start_A)$</li>
+<li>$F_B=f(F_A)$</li>
+<li>$\delta_B(f(v),c)=f(\delta_A(v,c))$，这一定义依赖于 $f$ 的性质 $3$。</li>
+</ol>
+<p>如：用 $right$ 集合等价类这个映射可以将朴素SAM压缩成最简SAM。</p>
+<h2 id="压缩后的自动机与原自动机等价的证明"><a href="#压缩后的自动机与原自动机等价的证明" class="headerlink" title="压缩后的自动机与原自动机等价的证明"></a>压缩后的自动机与原自动机等价的证明</h2><p>我们证明一个比 $A(s)=B(s)$ 更强的命题：$[\delta_A(v,s)\in F_A]=[\delta_B(f(v),s)\in F_B]$。</p>
+<p>当 $s$ 只有一个字符时，根据 $f$ 满足的性质 $2$ 以及 $B$ 的定义 $4,5$，命题显然成立。</p>
+<p>当 $s$ 不止一个字符时，可以归纳地说明命题成立。</p>
+<h2 id="DFA的最简压缩方法"><a href="#DFA的最简压缩方法" class="headerlink" title="DFA的最简压缩方法"></a>DFA的最简压缩方法</h2><p> 这里给出一个将任意DFA压缩至最简的方法：</p>
+<p>由于DFA是一个DAG，它的任意生成子图都必定有出度为 $0$ 的点。每次找到这些点，然后从中选取尽量多的点，使其映射到同一个状态后满足 $f$ 需要满足的三条性质（也就是，同一字符转移到的状态映射到的状态相同，且没有一个是接受状态另一个不是的情况），然后将这些点从图中删去，重复直至所有点都有了映射后的状态（所有点都被删去）。这样得到的映射 $f$ 能够将原DFA压缩至最简。</p>
+<h2 id="压缩至最简的证明"><a href="#压缩至最简的证明" class="headerlink" title="压缩至最简的证明"></a>压缩至最简的证明</h2><p>我们先证明每个状态的 $reg$（定义参见上文，表示从一个状态起能识别的字符串集合）两两不等。我们按照拓扑序归纳地证明。</p>
+<p>没有出边的非接受状态可以视作 $null$，而没有出边的接受状态按上文所述方法必定会被映射至同一状态。所以命题对没有出边的状态成立。</p>
+<p>假设一个状态所有出边的对应状态都已被证明，那么转移函数不同就等价于 $reg$ 不同，所以命题成立。</p>
+<p>接着，我们由 $reg$ 两两不同证明压缩至最简：</p>
+<p>若状态数继续减少，那么必然存在原来 $reg$ 不同的两个状态 $B(s_1)$ 和 $B(s_2)$ 被压缩到了一起，任取一个只在 $reg(B(s_1))$ 或只在 $reg(B(s_2))$ 中的字符串 $t$，原来 $B(s_1+t)\ne B(s_2+t)$，压缩后却使得 $B’(s_1+t)=B’(s_2+t)$，不符合要求。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/字符串/" rel="tag"><i class="fa fa-tag"></i> 字符串</a>
+          
+            <a href="/tags/SAM/" rel="tag"><i class="fa fa-tag"></i> SAM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/P3804-【模板】后缀自动机/" rel="next" title="P3804 【模板】后缀自动机（SAM/后缀数组）">
+                <i class="fa fa-chevron-left"></i> P3804 【模板】后缀自动机（SAM/后缀数组）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/CF235C-Cyclical-Quest（SAM）/" rel="prev" title="CF235C Cyclical Quest（SAM）">
+                CF235C Cyclical Quest（SAM） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  <div class="comments">
+    <script src="https://utteranc.es/client.js" repo="ouuan/hexo-blog-utterances" issue-term="title" label="utterances" theme="github-light" crossorigin="anonymous" async>
+    </script>
+  </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+
+    <div class="sidebar-inner">
+      <div class="hitokoto-block">
+        <div class="hitokoto-inner hitokoto-comma hitokoto-left-comma">“</div>
+        <div class="hitokoto-inner hitokoto-content"><b><span><span id="hitokoto-content"></span></span></b></div>
+        <div class="hitokoto-inner hitokoto-comma hitokoto-right-comma">”</div>
+      </div>
+      <div id="hitokoto-from"></div>
+      <div class="hitokoto-bottom">
+        <a id="hitokoto-link" href="https://hitokoto.cn/">Hitokoto</a>&nbsp;&nbsp;&nbsp;
+        <button id="hitokoto-like" title="通过给句子点赞可以增加其出现概率，由于技术原因并不能在博客中显示赞数与点赞是否成功的信息（红心表示成功发送点赞请求，但如果同 IP 重复点赞就会失败），如需查看可以点击左边的“Hitokoto”链接。"><i class="menu-item-icon fa fa-fw fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div style="height: 15px"></div>
+
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="ouuan">
+            
+              <p class="site-author-name" itemprop="name">ouuan</p>
+              <p class="site-description motion-element" itemprop="description">ouuan的博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">90</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">84</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/ouuan" title="GitHub &rarr; https://github.com/ouuan" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.luogu.org/space/show?uid=49742" title="洛谷 &rarr; https://www.luogu.org/space/show?uid=49742" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>洛谷</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.codeforces.com/profile/ouuan" title="Codeforces &rarr; https://www.codeforces.com/profile/ouuan" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>Codeforces</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://space.bilibili.com/11067182" title="b站 &rarr; https://space.bilibili.com/11067182" rel="noopener" target="_blank"><i class="fa fa-fw fa-tv"></i>b站</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://EternalAlexander.github.io/" title="https://EternalAlexander.github.io/" rel="noopener" target="_blank">EternalAlexander</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ustze.cn/" title="http://www.ustze.cn/" rel="noopener" target="_blank">ustze</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.xht37.com/" title="https://www.xht37.com/" rel="noopener" target="_blank">xht37</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/PinkRabbit/" title="https://www.cnblogs.com/PinkRabbit/" rel="noopener" target="_blank">PinkRabbit</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://qaq-am.com/" title="https://qaq-am.com/" rel="noopener" target="_blank">lk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.luogu.com.cn/blog/Sooke/" title="https://www.luogu.com.cn/blog/Sooke/" rel="noopener" target="_blank">Sooke</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/LJC00118/" title="https://www.cnblogs.com/LJC00118/" rel="noopener" target="_blank">wxw</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://memset0.cn/" title="https://memset0.cn/" rel="noopener" target="_blank">memset0</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://aprilgrimoire.tk/" title="http://aprilgrimoire.tk/" rel="noopener" target="_blank">AprilGrimoire</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zbww.cf/" title="https://zbww.cf/" rel="noopener" target="_blank">zbw</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#确定有限状态自动机（DFA）"><span class="nav-number">1.</span> <span class="nav-text">确定有限状态自动机（DFA）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后缀自动机（SAM）"><span class="nav-number">2.</span> <span class="nav-text">后缀自动机（SAM）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">2.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性质"><span class="nav-number">2.2.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个朴素的SAM"><span class="nav-number">2.3.</span> <span class="nav-text">一个朴素的SAM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最简SAM"><span class="nav-number">3.</span> <span class="nav-text">最简SAM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#right-集合"><span class="nav-number">3.1.</span> <span class="nav-text">$right$ 集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#right-集合等价类"><span class="nav-number">3.2.</span> <span class="nav-text">$right$ 集合等价类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#right-集合等价类的定义"><span class="nav-number">3.2.1.</span> <span class="nav-text">$right$ 集合等价类的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#right-集合等价类与最简SAM"><span class="nav-number">3.2.2.</span> <span class="nav-text">$right$ 集合等价类与最简SAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#right-集合等价类的性质"><span class="nav-number">3.2.3.</span> <span class="nav-text">$right$ 集合等价类的性质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#parent"><span class="nav-number">3.3.</span> <span class="nav-text">$parent$</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#parent-的定义"><span class="nav-number">3.3.1.</span> <span class="nav-text">$parent$ 的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义一"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">定义一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义二"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">定义二</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parent-的性质"><span class="nav-number">3.3.2.</span> <span class="nav-text">$parent$ 的性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parent-树"><span class="nav-number">3.3.3.</span> <span class="nav-text">$parent$ 树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最简SAM状态数为线性的证明"><span class="nav-number">3.4.</span> <span class="nav-text">最简SAM状态数为线性的证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最简SAM转移数为线性的证明"><span class="nav-number">3.5.</span> <span class="nav-text">最简SAM转移数为线性的证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最简SAM的线性构造"><span class="nav-number">3.6.</span> <span class="nav-text">最简SAM的线性构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考代码"><span class="nav-number">3.7.</span> <span class="nav-text">参考代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SAM的一些应用"><span class="nav-number">4.</span> <span class="nav-text">SAM的一些应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#判断子串-后缀"><span class="nav-number">4.1.</span> <span class="nav-text">判断子串/后缀</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读入字符串时删除首字符"><span class="nav-number">4.2.</span> <span class="nav-text">读入字符串时删除首字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子串出现次数"><span class="nav-number">4.3.</span> <span class="nav-text">子串出现次数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子串第一次出现位置"><span class="nav-number">4.4.</span> <span class="nav-text">子串第一次出现位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本质不同子串数"><span class="nav-number">4.5.</span> <span class="nav-text">本质不同子串数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-k-大子串"><span class="nav-number">4.6.</span> <span class="nav-text">第 $k$ 大子串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两串的最长公共子串"><span class="nav-number">4.7.</span> <span class="nav-text">两串的最长公共子串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多串的最长公共子串"><span class="nav-number">4.8.</span> <span class="nav-text">多串的最长公共子串</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#任意DFA的压缩"><span class="nav-number">5.</span> <span class="nav-text">任意DFA的压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#“DFA的压缩”的定义"><span class="nav-number">5.1.</span> <span class="nav-text">“DFA的压缩”的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩后的自动机与原自动机等价的证明"><span class="nav-number">5.2.</span> <span class="nav-text">压缩后的自动机与原自动机等价的证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DFA的最简压缩方法"><span class="nav-number">5.3.</span> <span class="nav-text">DFA的最简压缩方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩至最简的证明"><span class="nav-number">5.4.</span> <span class="nav-text">压缩至最简的证明</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-battery-full"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ouuan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+<script type="text/javascript">
+	function hitokotoLike(x, y) {
+		$.ajax({
+		    url: "https://hitokoto.cn/Like",
+		    type: "GET",
+		    data: "ID=" + x,
+		    dataType: "jsonp",
+		    success: function(data) {
+		        alert(data.message);
+		        $(y).css('color', 'red');
+		    },
+		    error: function() {
+		        console.log('Hitokoto Like Request Error.');
+		        $(y).css('color', 'red');
+		    }
+		});
+	}
+	$.get('https://v1.hitokoto.cn/?c=a', function(data) {
+		$('#hitokoto-content').css('display', '').text(data.hitokoto);
+		$('#hitokoto-from').css('display', '').text('——' + data.from);
+		$('#hitokoto-from').attr('title', '上传者: ' + data.creator);
+		$('#hitokoto-link').attr('href', 'https://hitokoto.cn/?id=' + data.id);
+		document.getElementById('hitokoto-like').onclick = function() { hitokotoLike(data.id, '#hitokoto-like'); }
+	});
+	$('.post-body').bind('copy', function() {
+		alert('本博客内容欢迎分享（将本博客的原文地址分享到其它网站），允许部分摘录并在醒目位置附上原文链接，未经许可禁止任何形式的全文转载。');
+	});
+</script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+  
+
+  
+  
+
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/pdfobject@2.1.1/pdfobject.min.js"></script>
+    <script type="text/javascript">
+    var options = {
+      pdfOpenParams: {
+        navpanes: 0,
+        toolbar: 0,
+        statusbar: 0,
+        pagemode: "thumbs",
+        view: "FitV"
+      },
+      PDFJS_URL: "/lib/pdf/web/viewer.html",
+      height: "500px"
+    };
+    $("#main a").each(function() {
+      var href = $(this).attr("href");
+      if (!href) return;
+      if (href.endsWith(".pdf") || href.endsWith(".pdf/")) {
+        var id = "pdf" + Math.floor(Math.random() * 10000);
+        $(this).after("<div id='" + id + "'></div>").remove();
+        PDFObject.embed(href, "#" + id, options);
+      }
+    });
+    </script>
+    <style>
+    .pdfobject-container {
+      position: relative;
+      overflow: auto;
+      width: 100%;
+      height: 500px;
+    }
+    </style>
+  
+
+
+</body>
+</html>

@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=2019.9.22" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico?v=6.6.0">
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="首先，你需要意识到，自己出的题是要给别人做的。">
+<meta name="keywords" content="出题规范">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ouuan 的出题规范">
+<meta property="og:url" content="https://ouuan.github.io/ouuan-的出题规范/index.html">
+<meta property="og:site_name" content="ouuan的博客">
+<meta property="og:description" content="首先，你需要意识到，自己出的题是要给别人做的。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-01T10:12:20.352Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ouuan 的出题规范">
+<meta name="twitter:description" content="首先，你需要意识到，自己出的题是要给别人做的。">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ouuan的博客" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://ouuan.github.io/ouuan-的出题规范/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>ouuan 的出题规范 | ouuan的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ouuan的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Codes change the world.</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-其它">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/others" rel="section"><i class="menu-item-icon fa fa-fw fa-wrench"></i> <br>其它</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ouuan.github.io/ouuan-的出题规范/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ouuan">
+      <meta itemprop="description" content="ouuan的博客">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ouuan的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">ouuan 的出题规范
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-16 11:24:12" itemprop="dateCreated datePublished" datetime="2019-06-16T11:24:12+08:00">2019-06-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-12-01 18:12:20" itemprop="dateModified" datetime="2019-12-01T18:12:20+08:00">2019-12-01</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/出题/" itemprop="url" rel="index"><span itemprop="name">出题</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>首先，你需要意识到，自己出的题是要<strong>给别人做</strong>的。</p>
+<a id="more"></a>
+<p>请不要说这是一句废话。这是做一名好的出题人必须要明白的。</p>
+<p>出题比起展示自己，更是服务他人。</p>
+<p>UPD: 本文已于 <a href="https://github.com/OI-wiki/OI-wiki/pull/1672" target="_blank" rel="noopener">pr #1672</a> 经优化、扩充后合并至 <a href="https://oi-wiki.org/topic/problemsetting" target="_blank" rel="noopener">OI-wiki</a>，推荐在 <a href="https://oi-wiki.org/topic/problemsetting" target="_blank" rel="noopener">OI-wiki</a> 上阅读。</p>
+<h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><h3 id="关于原题"><a href="#关于原题" class="headerlink" title="关于原题"></a>关于原题</h3><p>原题大致可分为完全一致、几乎一致和做法一致三种。</p>
+<ul>
+<li>完全一致：使用一题的 AC 代码可以 AC 另一题。</li>
+<li>几乎一致：由一题的 AC 代码改动至另一题的 AC 代码可以由一个不会该题的人完成。</li>
+<li>做法一致：核心思路、做法一致，但代码实现上、不那么关键的细节上有差异。</li>
+</ul>
+<p>这三种原题自下而上为包含关系。</p>
+<p>以下情况不应出现：</p>
+<ol>
+<li>在明知有“几乎一致”的原题的情况下出原题。</li>
+<li>由于未使用搜索引擎查找导致自己不清楚有原题，从而出了“几乎一致”的原题。</li>
+<li>在“做法一致”的原题广为人知（如：NOIp、NOI 原题）时出原题。</li>
+<li>在带有选拔性的考试的非送分题中出现“做法一致”的原题。</li>
+</ol>
+<p>以下情况最好不要出现：</p>
+<ol>
+<li>在明知有至少为“做法一致”的原题的情况下出原题。</li>
+<li>由于未使用搜索引擎查找导致自己不清楚有原题，从而出了“做法一致”的原题。</li>
+<li>在任何情况下出“几乎一致”的原题。</li>
+</ol>
+<p>可以放宽要求的例外情况：</p>
+<ol>
+<li>校内模拟赛。</li>
+<li>以专题训练为目的的模拟赛。</li>
+<li>难度较低的比赛，或是定位为送分题的题目。</li>
+</ol>
+<h3 id="关于毒瘤题"><a href="#关于毒瘤题" class="headerlink" title="关于毒瘤题"></a>关于毒瘤题</h3><p>“毒瘤题”是一个非常模糊而主观的观念，我在这只是引用一些前人关于此的探讨，加以自己的一些理解。这个话题是非常开放的，欢迎大家来发表自己的观点。</p>
+<blockquote>
+<p>一道好题不应该是两道题拼在一起，一道好题会有自己的idea —— 而它应该不加过多包装地突出这个idea。</p>
+<p>一道好题应该新颖。真正的好题，应该是能让人脑洞出新的好题的好题。</p>
+<p>—— vfk《UOJ精神之源流》</p>
+</blockquote>
+<p>例子：<a href="https://www.luogu.org/problemnew/show/P5346" target="_blank" rel="noopener">【XR-1】柯南家族</a>，做法的前后两部分完全割裂，前半部分为<a href="https://www.luogu.org/problemnew/show/P5353" target="_blank" rel="noopener">【模板】树上后缀排序</a>，后半部分是经典树上问题。</p>
+<blockquote>
+<p>一类OI题以数学为主，无论是题目描述还是做法都是数学题的特征，并且解法中不含算法相关的知识点，这类OI题目统称为纯数学题。</p>
+<p>—— 王天懿《论偏题的危害》</p>
+</blockquote>
+<p>经典例子：<a href="https://www.luogu.org/problemnew/show/P3951" target="_blank" rel="noopener">NOIP2017 小凯的疑惑</a></p>
+<p>我自己的标准是：尽量不要出数学填空题。但这样的纯数学题也不是完全不可取，有时纯粹地考察一些 OI 常用数学知识也是可以接受的。</p>
+<blockquote>
+<p>一部分偏题中牵涉到了大学物理的内容，导致选手在面对这些从未接触过的物理知识点时变得不知所措，造成了知识上的隔膜。</p>
+<p>—— 王天懿《论偏题的危害》</p>
+</blockquote>
+<p>经典例子：<a href="http://uoj.ac/problem/159" target="_blank" rel="noopener">【清华集训2015】多边形下海</a></p>
+<p>不止是物理，OI 题目中不应过多涉及到其它学科的知识，如果涉及应当给予详细的解释，不应使其它学科的知识作为解题的重大障碍。</p>
+<blockquote>
+<p>一道好题无论难度如何，都应该具有自己的思维难度，需要选手去思考并发现一些性质。</p>
+<p>一道好题的代码可以长，但一定不是通过强行嵌套或者增加条件而让代码变长，而是长得自然，让人感觉这个题的代码就应该是这么长。</p>
+<p>—— 王天懿《论偏题的危害》</p>
+</blockquote>
+<p>经典例子：<a href="https://www.luogu.org/problemnew/show/P2482" target="_blank" rel="noopener">[SDOI2010]猪国杀</a>，<a href="http://uoj.ac/problem/98" target="_blank" rel="noopener">【集训队互测2015】未来程序·改</a></p>
+<p>在一般的 OI 比赛中，思维难度应占主要部分。当然，如 THUWC / THUSC 的 Day 2+ 那样的工程题也有其存在的道理 —— 毕竟体验营的目的除了考察选手的算法设计能力，还有和大学学习对接的工程代码以及文档学习能力。但在一般的 OI 比赛中，考察更多的应当还是算法设计与思维能力。</p>
+<h2 id="题面"><a href="#题面" class="headerlink" title="题面"></a>题面</h2><h3 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h3><p>题目背景最好尽量简短。</p>
+<p>在题目背景较长时，应当与题目描述分开。</p>
+<p>需要绝对避免的情况：题目背景严重影响题意的理解。</p>
+<p>必要时，可以提供与背景结合的题目描述与简洁的题目描述两个版本。</p>
+<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>简而言之，题目描述需要<strong>清晰易懂</strong>。</p>
+<p>题面中的每个可能不被理解的定义都应得到解释，不应凭空冒出未加定义的概念。例如：在 <a href="https://codeforces.com/problemset/problem/1172/D" target="_blank" rel="noopener">CF1172D Nauuo and Portals</a> 中，你必须在题面中解释什么是“传送门”。</p>
+<p>题面中涉及到的每个概念应当使用单一的词汇来描述。例如：不应一会儿说“费用”，一会儿说“代价“。</p>
+<p>不应不加说明地使用与原义、常见义不同的词汇。例如：不应不加说明地用“路径”代指一条边。</p>
+<p>你需要保证你的题面不会自相矛盾。例如：在 <a href="https://codeforces.com/problemset/problem/1173/A" target="_blank" rel="noopener">CF 1173A Nauuo and Votes</a> 中，没有把 “?” 作为一种 “result”，是因为 “?” 的含义是 “there are more than one possible results”。</p>
+<p>你需要保证你的题面不能被错误理解而自圆其说，即使这种理解是反常识、没有人会这么去想的。例如：在 <a href="https://codeforces.com/problemset/problem/1172/D" target="_blank" rel="noopener">CF1172D Nauuo and Portals</a> 中，之所以要繁琐地定义 “walk into” 并与 “teleport” 区分，是为了防止这种理解：通过传送门可以到另一个传送门，而到了传送门会传送，因此会反复横跳。</p>
+<p>顺着读题目描述应当能看懂每一句话，并理解题目的任务与要求。至少在紧接着的下一段话中疑惑能够得到解释，而不是需要在若干段后才能得到解释，或者要看了输入输出格式才能明白题意，甚至需要根据样例来猜题意。例如：在 <a href="https://guoj.icu/problem/1171" target="_blank" rel="noopener">「GuOJ Round #1」琪露诺的冰雪宴会</a> 中，在输出格式才第一次出现了题目的目标“雾之湖最终能接收到的最大水量”，再加上“灵梦当然能很快算出来清理完全部小溪的总费用是多少”这句带有误解性质的话，更容易使人读错题意，这是不可取的，应当在题目描述中就对题目的目标进行说明。（在这个例子中还存在题目背景严重影响题意理解的问题。）</p>
+<h3 id="输入输出格式"><a href="#输入输出格式" class="headerlink" title="输入输出格式"></a>输入输出格式</h3><p>输入输出格式清晰<strong>完整</strong>即可，没有死板的要求，个人建议参照 CF 的题目来写输入输出格式，具体可以参考 <a href="/bad-round-与出题人的坚守/rules.jpg">cf 出题人须知</a>。</p>
+<p>需要特别注意的是，如果输出中含有小数，请尽量使用 SPJ。如果无法使用 SPJ，请保证对精度的要求是有限的。</p>
+<p>如果没有保证，对精度的要求可能是无限的。例如：要求保留三位小数，实际答案为 $0.0015$，此时只要有任意大小的误差导致计算出的答案小于 $0.0015$，即使计算出的答案是 $0.0014999999999\cdots$ 也会输出错误的答案。</p>
+<p>保证对精度要求有限的例子：请输出答案四舍五入后保留小数点后三位的结果。令标准答案为 $ans$，数据保证对于任意满足 $\frac{|x-ans|}{\max(1,ans)}&lt;10^{-9}$ 的 $x$，四舍五入后结果与 $ans$ 四舍五入后相同。</p>
+<p>可以参考的一些句子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入的第一行包含三个正整数 $n$, $m$, $k$ ($1\le n,m\le 2\cdot 10^5$, $1\le k\le 100$) — $n$ 表示数列的长度，$m$ 表示操作个数，$k$ 的意义见题目描述。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入的第二行包含 $n$ 个非负整数 $a_1,a_2,\ldots,a_n$ ($1\le a_i\le 10^9$) — 题目给出的数列。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">接下来的 $m$ 行中的第 $i$ 行包含两个正整数 $l_i$ 和 $r_i$ ($1\le l_i\le r_i\le n$)，表示第 $i$ 次操作在区间 $[l_i,r_i]$ 上进行。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">接下来的 $n-1$ 行，每行包含两个正整数 $u$ 和 $v$ ($1\le u,v\le n$)，表示 $u$ 和 $v$ 之间由一条边相连。</span><br><span class="line"></span><br><span class="line">数据保证给出的边能构成一棵树。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入的唯一一行包含一个由小写英文字母构成的非空字符串，其长度不超过 $10^6$。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入的第二行包含一个小数点后不超过三位的实数 $x$ ($-10^6\le x\le 10^6$)，意义见题目描述。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输出包含一个实数，当你的输出与标准答案之间的绝对误差或相对误差小于 $10^&#123;-6&#125;$ 时视作正确。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输出的第二行包含 $n$ 个正整数，表示你构造的一组方案 — 其中第 $i$ 个数表示你打出的第 $i$ 张牌的编号。</span><br><span class="line"></span><br><span class="line">如果有多组合法的答案，可以任意输出其中一组。</span><br></pre></td></tr></table></figure>
+<h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>按照 CF 的要求，数据范围要写在输入格式里，但在国内，数据范围往往是写在题目的最后的。</p>
+<p>数据范围中最容易犯的错误就是不完整。输入中的每一个数、每一个字符串都应该有清晰的界定。在上文所给出的输入输出格式示例中就有一些数据范围的正确写法。</p>
+<p>数据范围的常见遗漏：</p>
+<ol>
+<li>“整数”中的“整”。</li>
+<li>题面中只说了是“整数”没说是“正整数”，并且数据范围中只有上限没有下限。</li>
+<li>字符串没说字符集。</li>
+<li>实数没说小数点后位数。</li>
+<li>某些变量没有给范围。</li>
+</ol>
+<p>你需要保证标程可以通过满足题面所述数据范围的任何一组数据。</p>
+<h3 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h3><p>样例应当有一定的强度，能够查出一些简单的错误。读错题意的人应当能够通过样例发现自己读错了题意。</p>
+<p>有多种操作的题，每种操作都应在样例中出现。</p>
+<p>有多种输出的题（如 <a href="https://codeforces.com/problemset/problem/1173/A" target="_blank" rel="noopener">CF 1173A Nauuo and Votes</a>），每种输出都应在样例中出现。例外：实际上不可能无解，但要求判断是否有解的题目。</p>
+<h3 id="样例解释"><a href="#样例解释" class="headerlink" title="样例解释"></a>样例解释</h3><p>题目描述越复杂、越不易理解就越应当有详细的样例解释。</p>
+<p>题目难度越简单就越应当有详细的样例解释。</p>
+<p>详细的样例解释可以选择配上图片。</p>
+<p>较大的样例可以没有样例解释。</p>
+<p>为了照顾色觉障碍者，最好不要使颜色成为理解样例解释所必备的。可以用彩色图片来美化样例解释，但如果一定要用颜色传递一些必要的信息，最好不要同时出现红黄或者红绿。</p>
+<h2 id="时限、空间限制与部分分"><a href="#时限、空间限制与部分分" class="headerlink" title="时限、空间限制与部分分"></a>时限、空间限制与部分分</h2><p>时限与空间限制的目的是卡掉复杂度错误的做法。（当然，也是为了防止评测用时过长，如：只对交互次数有限制而对时间复杂度没有限制的交互题也有时间限制。）</p>
+<p>因此，原则上时间限制应当选取不使错误做法通过的尽量大的值。</p>
+<p>一般地，时限应满足以下要求：</p>
+<ol>
+<li>至少为 std 在最坏情况下用时的两倍。</li>
+<li>如果比赛允许使用 Java，应使 Java 能够通过。</li>
+<li>不应使错误做法通过（实在卡不掉、想放某种错解过除外）。</li>
+</ol>
+<p>为了更好地在放大常数做法过的同时卡掉错解，一般可以采用同时增大数据范围和时限的方法。但要注意，有时正解（由于缓存等玄学问题）会在数据范围增大时有极大的常数增加，此时增大数据范围不一定能够增大正解与错解之间用时的差距。</p>
+<p>在有部分分的赛制中，还可以通过设置有梯度的数据、数据范围稍小的数据来使较为优秀的错解和大常数正解不能通过，同时使其获得较高的部分分。</p>
+<p>需要注意的是，在数据范围小于 $5\cdot 10^5$ 时，应当考虑是否能使用<a href="/n方过百万-暴力碾标算——指令集优化的基础使用">指令集</a>通过。</p>
+<p>一般情况下空间限制应当设置的足够大，除非空间复杂度更优的做法的确十分巧妙，值得卡掉空间复杂度大的做法。这种情况下可以考虑设置空间限制较松的部分分。值得注意的是，如果不想卡掉空间消耗较大的做法，数据结构题一般需要设置较大的空间限制。</p>
+<blockquote>
+<p>一道好题应该具有它的选拔性质，具有足够的区分度。应该至少4档部分分，让新手可以拿到分，让高手能够展示自己的实力。</p>
+<p>—— vfk《UOJ精神之源流》</p>
+</blockquote>
+<p>部分分一般分为较小数据范围与特殊性质两种。</p>
+<p>较小数据范围一般要设置多档，即使你想不到某种复杂度的做法，也可以考虑给这种复杂度一档分。一般来说，为了避免卡常，可以设置一档极限数据除以二的部分分。</p>
+<p>“数据有梯度”最好用多档部分分替代。</p>
+<p>特殊性质部分分的设置要依具体题目而定。理想的特殊性质部分分应当是能够引导选手思考正解的。与较小数据范围部分分不同，在你不会针对某种特殊性质的做法时，最好不要给这种特殊性质一档分。例如：<a href="https://www.luogu.org/problemnew/show/P5400" target="_blank" rel="noopener">[CTS2019]随机立方体</a> 的 $k=1$ 这档部分分在讲题时就被很多人吐槽，称这档部分分妨碍了思考正解。</p>
+<p>如果不是测试点等分且总分为测试点得分相加（如：绑 Subtask 测试），一定要在题面中说明。</p>
+<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><h3 id="数据的多样性与强度"><a href="#数据的多样性与强度" class="headerlink" title="数据的多样性与强度"></a>数据的多样性与强度</h3><p>在不绑 Subtask，按测试点给分时，本部分内容可以酌情不遵守。</p>
+<p>数据中应当包含每个变量的最小值与最大值。</p>
+<p>数据中应当包含各种各样的构造，即使你不知道什么错解会挂在这组构造上。</p>
+<p>当然，如果你已知一个（正常人能想的到、写的出的）正确性有问题的错解，要尽量卡掉它。（时间复杂度有问题的错解已在上文讨论过了。）</p>
+<p>需要特别提醒的是，如果有整型溢出的可能，一定要卡掉会溢出的做法。在有部分分的赛制中，不应使不开 long long 的人得到和暴力一样甚至更低的分数。</p>
+<h3 id="如果有-pretests"><a href="#如果有-pretests" class="headerlink" title="如果有 pretests"></a>如果有 pretests</h3><p>pretests 应尽量强（，同时尽量少）。换言之，你需要在 pt 中（用尽量少的数据组数）包含该题的所有已知叉点。（括号中为个人观点。）</p>
+<p>如果你希望出现少量而非没有 fst，你可以问问 Sooke 对这件事的看法（Sooke 曾经坚称“fst 是 CF 的灵魂”，在我的强烈要求下，在 <a href="https://codeforces.com/problemset/problem/1172/A" target="_blank" rel="noopener">CF1172A Nauuo and Cards</a> 中，他构造了许多数据，在 pt 中卡掉了所有已知错解，最后，这题在比赛中 Div.2 的 fst 率为 $18.5\%$）。</p>
+<h3 id="使用-testlib-h-造数据"><a href="#使用-testlib-h-造数据" class="headerlink" title="使用 testlib.h 造数据"></a>使用 testlib.h 造数据</h3><p>在平常的出题中使用 <a href="https://polygon.codeforces.com/" target="_blank" rel="noopener">Polygon</a> 可能不是最为方便的选择（事实上如果是多人协作出题，即使不是出 cf，使用 Polygon 依然是非常棒的选择），但 Polygon 为我们提供的出题方式十分值得借鉴。</p>
+<p>简而言之，在 Polygon 中，数据要么是手造，要么由 generator 生成。而这个 generator 使用 <a href="https://github.com/MikeMirzayanov/testlib" target="_blank" rel="noopener">testlib.h</a>，并且使用命令行参数来设置数据范围、构造类型等参数。</p>
+<p>使用 testlib.h 的好处是，它内置了随机数生成器 <code>rnd.next()</code>，它在不同平台上返回同样的结果，并且其种子是基于整个命令行参数生成的，不用手动设置种子，并且在参数一样时生成的数据总是一样的。</p>
+<p>使用命令行参数的好处是，你可以写一个 .bat 文件（或者 Linux 下的 .sh 文件），把生成数据的命令写进去，可以十分方便地生成数据。</p>
+<p>一个简单的 generator 例子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// gen.cpp</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"testlib.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, k;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; p;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    registerGen(argc, argv, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">    n = atoi(argv[<span class="number">1</span>]);</span><br><span class="line">    m = atoi(argv[<span class="number">2</span>]);</span><br><span class="line">    k = rnd.next(<span class="number">1</span>, n);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i) p.push_back(i);</span><br><span class="line">    shuffle(p.begin(), p.end()); <span class="comment">// testlib.h 自带的 random_shuffle，使用 rnd.next() 进行 shuffle</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d %d %d\n"</span>, n, m, k);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; ++i) <span class="built_in">printf</span>(<span class="string">"%d%c"</span>, p[i], <span class="string">" \n"</span>[i == n - <span class="number">1</span>]); <span class="comment">// 把字符串当作数组用，中间空格，末尾换行，是一个造数据时常用的技巧</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gen 10 10 &gt; 1.in</span><br><span class="line">gen 1 1 &gt; 2.in</span><br><span class="line">gen 100 200 &gt; 3.in</span><br><span class="line">gen 2000 1000 &gt; 4.in</span><br><span class="line">gen 100000 100000 &gt; 5.in</span><br></pre></td></tr></table></figure>
+<p><a href="https://codeforces.com/blog/entry/18291" target="_blank" rel="noopener">官方 generator 教程</a>。</p>
+<p>如果你愿意，还可以写一个 validator。validator 是用来检查数据合法性的，在 cf 赛制中由于 hack 的存在是必备的，而在其它赛制中，validator 相当于给数据上了一道保险锁，个人十分推荐写一个 validator。</p>
+<p><a href="https://codeforces.com/blog/entry/18426" target="_blank" rel="noopener">官方 validator 教程</a>。</p>
+<p>最后推荐一个我自己经常使用的生成输出文件的 bat：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">for</span> /R <span class="string">"%cd%"</span> %%i <span class="keyword">in</span> (*.<span class="keyword">in</span>) <span class="keyword">do</span> ( </span><br><span class="line"><span class="built_in">echo</span> %%i</span><br><span class="line">validator &lt; %%i</span><br><span class="line"><span class="keyword">if</span> errorlevel 1 pause</span><br><span class="line">std &lt; %%i &gt; %%~ni.out</span><br><span class="line">)</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<h2 id="Special-Judge"><a href="#Special-Judge" class="headerlink" title="Special Judge"></a>Special Judge</h2><p>输出方案题和输出浮点数题是两种较为常见的需要使用 SPJ 的题型，其它题目视情况也需要使用 SPJ。在 CF 上，所有题目都必须使用基于 testlib.h 的 checker，例如：题目要求输出若干个整数时，你可以任意输出空白字符（既可以空格也可以换行）。</p>
+<p>checker 一般使用 testlib.h 编写，<a href="/使用-testlib-h-写-lemon-SPJ/">在 lemon 中也可以使用 testlib.h</a>。一般来说，不使用 testlib.h 是很难写好 checker 的，因为你要应对各种各样的不合法输出，需要极强的鲁棒性。</p>
+<p>编写 checker 需要注意以下两点：</p>
+<ol>
+<li>你需要应对各种不合法的输出，因此，请检查读入的每个变量是否在合法范围中（<code>readInt(minvalue, maxvalue)</code>）。例如：读入一个在 check 过程中会作为数组下标的变量时必须检查其范围，否则可能引发数组越界，有时这会导致 RE，有时则可能判为 AC。</li>
+<li>原则上 checker 中不应检查空白字符（即，不应使用 readSpace()、readEoln()、readEof()，值得一提的是，testlib.h 会自动检查是否有多余的输出）。</li>
+</ol>
+<p><a href="https://codeforces.com/blog/entry/18431" target="_blank" rel="noopener">官方 checker 教程</a>。</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>题解的目标是让预计会来参加比赛的人都能看懂。所以官方题解详细程度的要求会比一般的题解高。</p>
+<h3 id="关于部分分"><a href="#关于部分分" class="headerlink" title="关于部分分"></a>关于部分分</h3><p>在有部分分的题目中，题解里可以考虑写一写部分分的做法。</p>
+<h3 id="关于知识点"><a href="#关于知识点" class="headerlink" title="关于知识点"></a>关于知识点</h3><p>解题中用到的知识点应当写出来。对于一些难度和题目难度相当的知识点，最好给出学习该知识点的资料（比如一篇博客的地址）。“这样，再这样，然后<strong>用一些技巧</strong>就可以了”，而其中的“一些技巧”并不是谁都会的，这种情况要绝对避免。</p>
+<h3 id="关于定义"><a href="#关于定义" class="headerlink" title="关于定义"></a>关于定义</h3><p>题解中不要凭空冒出来一些概念。</p>
+<p>例如：dp 的题解要解释清楚状态的定义。</p>
+<p>再例如：cy 曾经写过一版 <a href="https://codeforces.com/problemset/problem/1172/F" target="_blank" rel="noopener">CF1172F Nauuo and Bug</a> 的题解，其中对“分段函数”没有定义，这是绝对不可取的。</p>
+<h3 id="关于细节"><a href="#关于细节" class="headerlink" title="关于细节"></a>关于细节</h3><p>具体的实现细节如果比较巧妙最好写出来，否则的话“详见代码”也是可以的。如果“详见代码”的话，最好在代码中加上一定的注释。</p>
+<h3 id="标程"><a href="#标程" class="headerlink" title="标程"></a>标程</h3><p>标程中最好去掉冗余部分。比如，有人在题解中保留了完整的 define 模板（为了提高做题速度，包含大量 define 与常用函数，常用于 CF 等在线比赛），并且其中很大一部分都没有用到，这是不好的。</p>
+<p>上文已经说过了，如果涉及到一些题解中没有详细说明的实现细节，最好加上适量的注释。</p>
+<h2 id="比赛"><a href="#比赛" class="headerlink" title="比赛"></a>比赛</h2><h3 id="比赛通知中的题目难度需真实"><a href="#比赛通知中的题目难度需真实" class="headerlink" title="比赛通知中的题目难度需真实"></a>比赛通知中的题目难度需真实</h3><p>感觉这个是比赛通知中比较需要注意的一点。</p>
+<p>如果不会评难度可以不评..</p>
+<blockquote>
+<p>Remember that authors tend to underestimate the difficulty of their problems.</p>
+<p>—— Codeforces PROPOSE A PROBLEM 页面的提醒</p>
+</blockquote>
+<p>需要特别强调的是，如果你以 CF 的难度来进行类比（如：该比赛为 Div.2 A ~ Div.2 E 难度），不仅是难度需要与 CF Div.2 类似，题型也应当是 CF 风格。</p>
+<h3 id="题目难度的分配"><a href="#题目难度的分配" class="headerlink" title="题目难度的分配"></a>题目难度的分配</h3><p>在类国内 OI 的模拟赛中，往往是三道题的整体难度与比赛难度相当即可。</p>
+<p>在类 CF / ATC 这种线上赛的比赛中，需要尽量保证难度的递增（虽然由于对难度的误估很多时候都并不能真正做到），并且尽量避免出现大的 difficulty gap。可以通过把一题分为难易两题（两个 Subtask）来减少 difficulty gap。</p>
+<h3 id="题目知识点的分配"><a href="#题目知识点的分配" class="headerlink" title="题目知识点的分配"></a>题目知识点的分配</h3><p>一场比赛应尽量涵盖较广的知识点（专题训练赛当然除外）。</p>
+<p>经典反例：涵盖了动态规划、期望、组合计数、容斥原理、多项式等多种知识点的 CTS2019。（<del>组题人：我要从五道题里选六道，我也很无奈啊。</del>）</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="http://vfleaking.blog.uoj.ac/blog/909" target="_blank" rel="noopener">vfk《UOJ精神之源流》</a></li>
+<li><a href="/ouuan-的出题规范/7-王天懿-论偏题的危害.ppt">王天懿《论偏题的危害》</a></li>
+<li><a href="/bad-round-与出题人的坚守/rules.jpg">cf 出题人须知</a></li>
+<li><a href="https://blog.csdn.net/VFleaKing/article/details/90521383" target="_blank" rel="noopener">vfk 博客</a>中的<a href="https://www.luogu.org/paste/sxvu97yz" target="_blank" rel="noopener">CF出题人的自我修养</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/出题规范/" rel="tag"><i class="fa fa-tag"></i> 出题规范</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/BZOJ2460-BJWC2011-元素（线性基，贪心）/" rel="next" title="BZOJ2460 [BJWC2011]元素（线性基，贪心）">
+                <i class="fa fa-chevron-left"></i> BZOJ2460 [BJWC2011]元素（线性基，贪心）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/BZOJ2115-WC2011-最大XOR和路径（线性基，图论）/" rel="prev" title="BZOJ2115 [WC2011]最大XOR和路径（线性基，图论）">
+                BZOJ2115 [WC2011]最大XOR和路径（线性基，图论） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  <div class="comments">
+    <script src="https://utteranc.es/client.js" repo="ouuan/hexo-blog-utterances" issue-term="title" label="utterances" theme="github-light" crossorigin="anonymous" async>
+    </script>
+  </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+
+    <div class="sidebar-inner">
+      <div class="hitokoto-block">
+        <div class="hitokoto-inner hitokoto-comma hitokoto-left-comma">“</div>
+        <div class="hitokoto-inner hitokoto-content"><b><span><span id="hitokoto-content"></span></span></b></div>
+        <div class="hitokoto-inner hitokoto-comma hitokoto-right-comma">”</div>
+      </div>
+      <div id="hitokoto-from"></div>
+      <div class="hitokoto-bottom">
+        <a id="hitokoto-link" href="https://hitokoto.cn/">Hitokoto</a>&nbsp;&nbsp;&nbsp;
+        <button id="hitokoto-like" title="通过给句子点赞可以增加其出现概率，由于技术原因并不能在博客中显示赞数与点赞是否成功的信息（红心表示成功发送点赞请求，但如果同 IP 重复点赞就会失败），如需查看可以点击左边的“Hitokoto”链接。"><i class="menu-item-icon fa fa-fw fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div style="height: 15px"></div>
+
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="ouuan">
+            
+              <p class="site-author-name" itemprop="name">ouuan</p>
+              <p class="site-description motion-element" itemprop="description">ouuan的博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">90</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">84</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/ouuan" title="GitHub &rarr; https://github.com/ouuan" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.luogu.org/space/show?uid=49742" title="洛谷 &rarr; https://www.luogu.org/space/show?uid=49742" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>洛谷</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.codeforces.com/profile/ouuan" title="Codeforces &rarr; https://www.codeforces.com/profile/ouuan" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>Codeforces</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://space.bilibili.com/11067182" title="b站 &rarr; https://space.bilibili.com/11067182" rel="noopener" target="_blank"><i class="fa fa-fw fa-tv"></i>b站</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://EternalAlexander.github.io/" title="https://EternalAlexander.github.io/" rel="noopener" target="_blank">EternalAlexander</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ustze.cn/" title="http://www.ustze.cn/" rel="noopener" target="_blank">ustze</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.xht37.com/" title="https://www.xht37.com/" rel="noopener" target="_blank">xht37</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/PinkRabbit/" title="https://www.cnblogs.com/PinkRabbit/" rel="noopener" target="_blank">PinkRabbit</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://qaq-am.com/" title="https://qaq-am.com/" rel="noopener" target="_blank">lk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.luogu.com.cn/blog/Sooke/" title="https://www.luogu.com.cn/blog/Sooke/" rel="noopener" target="_blank">Sooke</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/LJC00118/" title="https://www.cnblogs.com/LJC00118/" rel="noopener" target="_blank">wxw</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://memset0.cn/" title="https://memset0.cn/" rel="noopener" target="_blank">memset0</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://aprilgrimoire.tk/" title="http://aprilgrimoire.tk/" rel="noopener" target="_blank">AprilGrimoire</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zbww.cf/" title="https://zbww.cf/" rel="noopener" target="_blank">zbw</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目内容"><span class="nav-number">1.</span> <span class="nav-text">题目内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于原题"><span class="nav-number">1.1.</span> <span class="nav-text">关于原题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于毒瘤题"><span class="nav-number">1.2.</span> <span class="nav-text">关于毒瘤题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题面"><span class="nav-number">2.</span> <span class="nav-text">题面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目背景"><span class="nav-number">2.1.</span> <span class="nav-text">题目背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">2.2.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入输出格式"><span class="nav-number">2.3.</span> <span class="nav-text">输入输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据范围"><span class="nav-number">2.4.</span> <span class="nav-text">数据范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#样例"><span class="nav-number">2.5.</span> <span class="nav-text">样例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#样例解释"><span class="nav-number">2.6.</span> <span class="nav-text">样例解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时限、空间限制与部分分"><span class="nav-number">3.</span> <span class="nav-text">时限、空间限制与部分分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据"><span class="nav-number">4.</span> <span class="nav-text">数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据的多样性与强度"><span class="nav-number">4.1.</span> <span class="nav-text">数据的多样性与强度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果有-pretests"><span class="nav-number">4.2.</span> <span class="nav-text">如果有 pretests</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-testlib-h-造数据"><span class="nav-number">4.3.</span> <span class="nav-text">使用 testlib.h 造数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Special-Judge"><span class="nav-number">5.</span> <span class="nav-text">Special Judge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解"><span class="nav-number">6.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于部分分"><span class="nav-number">6.1.</span> <span class="nav-text">关于部分分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于知识点"><span class="nav-number">6.2.</span> <span class="nav-text">关于知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于定义"><span class="nav-number">6.3.</span> <span class="nav-text">关于定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于细节"><span class="nav-number">6.4.</span> <span class="nav-text">关于细节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标程"><span class="nav-number">6.5.</span> <span class="nav-text">标程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比赛"><span class="nav-number">7.</span> <span class="nav-text">比赛</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#比赛通知中的题目难度需真实"><span class="nav-number">7.1.</span> <span class="nav-text">比赛通知中的题目难度需真实</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目难度的分配"><span class="nav-number">7.2.</span> <span class="nav-text">题目难度的分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目知识点的分配"><span class="nav-number">7.3.</span> <span class="nav-text">题目知识点的分配</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">8.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-battery-full"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ouuan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+<script type="text/javascript">
+	function hitokotoLike(x, y) {
+		$.ajax({
+		    url: "https://hitokoto.cn/Like",
+		    type: "GET",
+		    data: "ID=" + x,
+		    dataType: "jsonp",
+		    success: function(data) {
+		        alert(data.message);
+		        $(y).css('color', 'red');
+		    },
+		    error: function() {
+		        console.log('Hitokoto Like Request Error.');
+		        $(y).css('color', 'red');
+		    }
+		});
+	}
+	$.get('https://v1.hitokoto.cn/?c=a', function(data) {
+		$('#hitokoto-content').css('display', '').text(data.hitokoto);
+		$('#hitokoto-from').css('display', '').text('——' + data.from);
+		$('#hitokoto-from').attr('title', '上传者: ' + data.creator);
+		$('#hitokoto-link').attr('href', 'https://hitokoto.cn/?id=' + data.id);
+		document.getElementById('hitokoto-like').onclick = function() { hitokotoLike(data.id, '#hitokoto-like'); }
+	});
+	$('.post-body').bind('copy', function() {
+		alert('本博客内容欢迎分享（将本博客的原文地址分享到其它网站），允许部分摘录并在醒目位置附上原文链接，未经许可禁止任何形式的全文转载。');
+	});
+</script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+  
+
+  
+  
+
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/pdfobject@2.1.1/pdfobject.min.js"></script>
+    <script type="text/javascript">
+    var options = {
+      pdfOpenParams: {
+        navpanes: 0,
+        toolbar: 0,
+        statusbar: 0,
+        pagemode: "thumbs",
+        view: "FitV"
+      },
+      PDFJS_URL: "/lib/pdf/web/viewer.html",
+      height: "500px"
+    };
+    $("#main a").each(function() {
+      var href = $(this).attr("href");
+      if (!href) return;
+      if (href.endsWith(".pdf") || href.endsWith(".pdf/")) {
+        var id = "pdf" + Math.floor(Math.random() * 10000);
+        $(this).after("<div id='" + id + "'></div>").remove();
+        PDFObject.embed(href, "#" + id, options);
+      }
+    });
+    </script>
+    <style>
+    .pdfobject-container {
+      position: relative;
+      overflow: auto;
+      width: 100%;
+      height: 500px;
+    }
+    </style>
+  
+
+
+</body>
+</html>

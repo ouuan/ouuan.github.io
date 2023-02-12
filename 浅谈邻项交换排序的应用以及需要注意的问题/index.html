@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=2019.9.22" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico?v=6.6.0">
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="邻项交换排序是一种常见的贪心算法，通过比较两个相邻元素交换前后的优劣对整个序列进行排序，从而使得这个序列成为题目所求的最优解。然而，邻项交换排序的应用有一些需要注意的地方，稍有不慎便会成为一个错误的算法。">
+<meta name="keywords" content="贪心,序理论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈邻项交换排序的应用以及需要注意的问题">
+<meta property="og:url" content="https://ouuan.github.io/浅谈邻项交换排序的应用以及需要注意的问题/index.html">
+<meta property="og:site_name" content="ouuan的博客">
+<meta property="og:description" content="邻项交换排序是一种常见的贪心算法，通过比较两个相邻元素交换前后的优劣对整个序列进行排序，从而使得这个序列成为题目所求的最优解。然而，邻项交换排序的应用有一些需要注意的地方，稍有不慎便会成为一个错误的算法。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-20T11:42:55.786Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈邻项交换排序的应用以及需要注意的问题">
+<meta name="twitter:description" content="邻项交换排序是一种常见的贪心算法，通过比较两个相邻元素交换前后的优劣对整个序列进行排序，从而使得这个序列成为题目所求的最优解。然而，邻项交换排序的应用有一些需要注意的地方，稍有不慎便会成为一个错误的算法。">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ouuan的博客" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://ouuan.github.io/浅谈邻项交换排序的应用以及需要注意的问题/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>浅谈邻项交换排序的应用以及需要注意的问题 | ouuan的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ouuan的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Codes change the world.</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-其它">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/others" rel="section"><i class="menu-item-icon fa fa-fw fa-wrench"></i> <br>其它</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ouuan.github.io/浅谈邻项交换排序的应用以及需要注意的问题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ouuan">
+      <meta itemprop="description" content="ouuan的博客">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ouuan的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">浅谈邻项交换排序的应用以及需要注意的问题
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-18 08:05:50" itemprop="dateCreated datePublished" datetime="2018-11-18T08:05:50+08:00">2018-11-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-12-20 19:42:55" itemprop="dateModified" datetime="2019-12-20T19:42:55+08:00">2019-12-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div class="row">
+    <embed src="/浅谈邻项交换排序的应用以及需要注意的问题/浅谈邻项交换排序的应用以及需要注意的问题.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+
+<blockquote>
+<p>邻项交换排序是一种常见的贪心算法，通过比较两个相邻元素交换前后的优劣对整个序列进行排序，从而使得这个序列成为题目所求的最优解。然而，邻项交换排序的应用有一些需要注意的地方，稍有不慎便会成为一个错误的算法。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h1><h2 id="例题引入"><a href="#例题引入" class="headerlink" title="例题引入"></a>例题引入</h2><h3 id="题目来源"><a href="#题目来源" class="headerlink" title="题目来源"></a>题目来源</h3><p><a href="https://www.luogu.org/problemnew/show/P1080" target="_blank" rel="noopener">NOIP2012提高组D1T2 国王游戏</a></p>
+<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>恰逢 $H$ 国国庆，国王邀请 $n$ 位大臣来玩一个有奖游戏。首先，他让每个大臣在左、右手上面分别写下一个整数，国王自己也在左、右手上各写一个整数。然后，让这 $n $位大臣排成一排，国王站在队伍的最前面。排好队后，所有的大臣都会获得国王奖赏的若干金币，每位大臣获得的金币数分别是：排在该大臣前面的所有人的左手上的数的乘积除以他自己右手上的数，然后向下取整得到的结果。</p>
+<p>国王不希望某一个大臣获得特别多的奖赏，所以他想请你帮他重新安排一下队伍的顺序，使得获得奖赏最多的大臣，所获奖赏尽可能的少。注意，国王的位置始终在队伍的最前面。</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h3><p>第一行包含一个整数 $n$ ，表示大臣的人数。</p>
+<p>第二行包含两个整数 $a$ 和 $b$ ，之间用一个空格隔开，分别表示国王左手和右手上的整数。</p>
+<p>接下来 $n$ 行，每行包含两个整数 $a$ 和 $b$ ，之间用一个空格隔开，分别表示每个大臣左手和右手上的整数。</p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>一个整数，表示重新排列后的队伍中获奖赏最多的大臣所获得的金币数。</p>
+<h3 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h3><p>对于 $20\%$ 的数据，有 $1\le n\le 10,0&lt;a,b&lt;8$；</p>
+<p>对于 $40\%$ 的数据，有 $1\le n\le 20,0&lt;a,b&lt;8$；</p>
+<p>对于 $60\%$ 的数据，有 $1\le n\le 100$；</p>
+<p>对于 $60\%$ 的数据，保证答案不超过 $10^9$；</p>
+<p>对于 $100\%$ 的数据，有 $1\le n\le 1000,0&lt;a,b&lt;10000$ 。</p>
+<h2 id="使用邻项交换排序解决问题"><a href="#使用邻项交换排序解决问题" class="headerlink" title="使用邻项交换排序解决问题"></a>使用邻项交换排序解决问题</h2><p>选取相邻的两个大臣 $i$ 和 $j$ （$j$ 此时在 $i$ 后一个），分别用 $a_i,b_i,a_j,b_j$ 表示这两位大臣左手上和右手上的数字，设这两位大臣前面的所有大臣左手上的数乘积为 $k$ 。</p>
+<p>此时，若调整这两名大臣的顺序，对前面和后面的大臣都不会造成影响，因此我们只要使得这两位大臣中获得较多奖赏的那位获得的奖赏尽量少即可。</p>
+<p>当 $i$ 在前 $j$ 在后时，这个值为 $\max(\frac k{b_i},\frac {k a_i}{b_j})$ 。</p>
+<p>当 $j$ 在前 $i$ 在后时，这个值为 $\max(\frac k{b_j},\frac {k a_j}{b_i})$ 。</p>
+<p>因此，若 $\max(\frac k{b_i},\frac {k a_i}{b_j})&gt;\max(\frac k{b_j},\frac {k a_j}{b_i})$ ，就需要交换 $i$ 和 $j$ 。</p>
+<p>实际上，由于 $\frac {k a_i}{b_j}\ge\frac k{b_j},\frac {k a_j}{b_i}\ge\frac k{b_i}$ ，只需比较 $\frac {k a_i}{b_j}$ 和 $\frac {k a_j}{b_i}$ ，也就只需比较 $\frac {a_i}{b_j}$ 和 $\frac {a_j}{b_i}$ ，即：若 $a_i b_i&gt;a_j b_j$，就要交换 $i$ 和 $j$ 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1010</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(Node&amp; y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> a*b&lt;y.a*y.b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; dc[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> n,ans,k;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;dc[i].a&gt;&gt;dc[i].b;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(dc+<span class="number">1</span>,dc+n+<span class="number">1</span>);</span><br><span class="line">    k=dc[<span class="number">0</span>].a;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        ans=max(ans,k/dc[i].b);</span><br><span class="line">        k*=dc[i].a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用以上代码即可得到60分，而AC此题需要使用高精度乘除法，不在本文讨论范围内。</p>
+<h1 id="使用邻项交换排序需要注意的问题"><a href="#使用邻项交换排序需要注意的问题" class="headerlink" title="使用邻项交换排序需要注意的问题"></a>使用邻项交换排序需要注意的问题</h1><h2 id="另一道例题"><a href="#另一道例题" class="headerlink" title="另一道例题"></a>另一道例题</h2><h3 id="题目来源-1"><a href="#题目来源-1" class="headerlink" title="题目来源"></a>题目来源</h3><p><a href="https://www.luogu.org/problemnew/show/P2123" target="_blank" rel="noopener">洛谷P2123 皇后游戏</a></p>
+<h3 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h3><p>皇后有 $n$ 位大臣，每位大臣的左右手上面分别写上了一个正整数。恰逢国庆节来临，皇后决定为 $n$ 位大臣颁发奖金，其中第 $i$ 位大臣所获得的奖金数目为第 $i－1$ 位大臣所获得奖金数目与前 $i$ 位大臣左手上的数的和的较大值再加上第 $i$ 位大臣右手上的数。</p>
+<p>形式化地讲：我们设第 $i$ 位大臣左手上的正整数为 $a_i$ ，右手上的正整数为 $b_i$ ，</p>
+<p>则第 $i$ 位大臣获得的奖金数目为 $c_i$ 可以表达为：</p>
+<p>$$c_i=\begin{cases}a_1+b_1 &amp; i=1\\\max(c_{i-1},\sum\limits_{j=1}^ia_j)+b_i &amp; 2\le i\le n\end{cases}$$</p>
+<p>当然，吝啬的皇后并不希望太多的奖金被发给大臣，所以她想请你来重新安排一下队伍的顺序，使得获得奖金最多的大臣，所获奖金数目尽可能的少。</p>
+<p>注意：重新安排队伍并不意味着一定要打乱顺序，我们允许不改变任何一位大臣的位置。</p>
+<h3 id="输入格式-1"><a href="#输入格式-1" class="headerlink" title="输入格式"></a>输入格式</h3><p>第一行包含一个正整数 $T$ ，表示测试数据的组数。</p>
+<p>接下来 $T$ 个部分，每个部分的第一行包含一个正整数 $n$ ，表示大臣的数目。</p>
+<p>每个部分接下来 $n$ 行中，每行两个正整数，分别为 $a_i$ 和 $b_i$ ，含义如上文所述。</p>
+<h3 id="输出格式-1"><a href="#输出格式-1" class="headerlink" title="输出格式"></a>输出格式</h3><p>共 $T$ 行，每行包含一个整数，表示获得奖金最多的大臣所获得的奖金数目。</p>
+<h3 id="数据范围-1"><a href="#数据范围-1" class="headerlink" title="数据范围"></a>数据范围</h3><p>对于全部测试数据满足：$T\le10,1\le n\le20000,1\le a_i,b_i\le10^9$ 。</p>
+<h2 id="尝试用邻项交换排序解决问题"><a href="#尝试用邻项交换排序解决问题" class="headerlink" title="尝试用邻项交换排序解决问题"></a>尝试用邻项交换排序解决问题</h2><p>还是选取相邻的两个大臣 $i$ 和 $j$ （$j$ 此时在 $i$ 后一个），交换 $i$ 和 $j$ 对前面的大臣无影响，对后面的大臣的影响在于排在后面的那个大臣获得的奖金，需要使之尽量小。</p>
+<p>设这两个大臣前面的所有大臣左手上的数之和为 $\rm sum$ ，这两个大臣的再往前一个大臣得到的奖金是 $\rm pre$ 。</p>
+<p>当 $i$ 在前 $j$ 在后时，这个值为 $\max(\max(\mathrm{pre},\mathrm{sum}+a_i)+b_i,\mathrm{sum}+a_i+a_j)+b_j$ 。</p>
+<p>当 $j$ 在前 $i$ 在后时，这个值为 $\max(\max(\mathrm{pre},\mathrm{sum}+a_j)+b_j,\mathrm{sum}+a_j+a_i)+b_i$ 。</p>
+<p>由于 $\max(x,y)+z=\max(x+z,y+z)$ ，需要比较的就是 $\max(\mathrm{pre}+b_i+b_j,\mathrm{sum}+a_i+b_i+b_j,\mathrm{sum}+a_i+a_j+b_j)$ 和 $\max(\mathrm{pre}+b_j+b_i,\mathrm{sum}+a_j+b_j+b_i,\mathrm{sum}+a_j+a_i+b_i)$ ，其中 $\mathrm{pre}+b_i+b_j=\mathrm{pre}+b_j+b_i$ ，需要比较的就是 $\max(\mathrm{sum}+a_i+b_i+b_j,\mathrm{sum}+a_i+a_j+b_j)$ 和 $\max(\mathrm{sum}+a_j+b_j+b_i,\mathrm{sum}+a_j+a_i+b_i)$ ，再用 $\mathrm{sum}+a_i+b_i+a_j+b_j$ 减去两边并变号，即：当 $\min(a_i,b_j)&gt;\min(a_j,b_i)$ 时，需要交换 $i$ 和 $j$。</p>
+<p>于是，可以写出以下代码，并在洛谷上AC此题：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">20010</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(Node&amp; y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> min(a,y.b)&lt;min(b,y.a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; dc[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans,sum,t,n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;t;</span><br><span class="line">    <span class="keyword">while</span> (t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;dc[i].a&gt;&gt;dc[i].b;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(dc+<span class="number">1</span>,dc+n+<span class="number">1</span>);</span><br><span class="line">        ans=sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            sum+=dc[i].a;</span><br><span class="line">            ans=max(ans,sum)+dc[i].b;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="hack数据"><a href="#hack数据" class="headerlink" title="hack数据"></a>hack数据</h2><p>事实上，上面的做法是错误的，无法通过下面这组数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">4</span><br><span class="line">1 1</span><br><span class="line">1 1</span><br><span class="line">3 5</span><br><span class="line">2 7</span><br><span class="line">4</span><br><span class="line">1 1</span><br><span class="line">3 5</span><br><span class="line">1 1</span><br><span class="line">2 7</span><br></pre></td></tr></table></figure>
+<p>这两组数据只有大臣给出的顺序不同，但上面的代码输出为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">16</span><br><span class="line">17</span><br></pre></td></tr></table></figure>
+<p>输出中间结果，可以发现，排列后的最终结果分别为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 1</span><br><span class="line">1 1</span><br><span class="line">2 7</span><br><span class="line">3 5</span><br></pre></td></tr></table></figure>
+<p>和</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 1</span><br><span class="line">3 5</span><br><span class="line">1 1</span><br><span class="line">2 7</span><br></pre></td></tr></table></figure>
+<p>这两种排列方式都满足 $\forall i\in [1,n),\min(a_i,b_{i+1})\le\min(a_{i+1},b_i)$，但第二种方式并不是最优解。具体原因将在下文分析。</p>
+<h2 id="严格弱序"><a href="#严格弱序" class="headerlink" title="严格弱序"></a>严格弱序</h2><h3 id="严格弱序简介"><a href="#严格弱序简介" class="headerlink" title="严格弱序简介"></a>严格弱序简介</h3><p>要知道为什么这种做法是错误的，首先需要了解严格弱序（strict weak ordering）。</p>
+<p>对于一个比较运算符（用“$&lt;$”表示此运算符，用“$\not&lt;$”表示不满足此运算符），若满足以下四个条件，则称其是满足严格弱序的：</p>
+<ol>
+<li>$x\not&lt;x$ （非自反性）</li>
+<li>若 $x&lt;y$，则 $y\not&lt;x$ （非对称性）</li>
+<li>若 $x&lt;y,y&lt;z$，则 $x&lt;z$ （传递性）</li>
+<li>若 $x\not&lt;y,y\not&lt;x,y\not&lt;z,z\not&lt;y$，则 $x\not&lt;z,z\not&lt;x$ （不可比性的传递性）</li>
+</ol>
+<p>而 C++ 标准库要求用于排序的运算符必须满足严格弱序：</p>
+<ol>
+<li><p>It has to be antisymmetric.</p>
+<p>This means that for operator $&lt;$: If $x &lt; y$ is true, then $y &lt; x$ is false.</p>
+<p>This means that for a predicate op(): If op(x,y) is true, then op(y,x) is false.</p>
+</li>
+<li><p>It has to be transitive.</p>
+<p>This means that for operator $&lt;$: If $x &lt; y$ is true and $y &lt; z$ is true, then $x &lt; z$ is true.</p>
+<p>This means that for a predicate op(): If op(x,y) is true and op(y,z) is true, then op(x,z)</p>
+<p>is true.</p>
+</li>
+<li><p>It has to be irreflexive.</p>
+<p>This means that for operator $&lt;$: $x &lt; x$ is always false.</p>
+<p>This means that for a predicate op(): op(x,x) is always false.</p>
+</li>
+<li><p>It has to have transitivity of equivalence, which means roughly: If a is equivalent to b and b is</p>
+<p>equivalent to c, then a is equivalent to c.</p>
+<p>This means that for operator $&lt;$: If $!(a&lt;b) \&amp;\&amp; !(b&lt;a)$ is true and $!(b&lt;c) \&amp;\&amp; !(c&lt;b)$ is true</p>
+<p>then $!(a&lt;c) \&amp;\&amp; !(c&lt;a)$ is true.</p>
+<p>This means that for a predicate op(): If op(a,b), op(b,a), op(b,c), and op(c,b) all yield</p>
+<p>false, then op(a,c) and op(c,a) yield false.</p>
+</li>
+</ol>
+<p>上述做法的判断条件满足传递性，但不满足不可比性的传递性。</p>
+<h3 id="满足传递性的证明"><a href="#满足传递性的证明" class="headerlink" title="满足传递性的证明"></a>满足传递性的证明</h3><p>命题：$\forall \begin{cases}\min(a_i,b_j)&lt;\min(a_j,b_i)\\\min(a_j,b_k)&lt;\min(a_k,b_j)\end{cases}$，有 $\min(a_i,b_k)&lt;\min(a_k,b_i)$。</p>
+<p>将上式拆解成逻辑式，即证：</p>
+<p>$\forall \begin{cases}\,(a_i&lt;a_j\lor b_j&lt;a_j)\land(a_i&lt;b_i\lor b_j&lt;b_i) \\\,(a_j&lt;a_k\lor b_k&lt;a_k)\land(a_j&lt;b_j\lor b_k&lt;b_j)\end{cases}$，有 $(a_i&lt;a_k\lor b_k&lt;a_k)\land(a_i&lt;b_i\lor b_k&lt;b_i)$。</p>
+<p>假设原命题不成立，即 $\exists\begin{cases}\,(a_i&lt;a_j\lor b_j&lt;a_j)\land(a_i&lt;b_i\lor b_j&lt;b_i)&amp;(1) \\\,(a_j&lt;a_k\lor b_k&lt;a_k)\land(a_j&lt;b_j\lor b_k&lt;b_j)&amp;(2) \\\,(a_i\ge a_k\land b_k\ge a_k)\lor(a_i\ge b_i\land b_k\ge b_i)&amp;(3)\end{cases}$</p>
+<p>分别讨论 $(3)$ 式成立的两种情况：</p>
+<p>若 $a_i\ge a_k\land b_k\ge a_k$，由 $(2)$ 式得 $a_j&lt;a_k$，进而推出 $a_j&lt;a_i$，再由 $(1)$ 式得 $b_j&lt;a_j$，再由 $(2)$ 式得到 $b_k&lt;b_j$，所以 $b_k&lt;b_j&lt;a_j&lt;a_k$，与 $b_k\ge a_k$ 矛盾，不成立。</p>
+<p>若 $a_i\ge b_i\land b_k\ge b_i$，与上面类似，由 $(1)$ 式得 $b_j&lt;b_i$，进而推出 $b_j&lt;b_k$，再由 $(2)$ 式得到 $a_j&lt;b_j$，再由 $(1)$ 式得到 $a_i&lt;a_j$，所以 $a_i&lt;a_j&lt;b_j&lt;b_i$，与 $a_i\ge b_i$ 矛盾，不成立。</p>
+<p>综上所述，假设不成立。</p>
+<p>所以，$P_{i,j}=\min(a_i,b_j)&lt;\min(a_j,b_i)$ 具有传递性。</p>
+<h3 id="不具有不可比性的传递性的证明"><a href="#不具有不可比性的传递性的证明" class="headerlink" title="不具有不可比性的传递性的证明"></a>不具有不可比性的传递性的证明</h3><p>命题：$\forall \begin{cases}\min(a_i,b_j)=\min(a_j,b_i)\\\min(a_j,b_k)=\min(a_k,b_j)\end{cases}$，有 $\min(a_i,b_k)=\min(a_k,b_i)$。</p>
+<p>很明显，当 $a_j=b_j$ 且都很小时存在反例，如：</p>
+<p>$$\begin{array}{c|c|c}&amp;a&amp;b\\i&amp;3&amp;5\\j&amp;1&amp;1\\k&amp;2&amp;7\end{array}$$</p>
+<p>$\begin{cases}\min(3,1)=\min(1,5)\\\min(1,7)=\min(2,1)\end{cases}$，但 $\min(3,7)\ne \min(2,5)$。</p>
+<p>这样的反例还有很多，所以，$P_{i,j}=\min(a_i,b_j)&lt;\min(a_j,b_i)$ 不具有不可比性的传递性。</p>
+<h3 id="为何会错"><a href="#为何会错" class="headerlink" title="为何会错"></a>为何会错</h3><p>简单地说，$P_{i,j}=\min(a_i,b_j)&lt;\min(a_j,b_i)$ 不满足严格弱序，不能作为 <code>std::sort</code> 的比较函数。</p>
+<p>究其原因，“不具有不可比性的传递性”意味着：将序列中若干个不可比的相邻元素对（在这种比较方式下即 $\min(a_i,b_{i+1})=\min(a_{i+1},b_i)$ 的 $i$ 和 $i+1$）互换后，可能会出现前面的元素“大于”后面的元素（在这种比较方式下即出现 $\min(a_i,b_{i+1})&gt;\min(a_{i+1},b_i)$），从而使得原先的排列方式不是最优的。</p>
+<h2 id="正确解法"><a href="#正确解法" class="headerlink" title="正确解法"></a>正确解法</h2><h3 id="更加完善的贪心解法"><a href="#更加完善的贪心解法" class="headerlink" title="更加完善的贪心解法"></a>更加完善的贪心解法</h3><p>比较相邻两项时，若 $\min(a_i,b_j)=\min(a_j,b_i)$ ，从全局来看，由于 $a$ 的前缀和对答案有一定的影响，把 $a$ 更小的放前面是更优的。从而可以得到这样一个解法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">20010</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a,b;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(Node&amp; y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> min(a,y.b)==min(b,y.a)?a&lt;y.a:min(a,y.b)&lt;min(b,y.a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; dc[N];</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans,sum,t,n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;t;</span><br><span class="line">    <span class="keyword">while</span> (t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;dc[i].a&gt;&gt;dc[i].b;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(dc+<span class="number">1</span>,dc+n+<span class="number">1</span>);</span><br><span class="line">        ans=sum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">        &#123;</span><br><span class="line">            sum+=dc[i].a;</span><br><span class="line">            ans=max(ans,sum)+dc[i].b;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个解法的正确性将在下文证明。</p>
+<h3 id="一个解法是否正确的判断方式"><a href="#一个解法是否正确的判断方式" class="headerlink" title="一个解法是否正确的判断方式"></a>一个解法是否正确的判断方式</h3><p>由上文的讨论可以得知，一个排序方式 $P_{i,j}$ 要是正解，需要满足两个条件：</p>
+<ol>
+<li><p>满足严格弱序。</p>
+</li>
+<li><p>$\forall P_{i,j}=true$，$\min(a_i,b_j)\le\min(a_j,b_i)$ 。</p>
+</li>
+</ol>
+<p>即，可以作为比较函数，且排序完成后任意交换相邻元素均不会使答案更优。</p>
+<p>从而可以写出下面的正解判断器：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>],b[<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (a[<span class="number">0</span>]=<span class="number">1</span>;a[<span class="number">0</span>]&lt;=<span class="number">6</span>;++a[<span class="number">0</span>])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (b[<span class="number">0</span>]=<span class="number">1</span>;b[<span class="number">0</span>]&lt;=<span class="number">6</span>;++b[<span class="number">0</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (cmp(<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"No irreflexivity:%d %d\n"</span>,a[<span class="number">0</span>],b[<span class="number">0</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (a[<span class="number">1</span>]=<span class="number">1</span>;a[<span class="number">1</span>]&lt;=<span class="number">6</span>;++a[<span class="number">1</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (b[<span class="number">1</span>]=<span class="number">1</span>;b[<span class="number">1</span>]&lt;=<span class="number">6</span>;++b[<span class="number">1</span>])</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> (cmp(<span class="number">0</span>,<span class="number">1</span>)&amp;&amp;min(a[<span class="number">0</span>],b[<span class="number">1</span>])&gt;min(a[<span class="number">1</span>],b[<span class="number">0</span>]))</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">"Not the best:%d %d %d %d\n"</span>,a[<span class="number">0</span>],b[<span class="number">0</span>],a[<span class="number">1</span>],b[<span class="number">1</span>]);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">for</span> (a[<span class="number">2</span>]=<span class="number">1</span>;a[<span class="number">2</span>]&lt;=<span class="number">6</span>;++a[<span class="number">2</span>])</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">for</span> (b[<span class="number">2</span>]=<span class="number">1</span>;b[<span class="number">2</span>]&lt;=<span class="number">6</span>;++b[<span class="number">2</span>])</span><br><span class="line">                        &#123;</span><br><span class="line">                            <span class="keyword">if</span> (cmp(<span class="number">0</span>,<span class="number">1</span>)&amp;&amp;cmp(<span class="number">1</span>,<span class="number">2</span>)&amp;&amp;!cmp(<span class="number">0</span>,<span class="number">2</span>))</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="built_in">printf</span>(<span class="string">"No transitivity:%d %d %d %d %d %d\n"</span>,a[<span class="number">0</span>],b[<span class="number">0</span>],a[<span class="number">1</span>],b[<span class="number">1</span>],a[<span class="number">2</span>],b[<span class="number">2</span>]);</span><br><span class="line">                            &#125;</span><br><span class="line">                            <span class="keyword">if</span> (!cmp(<span class="number">0</span>,<span class="number">1</span>)&amp;&amp;!cmp(<span class="number">1</span>,<span class="number">0</span>)&amp;&amp;!cmp(<span class="number">1</span>,<span class="number">2</span>)&amp;&amp;!cmp(<span class="number">2</span>,<span class="number">1</span>)&amp;&amp;(cmp(<span class="number">0</span>,<span class="number">2</span>)||cmp(<span class="number">2</span>,<span class="number">0</span>)))</span><br><span class="line">                            &#123;</span><br><span class="line">                                <span class="built_in">printf</span>(<span class="string">"No transitivity of incomparability:%d %d %d %d %d %d\n"</span>,a[<span class="number">0</span>],b[<span class="number">0</span>],a[<span class="number">1</span>],b[<span class="number">1</span>],a[<span class="number">2</span>],b[<span class="number">2</span>]);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> min(a[i],b[j])==min(a[j],b[i])?a[i]&lt;a[j]:min(a[i],b[j])&lt;min(a[j],b[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行程序，没有任何输出，说明上文所述的排序方式是一个正解。</p>
+<p>用其它排序方式替换 <code>cmp</code>，若没有任何输出即可作为本题的正确排序方式。</p>
+<p>下面是几种排序方式的例子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> min(a[i],b[j])==min(a[j],b[i])?b[i]&gt;b[j]:min(a[i],b[j])&lt;min(a[j],b[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出为空，是正解。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> min(a[i],b[j])&lt;min(a[j],b[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>共输出1694行，前10行如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">No transitivity of incomparability:1 2 1 1 2 1</span><br><span class="line">No transitivity of incomparability:1 2 1 1 2 2</span><br><span class="line">No transitivity of incomparability:1 2 1 1 2 3</span><br><span class="line">No transitivity of incomparability:1 2 1 1 2 4</span><br><span class="line">No transitivity of incomparability:1 2 1 1 2 5</span><br><span class="line">No transitivity of incomparability:1 2 1 1 2 6</span><br><span class="line">No transitivity of incomparability:1 2 1 1 3 1</span><br><span class="line">No transitivity of incomparability:1 2 1 1 3 2</span><br><span class="line">No transitivity of incomparability:1 2 1 1 3 3</span><br><span class="line">No transitivity of incomparability:1 2 1 1 3 4</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> min(a[i],b[j])==min(a[j],b[i])?a[i]&gt;a[j]:min(a[i],b[j])&lt;min(a[j],b[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>共输出280行，前10行如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">No transitivity:1 2 2 1 1 1</span><br><span class="line">No transitivity:1 2 2 2 1 1</span><br><span class="line">No transitivity:1 2 2 3 1 1</span><br><span class="line">No transitivity:1 2 2 4 1 1</span><br><span class="line">No transitivity:1 2 2 5 1 1</span><br><span class="line">No transitivity:1 2 2 6 1 1</span><br><span class="line">No transitivity:1 2 3 1 1 1</span><br><span class="line">No transitivity:1 2 3 2 1 1</span><br><span class="line">No transitivity:1 2 3 3 1 1</span><br><span class="line">No transitivity:1 2 3 4 1 1</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> min(a[i],b[j])&lt;=min(a[j],b[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>共输出883行，前10行如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">No irreflexivity:1 1</span><br><span class="line">No irreflexivity:1 2</span><br><span class="line">No irreflexivity:1 3</span><br><span class="line">No irreflexivity:1 4</span><br><span class="line">No irreflexivity:1 5</span><br><span class="line">No irreflexivity:1 6</span><br><span class="line">No irreflexivity:2 1</span><br><span class="line">No transitivity:2 1 1 1 1 2</span><br><span class="line">No transitivity:2 1 1 1 1 3</span><br><span class="line">No transitivity:2 1 1 1 1 4</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在可以通过比较相邻两项得出交换或不交换一定不会更差时，可以通过邻项交换排序的方式来得到最优解。</p>
+<p>邻项交换排序的比较函数需要满足严格弱序，并且排序完成后任意交换相邻元素都不会更优。</p>
+<p>使用这种算法时，一定要注意以上两点，才能得到真正正确的算法。</p>
+<hr>
+<p>最后再把我去雅礼集训的时候水题选讲的 slide 放上来好了..（还附赠一道由乃题）</p>
+
+
+	<div class="row">
+    <embed src="水题选讲_ouuan.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/贪心/" rel="tag"><i class="fa fa-tag"></i> 贪心</a>
+          
+            <a href="/tags/序理论/" rel="tag"><i class="fa fa-tag"></i> 序理论</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/NOIp2018提高组游记/" rel="next" title="NOIp2018提高组游记">
+                <i class="fa fa-chevron-left"></i> NOIp2018提高组游记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/树上背包的上下界优化/" rel="prev" title="树上背包的上下界优化">
+                树上背包的上下界优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  <div class="comments">
+    <script src="https://utteranc.es/client.js" repo="ouuan/hexo-blog-utterances" issue-term="title" label="utterances" theme="github-light" crossorigin="anonymous" async>
+    </script>
+  </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+
+    <div class="sidebar-inner">
+      <div class="hitokoto-block">
+        <div class="hitokoto-inner hitokoto-comma hitokoto-left-comma">“</div>
+        <div class="hitokoto-inner hitokoto-content"><b><span><span id="hitokoto-content"></span></span></b></div>
+        <div class="hitokoto-inner hitokoto-comma hitokoto-right-comma">”</div>
+      </div>
+      <div id="hitokoto-from"></div>
+      <div class="hitokoto-bottom">
+        <a id="hitokoto-link" href="https://hitokoto.cn/">Hitokoto</a>&nbsp;&nbsp;&nbsp;
+        <button id="hitokoto-like" title="通过给句子点赞可以增加其出现概率，由于技术原因并不能在博客中显示赞数与点赞是否成功的信息（红心表示成功发送点赞请求，但如果同 IP 重复点赞就会失败），如需查看可以点击左边的“Hitokoto”链接。"><i class="menu-item-icon fa fa-fw fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div style="height: 15px"></div>
+
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="ouuan">
+            
+              <p class="site-author-name" itemprop="name">ouuan</p>
+              <p class="site-description motion-element" itemprop="description">ouuan的博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">90</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">84</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/ouuan" title="GitHub &rarr; https://github.com/ouuan" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.luogu.org/space/show?uid=49742" title="洛谷 &rarr; https://www.luogu.org/space/show?uid=49742" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>洛谷</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.codeforces.com/profile/ouuan" title="Codeforces &rarr; https://www.codeforces.com/profile/ouuan" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>Codeforces</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://space.bilibili.com/11067182" title="b站 &rarr; https://space.bilibili.com/11067182" rel="noopener" target="_blank"><i class="fa fa-fw fa-tv"></i>b站</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://EternalAlexander.github.io/" title="https://EternalAlexander.github.io/" rel="noopener" target="_blank">EternalAlexander</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ustze.cn/" title="http://www.ustze.cn/" rel="noopener" target="_blank">ustze</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.xht37.com/" title="https://www.xht37.com/" rel="noopener" target="_blank">xht37</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/PinkRabbit/" title="https://www.cnblogs.com/PinkRabbit/" rel="noopener" target="_blank">PinkRabbit</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://qaq-am.com/" title="https://qaq-am.com/" rel="noopener" target="_blank">lk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.luogu.com.cn/blog/Sooke/" title="https://www.luogu.com.cn/blog/Sooke/" rel="noopener" target="_blank">Sooke</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/LJC00118/" title="https://www.cnblogs.com/LJC00118/" rel="noopener" target="_blank">wxw</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://memset0.cn/" title="https://memset0.cn/" rel="noopener" target="_blank">memset0</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://aprilgrimoire.tk/" title="http://aprilgrimoire.tk/" rel="noopener" target="_blank">AprilGrimoire</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zbww.cf/" title="https://zbww.cf/" rel="noopener" target="_blank">zbw</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#算法简介"><span class="nav-number">1.</span> <span class="nav-text">算法简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例题引入"><span class="nav-number">1.1.</span> <span class="nav-text">例题引入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目来源"><span class="nav-number">1.1.1.</span> <span class="nav-text">题目来源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.2.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入格式"><span class="nav-number">1.1.3.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出格式"><span class="nav-number">1.1.4.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据范围"><span class="nav-number">1.1.5.</span> <span class="nav-text">数据范围</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用邻项交换排序解决问题"><span class="nav-number">1.2.</span> <span class="nav-text">使用邻项交换排序解决问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用邻项交换排序需要注意的问题"><span class="nav-number">2.</span> <span class="nav-text">使用邻项交换排序需要注意的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#另一道例题"><span class="nav-number">2.1.</span> <span class="nav-text">另一道例题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目来源-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">题目来源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述-1"><span class="nav-number">2.1.2.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入格式-1"><span class="nav-number">2.1.3.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出格式-1"><span class="nav-number">2.1.4.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据范围-1"><span class="nav-number">2.1.5.</span> <span class="nav-text">数据范围</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#尝试用邻项交换排序解决问题"><span class="nav-number">2.2.</span> <span class="nav-text">尝试用邻项交换排序解决问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hack数据"><span class="nav-number">2.3.</span> <span class="nav-text">hack数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#严格弱序"><span class="nav-number">2.4.</span> <span class="nav-text">严格弱序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#严格弱序简介"><span class="nav-number">2.4.1.</span> <span class="nav-text">严格弱序简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#满足传递性的证明"><span class="nav-number">2.4.2.</span> <span class="nav-text">满足传递性的证明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不具有不可比性的传递性的证明"><span class="nav-number">2.4.3.</span> <span class="nav-text">不具有不可比性的传递性的证明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为何会错"><span class="nav-number">2.4.4.</span> <span class="nav-text">为何会错</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正确解法"><span class="nav-number">2.5.</span> <span class="nav-text">正确解法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#更加完善的贪心解法"><span class="nav-number">2.5.1.</span> <span class="nav-text">更加完善的贪心解法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个解法是否正确的判断方式"><span class="nav-number">2.5.2.</span> <span class="nav-text">一个解法是否正确的判断方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-battery-full"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ouuan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+<script type="text/javascript">
+	function hitokotoLike(x, y) {
+		$.ajax({
+		    url: "https://hitokoto.cn/Like",
+		    type: "GET",
+		    data: "ID=" + x,
+		    dataType: "jsonp",
+		    success: function(data) {
+		        alert(data.message);
+		        $(y).css('color', 'red');
+		    },
+		    error: function() {
+		        console.log('Hitokoto Like Request Error.');
+		        $(y).css('color', 'red');
+		    }
+		});
+	}
+	$.get('https://v1.hitokoto.cn/?c=a', function(data) {
+		$('#hitokoto-content').css('display', '').text(data.hitokoto);
+		$('#hitokoto-from').css('display', '').text('——' + data.from);
+		$('#hitokoto-from').attr('title', '上传者: ' + data.creator);
+		$('#hitokoto-link').attr('href', 'https://hitokoto.cn/?id=' + data.id);
+		document.getElementById('hitokoto-like').onclick = function() { hitokotoLike(data.id, '#hitokoto-like'); }
+	});
+	$('.post-body').bind('copy', function() {
+		alert('本博客内容欢迎分享（将本博客的原文地址分享到其它网站），允许部分摘录并在醒目位置附上原文链接，未经许可禁止任何形式的全文转载。');
+	});
+</script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+  
+
+  
+  
+
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/pdfobject@2.1.1/pdfobject.min.js"></script>
+    <script type="text/javascript">
+    var options = {
+      pdfOpenParams: {
+        navpanes: 0,
+        toolbar: 0,
+        statusbar: 0,
+        pagemode: "thumbs",
+        view: "FitV"
+      },
+      PDFJS_URL: "/lib/pdf/web/viewer.html",
+      height: "500px"
+    };
+    $("#main a").each(function() {
+      var href = $(this).attr("href");
+      if (!href) return;
+      if (href.endsWith(".pdf") || href.endsWith(".pdf/")) {
+        var id = "pdf" + Math.floor(Math.random() * 10000);
+        $(this).after("<div id='" + id + "'></div>").remove();
+        PDFObject.embed(href, "#" + id, options);
+      }
+    });
+    </script>
+    <style>
+    .pdfobject-container {
+      position: relative;
+      overflow: auto;
+      width: 100%;
+      height: 500px;
+    }
+    </style>
+  
+
+
+</body>
+</html>

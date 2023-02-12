@@ -1,0 +1,269 @@
+<head>
+    <title>Huawei Honorcup Marathon 2</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+    <script type="text/javascript">
+        var answer = [];
+        var cur = 0;
+        var lastX = -1;
+        var lastY = -1;
+        var answerStr = '';
+        function drawBlock(x, y) {
+            var p = Number($('#p-input')[0].value);
+            var m = Number($('#m-input')[0].value);
+            var rawtx = $('#raw-canvas')[0].getContext('2d');
+            var showtx = $('#show-canvas')[0].getContext('2d');
+            showtx.putImageData(rawtx.getImageData(answer[y * m + x] % m * p, Math.floor(answer[y * m + x] / m) * p, p, p), x * p, y * p);
+        }
+        function showAnswer() {
+            var m = Number($('#m-input')[0].value);
+            var text = '';
+            for (var i = 0; i < m; ++i) {
+                for (var j = 0; j < m; ++j) {
+                    text += (String(answer[i * m + j]) + ',     ').substr(0, 5);
+                }
+                text += '\n';
+            }
+            $('#answer-input').css('height', String(m * 18) + 'px');
+            $('#answer-input').css('width', String(m * 37.5) + 'px');
+            $('#answer-input')[0].value = text;
+        }
+        function submit() {
+            var id = $('#image-id')[0].value;
+            var p = Number($('#p-input')[0].value);
+            var m = Number($('#m-input')[0].value);
+            var images = $('#images-upload')[0].files;
+            var imageFile = -1;
+            for (var i = 0; i < images.length; ++i) {
+                if (images[i].name == id + '.png') {
+                    imageFile = images[i];
+                    break;
+                }
+            }
+            if (imageFile == -1) {
+                alert("Can't find the image " + id + ", please upload it first.");
+                return;
+            }
+            answer = [];
+            var lines = answerStr.split('\n');
+            for (var i = 0; i < lines.length; ++i) {
+                if (lines[i].substr(0, (id + '.png').length) == id + '.png') {
+                    var answerLine = lines[i + 1].split(' ');
+                    if (answerLine.length < m * m) continue;
+                    for (var j = 0; j < m * m; ++j) {
+                        answer.push(Number(answerLine[j]));
+                    }
+                    break;
+                }
+            }
+            if (answer.length != m * m) {
+                alert("Can't find the answer, use identity permutation instead.");
+                answer = []
+                for (var i = 0; i < m * m; ++i) {
+                    answer.push(i);
+                }
+            }
+            showAnswer();
+            var imageReader = new FileReader();
+            imageReader.onload = function (e) {
+                cur = 0;
+                var img = new Image;
+                img.src = this.result;
+                img.onload = function () {
+                    if (img.width != m * p) {
+                        alert('Wrong width!');
+                        return;
+                    } else if (img.height != m * p) {
+                        alert('Wrong height!');
+                        return;
+                    }
+                    $('#raw-canvas')[0].getContext('2d').drawImage(img, 0, 0);
+                    var rawtx = $('#raw-canvas')[0].getContext('2d');
+                    var showtx = $('#show-canvas')[0].getContext('2d');
+                    for (var i = 0; i < m; ++i) {
+                        for (var j = 0; j < m; ++j) {
+                            drawBlock(i, j);
+                        }
+                    }
+                }
+            }
+            imageReader.readAsDataURL(imageFile);
+        }
+        $(function () {
+            $('#answer-upload').bind('change',
+                function () {
+                    var answerFile = $('#answer-upload')[0].files[0];
+                    var answerReader = new FileReader();
+                    answerReader.onload = function (e) {
+                        answerStr = this.result;
+                    };
+                    answerReader.readAsText(answerFile);
+                });
+            $('#image-id, #p-input, #m-input').bind('keypress',
+                function (e) {
+                    if (e.keyCode == 13) {
+                        submit();
+                    }
+                });
+            $('#answer-input').bind('keypress',
+                function (e) {
+                    if (e.keyCode == 13) {
+                        cur = 0;
+                        var m = Number($('#m-input')[0].value);
+                        var answerStr = this.value.split(',');
+                        if (answerStr.length < m * m) return;
+                        answer = []
+                        for (var j = 0; j < m * m; ++j) {
+                            answer.push(Number(answerStr[j]));
+                        }
+                        for (var i = 0; i < m; ++i) {
+                            for (var j = 0; j < m; ++j) {
+                                drawBlock(i, j);
+                            }
+                        }
+                    }
+                });
+            $('#submit-button').bind('click',
+                function () {
+                    submit();
+                });
+            $('#pre-image').bind('click',
+                function () {
+                    $('#image-id')[0].value = String(Number($('#image-id')[0].value) - 1);
+                    submit();
+                });
+            $('#next-image').bind('click',
+                function () {
+                    $('#image-id')[0].value = String(Number($('#image-id')[0].value) + 1);
+                    submit();
+                });
+            $('#show-canvas').bind('click',
+                function (e) {
+                    var m = Number($('#m-input')[0].value);
+                    var p = Number($('#p-input')[0].value);
+                    var rect = this.getBoundingClientRect();
+                    var x = Math.floor((e.clientX - rect.left * (this.width / rect.width)) / p);
+                    var y = Math.floor((e.clientY - rect.top * (this.height / rect.height)) / p);
+                    if (cur == 0) {
+                        cur = 1;
+                        lastX = x;
+                        lastY = y;
+                        var ctx = $('#show-canvas')[0].getContext('2d');
+                        var col = ctx.getImageData(x * p, y * p, p, p);
+                        for (var i = 0; i < 2; ++i) {
+                            for (var j = 0; j < p; ++j) {
+                                col.data[(i * p + j) * 4] = 255;
+                                col.data[(i * p + j) * 4 + 1] = 0;
+                                col.data[(i * p + j) * 4 + 2] = 0;
+                                col.data[(i * p + j) * 4 + 3] = 255;
+                                col.data[((p - i - 1) * p + j) * 4] = 255;
+                                col.data[((p - i - 1) * p + j) * 4 + 1] = 0;
+                                col.data[((p - i - 1) * p + j) * 4 + 2] = 0;
+                                col.data[((p - i - 1) * p + j) * 4 + 3] = 255;
+                                col.data[(j * p + i) * 4] = 255;
+                                col.data[(j * p + i) * 4 + 1] = 0;
+                                col.data[(j * p + i) * 4 + 2] = 0;
+                                col.data[(j * p + i) * 4 + 3] = 255;
+                                col.data[(j * p + p - i - 1) * 4] = 255;
+                                col.data[(j * p + p - i - 1) * 4 + 1] = 0;
+                                col.data[(j * p + p - i - 1) * 4 + 2] = 0;
+                                col.data[(j * p + p - i - 1) * 4 + 3] = 255;
+                            }
+                        }
+                        ctx.putImageData(col, x * p, y * p);
+                    } else {
+                        cur = 0;
+                        var t = answer[y * m + x];
+                        answer[y * m + x] = answer[lastY * m + lastX];
+                        answer[lastY * m + lastX] = t;
+                        showAnswer();
+                        drawBlock(x, y);
+                        drawBlock(lastX, lastY);
+                    }
+                });
+            $('#save-answer').bind('click',
+                function () {
+                    var id = $('#image-id')[0].value;
+                    var m = Number($('#m-input')[0].value);
+                    var lines = answerStr.split('\n');
+                    var flag = false;
+                    answerStr = '';
+                    for (var i = 0; i < lines.length; ++i) {
+                        answerStr += lines[i] + '\n';
+                        if (lines[i].substr(0, (id + '.png').length) == id + '.png') {
+                            ++i;
+                            flag = true;
+                            for (var j = 0; j < m * m; ++j) {
+                                answerStr += String(answer[j]) + (j == m * m - 1 ? '\n' : ' ');
+                            }
+                        }
+                    }
+                    if (!flag) {
+                        answerStr += id + '.png\n';
+                        for (var j = 0; j < m * m; ++j) {
+                            answerStr += String(answer[j]) + (j == m * m - 1 ? '\n' : ' ');
+                        }
+                    }
+                    alert('Answer for the image ' + id + ' has been saved successfully.');
+                });
+            $('#download-answer').bind('click',
+                function () {
+                    var urlObject = window.URL || window.webkitURL || window;
+                    var exportBlob = new Blob([answerStr]);
+                    var saveLink = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+                    saveLink.href = urlObject.createObjectURL(exportBlob);
+                    saveLink.download = 'answer.out';
+                    var ev = document.createEvent('MouseEvents');
+                    ev.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+                    saveLink.dispatchEvent(ev);
+                });
+        });
+    </script>
+</head>
+
+<body>
+    <p>
+        Image Files:
+        <input type="file" multiple id="images-upload">
+    </p>
+    <p>
+        Answer File:
+        <input type="file" id="answer-upload">
+    </p>
+    <p>
+        Image ID:
+        <input type="number" id="image-id" style="width:100px;">
+    </p>
+    <p>
+        p:
+        <input type="text" id="p-input" style="width:60px;">
+        &nbsp; m:
+        <input type="text" id="m-input" style="width:60px;">
+    </p>
+    <p>
+        Answer:
+        <textarea id="answer-input"></textarea>
+    </p>
+    <p>
+        <button id="submit-button">
+            Submit
+        </button>
+        <button id="pre-image">
+            Pre
+        </button>
+        <button id="next-image">
+            Next
+        </button>
+        <button id="save-answer">
+            Save
+        </button>
+        <button id="download-answer">
+            Download
+        </button>
+    </p>
+    <canvas id="raw-canvas" width=512 height=512 style="display: none;">
+    </canvas>
+    <canvas id="show-canvas" width=512 height=512>
+    </canvas>
+</body>

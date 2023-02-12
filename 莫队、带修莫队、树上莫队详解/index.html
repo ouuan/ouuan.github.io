@@ -1,0 +1,1890 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=2019.9.22" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico?v=6.6.0">
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="这几天学习了莫队算法，试着写一篇比较详细的莫队教程吧… 普通莫队简介莫队是一种基于分块思想的离线算法，用于解决区间问题，适用范围如下：  只有询问没有修改。  允许离线。  在已知询问 $[l,r]$ 答案的情况下可以 $O(1)$  得到 $[l,r-1],[l,r+1],[l-1,r],[l+1,r]$ 的答案。   满足以上三个条件就可以在 $O(n\sqrt{m}+m\log m)​$ 的">
+<meta name="keywords" content="离线算法,莫队">
+<meta property="og:type" content="article">
+<meta property="og:title" content="莫队、带修莫队、树上莫队详解">
+<meta property="og:url" content="https://ouuan.github.io/莫队、带修莫队、树上莫队详解/index.html">
+<meta property="og:site_name" content="ouuan的博客">
+<meta property="og:description" content="这几天学习了莫队算法，试着写一篇比较详细的莫队教程吧… 普通莫队简介莫队是一种基于分块思想的离线算法，用于解决区间问题，适用范围如下：  只有询问没有修改。  允许离线。  在已知询问 $[l,r]$ 答案的情况下可以 $O(1)$  得到 $[l,r-1],[l,r+1],[l-1,r],[l+1,r]$ 的答案。   满足以上三个条件就可以在 $O(n\sqrt{m}+m\log m)​$ 的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ouuan.github.io/莫队、带修莫队、树上莫队详解/dxmdfkdx.jpg">
+<meta property="og:updated_time" content="2019-12-01T10:12:21.058Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="莫队、带修莫队、树上莫队详解">
+<meta name="twitter:description" content="这几天学习了莫队算法，试着写一篇比较详细的莫队教程吧… 普通莫队简介莫队是一种基于分块思想的离线算法，用于解决区间问题，适用范围如下：  只有询问没有修改。  允许离线。  在已知询问 $[l,r]$ 答案的情况下可以 $O(1)$  得到 $[l,r-1],[l,r+1],[l-1,r],[l+1,r]$ 的答案。   满足以上三个条件就可以在 $O(n\sqrt{m}+m\log m)​$ 的">
+<meta name="twitter:image" content="https://ouuan.github.io/莫队、带修莫队、树上莫队详解/dxmdfkdx.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ouuan的博客" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://ouuan.github.io/莫队、带修莫队、树上莫队详解/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>莫队、带修莫队、树上莫队详解 | ouuan的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ouuan的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Codes change the world.</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-其它">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/others" rel="section"><i class="menu-item-icon fa fa-fw fa-wrench"></i> <br>其它</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ouuan.github.io/莫队、带修莫队、树上莫队详解/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ouuan">
+      <meta itemprop="description" content="ouuan的博客">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ouuan的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">莫队、带修莫队、树上莫队详解
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-09-30 17:19:58" itemprop="dateCreated datePublished" datetime="2018-09-30T17:19:58+08:00">2018-09-30</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-12-01 18:12:21" itemprop="dateModified" datetime="2019-12-01T18:12:21+08:00">2019-12-01</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这几天学习了莫队算法，试着写一篇比较详细的莫队教程吧…</p>
+<h1 id="普通莫队"><a href="#普通莫队" class="headerlink" title="普通莫队"></a>普通莫队</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>莫队是一种基于分块思想的离线算法，用于解决区间问题，适用范围如下：</p>
+<ol>
+<li><p>只有询问没有修改。</p>
+</li>
+<li><p>允许离线。</p>
+</li>
+<li><p>在已知询问 $[l,r]$ 答案的情况下可以 $O(1)$  得到 $[l,r-1],[l,r+1],[l-1,r],[l+1,r]$ 的答案。</p>
+</li>
+</ol>
+<p>满足以上三个条件就可以在 $O(n\sqrt{m}+m\log m)​$ 的时间复杂度下得到每个询问的解。</p>
+<a id="more"></a>
+<h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h2><p>莫队的精髓就在于通过对询问进行排序，并把询问的结果作为下一个询问求解的基础，使得暴力求解的复杂度得到保证。</p>
+<p>上文中“适用范围”的第三点“<strong>在已知询问 $[l,r]$ 答案的情况下可以 $O(1)$  得到 $[l,r-1],[l,r+1],[l-1,r],[l+1,r]$ 的答案</strong>”即是“<strong>把询问的结果作为下一个询问求解的基础</strong>”的方法。</p>
+<h2 id="例题解析"><a href="#例题解析" class="headerlink" title="例题解析"></a>例题解析</h2><p>例：<a href="https://www.luogu.org/problemnew/show/P1494" target="_blank" rel="noopener">[国家集训队]小Z的袜子</a></p>
+<p>在这题中，用 $cnt_i$ 表示当前处理的区间内颜色为i的袜子出现的次数，用 $\mathrm{len}$ 表示当前处理的区间的长度，用 $x$ 表示新增的那只袜子的颜色。</p>
+<p>以已知区间 $[l,r]$ 的答案求解区间 $[l,r+1]$ 为例。分别处理分子和分母：</p>
+<ul>
+<li>分母为任选两只袜子的组合总数，原先是 $\frac{\mathrm{len}(\mathrm{len}-1)}{2}$，现在是 $\frac{\mathrm{len}(\mathrm{len}+1)}{2}$，增加了 $\mathrm{len}$ 。</li>
+<li>分子为两只袜子颜色相同的组合总数，比原来增加了 $cnt_x$，即新增的这只袜子和原本就在当前区间内的相同颜色的袜子的组合。</li>
+</ul>
+<p>因此，将一只颜色为x的袜子计入答案的函数就可以写出来了：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//fz代表分子，fm代表分母</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    fz+=cnt[x];</span><br><span class="line">    ++cnt[x];</span><br><span class="line">    fm+=len;</span><br><span class="line">    ++len;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同理可以写出将一只颜色为x的袜子移出答案的函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    --cnt[x];</span><br><span class="line">    fz-=cnt[x];</span><br><span class="line">    --len;</span><br><span class="line">    fm-=len;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>于是，我们就可以得到一个暴力的算法：用 $l$ 和 $r$ 分别记录当前区间的两个端点，然后用下面这段代码来更新答案（q[i].l,q[i].r代表正在处理的询问的两个端点，col[p]代表第 $p$ 只袜子的颜色）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (l&gt;q[i].l)</span><br><span class="line">&#123;</span><br><span class="line">    add(col[--l]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> (r&lt;q[i].r)</span><br><span class="line">&#123;</span><br><span class="line">    add(col[++r]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> (l&lt;q[i].l) </span><br><span class="line">&#123;</span><br><span class="line">    del(col[l++]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span> (r&gt;q[i].r)</span><br><span class="line">&#123;</span><br><span class="line">    del(col[r--]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然而，这个算法的时间复杂度是 $O(nm)$ 的（因为最坏情况下每次 $l$ 和 $r$ 两个指针都要走 $O(n)$ 的距离，而一共有 $m$ 次询问），和暴力完全一样甚至跑的更慢。</p>
+<h2 id="优化复杂度"><a href="#优化复杂度" class="headerlink" title="优化复杂度"></a>优化复杂度</h2><p>别忘了，之前我说过，莫队的精髓就在于通过对询问进行排序，使得暴力求解的复杂度得到保证。</p>
+<p>我们的目的是使 $l$ 和 $r$ 两个指针走过的总距离尽量的小，这时候就要用到分块的思想了。</p>
+<p>把整个区间 $[1,n]$ 分成若干块，以询问的左端点所在块为第一关键字，以询问的右端点大小为第二关键字，对询问进行排序，那么：</p>
+<ul>
+<li>对于同一块的询问，$l$ 指针每次最多移动块的大小，$r$ 指针的移动则是单调的，总共移动最多 $n$ 。</li>
+<li>对于不同块的询问，$l$ 每次换块时最多移动两倍块的大小， $r$ 每次换块时最多移动 $n$  。</li>
+</ul>
+<p>总结：（用 $B$ 表示块的大小）$l$ 指针每次移动 $O(B)$，$r$ 指针每块移动 $O(n)​$ 。</p>
+<p>所以：</p>
+<ul>
+<li>$l$ 的移动次数最多为询问数 $\times$ 块的大小，即 $O(mB)$ 。</li>
+<li>$r$ 的移动次数最多为块的个数 $\times$ 总区间大小，即 $O(n^2/B)$ 。</li>
+</ul>
+<p>因此，总移动次数为 $O(mB+n^2/B)$ 。</p>
+<blockquote>
+<p>实际上，“换块”这一事件发生的次数并不多，因此即便换块复杂度达到 $\mathcal O(n)$ 也是不会影响复杂度的。只不过一般情况下块是相邻的，换块复杂度就比较小。</p>
+<p>—— update on 2019.7.27</p>
+</blockquote>
+<p>没错，这就是个双勾函数，所以当 $B=\sqrt{\frac{n^2}{m}}$ 即 $\frac{n}{\sqrt{m}}$ 时复杂度最小，为 $O(n\sqrt{m})$ 。</p>
+<p>剩下的最后一个问题：初始的当前区间是什么？</p>
+<p>只要任意指定一个空区间就好了，如 $l=1,r=0$ 。</p>
+<p>所以，整个莫队算法就可以概括为：</p>
+<ol>
+<li><p>将询问记录下来。</p>
+</li>
+<li><p>以 $\frac{n}{\sqrt{m}}$ 为块的大小，以询问的左端点所在块为第一关键字，以询问的右端点大小为第二关键字，对询问进行排序。</p>
+</li>
+<li><p>暴力处理每个询问。</p>
+</li>
+<li><p>输出答案。</p>
+</li>
+</ol>
+<p>总的复杂度为 $O(n\sqrt{m}+m\log m)$ 。</p>
+<p>P.S. 网上很多教程说分块大小取 $\sqrt{n}$ 最优，复杂度为 $O(n\sqrt{n})$，这是不严谨的，当n、m差别较大时使用 $\sqrt{n}$ 作为分块大小效率会明显偏低。</p>
+<h2 id="例题代码"><a href="#例题代码" class="headerlink" title="例题代码"></a>例题代码</h2><p><a href="https://www.luogu.org/problemnew/show/P1494" target="_blank" rel="noopener">[国家集训队]小Z的袜子</a> AC代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">50010</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m,B,fz,fm,len,col[N],cnt[N],ans[N][<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Query</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l,r,id;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(Query&amp; b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> l/B==b.l/B?r&lt;b.r:l&lt;b.l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; q[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,l=<span class="number">1</span>,r=<span class="number">0</span>,g;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line"></span><br><span class="line">    B=n/<span class="built_in">sqrt</span>(m);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;col[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;m;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;q[i].l&gt;&gt;q[i].r;</span><br><span class="line">        q[i].id=i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sort(q,q+m);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;m;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (q[i].l==q[i].r)</span><br><span class="line">        &#123;</span><br><span class="line">            ans[q[i].id][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">            ans[q[i].id][<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (l&gt;q[i].l)</span><br><span class="line">        &#123;</span><br><span class="line">            add(col[--l]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (r&lt;q[i].r)</span><br><span class="line">        &#123;</span><br><span class="line">            add(col[++r]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (l&lt;q[i].l) </span><br><span class="line">        &#123;</span><br><span class="line">            del(col[l++]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (r&gt;q[i].r)</span><br><span class="line">        &#123;</span><br><span class="line">            del(col[r--]);</span><br><span class="line">        &#125;</span><br><span class="line">        g=gcd(fz,fm);</span><br><span class="line">        ans[q[i].id][<span class="number">0</span>]=fz/g;</span><br><span class="line">        ans[q[i].id][<span class="number">1</span>]=fm/g;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;m;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d/%d\n"</span>,ans[i][<span class="number">0</span>],ans[i][<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    fz+=cnt[x];</span><br><span class="line">    ++cnt[x];</span><br><span class="line">    fm+=len;</span><br><span class="line">    ++len;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    --cnt[x];</span><br><span class="line">    fz-=cnt[x];</span><br><span class="line">    --len;</span><br><span class="line">    fm-=len;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> b==<span class="number">0</span>?a:gcd(b,a%b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="其它例题"><a href="#其它例题" class="headerlink" title="其它例题"></a>其它例题</h2><p><a href="https://www.luogu.org/problemnew/show/P2709" target="_blank" rel="noopener">小B的询问</a></p>
+<h1 id="带修莫队"><a href="#带修莫队" class="headerlink" title="带修莫队"></a>带修莫队</h1><p>前面说过，普通的莫队只能解决没有修改的问题，那么<a href="https://www.luogu.org/problemnew/show/P1903" target="_blank" rel="noopener">带修改的问题</a>怎么解决呢？带修莫队就是一种支持单点修改的莫队算法。</p>
+<h2 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h2><p>还是对询问进行排序，每个询问除了左端点和右端点还要记录这次询问是在第几次修改之后（时间），以左端点所在块为第一关键字，以右端点所在块为第二关键字，以时间为第三关键字进行排序。</p>
+<p>暴力查询时，如果当前修改数比询问的修改数少就把没修改的进行修改，反之回退。</p>
+<p>需要注意的是，修改分为两部分：</p>
+<ol>
+<li><p>若修改的位置在当前区间内，需要更新答案（del原颜色，add修改后的颜色）。</p>
+</li>
+<li><p>无论修改的位置是否在当前区间内，都要进行修改（以供add和del函数在以后更新答案）。</p>
+</li>
+</ol>
+<h2 id="分块大小的选择以及复杂度证明"><a href="#分块大小的选择以及复杂度证明" class="headerlink" title="分块大小的选择以及复杂度证明"></a>分块大小的选择以及复杂度证明</h2><p>（用 $B$ 表示分块大小，$c$ 表示修改个数，$q$ 表示询问个数，l块表示以 $l/B$ 分的块，r块表示以 $r/B$ 分的块，每个l块包含 $n/B$ 个r块）</p>
+<ol>
+<li><p>对于时间指针 $now$：对于每个r块，最坏情况下会移动 $c$，共有 $\left(\frac{n}{B}\right)^2$ 个r块，所以总移动次数为 $\frac{cn^2}{B^2}$ 。</p>
+</li>
+<li><p>对于左端点指针 $l$ ：l块内移动每次最多 $B$，换l块每次最多 $2B$，所以总移动次数为 $O(qB)$ 。</p>
+</li>
+<li><p>对于右端点指针 $r​$：r块内移动每次最多 $B​$，换r块每次最多 $2B​$，所有l块内移动次数之和为 $O(qB)​$；换l块时最多移动 $n​$，总的换l块时移动次数为 $O\left(\frac{n^2}{B}\right)​$；所以总的移动次数为 $O\left(qB+\frac{n^2}{B}\right)​$ 。</p>
+</li>
+</ol>
+<p>所以：总移动次数为 $O\left(\frac{cn^2}{B^2}+qB+\frac{n^2}{B}\right)$ 。</p>
+<blockquote>
+<p>实际上，“换块”这一事件发生的次数并不多，因此即便换块复杂度达到 $\mathcal O(n)​$ 也是不会影响复杂度的。只不过一般情况下块是相邻的，换块复杂度就比较小。</p>
+<p>—— update on 2019.7.27</p>
+</blockquote>
+<p>由于一般的题目都不会告诉你修改和询问分别的个数，所以统一用 $m​$ 表示，即 $O\left(\frac{mn^2}{B^2}+mB+\frac{n^2}{B}\right)​$ 。</p>
+<p>那么 $B$ 取多少呢…Mathematica告诉我大约是这个： <img src="/莫队、带修莫队、树上莫队详解/dxmdfkdx.jpg" alt=""> </p>
+<p>所以还是不要纠结带修莫队的最佳分块大小好了…视作 $n=m​$ 的话，就可以得到总移动次数为 $O\left(\frac{n^3}{B^2}+nB+\frac{n^2}{B}\right)​$，那么 $B=n^{\frac{2}{3}}​$ 时取最小值 $O\left(n^{\frac{5}{3}}\right)​$ 。</p>
+<p>所以：带修莫队的渐进时间复杂度为 $O\left(n\log n+n^{\frac{5}{3}}\right)$ （视作 $n=m$）。</p>
+<h2 id="例题代码-1"><a href="#例题代码-1" class="headerlink" title="例题代码"></a>例题代码</h2><p>这次就不详细分析例题了，直接上代码。</p>
+<p><a href="https://www.luogu.org/problemnew/show/P1903" target="_blank" rel="noopener">[国家集训队]数颜色</a> AC代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> ti)</span></span>;  <span class="comment">//这个函数会执行或回退修改ti（执行还是回退取决于是否执行过，具体通过swap实现），x表明当前的询问是x，即若修改了区间[q[x].l,q[x].r]便要更新答案</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m,B,cnt[<span class="number">1000010</span>],a[<span class="number">50010</span>],ans,ccnt,qcnt,now,out[<span class="number">50010</span>];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Change</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> p,col;</span><br><span class="line">&#125; c[<span class="number">50010</span>];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Query</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l,r,t,id;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(Query&amp; b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> l/B==b.l/B?(r/B==b.r/B?t&lt;b.t:r&lt;b.r):l&lt;b.l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; q[<span class="number">50010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,l=<span class="number">2</span>,r=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> type[<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    B=<span class="built_in">pow</span>(n,<span class="number">0.66666</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=m;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s"</span>,type);</span><br><span class="line">        <span class="keyword">if</span> (type[<span class="number">0</span>]==<span class="string">'Q'</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ++qcnt;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;q[qcnt].l&gt;&gt;q[qcnt].r;</span><br><span class="line">            q[qcnt].t=ccnt;</span><br><span class="line">            q[qcnt].id=qcnt;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            ++ccnt;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;c[ccnt].p&gt;&gt;c[ccnt].col;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sort(q+<span class="number">1</span>,q+qcnt+<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=qcnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> (l&gt;q[i].l)</span><br><span class="line">        &#123;</span><br><span class="line">            add(a[--l]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (r&lt;q[i].r)</span><br><span class="line">        &#123;</span><br><span class="line">            add(a[++r]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (l&lt;q[i].l)</span><br><span class="line">        &#123;</span><br><span class="line">            del(a[l++]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (r&gt;q[i].r)</span><br><span class="line">        &#123;</span><br><span class="line">            del(a[r--]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (now&lt;q[i].t)</span><br><span class="line">        &#123;</span><br><span class="line">            modify(i,++now);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (now&gt;q[i].t)</span><br><span class="line">        &#123;</span><br><span class="line">            modify(i,now--);</span><br><span class="line">        &#125;</span><br><span class="line">        out[q[i].id]=ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=qcnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;out[i]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (cnt[x]++==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ++ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">del</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (--cnt[x]==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        --ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> ti)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (c[ti].p&gt;=q[x].l&amp;&amp;c[ti].p&lt;=q[x].r)</span><br><span class="line">    &#123;</span><br><span class="line">        del(a[c[ti].p]);</span><br><span class="line">        add(c[ti].col);</span><br><span class="line">    &#125;</span><br><span class="line">    swap(a[c[ti].p],c[ti].col); <span class="comment">//下次执行时必定是回退这次操作，直接互换就可以了 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="其它例题-1"><a href="#其它例题-1" class="headerlink" title="其它例题"></a>其它例题</h2><p><a href="https://www.luogu.org/problemnew/show/CF940F" target="_blank" rel="noopener">CF940F Machine Learning</a></p>
+<h1 id="树上莫队"><a href="#树上莫队" class="headerlink" title="树上莫队"></a>树上莫队</h1><p>其实，莫队算法除了序列还可以用于树。复杂度同序列上的莫队（不带修 $O(n\sqrt{m}+m\log m)​$，带修 $O\left(n\log n+n^{\frac{5}{3}}\right)$）。</p>
+<p>例题：<a href="http://uoj.ac/problem/58" target="_blank" rel="noopener">[WC2013]糖果公园</a></p>
+<h2 id="分块方式"><a href="#分块方式" class="headerlink" title="分块方式"></a>分块方式</h2><p>这里需要看一道专门为树上莫队设计的题目 <a href="https://www.luogu.org/problemnew/show/P2325" target="_blank" rel="noopener">[SCOI2005]王室联邦</a>。</p>
+<p>用这道题所要求的方式进行分块，并用后文的方式更新答案，就能保证复杂度（复杂度分析见后文）。</p>
+<p>那么如何满足<strong>每块大小在 $[B,3B]$，块内每个点到核心点路径上的所有点都在块内</strong>呢？</p>
+<p>这里先提供一种构造方式，再予以证明：</p>
+<p><strong>dfs，并创建一个栈，dfs一个点时先记录初始栈顶高度，每dfs完当前节点的一棵子树就判断栈内（相对于刚开始dfs时）新增节点的数量是否≥B，是则将栈内所有新增点分为同一块，核心点为当前dfs的点，当前节点结束dfs时将当前节点入栈，整个dfs结束后将栈内所有剩余节点归入已经分好的最后一个块。</strong></p>
+<p>参考代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t=top;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=head[u];i;i=nxt[i])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> v=to[i];</span><br><span class="line">        <span class="keyword">if</span> (v!=fa)</span><br><span class="line">        &#123;</span><br><span class="line">            dfs(v,u);</span><br><span class="line">            <span class="keyword">if</span> (top-t&gt;=B)</span><br><span class="line">            &#123;</span><br><span class="line">                key[++tot]=u;</span><br><span class="line">                <span class="keyword">while</span> (top&gt;t) bl[stk[top--]]=tot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stk[++top]=u;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//.......</span></span><br><span class="line"></span><br><span class="line">    dfs(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!tot) ++tot;</span><br><span class="line">    key[tot]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (top) bl[stk[top--]]=tot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你看懂了这个方法的话，每块大小≥B是显然的，下面证明为何每块大小≤3B：</p>
+<p>对于当前节点的每一棵子树：</p>
+<ul>
+<li><p>若未被分块的节点数&gt;B，那么在dfs这棵子树的根节点时就一定会把这棵子树的一部分分为一块直至这棵子树的剩余节点数≤B，所以这种情况不存在。</p>
+</li>
+<li><p>若未被分块的节点数=B，这些节点一定会和栈中所有节点分为一块，栈中之前还剩 $[0,B-1]$ 个节点，那么这一块的大小为 $[B,2B-1]$ 。</p>
+</li>
+<li><p>若未被分块的节点数&lt;B，当未被分块的节点数+栈中剩余节点数≥B时，这一块的大小为 $[B,2B-1)$，否则继续进行下一棵子树。</p>
+</li>
+</ul>
+<p>对于dfs结束后栈内剩余节点，数量一定在 $[1,B]​$ 内，而已经分好的每一块的大小为 $[B,2B-1]​$，所以每块的大小都在 $[B,3B)​$ 内。</p>
+<h2 id="修改方式"><a href="#修改方式" class="headerlink" title="修改方式"></a>修改方式</h2><p>所谓“修改”，就是由询问 $(cu,cv)$ 更新至询问 $(tu,tv)$ 。</p>
+<p>如果把两条路径上的点全部修改复杂度是和暴力一样的，所以需要做一些处理。</p>
+<p>  （下文中 $T(u,v)​$ 表示 $u​$ 到 $v​$ 的路径上除 $lca(u,v)​$ 外的所有点构成的集合，$S(u,v)​$ 代表u到v的路径，$xor​$ 表示集合对称差（就跟异或差不多））</p>
+<ul>
+<li>两个指针 $cu,cv​$ （相当于序列莫队的 $l,r​$ 两个指针）， $ans​$记录$T(cu,cv)​$ 的答案，$vis​$ 数组记录每个节点是否在 $T(cu,cv)​$ 内；</li>
+<li>由 $T(cu,cv)​$ 更新至 $T(tu,tv)​$ 时，将 $T(cu,tu)​$ 和 $T(cv,tv)​$ 的 $vis​$ 分别取反，并相应地更新答案；</li>
+<li>将答案记录到 $out​$ 数组（离线后用于输出那个）时对 $lca(cu,cv)​$ （此时的 $cu,cv​$ 已更新为上一步中的 $tu,tv​$） 的 $vis​$ 取反并更新答案，记录完再改回来（因为 $lca​$ 处理比较麻烦，这样搞比较方便）。</li>
+</ul>
+<p>第二步证明如下：</p>
+<p>$\quad\,T(cu,cv)\ xor\ T(tu,tv)$</p>
+<p>$=[S(cu,root)\ xor\ S(cv,root)]\ xor\ [S(tu,root)\ xor\ S(tv,root)]$ （lca及以上相消）</p>
+<p>$=[S(cu,root)\ xor\ S(tu,root)]\ xor\ [S(cv,root)\ xor\ S(tv,root)]$ （交换律、结合律）</p>
+<p>$=T(cu,tu)\ xor\ T(cv,tv)$</p>
+<p>之所以要把 $T(cu,cv)\ xor\ T(tu,tv)$ 转化成 $T(cu,tu)\ xor\ T(cv,tv)$，是因为这样的话就能通过对询问排序来保证复杂度。排序方式就是以 $u$ 所在块编号为第一关键字，$v​$ 的编号为第二关键字排序。如果是带修莫队，就还要以时间为第三关键字。</p>
+<h2 id="关于单点修改"><a href="#关于单点修改" class="headerlink" title="关于单点修改"></a>关于单点修改</h2><p>树上莫队的单点修改和序列莫队类似，唯一不同就是，修改后是否更新答案通过 $vis$ 数组判断。</p>
+<h2 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h2><p>每块大小在 $[B,3B)​$，所以两点间路径长度也在 $[B,3B)​$，块内移动就是 $\mathcal O(B)​$ 的，然后就和序列莫队的复杂度分析类似了…</p>
+<h2 id="例题代码-2"><a href="#例题代码-2" class="headerlink" title="例题代码"></a>例题代码</h2><p><a href="http://uoj.ac/problem/58" target="_blank" rel="noopener">[WC2013]糖果公园</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">100010</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pathmodify</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span>; <span class="comment">//将T(u,v)取反并更新答案</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">opp</span><span class="params">(<span class="keyword">int</span> x)</span></span>; <span class="comment">//将节点x取反并更新答案</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> ti)</span></span>; <span class="comment">//进行或回退修改ti</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lca</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span>; <span class="comment">//进行分块并记录dep数组、f数组（用于求lca、两点间路径）</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> head[N],nxt[N&lt;&lt;<span class="number">1</span>],to[N&lt;&lt;<span class="number">1</span>],cnt;</span><br><span class="line"><span class="keyword">int</span> n,m,Q,B,bl[N],tot,V[N],W[N],a[N],stk[N],top,qcnt,ccnt,dep[N],f[<span class="number">20</span>][N],num[N],now;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans,out[N];</span><br><span class="line"><span class="keyword">bool</span> vis[N];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Query</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> u,v,t,id;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(Query&amp; y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> bl[u]==bl[y.u]?(bl[v]==bl[y.v]?t&lt;y.t:bl[v]&lt;bl[y.v]):bl[u]&lt;bl[y.u];</span><br><span class="line">    &#125;</span><br><span class="line">&#125; q[N];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Change</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> p,x;</span><br><span class="line">&#125; c[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,u,v,lc,type;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m&gt;&gt;Q;</span><br><span class="line">    B=<span class="built_in">pow</span>(n,<span class="number">0.666</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=m;++i) <span class="built_in">cin</span>&gt;&gt;V[i];</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) <span class="built_in">cin</span>&gt;&gt;W[i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v;</span><br><span class="line">        add(u,v);</span><br><span class="line">        add(v,u);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dfs(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=<span class="number">16</span>;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (j=<span class="number">1</span>;j&lt;=n;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            f[i][j]=f[i<span class="number">-1</span>][f[i<span class="number">-1</span>][j]];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (top) bl[stk[top--]]=tot;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;=n;++i) <span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;Q;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;type;</span><br><span class="line">        <span class="keyword">if</span> (type==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ++ccnt;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;c[ccnt].p&gt;&gt;c[ccnt].x;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;q[qcnt].u&gt;&gt;q[qcnt].v;</span><br><span class="line">            q[qcnt].t=ccnt;</span><br><span class="line">            q[qcnt].id=qcnt;</span><br><span class="line">            ++qcnt;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sort(q,q+qcnt);</span><br><span class="line"></span><br><span class="line">    u=v=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;qcnt;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        pathmodify(u,q[i].u);</span><br><span class="line">        pathmodify(v,q[i].v);</span><br><span class="line">        u=q[i].u;</span><br><span class="line">        v=q[i].v;</span><br><span class="line">        <span class="keyword">while</span> (now&lt;q[i].t) modify(++now);</span><br><span class="line">        <span class="keyword">while</span> (now&gt;q[i].t) modify(now--);</span><br><span class="line">        lc=lca(u,v);</span><br><span class="line">        opp(lc);</span><br><span class="line">        out[q[i].id]=ans;</span><br><span class="line">        opp(lc);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;qcnt;++i) <span class="built_in">cout</span>&lt;&lt;out[i]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pathmodify</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (dep[u]&lt;dep[v]) swap(u,v);</span><br><span class="line">    <span class="keyword">while</span> (dep[u]&gt;dep[v])</span><br><span class="line">    &#123;</span><br><span class="line">        opp(u);</span><br><span class="line">        u=f[<span class="number">0</span>][u];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (u!=v)</span><br><span class="line">    &#123;</span><br><span class="line">        opp(u);</span><br><span class="line">        opp(v);</span><br><span class="line">        u=f[<span class="number">0</span>][u];</span><br><span class="line">        v=f[<span class="number">0</span>][v];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">opp</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (vis[x]) ans-=<span class="number">1l</span>l*V[a[x]]*W[num[a[x]]--];</span><br><span class="line">    <span class="keyword">else</span> ans+=<span class="number">1l</span>l*V[a[x]]*W[++num[a[x]]];</span><br><span class="line">    vis[x]^=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> ti)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (vis[c[ti].p])</span><br><span class="line">    &#123;</span><br><span class="line">        opp(c[ti].p);</span><br><span class="line">        swap(a[c[ti].p],c[ti].x);</span><br><span class="line">        opp(c[ti].p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> swap(a[c[ti].p],c[ti].x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lca</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (dep[u]&lt;dep[v])</span><br><span class="line">    &#123;</span><br><span class="line">        swap(u,v);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;=<span class="number">16</span>;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ((dep[u]-dep[v])&amp;(<span class="number">1</span>&lt;&lt;i))</span><br><span class="line">        &#123;</span><br><span class="line">            u=f[i][u];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (u==v) <span class="keyword">return</span> u;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">16</span>;i&gt;=<span class="number">0</span>;--i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (f[i][u]!=f[i][v])</span><br><span class="line">        &#123;</span><br><span class="line">            u=f[i][u];</span><br><span class="line">            v=f[i][v];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f[<span class="number">0</span>][u];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t=top;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=head[u];i;i=nxt[i])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> v=to[i];</span><br><span class="line">        <span class="keyword">if</span> (v!=f[<span class="number">0</span>][u])</span><br><span class="line">        &#123;</span><br><span class="line">            f[<span class="number">0</span>][v]=u;</span><br><span class="line">            dep[v]=dep[u]+<span class="number">1</span>;</span><br><span class="line">            dfs(v);</span><br><span class="line">            <span class="keyword">if</span> (top-t&gt;=B)</span><br><span class="line">            &#123;</span><br><span class="line">                ++tot;</span><br><span class="line">                <span class="keyword">while</span> (top&gt;t) bl[stk[top--]]=tot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stk[++top]=u;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    nxt[++cnt]=head[u];</span><br><span class="line">    head[u]=cnt;</span><br><span class="line">    to[cnt]=v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="回滚莫队（只增莫队）"><a href="#回滚莫队（只增莫队）" class="headerlink" title="回滚莫队（只增莫队）"></a>回滚莫队（只增莫队）</h1><h2 id="适用范围"><a href="#适用范围" class="headerlink" title="适用范围"></a>适用范围</h2><ol>
+<li>删除时不方便统计答案。</li>
+<li>可以方便地回滚单次操作，即修改造成的影响要么能够在 $\mathcal O(\sqrt n)$ 内保存下来，要么可以 $\mathcal O(1)​$ 地回滚单次增加。</li>
+</ol>
+<h2 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h2><ol>
+<li>对于左右端点在同一块的暴力计算。</li>
+<li>跟普通莫队一样排序，左端点换块时清空答案，把左指针设为左端点所在块的下一块的开头，把右指针设为左端点所在块的最后一位。这样右指针是单调递增的，每处理一个询问时，先记录一些信息（比如答案），再左移左指针并更新答案，然后把左指针移回左端点所在块的下一块的开头，过程中回滚除记录下的信息以外的其它影响，最后把记录下的信息恢复。如：先右移右指针，再记录 <code>ans</code>，然后左移左指针时增加 <code>cnt</code> 并更新 <code>ans</code>，回滚时把增加的 <code>cnt</code> 减掉，最后把 <code>ans</code> 回滚为记录的值。</li>
+</ol>
+<h2 id="例题-amp-代码"><a href="#例题-amp-代码" class="headerlink" title="例题 &amp; 代码"></a>例题 &amp; 代码</h2><p><a href="http://darkbzoj.tk/problem/4241" target="_blank" rel="noopener">BZOJ4241 历史研究</a></p>
+<div><div class="fold_hider"><div class="close hider_title">参考代码</div></div><div class="fold">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100010</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> B = <span class="number">333</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> out = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">isdigit</span>(c = getchar()));</span><br><span class="line">    <span class="keyword">for</span> (; <span class="built_in">isdigit</span>(c); c = getchar()) out = out * <span class="number">10</span> + c - <span class="string">'0'</span>;</span><br><span class="line">    <span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Query</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r, id;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> Query &amp; y) <span class="keyword">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> l / B == y.l / B ? r &lt; y.r : l &lt; y.l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; q[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, a[N], lsh[N], tot, cnt[N];</span><br><span class="line">ll ans, bk, out[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j, l, r, bl = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    n = read();</span><br><span class="line">    m = read();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i) a[i] = lsh[++tot] = read();</span><br><span class="line"></span><br><span class="line">    sort(lsh + <span class="number">1</span>, lsh + tot + <span class="number">1</span>);</span><br><span class="line">    tot = unique(lsh + <span class="number">1</span>, lsh + tot + <span class="number">1</span>) - lsh;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; ++i) a[i] = lower_bound(lsh + <span class="number">1</span>, lsh + tot, a[i]) - lsh;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        q[i].l = read();</span><br><span class="line">        q[i].r = read();</span><br><span class="line">        q[i].id = i;</span><br><span class="line">        <span class="keyword">if</span> (q[i].l / B == q[i].r / B) <span class="comment">// 暴力处理左右端点在同一块的询问</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (j = q[i].l; j &lt;= q[i].r; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                ++cnt[a[j]];</span><br><span class="line">                out[i] = max(out[i], (ll) cnt[a[j]] * lsh[a[j]]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">for</span> (j = q[i].l; j &lt;= q[i].r; ++j) --cnt[a[j]];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sort(q + <span class="number">1</span>, q + m + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (q[i].l / B == q[i].r / B) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span> (i == <span class="number">1</span> || q[i].l / B != bl) <span class="comment">// 左端点换块</span></span><br><span class="line">        &#123;</span><br><span class="line">            ans = <span class="number">0</span>;</span><br><span class="line">            bl = q[i].l / B;</span><br><span class="line">            <span class="built_in">memset</span>(cnt, <span class="number">0</span>, <span class="keyword">sizeof</span>(cnt));</span><br><span class="line">            l = (bl + <span class="number">1</span>) * B;</span><br><span class="line">            r = (bl + <span class="number">1</span>) * B - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (r &lt; q[i].r) add(a[++r]); <span class="comment">// 右移右指针</span></span><br><span class="line">        bk = ans; <span class="comment">// 记录 ans</span></span><br><span class="line">        <span class="keyword">while</span> (l &gt; q[i].l) add(a[--l]); <span class="comment">// 左移左指针并更新答案</span></span><br><span class="line">        out[q[i].id] = ans;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; (bl + <span class="number">1</span>) * B) --cnt[a[l++]]; <span class="comment">// 回滚</span></span><br><span class="line">        ans = bk; <span class="comment">// 把 ans 修改回来</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= m; ++i) <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, out[i]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ++cnt[x];</span><br><span class="line">    ans = max(ans, (ll) cnt[x] * lsh[x]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+<h1 id="莫队的扩展"><a href="#莫队的扩展" class="headerlink" title="莫队的扩展"></a>莫队的扩展</h1><p>其实莫队可以扩展到高维，参见<a href="https://ouuan.github.io/二维莫队解题报告">二维莫队解题报告</a>。</p>
+<p>更一般地，若 $Q(x_1,x_2,\cdots,x_k)​$ 为一个询问，$\forall i\in[1,k]​$，$x_i​$ 的规模都为 $n​$，可以在时间 $\mathrm{T}​$ 内求解 $Q(x_1,x_2,\cdots,x_i\pm 1,\cdots,x_n)​$，共有 $m​$ 个询问，那么就可以在 $O\left(km\log m+nTm^\frac{k-1}{k}\right)​$ 的时间复杂度下离线求解。</p>
+<p>（蒟蒻的大胆猜想而已..并没有严格证明）</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/离线算法/" rel="tag"><i class="fa fa-tag"></i> 离线算法</a>
+          
+            <a href="/tags/莫队/" rel="tag"><i class="fa fa-tag"></i> 莫队</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/好用的网站/" rel="next" title="好用的网站">
+                <i class="fa fa-chevron-left"></i> 好用的网站
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018国庆YALI集训游记/" rel="prev" title="2018国庆YALI集训游记">
+                2018国庆YALI集训游记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  <div class="comments">
+    <script src="https://utteranc.es/client.js" repo="ouuan/hexo-blog-utterances" issue-term="title" label="utterances" theme="github-light" crossorigin="anonymous" async>
+    </script>
+  </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+
+    <div class="sidebar-inner">
+      <div class="hitokoto-block">
+        <div class="hitokoto-inner hitokoto-comma hitokoto-left-comma">“</div>
+        <div class="hitokoto-inner hitokoto-content"><b><span><span id="hitokoto-content"></span></span></b></div>
+        <div class="hitokoto-inner hitokoto-comma hitokoto-right-comma">”</div>
+      </div>
+      <div id="hitokoto-from"></div>
+      <div class="hitokoto-bottom">
+        <a id="hitokoto-link" href="https://hitokoto.cn/">Hitokoto</a>&nbsp;&nbsp;&nbsp;
+        <button id="hitokoto-like" title="通过给句子点赞可以增加其出现概率，由于技术原因并不能在博客中显示赞数与点赞是否成功的信息（红心表示成功发送点赞请求，但如果同 IP 重复点赞就会失败），如需查看可以点击左边的“Hitokoto”链接。"><i class="menu-item-icon fa fa-fw fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div style="height: 15px"></div>
+
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="ouuan">
+            
+              <p class="site-author-name" itemprop="name">ouuan</p>
+              <p class="site-description motion-element" itemprop="description">ouuan的博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">90</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">84</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/ouuan" title="GitHub &rarr; https://github.com/ouuan" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.luogu.org/space/show?uid=49742" title="洛谷 &rarr; https://www.luogu.org/space/show?uid=49742" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>洛谷</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.codeforces.com/profile/ouuan" title="Codeforces &rarr; https://www.codeforces.com/profile/ouuan" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>Codeforces</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://space.bilibili.com/11067182" title="b站 &rarr; https://space.bilibili.com/11067182" rel="noopener" target="_blank"><i class="fa fa-fw fa-tv"></i>b站</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://EternalAlexander.github.io/" title="https://EternalAlexander.github.io/" rel="noopener" target="_blank">EternalAlexander</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ustze.cn/" title="http://www.ustze.cn/" rel="noopener" target="_blank">ustze</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.xht37.com/" title="https://www.xht37.com/" rel="noopener" target="_blank">xht37</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/PinkRabbit/" title="https://www.cnblogs.com/PinkRabbit/" rel="noopener" target="_blank">PinkRabbit</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://qaq-am.com/" title="https://qaq-am.com/" rel="noopener" target="_blank">lk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.luogu.com.cn/blog/Sooke/" title="https://www.luogu.com.cn/blog/Sooke/" rel="noopener" target="_blank">Sooke</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/LJC00118/" title="https://www.cnblogs.com/LJC00118/" rel="noopener" target="_blank">wxw</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://memset0.cn/" title="https://memset0.cn/" rel="noopener" target="_blank">memset0</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://aprilgrimoire.tk/" title="http://aprilgrimoire.tk/" rel="noopener" target="_blank">AprilGrimoire</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zbww.cf/" title="https://zbww.cf/" rel="noopener" target="_blank">zbw</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#普通莫队"><span class="nav-number">1.</span> <span class="nav-text">普通莫队</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思想"><span class="nav-number">1.2.</span> <span class="nav-text">算法思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题解析"><span class="nav-number">1.3.</span> <span class="nav-text">例题解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化复杂度"><span class="nav-number">1.4.</span> <span class="nav-text">优化复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题代码"><span class="nav-number">1.5.</span> <span class="nav-text">例题代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它例题"><span class="nav-number">1.6.</span> <span class="nav-text">其它例题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#带修莫队"><span class="nav-number">2.</span> <span class="nav-text">带修莫队</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法简介"><span class="nav-number">2.1.</span> <span class="nav-text">算法简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分块大小的选择以及复杂度证明"><span class="nav-number">2.2.</span> <span class="nav-text">分块大小的选择以及复杂度证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题代码-1"><span class="nav-number">2.3.</span> <span class="nav-text">例题代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它例题-1"><span class="nav-number">2.4.</span> <span class="nav-text">其它例题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#树上莫队"><span class="nav-number">3.</span> <span class="nav-text">树上莫队</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分块方式"><span class="nav-number">3.1.</span> <span class="nav-text">分块方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改方式"><span class="nav-number">3.2.</span> <span class="nav-text">修改方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于单点修改"><span class="nav-number">3.3.</span> <span class="nav-text">关于单点修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复杂度分析"><span class="nav-number">3.4.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题代码-2"><span class="nav-number">3.5.</span> <span class="nav-text">例题代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#回滚莫队（只增莫队）"><span class="nav-number">4.</span> <span class="nav-text">回滚莫队（只增莫队）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#适用范围"><span class="nav-number">4.1.</span> <span class="nav-text">适用范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法流程"><span class="nav-number">4.2.</span> <span class="nav-text">算法流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题-amp-代码"><span class="nav-number">4.3.</span> <span class="nav-text">例题 &amp; 代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#莫队的扩展"><span class="nav-number">5.</span> <span class="nav-text">莫队的扩展</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-battery-full"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ouuan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+<script type="text/javascript">
+	function hitokotoLike(x, y) {
+		$.ajax({
+		    url: "https://hitokoto.cn/Like",
+		    type: "GET",
+		    data: "ID=" + x,
+		    dataType: "jsonp",
+		    success: function(data) {
+		        alert(data.message);
+		        $(y).css('color', 'red');
+		    },
+		    error: function() {
+		        console.log('Hitokoto Like Request Error.');
+		        $(y).css('color', 'red');
+		    }
+		});
+	}
+	$.get('https://v1.hitokoto.cn/?c=a', function(data) {
+		$('#hitokoto-content').css('display', '').text(data.hitokoto);
+		$('#hitokoto-from').css('display', '').text('——' + data.from);
+		$('#hitokoto-from').attr('title', '上传者: ' + data.creator);
+		$('#hitokoto-link').attr('href', 'https://hitokoto.cn/?id=' + data.id);
+		document.getElementById('hitokoto-like').onclick = function() { hitokotoLike(data.id, '#hitokoto-like'); }
+	});
+	$('.post-body').bind('copy', function() {
+		alert('本博客内容欢迎分享（将本博客的原文地址分享到其它网站），允许部分摘录并在醒目位置附上原文链接，未经许可禁止任何形式的全文转载。');
+	});
+</script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+  
+
+  
+  
+
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/pdfobject@2.1.1/pdfobject.min.js"></script>
+    <script type="text/javascript">
+    var options = {
+      pdfOpenParams: {
+        navpanes: 0,
+        toolbar: 0,
+        statusbar: 0,
+        pagemode: "thumbs",
+        view: "FitV"
+      },
+      PDFJS_URL: "/lib/pdf/web/viewer.html",
+      height: "500px"
+    };
+    $("#main a").each(function() {
+      var href = $(this).attr("href");
+      if (!href) return;
+      if (href.endsWith(".pdf") || href.endsWith(".pdf/")) {
+        var id = "pdf" + Math.floor(Math.random() * 10000);
+        $(this).after("<div id='" + id + "'></div>").remove();
+        PDFObject.embed(href, "#" + id, options);
+      }
+    });
+    </script>
+    <style>
+    .pdfobject-container {
+      position: relative;
+      overflow: auto;
+      width: 100%;
+      height: 500px;
+    }
+    </style>
+  
+
+
+</body>
+</html>

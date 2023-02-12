@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=2019.9.22" rel="stylesheet" type="text/css">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico?v=6.6.0">
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="大多数人所使用的费用流算法，即每次求出残量网络中 $s$ 到 $t$ 关于费用的最短路进行增广（将 Dinic 最大流算法中的 BFS 改为 SPFA），是伪多项式复杂度的，最坏情况下复杂度为 $O(nmf)$，其中 $f$ 为最大流。已知有一种在点数为 $n$，边数为 $O(n^2)$，值域为 $O(2^{n/2})$ 时将其用时卡成关于 $n$ 的指数级复杂度的构造方法。 本文将介绍一种复杂度">
+<meta name="keywords" content="图论,网络流,费用流">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于 Capacity Scaling 的弱多项式复杂度最小费用流算法">
+<meta property="og:url" content="https://ouuan.github.io/基于-Capacity-Scaling-的弱多项式复杂度最小费用流算法/index.html">
+<meta property="og:site_name" content="ouuan的博客">
+<meta property="og:description" content="大多数人所使用的费用流算法，即每次求出残量网络中 $s$ 到 $t$ 关于费用的最短路进行增广（将 Dinic 最大流算法中的 BFS 改为 SPFA），是伪多项式复杂度的，最坏情况下复杂度为 $O(nmf)$，其中 $f$ 为最大流。已知有一种在点数为 $n$，边数为 $O(n^2)$，值域为 $O(2^{n/2})$ 时将其用时卡成关于 $n$ 的指数级复杂度的构造方法。 本文将介绍一种复杂度">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-12-05T13:26:25.080Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于 Capacity Scaling 的弱多项式复杂度最小费用流算法">
+<meta name="twitter:description" content="大多数人所使用的费用流算法，即每次求出残量网络中 $s$ 到 $t$ 关于费用的最短路进行增广（将 Dinic 最大流算法中的 BFS 改为 SPFA），是伪多项式复杂度的，最坏情况下复杂度为 $O(nmf)$，其中 $f$ 为最大流。已知有一种在点数为 $n$，边数为 $O(n^2)$，值域为 $O(2^{n/2})$ 时将其用时卡成关于 $n$ 的指数级复杂度的构造方法。 本文将介绍一种复杂度">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ouuan的博客" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://ouuan.github.io/基于-Capacity-Scaling-的弱多项式复杂度最小费用流算法/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>基于 Capacity Scaling 的弱多项式复杂度最小费用流算法 | ouuan的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ouuan的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Codes change the world.</h1>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-其它">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/others" rel="section"><i class="menu-item-icon fa fa-fw fa-wrench"></i> <br>其它</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ouuan.github.io/基于-Capacity-Scaling-的弱多项式复杂度最小费用流算法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ouuan">
+      <meta itemprop="description" content="ouuan的博客">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ouuan的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">基于 Capacity Scaling 的弱多项式复杂度最小费用流算法
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-26 19:50:25" itemprop="dateCreated datePublished" datetime="2019-10-26T19:50:25+08:00">2019-10-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-12-05 21:26:25" itemprop="dateModified" datetime="2019-12-05T21:26:25+08:00">2019-12-05</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>大多数人所使用的费用流算法，即每次求出残量网络中 $s$ 到 $t$ 关于费用的最短路进行增广（将 Dinic 最大流算法中的 BFS 改为 SPFA），是伪多项式复杂度的，最坏情况下复杂度为 $O(nmf)$，其中 $f$ 为最大流。已知有一种在点数为 $n$，边数为 $O(n^2)$，值域为 $O(2^{n/2})$ 时将其用时卡成关于 $n$ 的指数级复杂度的构造方法。</p>
+<p>本文将介绍一种复杂度为进行 $O(m\log U)$ 次（$U$ 表示边的最大容量）无负权边单源最短路（使用 <code>priority_queue</code> 实现 Dijkstra 算法，总复杂度即为 $O(m^2\log U\log m)$）的弱多项式复杂度算法。</p>
+<p>其实这个算法并不是很复杂（只是相关资料比较少，会对学习造成一定困难，这也是我写这篇博客的原因），最小费用最大流的模板也只需要 $2.5KB$，并不比常见的伪多项式复杂度算法长很多。</p>
+<a id="more"></a>
+<h2 id="hack-常见的费用流算法"><a href="#hack-常见的费用流算法" class="headerlink" title="hack 常见的费用流算法"></a>hack 常见的费用流算法</h2><p>可以参考 <a href="https://min-25.hatenablog.com/entry/2018/03/19/235802" target="_blank" rel="noopener">这篇博客</a>，里面给出了一个用 Python 写的数据生成器，调用函数 <code>mcmf_worst_instance(k)</code> 可以得到 $2k+2$ 个点的数据，格式为第一行点数和边数，后面每行描述一条边（起点、终点、容量、费用），源点是 $1$ 汇点是 $2k+2$。</p>
+<div><div class="fold_hider"><div class="close hider_title">k=20 生成的数据</div></div><div class="fold">
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br></pre></td><td class="code"><pre><span class="line">42 421</span><br><span class="line">1 2 1 0</span><br><span class="line">1 3 3 0</span><br><span class="line">1 4 5 0</span><br><span class="line">1 5 10 0</span><br><span class="line">1 6 20 0</span><br><span class="line">1 7 40 0</span><br><span class="line">1 8 80 0</span><br><span class="line">1 9 160 0</span><br><span class="line">1 10 320 0</span><br><span class="line">1 11 640 0</span><br><span class="line">1 12 1280 0</span><br><span class="line">1 13 2560 0</span><br><span class="line">1 14 5120 0</span><br><span class="line">1 15 10240 0</span><br><span class="line">1 16 20480 0</span><br><span class="line">1 17 40960 0</span><br><span class="line">1 18 81920 0</span><br><span class="line">1 19 163840 0</span><br><span class="line">1 20 327680 0</span><br><span class="line">1 21 655360 0</span><br><span class="line">2 22 5242880 0</span><br><span class="line">2 23 5242880 1</span><br><span class="line">2 24 5242880 3</span><br><span class="line">2 25 5242880 7</span><br><span class="line">2 26 5242880 15</span><br><span class="line">2 27 5242880 31</span><br><span class="line">2 28 5242880 63</span><br><span class="line">2 29 5242880 127</span><br><span class="line">2 30 5242880 255</span><br><span class="line">2 31 5242880 511</span><br><span class="line">2 32 5242880 1023</span><br><span class="line">2 33 5242880 2047</span><br><span class="line">2 34 5242880 4095</span><br><span class="line">2 35 5242880 8191</span><br><span class="line">2 36 5242880 16383</span><br><span class="line">2 37 5242880 32767</span><br><span class="line">2 38 5242880 65535</span><br><span class="line">2 39 5242880 131071</span><br><span class="line">2 40 5242880 262143</span><br><span class="line">2 41 5242880 524287</span><br><span class="line">3 22 5242880 1</span><br><span class="line">3 24 5242880 3</span><br><span class="line">3 25 5242880 7</span><br><span class="line">3 26 5242880 15</span><br><span class="line">3 27 5242880 31</span><br><span class="line">3 28 5242880 63</span><br><span class="line">3 29 5242880 127</span><br><span class="line">3 30 5242880 255</span><br><span class="line">3 31 5242880 511</span><br><span class="line">3 32 5242880 1023</span><br><span class="line">3 33 5242880 2047</span><br><span class="line">3 34 5242880 4095</span><br><span class="line">3 35 5242880 8191</span><br><span class="line">3 36 5242880 16383</span><br><span class="line">3 37 5242880 32767</span><br><span class="line">3 38 5242880 65535</span><br><span class="line">3 39 5242880 131071</span><br><span class="line">3 40 5242880 262143</span><br><span class="line">3 41 5242880 524287</span><br><span class="line">4 22 5242880 3</span><br><span class="line">4 23 5242880 3</span><br><span class="line">4 25 5242880 7</span><br><span class="line">4 26 5242880 15</span><br><span class="line">4 27 5242880 31</span><br><span class="line">4 28 5242880 63</span><br><span class="line">4 29 5242880 127</span><br><span class="line">4 30 5242880 255</span><br><span class="line">4 31 5242880 511</span><br><span class="line">4 32 5242880 1023</span><br><span class="line">4 33 5242880 2047</span><br><span class="line">4 34 5242880 4095</span><br><span class="line">4 35 5242880 8191</span><br><span class="line">4 36 5242880 16383</span><br><span class="line">4 37 5242880 32767</span><br><span class="line">4 38 5242880 65535</span><br><span class="line">4 39 5242880 131071</span><br><span class="line">4 40 5242880 262143</span><br><span class="line">4 41 5242880 524287</span><br><span class="line">5 22 5242880 7</span><br><span class="line">5 23 5242880 7</span><br><span class="line">5 24 5242880 7</span><br><span class="line">5 26 5242880 15</span><br><span class="line">5 27 5242880 31</span><br><span class="line">5 28 5242880 63</span><br><span class="line">5 29 5242880 127</span><br><span class="line">5 30 5242880 255</span><br><span class="line">5 31 5242880 511</span><br><span class="line">5 32 5242880 1023</span><br><span class="line">5 33 5242880 2047</span><br><span class="line">5 34 5242880 4095</span><br><span class="line">5 35 5242880 8191</span><br><span class="line">5 36 5242880 16383</span><br><span class="line">5 37 5242880 32767</span><br><span class="line">5 38 5242880 65535</span><br><span class="line">5 39 5242880 131071</span><br><span class="line">5 40 5242880 262143</span><br><span class="line">5 41 5242880 524287</span><br><span class="line">6 22 5242880 15</span><br><span class="line">6 23 5242880 15</span><br><span class="line">6 24 5242880 15</span><br><span class="line">6 25 5242880 15</span><br><span class="line">6 27 5242880 31</span><br><span class="line">6 28 5242880 63</span><br><span class="line">6 29 5242880 127</span><br><span class="line">6 30 5242880 255</span><br><span class="line">6 31 5242880 511</span><br><span class="line">6 32 5242880 1023</span><br><span class="line">6 33 5242880 2047</span><br><span class="line">6 34 5242880 4095</span><br><span class="line">6 35 5242880 8191</span><br><span class="line">6 36 5242880 16383</span><br><span class="line">6 37 5242880 32767</span><br><span class="line">6 38 5242880 65535</span><br><span class="line">6 39 5242880 131071</span><br><span class="line">6 40 5242880 262143</span><br><span class="line">6 41 5242880 524287</span><br><span class="line">7 22 5242880 31</span><br><span class="line">7 23 5242880 31</span><br><span class="line">7 24 5242880 31</span><br><span class="line">7 25 5242880 31</span><br><span class="line">7 26 5242880 31</span><br><span class="line">7 28 5242880 63</span><br><span class="line">7 29 5242880 127</span><br><span class="line">7 30 5242880 255</span><br><span class="line">7 31 5242880 511</span><br><span class="line">7 32 5242880 1023</span><br><span class="line">7 33 5242880 2047</span><br><span class="line">7 34 5242880 4095</span><br><span class="line">7 35 5242880 8191</span><br><span class="line">7 36 5242880 16383</span><br><span class="line">7 37 5242880 32767</span><br><span class="line">7 38 5242880 65535</span><br><span class="line">7 39 5242880 131071</span><br><span class="line">7 40 5242880 262143</span><br><span class="line">7 41 5242880 524287</span><br><span class="line">8 22 5242880 63</span><br><span class="line">8 23 5242880 63</span><br><span class="line">8 24 5242880 63</span><br><span class="line">8 25 5242880 63</span><br><span class="line">8 26 5242880 63</span><br><span class="line">8 27 5242880 63</span><br><span class="line">8 29 5242880 127</span><br><span class="line">8 30 5242880 255</span><br><span class="line">8 31 5242880 511</span><br><span class="line">8 32 5242880 1023</span><br><span class="line">8 33 5242880 2047</span><br><span class="line">8 34 5242880 4095</span><br><span class="line">8 35 5242880 8191</span><br><span class="line">8 36 5242880 16383</span><br><span class="line">8 37 5242880 32767</span><br><span class="line">8 38 5242880 65535</span><br><span class="line">8 39 5242880 131071</span><br><span class="line">8 40 5242880 262143</span><br><span class="line">8 41 5242880 524287</span><br><span class="line">9 22 5242880 127</span><br><span class="line">9 23 5242880 127</span><br><span class="line">9 24 5242880 127</span><br><span class="line">9 25 5242880 127</span><br><span class="line">9 26 5242880 127</span><br><span class="line">9 27 5242880 127</span><br><span class="line">9 28 5242880 127</span><br><span class="line">9 30 5242880 255</span><br><span class="line">9 31 5242880 511</span><br><span class="line">9 32 5242880 1023</span><br><span class="line">9 33 5242880 2047</span><br><span class="line">9 34 5242880 4095</span><br><span class="line">9 35 5242880 8191</span><br><span class="line">9 36 5242880 16383</span><br><span class="line">9 37 5242880 32767</span><br><span class="line">9 38 5242880 65535</span><br><span class="line">9 39 5242880 131071</span><br><span class="line">9 40 5242880 262143</span><br><span class="line">9 41 5242880 524287</span><br><span class="line">10 22 5242880 255</span><br><span class="line">10 23 5242880 255</span><br><span class="line">10 24 5242880 255</span><br><span class="line">10 25 5242880 255</span><br><span class="line">10 26 5242880 255</span><br><span class="line">10 27 5242880 255</span><br><span class="line">10 28 5242880 255</span><br><span class="line">10 29 5242880 255</span><br><span class="line">10 31 5242880 511</span><br><span class="line">10 32 5242880 1023</span><br><span class="line">10 33 5242880 2047</span><br><span class="line">10 34 5242880 4095</span><br><span class="line">10 35 5242880 8191</span><br><span class="line">10 36 5242880 16383</span><br><span class="line">10 37 5242880 32767</span><br><span class="line">10 38 5242880 65535</span><br><span class="line">10 39 5242880 131071</span><br><span class="line">10 40 5242880 262143</span><br><span class="line">10 41 5242880 524287</span><br><span class="line">11 22 5242880 511</span><br><span class="line">11 23 5242880 511</span><br><span class="line">11 24 5242880 511</span><br><span class="line">11 25 5242880 511</span><br><span class="line">11 26 5242880 511</span><br><span class="line">11 27 5242880 511</span><br><span class="line">11 28 5242880 511</span><br><span class="line">11 29 5242880 511</span><br><span class="line">11 30 5242880 511</span><br><span class="line">11 32 5242880 1023</span><br><span class="line">11 33 5242880 2047</span><br><span class="line">11 34 5242880 4095</span><br><span class="line">11 35 5242880 8191</span><br><span class="line">11 36 5242880 16383</span><br><span class="line">11 37 5242880 32767</span><br><span class="line">11 38 5242880 65535</span><br><span class="line">11 39 5242880 131071</span><br><span class="line">11 40 5242880 262143</span><br><span class="line">11 41 5242880 524287</span><br><span class="line">12 22 5242880 1023</span><br><span class="line">12 23 5242880 1023</span><br><span class="line">12 24 5242880 1023</span><br><span class="line">12 25 5242880 1023</span><br><span class="line">12 26 5242880 1023</span><br><span class="line">12 27 5242880 1023</span><br><span class="line">12 28 5242880 1023</span><br><span class="line">12 29 5242880 1023</span><br><span class="line">12 30 5242880 1023</span><br><span class="line">12 31 5242880 1023</span><br><span class="line">12 33 5242880 2047</span><br><span class="line">12 34 5242880 4095</span><br><span class="line">12 35 5242880 8191</span><br><span class="line">12 36 5242880 16383</span><br><span class="line">12 37 5242880 32767</span><br><span class="line">12 38 5242880 65535</span><br><span class="line">12 39 5242880 131071</span><br><span class="line">12 40 5242880 262143</span><br><span class="line">12 41 5242880 524287</span><br><span class="line">13 22 5242880 2047</span><br><span class="line">13 23 5242880 2047</span><br><span class="line">13 24 5242880 2047</span><br><span class="line">13 25 5242880 2047</span><br><span class="line">13 26 5242880 2047</span><br><span class="line">13 27 5242880 2047</span><br><span class="line">13 28 5242880 2047</span><br><span class="line">13 29 5242880 2047</span><br><span class="line">13 30 5242880 2047</span><br><span class="line">13 31 5242880 2047</span><br><span class="line">13 32 5242880 2047</span><br><span class="line">13 34 5242880 4095</span><br><span class="line">13 35 5242880 8191</span><br><span class="line">13 36 5242880 16383</span><br><span class="line">13 37 5242880 32767</span><br><span class="line">13 38 5242880 65535</span><br><span class="line">13 39 5242880 131071</span><br><span class="line">13 40 5242880 262143</span><br><span class="line">13 41 5242880 524287</span><br><span class="line">14 22 5242880 4095</span><br><span class="line">14 23 5242880 4095</span><br><span class="line">14 24 5242880 4095</span><br><span class="line">14 25 5242880 4095</span><br><span class="line">14 26 5242880 4095</span><br><span class="line">14 27 5242880 4095</span><br><span class="line">14 28 5242880 4095</span><br><span class="line">14 29 5242880 4095</span><br><span class="line">14 30 5242880 4095</span><br><span class="line">14 31 5242880 4095</span><br><span class="line">14 32 5242880 4095</span><br><span class="line">14 33 5242880 4095</span><br><span class="line">14 35 5242880 8191</span><br><span class="line">14 36 5242880 16383</span><br><span class="line">14 37 5242880 32767</span><br><span class="line">14 38 5242880 65535</span><br><span class="line">14 39 5242880 131071</span><br><span class="line">14 40 5242880 262143</span><br><span class="line">14 41 5242880 524287</span><br><span class="line">15 22 5242880 8191</span><br><span class="line">15 23 5242880 8191</span><br><span class="line">15 24 5242880 8191</span><br><span class="line">15 25 5242880 8191</span><br><span class="line">15 26 5242880 8191</span><br><span class="line">15 27 5242880 8191</span><br><span class="line">15 28 5242880 8191</span><br><span class="line">15 29 5242880 8191</span><br><span class="line">15 30 5242880 8191</span><br><span class="line">15 31 5242880 8191</span><br><span class="line">15 32 5242880 8191</span><br><span class="line">15 33 5242880 8191</span><br><span class="line">15 34 5242880 8191</span><br><span class="line">15 36 5242880 16383</span><br><span class="line">15 37 5242880 32767</span><br><span class="line">15 38 5242880 65535</span><br><span class="line">15 39 5242880 131071</span><br><span class="line">15 40 5242880 262143</span><br><span class="line">15 41 5242880 524287</span><br><span class="line">16 22 5242880 16383</span><br><span class="line">16 23 5242880 16383</span><br><span class="line">16 24 5242880 16383</span><br><span class="line">16 25 5242880 16383</span><br><span class="line">16 26 5242880 16383</span><br><span class="line">16 27 5242880 16383</span><br><span class="line">16 28 5242880 16383</span><br><span class="line">16 29 5242880 16383</span><br><span class="line">16 30 5242880 16383</span><br><span class="line">16 31 5242880 16383</span><br><span class="line">16 32 5242880 16383</span><br><span class="line">16 33 5242880 16383</span><br><span class="line">16 34 5242880 16383</span><br><span class="line">16 35 5242880 16383</span><br><span class="line">16 37 5242880 32767</span><br><span class="line">16 38 5242880 65535</span><br><span class="line">16 39 5242880 131071</span><br><span class="line">16 40 5242880 262143</span><br><span class="line">16 41 5242880 524287</span><br><span class="line">17 22 5242880 32767</span><br><span class="line">17 23 5242880 32767</span><br><span class="line">17 24 5242880 32767</span><br><span class="line">17 25 5242880 32767</span><br><span class="line">17 26 5242880 32767</span><br><span class="line">17 27 5242880 32767</span><br><span class="line">17 28 5242880 32767</span><br><span class="line">17 29 5242880 32767</span><br><span class="line">17 30 5242880 32767</span><br><span class="line">17 31 5242880 32767</span><br><span class="line">17 32 5242880 32767</span><br><span class="line">17 33 5242880 32767</span><br><span class="line">17 34 5242880 32767</span><br><span class="line">17 35 5242880 32767</span><br><span class="line">17 36 5242880 32767</span><br><span class="line">17 38 5242880 65535</span><br><span class="line">17 39 5242880 131071</span><br><span class="line">17 40 5242880 262143</span><br><span class="line">17 41 5242880 524287</span><br><span class="line">18 22 5242880 65535</span><br><span class="line">18 23 5242880 65535</span><br><span class="line">18 24 5242880 65535</span><br><span class="line">18 25 5242880 65535</span><br><span class="line">18 26 5242880 65535</span><br><span class="line">18 27 5242880 65535</span><br><span class="line">18 28 5242880 65535</span><br><span class="line">18 29 5242880 65535</span><br><span class="line">18 30 5242880 65535</span><br><span class="line">18 31 5242880 65535</span><br><span class="line">18 32 5242880 65535</span><br><span class="line">18 33 5242880 65535</span><br><span class="line">18 34 5242880 65535</span><br><span class="line">18 35 5242880 65535</span><br><span class="line">18 36 5242880 65535</span><br><span class="line">18 37 5242880 65535</span><br><span class="line">18 39 5242880 131071</span><br><span class="line">18 40 5242880 262143</span><br><span class="line">18 41 5242880 524287</span><br><span class="line">19 22 5242880 131071</span><br><span class="line">19 23 5242880 131071</span><br><span class="line">19 24 5242880 131071</span><br><span class="line">19 25 5242880 131071</span><br><span class="line">19 26 5242880 131071</span><br><span class="line">19 27 5242880 131071</span><br><span class="line">19 28 5242880 131071</span><br><span class="line">19 29 5242880 131071</span><br><span class="line">19 30 5242880 131071</span><br><span class="line">19 31 5242880 131071</span><br><span class="line">19 32 5242880 131071</span><br><span class="line">19 33 5242880 131071</span><br><span class="line">19 34 5242880 131071</span><br><span class="line">19 35 5242880 131071</span><br><span class="line">19 36 5242880 131071</span><br><span class="line">19 37 5242880 131071</span><br><span class="line">19 38 5242880 131071</span><br><span class="line">19 40 5242880 262143</span><br><span class="line">19 41 5242880 524287</span><br><span class="line">20 22 5242880 262143</span><br><span class="line">20 23 5242880 262143</span><br><span class="line">20 24 5242880 262143</span><br><span class="line">20 25 5242880 262143</span><br><span class="line">20 26 5242880 262143</span><br><span class="line">20 27 5242880 262143</span><br><span class="line">20 28 5242880 262143</span><br><span class="line">20 29 5242880 262143</span><br><span class="line">20 30 5242880 262143</span><br><span class="line">20 31 5242880 262143</span><br><span class="line">20 32 5242880 262143</span><br><span class="line">20 33 5242880 262143</span><br><span class="line">20 34 5242880 262143</span><br><span class="line">20 35 5242880 262143</span><br><span class="line">20 36 5242880 262143</span><br><span class="line">20 37 5242880 262143</span><br><span class="line">20 38 5242880 262143</span><br><span class="line">20 39 5242880 262143</span><br><span class="line">20 41 5242880 524287</span><br><span class="line">21 22 5242880 524287</span><br><span class="line">21 23 5242880 524287</span><br><span class="line">21 24 5242880 524287</span><br><span class="line">21 25 5242880 524287</span><br><span class="line">21 26 5242880 524287</span><br><span class="line">21 27 5242880 524287</span><br><span class="line">21 28 5242880 524287</span><br><span class="line">21 29 5242880 524287</span><br><span class="line">21 30 5242880 524287</span><br><span class="line">21 31 5242880 524287</span><br><span class="line">21 32 5242880 524287</span><br><span class="line">21 33 5242880 524287</span><br><span class="line">21 34 5242880 524287</span><br><span class="line">21 35 5242880 524287</span><br><span class="line">21 36 5242880 524287</span><br><span class="line">21 37 5242880 524287</span><br><span class="line">21 38 5242880 524287</span><br><span class="line">21 39 5242880 524287</span><br><span class="line">21 40 5242880 524287</span><br><span class="line">22 42 2 0</span><br><span class="line">23 42 2 0</span><br><span class="line">24 42 5 0</span><br><span class="line">25 42 10 0</span><br><span class="line">26 42 20 0</span><br><span class="line">27 42 40 0</span><br><span class="line">28 42 80 0</span><br><span class="line">29 42 160 0</span><br><span class="line">30 42 320 0</span><br><span class="line">31 42 640 0</span><br><span class="line">32 42 1280 0</span><br><span class="line">33 42 2560 0</span><br><span class="line">34 42 5120 0</span><br><span class="line">35 42 10240 0</span><br><span class="line">36 42 20480 0</span><br><span class="line">37 42 40960 0</span><br><span class="line">38 42 81920 0</span><br><span class="line">39 42 163840 0</span><br><span class="line">40 42 327680 0</span><br><span class="line">41 42 655360 0</span><br></pre></td></tr></table></figure>
+
+</div></div>
+<h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><p>本文假定读者对网络流有基本的了解（掌握并大致理解了最大流的增广路解法（EK / Dinic）即可）。</p>
+<p>还要会解决无负权边的单源最短路问题（会 Dijkstra 算法即可）。</p>
+<h2 id="一些定义"><a href="#一些定义" class="headerlink" title="一些定义"></a>一些定义</h2><p>无源汇的流，每个点需要满足流入量等于流出量（流量平衡），并且每条边的流量不超过上限。</p>
+<p>有源汇的流，存在源点 $s$ 和汇点 $t$，$s$ 只流出不流入，$t$ 只流入不流出，其它点满足流量平衡，并且每条边的流量不超过上限。</p>
+<p>最大流问题，只在有源汇的流中有意义，即最大化 $s$ 的流出量（也就是 $t$ 的流入量）。</p>
+<p>流的费用，是每条边的流量与费用之积的和。</p>
+<p>最小费用最大流问题，在最大流的前提下，最小化流的费用。</p>
+<p>（无源汇）最小费用流问题，只用最小化流的费用。</p>
+<p>残量网络，是原图中每条没满流的边以及每条有流的边的反边（反边指方向相反，费用为相反数）构成的图。</p>
+<p>增广路，在有源汇的流中指残量网络上一条 $s$ 到 $t$ 的路径，在无源汇的流中指残量网络上的一个环。</p>
+<p>增广，指的是将一条增广路流量加一（增广路上的边容量减一，对应的反边容量加一）。</p>
+<p>不加说明时，边的长度 / 路径的长度 / 环的长度（当然还有“最长路径”、“负环”之类的表述）中的“长度”都指费用。</p>
+<p>$(u, v)$ 表示从 $u$ 到 $v$ 的有向边（本文只讨论原图为简单图的情况，非简单图是类似的），$cap(u, v)$ 表示 $(u, v)$ 这条边的容量，$cost(u, v)$ 表示 $(u, v)$ 这条边的费用。</p>
+<h2 id="将最小费用最大流问题转化为无源汇最小费用流问题"><a href="#将最小费用最大流问题转化为无源汇最小费用流问题" class="headerlink" title="将最小费用最大流问题转化为无源汇最小费用流问题"></a>将最小费用最大流问题转化为无源汇最小费用流问题</h2><p>最小费用最大流问题可以转化为无源汇最小费用流问题，方法是连一条 $t$ 到 $s$，容量足够大，费用足够小（为一个负数）的边。这里的“容量足够大”指的是不小于最大流，“费用足够小”指的是小于 $s$ 到 $t$ 的最长简单路径费用的相反数。</p>
+<p>由于“费用足够小”，若没有达成最大流，即存在 $s$ 到 $t$ 的增广路，任何一条不经过正环（若存在经过正环的增广路，一定也存在不经过正环的增广路）的 $s$ 到 $t$ 的增广路加上 $(t, s)$ 这条边的费用一定为负，所以通过这条增广路增广总费用一定更小，这说明，无源汇流中满足最小费用时，原问题同时满足了最小费用与最大流。</p>
+<p>下文中讨论的都是无源汇最小费用流问题，也不会再次强调“无源汇”。</p>
+<h2 id="负环"><a href="#负环" class="headerlink" title="负环"></a>负环</h2><p>一个流是最小费用流，当且仅当其残量网络中没有负环。</p>
+<div><div class="fold_hider"><div class="close hider_title">证明：</div></div><div class="fold">
+<p>仅当（必要条件）：若存在负环可以在负环上增广，从而得到费用更小的流。</p>
+<p>当（充分条件）：令所考虑的这个流为 $f$，取任意一个最小费用流 $f^{\ast}$，计算它们之间的差 $f^{\ast}-f$（对应边流量相减）。假设 $f$ 不是最小费用流，那么 $f^{\ast}-f$ 的总费用一定为负。由于 $f$ 和 $f^{\ast}$ 都流量平衡，$f^{\ast}-f$ 一定也流量平衡，所以它也是个合法的流，而一个流一定可以拆成若干个环（由于流量平衡，每个联通部分都有欧拉回路），若总费用为负就一定包含负环。又因为 $f^{\ast}-f$ 是在 $f$ 的基础上增广的，$f^{\ast}-f$ 一定是 $f$ 残量网络的一个子图，而其包含负环与 $f$ 的残量网络中没有负环矛盾，所以假设不成立。</p>
+
+</div></div>
+<h2 id="节点势能-amp-边的-reduced-cost"><a href="#节点势能-amp-边的-reduced-cost" class="headerlink" title="节点势能 &amp; 边的 reduced cost"></a>节点势能 &amp; 边的 reduced cost</h2><p>这两个概念的提出与最小费用流的线性规划形式的对偶问题相关，但了解这个对偶问题并不是必要的，所以本篇博客中不会提及。</p>
+<p>给每个节点 $u$ 指定一个任意的势能 $p(u)$。（这个概念看起来很突兀，总之就是给每个节点新增了一个属性，它的值是任意的。）（本质上是线性规划对偶问题中的一个无限制变量。）</p>
+<p>定义一条边 $(u, v)$ 关于某一组势能 $p$ 的 reduced cost（并不知道怎么翻译..）$C_p(u, v)$ 为 $p(u)+cost(u, v)-p(v)$。</p>
+<p>reduced cost 有两个很好的性质：</p>
+<ol>
+<li><p>将原费用替换为 reduced cost 不影响最短路。（不是不影响最短路长度，而是不影响最短路是哪一条。）</p>
+</li>
+<li><p>将原费用替换为 reduced cost 不影响环的总费用。</p>
+</li>
+</ol>
+<p>这两个性质都可以由 $C_p(u, v)+C_p(v, w)=p(u)+cost(u, v)+cost(v, w)-p(w)$（中间经过的点的势能相加后抵消）说明。</p>
+<p>如果大家有了解过 Johnson 全源最短路径算法，里面也有类似的操作，用于保证边权非负，使得 Dijkstra 算法可以得到应用。在本文所介绍的最小费用流算法中也是一样，为了能够使用 Dijkstra 算法计算最短路，在过程中需要保证 reduced cost 非负。</p>
+<h2 id="capacity-scaling"><a href="#capacity-scaling" class="headerlink" title="capacity scaling"></a>capacity scaling</h2><p>（这个也不知道怎么翻译..）</p>
+<p>capacity scaling 从高到低考虑容量的最高若干位（比如容量为 $5$ ($101_2$)，第一次迭代时考虑最高一位，即 $1$ ($1_2$)，第二次迭代时考虑最高两位，即 $2$ ($10_2$)，第三次迭代时考虑最高三位，即 $5$ ($101_2$)），每次加入更低的位后更新答案。（这个过程和求快速幂有点像。）</p>
+<p>它基于一个性质：将原图中每条边的容量乘二后，最小费用流每条边的流量分别乘二。</p>
+<p>那么，若计算出了以 $\left\lfloor\frac{cap(u, v)}{2^k}\right\rfloor$ 为边 $(u, v)$ 的容量的最小费用流，现在要得到以 $\left\lfloor\frac{cap(u, v)}{2^{k-1}}\right\rfloor$ 为边 $(u, v)$ 的容量的最小费用流，只需要先将流乘二，然后对每条二进制中该位为 $1$ 的边进行容量加一的操作即可。</p>
+<p>所以，问题转化为了给一条边的容量加一，更新最小费用流。</p>
+<h2 id="给一条边的容量加一"><a href="#给一条边的容量加一" class="headerlink" title="给一条边的容量加一"></a>给一条边的容量加一</h2><p>在上文中已经证明，最小费用流等价于残量网络中没有负环。</p>
+<p>所以，若容量加一后若产生负环，进行增广即可。</p>
+<p>为了优化常数，可以特判掉容量加一前该边已存在于残量网络的情况，直接跳过。</p>
+<p>令容量加一的这条边为 $(u, v)$，找负环可以先求出从 $v$ 出发以 reduced cost 为长度到每个点 $i$ 的最短路 $d(i)$（这个最短路不包括 $(u, v)$ 这条边， 由于当前维护的残量网络是容量加一之前的最小费用流，不存在负环，所以最短路是可以求的），判断 $d(u)+C_p(u, v)$ 是否小于 $0$ 即可。</p>
+<p>为了使用 Dijkstra 算法，还需要保证 reduced cost 非负，所以需要调整节点的势能。</p>
+<p>这里直接给出一种做法：求出上文所述的最短路 $d(i)$（若 $x$ 不可达就将 $d(x)$ 设为 $\max_{\text{节点 }i\text{ 可达}}\{d(i)\}+max(0, -C_p(u, v))$），然后将每个点 $i$ 的势能加上 $d(i)$（用 $p’(i)$ 表示节点 $i$ 更新后的势能）。</p>
+<div><div class="fold_hider"><div class="close hider_title">这样调整后残量网络中的每一条边的 reduced cost 依然非负的证明：</div></div><div class="fold">
+<p>对于 $(u, v)$ 这条边，若 $u$ 不可达，那么：</p>
+<p>$$<br>\begin{aligned}<br>C_{p’}(u, v)<br>&amp;=p’(u)+cost(u, v)-p’(v)\\<br>&amp;=p(u)+max(0, -C_p(u, v))+cost(u, v)-p(v)\\<br>&amp;\ge p(u)-(p(u)+cost(u, v)-p(v))+cost(u, v)-p(v)\\<br>&amp;=0<br>\end{aligned}<br>$$</p>
+<p>若 $u$ 可达且 $(u, v)$ 这条边加入后产生了负环，负环会被增广，$(u, v)$ 这条边就不存在了。</p>
+<p>若 $u$ 可达且 $(u, v)$ 这条边加入后没有产生负环，即 $d(u)+C_p(u, v)\ge 0$，那么 $C_{p’}(u, v)=d(u)+C_p(u, v)-d(v)=d(u)+C_p(u, v)\ge 0$。</p>
+<p>capacity scaling 算法在初始时所有边容量均为 $0$（也就是说残量网络为空），所以可以在除 $(u, v)$ 外每条边的 reduced cost 均非负的基础上归纳证明。</p>
+<p>对于其它从 $u$ 可达的边 $(x, y)$，由于 $d(y)\le d(x)+C_p(x, y)$（最短路的性质），即 $d(y)\le d(x)+p(x)+cost(x, y)-p(y)$，所以 $p(x)+d(x)+cost(x, y)-(p(y)+d(y))\ge 0$，即 $p’(x)+cost(x, y)-p’(y)\ge 0$，也就是说 $u$ 可达的边 reduced cost 调整后非负。</p>
+<p>对于其它从 $u$ 可达与从 $u$ 不可达交界处的边 $(x, y)$（由于这条边不可达，一定是 $x$ 不可达 $y$ 可达），由于 $C_p(x, y)\ge 0$ 且 $d(x)=\max_{\text{节点 }i\text{ 可达}}\{d(i)\}+max(0, -C_p(u, v))\ge d(y)$，这样的边调整后 reduced cost 也非负。</p>
+<p>对于连接从 $u$ 不可达的两个点 $x$，$y$ 的边，$d(x)=d(y)$，调整后 reduced cost 也非负。</p>
+<p>综上所述，调整后残量网络中的每一条边的 reduced cost 依然非负。</p>
+
+</div></div>
+<p>进而我们还可以得出，上述流程结束后，残量网络中不存在负环，即上述流程可以计算出当前的最小费用流。</p>
+<h2 id="防止溢出"><a href="#防止溢出" class="headerlink" title="防止溢出"></a>防止溢出</h2><p>上一部分中给出的势能调整方式能够保证 reduced cost 非负，但在实际实现时会有势能太大从而溢出的风险。</p>
+<p>防止溢出的方法也很简单，新建一个点 $k$，从 $k$ 向所有点连长度为 $0$ 的边，求从 $k$ 出发以原费用（而非 reduced cost）为长度的最短路（由于更新后的残量网络是当前的最小费用流，不存在负环，新增的 $k$ 以及 $k$ 连向其它节点的边也不会带来新的负环，所以最短路是可以求的），以 $k$ 到 $i$ 的最短路作为调整后节点 $i$ 的势能。这样调整后，$C_p(x, y)=d(x)+cost(x, y)-d(y)\ge 0$（由最短路性质得到），并且每个节点的势能的值域不会超过 $[\min(0, (n-1)\min\{cost(u, v)\}), 0]$。</p>
+<p>虽然是以原费用为长度，计算最短路时还是可以利用 reduced cost 来计算。由于只有从 $k$ 连出的边可能 reduced cost 为负，而 $k$ 又是第一个松弛的，所以这不会影响 Dijkstra 算法的正确性（当然，也可以为 $k$ 设置一个足够大的势能来保证从 $k$ 连出的边 reduced cost 也非负）。</p>
+<h2 id="流程总结"><a href="#流程总结" class="headerlink" title="流程总结"></a>流程总结</h2><p>若求的是最小费用最大流，首先通过加一条 $t$ 到 $s$ 的边转化为无源汇最小费用流。</p>
+<p>使用 capacity scaling，枚举考虑容量的最高 $k$ 位，每次迭代开始时将残量网络中每条边的容量以及答案乘二，然后枚举每条二进制中该位为 $1$ 的边，使其容量加一。</p>
+<p>给一条边容量加一时，先特判掉这条边本来就在残量网络中的情况（优化常数），然后判是否产生了负环，若产生了负环就增广这个负环，然后调整节点势能使得所有 reduced cost 非负，最后通过计算新增节点到每个节点的最短路来更新节点势能防止溢出。</p>
+<p>复杂度瓶颈在求无负权边单源最短路上，总共需要计算 $O(m\log U)$ 次（$U$ 为边的最大容量）最短路，如果使用 <code>priority_queue</code> 来实现 Dijkstra 算法，总复杂度为 $O(m^2\log U\log m)$。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p><a href="http://uoj.ac/problem/487" target="_blank" rel="noopener">模板题</a>。</p>
+<div><div class="fold_hider"><div class="close hider_title">代码</div></div><div class="fold">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;ll, <span class="keyword">int</span>&gt; pli;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ll INF = <span class="number">1e18</span>;</span><br><span class="line"><span class="keyword">const</span> ll LARGE = <span class="number">1e12</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; vis;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; head, nxt, from, to, pre;</span><br><span class="line"><span class="built_in">vector</span>&lt;ll&gt; raw_cap, cap, cost, p, dis;</span><br><span class="line">priority_queue&lt;pli, <span class="built_in">vector</span>&lt;pli&gt;, greater&lt;pli&gt; &gt; q;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, ll f, ll w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    nxt.push_back(head[u]);</span><br><span class="line">    head[u] = to.size();</span><br><span class="line">    from.push_back(u);</span><br><span class="line">    to.push_back(v);</span><br><span class="line">    raw_cap.push_back(f);</span><br><span class="line">    cap.push_back(<span class="number">0</span>);</span><br><span class="line">    cost.push_back(w);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add_edge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, ll f, ll w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    add(u, v, f, w);</span><br><span class="line">    add(v, u, <span class="number">0</span>, -w);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">c</span><span class="params">(<span class="keyword">int</span> id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> p[from[id]] + cost[id] - p[to[id]];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    vis.assign(n + <span class="number">2</span>, <span class="literal">false</span>);</span><br><span class="line">    dis.assign(n + <span class="number">2</span>, INF);</span><br><span class="line">    pre.assign(n + <span class="number">2</span>, <span class="number">-1</span>);</span><br><span class="line">    dis[s] = <span class="number">0</span>;</span><br><span class="line">    q.push(pli(<span class="number">0</span>, s));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u = q.top().second;</span><br><span class="line">        ll w = q.top().first;</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">if</span> (vis[u]) <span class="keyword">continue</span>;</span><br><span class="line">        vis[u] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = head[u]; ~i; i = nxt[i])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> v = to[i];</span><br><span class="line">            <span class="keyword">if</span> (cap[i] &amp;&amp; dis[v] &gt; w + c(i))</span><br><span class="line">            &#123;</span><br><span class="line">                dis[v] = w + c(i);</span><br><span class="line">                pre[v] = i;</span><br><span class="line">                q.push(pli(dis[v], v));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add_one_cap</span><span class="params">(<span class="keyword">int</span> id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> u = from[id];</span><br><span class="line">    <span class="keyword">int</span> v = to[id];</span><br><span class="line">    <span class="keyword">if</span> (cap[id])</span><br><span class="line">    &#123;</span><br><span class="line">        ++cap[id];</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    dijkstra(v);</span><br><span class="line">    <span class="keyword">if</span> (dis[u] &lt; INF &amp;&amp; dis[u] + c(id) &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ++cap[id ^ <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">while</span> (u != v)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> x = pre[u];</span><br><span class="line">            --cap[x];</span><br><span class="line">            ++cap[x ^ <span class="number">1</span>];</span><br><span class="line">            u = from[x];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> ++cap[id];</span><br><span class="line">    ll max_dis = <span class="number">0</span>;</span><br><span class="line">    ll cur_len = c(id);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) <span class="keyword">if</span> (dis[i] &lt; INF) max_dis = max(max_dis, dis[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) p[i] += dis[i] &lt; INF ? dis[i] : max_dis + max(<span class="number">0l</span>l, -cur_len);</span><br><span class="line"></span><br><span class="line">    dijkstra(n + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) p[i] += dis[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> s, t;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; s &gt;&gt; t;</span><br><span class="line"></span><br><span class="line">    head.resize(n + <span class="number">2</span>, <span class="number">-1</span>);</span><br><span class="line">    p.resize(n + <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        ll u, v, f, w;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v &gt;&gt; f &gt;&gt; w;</span><br><span class="line">        add_edge(u, v, f, w);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    add_edge(t, s, LARGE, -LARGE);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        add_edge(n + <span class="number">1</span>, i, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        cap[to.size() - <span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">40</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= m * <span class="number">2</span> + <span class="number">1</span>; ++j) cap[j] &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= m * <span class="number">2</span>; j += <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ((raw_cap[j] &gt;&gt; i) &amp; <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                add_one_cap(j);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ll min_cost = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i) min_cost += cap[i &lt;&lt; <span class="number">1</span> | <span class="number">1</span>] * cost[i &lt;&lt; <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; cap[m &lt;&lt; <span class="number">1</span> | <span class="number">1</span>] &lt;&lt; <span class="string">' '</span> &lt;&lt; min_cost;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+<h2 id="关于-SPFA"><a href="#关于-SPFA" class="headerlink" title="关于 SPFA"></a>关于 SPFA</h2><p>如果把算法中的 Dijkstra 换成 SPFA，reduced cost 就不需要了，调整势能和防止溢出两部分都可以去掉，加上 SPFA 本身就略微比 Dijkstra 好写，总体会好写不少，复杂度是 $O(nm^2\log U)$，但很难卡满，而且由于不用防止溢出，少跑很多遍最短路，总体跑的非常快。</p>
+<div><div class="fold_hider"><div class="close hider_title">代码</div></div><div class="fold">
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;ll, <span class="keyword">int</span>&gt; pli;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ll INF = <span class="number">1e18</span>;</span><br><span class="line"><span class="keyword">const</span> ll LARGE = <span class="number">1e12</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; inq;</span><br><span class="line"><span class="built_in">vector</span>&lt;ll&gt; raw_cap, cap, cost, dis;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; head, nxt, from, to, pre;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, ll f, ll w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    nxt.push_back(head[u]);</span><br><span class="line">    head[u] = to.size();</span><br><span class="line">    from.push_back(u);</span><br><span class="line">    to.push_back(v);</span><br><span class="line">    raw_cap.push_back(f);</span><br><span class="line">    cap.push_back(<span class="number">0</span>);</span><br><span class="line">    cost.push_back(w);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add_edge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, ll f, ll w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    add(u, v, f, w);</span><br><span class="line">    add(v, u, <span class="number">0</span>, -w);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">spfa</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    inq.assign(n + <span class="number">2</span>, <span class="literal">false</span>);</span><br><span class="line">    dis.assign(n + <span class="number">2</span>, INF);</span><br><span class="line">    pre.assign(n + <span class="number">2</span>, <span class="number">-1</span>);</span><br><span class="line">    dis[s] = <span class="number">0</span>;</span><br><span class="line">    q.push(s);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u = q.front();</span><br><span class="line">        inq[u] = <span class="literal">false</span>;</span><br><span class="line">        q.pop();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = head[u]; ~i; i = nxt[i])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> v = to[i];</span><br><span class="line">            ll w = cost[i];</span><br><span class="line">            <span class="keyword">if</span> (cap[i] &amp;&amp; dis[v] &gt; dis[u] + w)</span><br><span class="line">            &#123;</span><br><span class="line">                dis[v] = dis[u] + w;</span><br><span class="line">                pre[v] = i;</span><br><span class="line">                <span class="keyword">if</span> (!inq[v])</span><br><span class="line">                &#123;</span><br><span class="line">                    inq[v] = <span class="literal">true</span>;</span><br><span class="line">                    q.push(v);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add_one_cap</span><span class="params">(<span class="keyword">int</span> id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> u = from[id];</span><br><span class="line">    <span class="keyword">int</span> v = to[id];</span><br><span class="line">    <span class="keyword">if</span> (cap[id])</span><br><span class="line">    &#123;</span><br><span class="line">        ++cap[id];</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    spfa(v);</span><br><span class="line">    <span class="keyword">if</span> (dis[u] &lt; INF &amp;&amp; dis[u] + cost[id] &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ++cap[id ^ <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">while</span> (u != v)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> x = pre[u];</span><br><span class="line">            --cap[x];</span><br><span class="line">            ++cap[x ^ <span class="number">1</span>];</span><br><span class="line">            u = from[x];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> ++cap[id];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> s, t; </span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; s &gt;&gt; t;</span><br><span class="line"></span><br><span class="line">    head.resize(n + <span class="number">2</span>, <span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        ll u, v, f, w;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v &gt;&gt; f &gt;&gt; w;</span><br><span class="line">        add_edge(u, v, f, w);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    add_edge(t, s, LARGE, -LARGE);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        add_edge(n + <span class="number">1</span>, i, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        cap[to.size() - <span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">40</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= m * <span class="number">2</span> + <span class="number">1</span>; ++j) cap[j] &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= m * <span class="number">2</span>; j += <span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> ((raw_cap[j] &gt;&gt; i) &amp; <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                add_one_cap(j);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ll min_cost = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i) min_cost += cap[i &lt;&lt; <span class="number">1</span> | <span class="number">1</span>] * cost[i &lt;&lt; <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; cap[m &lt;&lt; <span class="number">1</span> | <span class="number">1</span>] &lt;&lt; <span class="string">' '</span> &lt;&lt; min_cost;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</div></div>
+<h2 id="关于出题"><a href="#关于出题" class="headerlink" title="关于出题"></a>关于出题</h2><p>尽管多数人使用的费用流算法是伪多项式复杂度的，我并不建议在题目中卡掉它。</p>
+<p>但需要注意的是，“不卡掉”是指设置合适的数据范围，使得常见费用流算法可以确保通过。如果设置了不合理的数据范围而测试数据中没有卡掉常见费用流算法，那么不仅 <strong>卡了</strong> 常见费用流算法，数据也造的不合格。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><p><a href="https://min-25.hatenablog.com/entry/2018/03/19/235802" target="_blank" rel="noopener">Min_25 最小費用最大流の悪例題</a></p>
+</li>
+<li><p><a href="https://web.stanford.edu/class/cs361b/files/cs361b-notes.pdf" target="_blank" rel="noopener">Stanford CS 361B: Advanced Algorithms, Spring 2014 Lecture Notes</a></p>
+</li>
+<li><p><a href="https://www.math.ubc.ca/~anstee/math523/StronglyPolynomialNetworkFlow.pdf" target="_blank" rel="noopener">A Faster Strongly Polynomial Minimum Cost Flow Algorithm</a></p>
+</li>
+<li><p><a href="https://web.eecs.umich.edu/~pettie/matching/Edmonds-Karp-network-flow.pdf" target="_blank" rel="noopener">Theoretical Improvements in Algorithmic Efficiency for Network Flow Problems</a></p>
+</li>
+<li><p><a href="https://github.com/Laakeri/tiralabra" target="_blank" rel="noopener">Github repo Laakeri/tiralabra</a></p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/图论/" rel="tag"><i class="fa fa-tag"></i> 图论</a>
+          
+            <a href="/tags/网络流/" rel="tag"><i class="fa fa-tag"></i> 网络流</a>
+          
+            <a href="/tags/费用流/" rel="tag"><i class="fa fa-tag"></i> 费用流</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/CF3D-Least-Cost-Bracket-Sequence（贪心）/" rel="next" title="CF3D Least Cost Bracket Sequence（贪心）">
+                <i class="fa fa-chevron-left"></i> CF3D Least Cost Bracket Sequence（贪心）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/悬崖边的踟蹰-——-CSP-S-2019/" rel="prev" title="悬崖边的踟蹰 —— CSP-S 2019">
+                悬崖边的踟蹰 —— CSP-S 2019 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  <div class="comments">
+    <script src="https://utteranc.es/client.js" repo="ouuan/hexo-blog-utterances" issue-term="title" label="utterances" theme="github-light" crossorigin="anonymous" async>
+    </script>
+  </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+
+    <div class="sidebar-inner">
+      <div class="hitokoto-block">
+        <div class="hitokoto-inner hitokoto-comma hitokoto-left-comma">“</div>
+        <div class="hitokoto-inner hitokoto-content"><b><span><span id="hitokoto-content"></span></span></b></div>
+        <div class="hitokoto-inner hitokoto-comma hitokoto-right-comma">”</div>
+      </div>
+      <div id="hitokoto-from"></div>
+      <div class="hitokoto-bottom">
+        <a id="hitokoto-link" href="https://hitokoto.cn/">Hitokoto</a>&nbsp;&nbsp;&nbsp;
+        <button id="hitokoto-like" title="通过给句子点赞可以增加其出现概率，由于技术原因并不能在博客中显示赞数与点赞是否成功的信息（红心表示成功发送点赞请求，但如果同 IP 重复点赞就会失败），如需查看可以点击左边的“Hitokoto”链接。"><i class="menu-item-icon fa fa-fw fa-heart"></i></button>
+      </div>
+    </div>
+
+    <div style="height: 15px"></div>
+
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="ouuan">
+            
+              <p class="site-author-name" itemprop="name">ouuan</p>
+              <p class="site-description motion-element" itemprop="description">ouuan的博客</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">90</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">84</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/ouuan" title="GitHub &rarr; https://github.com/ouuan" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.luogu.org/space/show?uid=49742" title="洛谷 &rarr; https://www.luogu.org/space/show?uid=49742" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>洛谷</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.codeforces.com/profile/ouuan" title="Codeforces &rarr; https://www.codeforces.com/profile/ouuan" rel="noopener" target="_blank"><i class="fa fa-fw fa-code"></i>Codeforces</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://space.bilibili.com/11067182" title="b站 &rarr; https://space.bilibili.com/11067182" rel="noopener" target="_blank"><i class="fa fa-fw fa-tv"></i>b站</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://EternalAlexander.github.io/" title="https://EternalAlexander.github.io/" rel="noopener" target="_blank">EternalAlexander</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ustze.cn/" title="http://www.ustze.cn/" rel="noopener" target="_blank">ustze</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.xht37.com/" title="https://www.xht37.com/" rel="noopener" target="_blank">xht37</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/PinkRabbit/" title="https://www.cnblogs.com/PinkRabbit/" rel="noopener" target="_blank">PinkRabbit</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://qaq-am.com/" title="https://qaq-am.com/" rel="noopener" target="_blank">lk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.luogu.com.cn/blog/Sooke/" title="https://www.luogu.com.cn/blog/Sooke/" rel="noopener" target="_blank">Sooke</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.cnblogs.com/LJC00118/" title="https://www.cnblogs.com/LJC00118/" rel="noopener" target="_blank">wxw</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://memset0.cn/" title="https://memset0.cn/" rel="noopener" target="_blank">memset0</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://aprilgrimoire.tk/" title="http://aprilgrimoire.tk/" rel="noopener" target="_blank">AprilGrimoire</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zbww.cf/" title="https://zbww.cf/" rel="noopener" target="_blank">zbw</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#hack-常见的费用流算法"><span class="nav-number">1.</span> <span class="nav-text">hack 常见的费用流算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前置知识"><span class="nav-number">2.</span> <span class="nav-text">前置知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些定义"><span class="nav-number">3.</span> <span class="nav-text">一些定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将最小费用最大流问题转化为无源汇最小费用流问题"><span class="nav-number">4.</span> <span class="nav-text">将最小费用最大流问题转化为无源汇最小费用流问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负环"><span class="nav-number">5.</span> <span class="nav-text">负环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#节点势能-amp-边的-reduced-cost"><span class="nav-number">6.</span> <span class="nav-text">节点势能 &amp; 边的 reduced cost</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#capacity-scaling"><span class="nav-number">7.</span> <span class="nav-text">capacity scaling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#给一条边的容量加一"><span class="nav-number">8.</span> <span class="nav-text">给一条边的容量加一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防止溢出"><span class="nav-number">9.</span> <span class="nav-text">防止溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程总结"><span class="nav-number">10.</span> <span class="nav-text">流程总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">11.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于-SPFA"><span class="nav-number">12.</span> <span class="nav-text">关于 SPFA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于出题"><span class="nav-number">13.</span> <span class="nav-text">关于出题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">14.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-battery-full"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ouuan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+<script type="text/javascript">
+	function hitokotoLike(x, y) {
+		$.ajax({
+		    url: "https://hitokoto.cn/Like",
+		    type: "GET",
+		    data: "ID=" + x,
+		    dataType: "jsonp",
+		    success: function(data) {
+		        alert(data.message);
+		        $(y).css('color', 'red');
+		    },
+		    error: function() {
+		        console.log('Hitokoto Like Request Error.');
+		        $(y).css('color', 'red');
+		    }
+		});
+	}
+	$.get('https://v1.hitokoto.cn/?c=a', function(data) {
+		$('#hitokoto-content').css('display', '').text(data.hitokoto);
+		$('#hitokoto-from').css('display', '').text('——' + data.from);
+		$('#hitokoto-from').attr('title', '上传者: ' + data.creator);
+		$('#hitokoto-link').attr('href', 'https://hitokoto.cn/?id=' + data.id);
+		document.getElementById('hitokoto-like').onclick = function() { hitokotoLike(data.id, '#hitokoto-like'); }
+	});
+	$('.post-body').bind('copy', function() {
+		alert('本博客内容欢迎分享（将本博客的原文地址分享到其它网站），允许部分摘录并在醒目位置附上原文链接，未经许可禁止任何形式的全文转载。');
+	});
+</script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('复制成功')
+          else $(this).text('复制失败')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+  
+
+  
+  
+
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/pdfobject@2.1.1/pdfobject.min.js"></script>
+    <script type="text/javascript">
+    var options = {
+      pdfOpenParams: {
+        navpanes: 0,
+        toolbar: 0,
+        statusbar: 0,
+        pagemode: "thumbs",
+        view: "FitV"
+      },
+      PDFJS_URL: "/lib/pdf/web/viewer.html",
+      height: "500px"
+    };
+    $("#main a").each(function() {
+      var href = $(this).attr("href");
+      if (!href) return;
+      if (href.endsWith(".pdf") || href.endsWith(".pdf/")) {
+        var id = "pdf" + Math.floor(Math.random() * 10000);
+        $(this).after("<div id='" + id + "'></div>").remove();
+        PDFObject.embed(href, "#" + id, options);
+      }
+    });
+    </script>
+    <style>
+    .pdfobject-container {
+      position: relative;
+      overflow: auto;
+      width: 100%;
+      height: 500px;
+    }
+    </style>
+  
+
+
+</body>
+</html>
